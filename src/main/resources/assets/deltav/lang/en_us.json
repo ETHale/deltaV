@@ -1,0 +1,13 @@
+{
+  "itemGroup.deltav": "Example Mod Tab",
+  "block.deltav.example_block": "Example Block",
+  "item.deltav.example_item": "Example Item",
+
+  "deltav.configuration.title": "DeltaV Configs",
+  "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
+  "deltav.configuration.section.deltav.common.toml.title": "DeltaV Configs",
+  "deltav.configuration.items": "Item List",
+  "deltav.configuration.logDirtBlock": "Log Dirt Block",
+  "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
+  "deltav.configuration.magicNumber": "Magic Number"
+}
