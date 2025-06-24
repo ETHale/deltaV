@@ -2,6 +2,7 @@ package com.deltav.deltavmod.block;
 
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -30,7 +31,18 @@ public class ModBlocks {
             .sound(SoundType.IRON))
     );
 
+    public static final DeferredBlock<AlloyFurnaceBlock> ALLOY_FURNACE = BLOCKS.register(
+        "alloy_furnace",
+        registryName -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of()
+        .setId(ResourceKey.create(Registries.BLOCK, registryName))
+        .mapColor(MapColor.STONE)
+        .instrument(NoteBlockInstrument.BASEDRUM)
+        .requiresCorrectToolForDrops()
+        .strength(3.5F))
+    );
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
+
 }
