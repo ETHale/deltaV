@@ -4,6 +4,7 @@
   "item.deltav.example_item": "Example Item",
   "block.deltav.steel_block": "Block of Steel",
   "block.deltav.alloy_furnace": "Alloy Furnace",
+  "block.deltav.kimberlite": "Kimberlite",
 
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",

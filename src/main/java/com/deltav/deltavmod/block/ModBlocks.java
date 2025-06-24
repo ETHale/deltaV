@@ -41,6 +41,15 @@ public class ModBlocks {
         .strength(3.5F))
     );
 
+    public static final DeferredBlock<Block> KIMBERLITE = BLOCKS.registerSimpleBlock(
+        "kimberlite", 
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(1.4f, 5.0f)
+    );
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
