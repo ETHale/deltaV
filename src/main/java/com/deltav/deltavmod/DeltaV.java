@@ -2,6 +2,8 @@ package com.deltav.deltavmod;
 
 import org.slf4j.Logger;
 
+import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.item.ModItems;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.Minecraft;
@@ -48,16 +50,6 @@ public class DeltaV {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "deltav" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final DeferredBlock<Block> STEEL_BLOCK = BLOCKS.register(
-        "steel_block",
-        registryName -> new Block(BlockBehaviour.Properties.of()
-        .setId(ResourceKey.create(Registries.BLOCK, registryName))
-        .destroyTime(2.0f)
-    ));
-
-    public static final DeferredItem<BlockItem> STEEL_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("steel_block", STEEL_BLOCK);
-
-
     // Creates a new food item with the id "deltav:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
@@ -76,7 +68,8 @@ public class DeltaV {
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -112,7 +105,7 @@ public class DeltaV {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(STEEL_BLOCK);
+            event.accept(ModBlocks.STEEL_BLOCK);
         }
     }
 
