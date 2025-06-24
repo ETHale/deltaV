@@ -3,6 +3,7 @@ package com.deltav.deltavmod;
 import org.slf4j.Logger;
 
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.data.DeltaVDataGenerators;
 import com.deltav.deltavmod.item.ModItems;
 import com.mojang.logging.LogUtils;
 
@@ -70,18 +71,19 @@ public class DeltaV {
         modEventBus.addListener(this::commonSetup);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
-
+        
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (DeltaV) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
-
+        
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
