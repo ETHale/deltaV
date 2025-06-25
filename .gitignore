@@ -27,3 +27,6 @@ repo
 
 #vscode
 .vscode/*
+
+# cache 
+src/generated/resources/.cache/*
