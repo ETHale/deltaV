@@ -60,6 +60,7 @@ public class DeltaV {
                 output.accept(ModBlocks.STEEL_BLOCK.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(ModBlocks.ALLOY_FURNACE.get());
                 output.accept(ModBlocks.KIMBERLITE.get());
+                output.accept(ModItems.STEEL_INGOT.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
