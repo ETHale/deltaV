@@ -1,5 +1,7 @@
 {
   "values": [
-    "deltav:kimberlite"
+    "deltav:kimberlite",
+    "deltav:steel_block",
+    "deltav:alloy_furnace"
   ]
 }

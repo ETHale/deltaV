@@ -27,7 +27,7 @@ public class ModBlocks {
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
             .requiresCorrectToolForDrops()
-            .strength(5.0F, 6.0F)
+            .strength(5.0f, 6.0f)
             .sound(SoundType.IRON))
     );
 
@@ -38,7 +38,7 @@ public class ModBlocks {
         .mapColor(MapColor.STONE)
         .instrument(NoteBlockInstrument.BASEDRUM)
         .requiresCorrectToolForDrops()
-        .strength(3.5F))
+        .strength(3.5f))
     );
 
     public static final DeferredBlock<Block> KIMBERLITE = BLOCKS.registerSimpleBlock(
