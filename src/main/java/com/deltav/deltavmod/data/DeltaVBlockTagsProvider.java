@@ -21,6 +21,9 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.KIMBERLITE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
+        this.tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL).add(ModBlocks.STEEL_BLOCK.get());
     }
     
 }
