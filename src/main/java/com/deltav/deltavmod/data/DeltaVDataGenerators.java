@@ -20,6 +20,7 @@ public class DeltaVDataGenerators {
     public static void gatherData(GatherDataEvent.Client event) {
         // tags
         event.createProvider(DeltaVBlockTagsProvider::new);
+        event.createProvider(DeltaVModelProvider::new);
     }
 
     @SubscribeEvent

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "deltav:block/kimberlite_slab"
+    },
+    "type=double": {
+      "model": "deltav:block/kimberlite"
+    },
+    "type=top": {
+      "model": "deltav:block/kimberlite_slab_top"
+    }
+  }
+}

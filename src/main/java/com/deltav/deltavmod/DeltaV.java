@@ -50,8 +50,6 @@ public class DeltaV {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new food item with the id "deltav:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
     // Creates a creative tab for deltav items, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_BLOCK = CREATIVE_MODE_TABS.register("deltav_tab_blocks", () -> CreativeModeTab.builder()
