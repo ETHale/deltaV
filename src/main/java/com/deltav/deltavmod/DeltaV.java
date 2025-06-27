@@ -16,7 +16,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -52,15 +54,28 @@ public class DeltaV {
             .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
     // Creates a creative tab for deltav items, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB = CREATIVE_MODE_TABS.register("deltav_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.deltav")) //The language key for the title of your CreativeModeTab
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_BLOCK = CREATIVE_MODE_TABS.register("deltav_tab_blocks", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.deltav_blocks")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.STEEL_BLOCK.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                output.accept(ModBlocks.ALLOY_FURNACE.get());
-                output.accept(ModBlocks.KIMBERLITE.get());
-                output.accept(ModItems.STEEL_INGOT.get());
+                 ModBlocks.BLOCKS.getEntries().stream()
+                    .map(DeferredHolder::value)
+                    .map(Block::asItem)
+                    .filter(item -> item != Items.AIR) // in case any are non-item blocks
+                    .forEach(output::accept);
+            }).build());
+    
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.deltav_items")) //The language key for the title of your CreativeModeTab
+            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
+            .displayItems((parameters, output) -> {
+                 ModBlocks.BLOCKS.getEntries().stream()
+                    .map(DeferredHolder::value)
+                    .map(Block::asItem)
+                    .filter(item -> item != Items.AIR) // in case any are non-item blocks
+                    .forEach(output::accept);
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
