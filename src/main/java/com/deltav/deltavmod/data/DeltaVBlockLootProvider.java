@@ -1,13 +1,10 @@
 package com.deltav.deltavmod.data;
 
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 
-import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -28,8 +25,8 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
     // add loot tables to blocks here
     @Override
     protected void generate() {
-        for(Block block : getKnownBlocks()) {
-            this.dropSelf(block);
-        }
+        this.dropSelf(ModBlocks.KIMBERLITE.get());
+        this.dropSelf(ModBlocks.STEEL_BLOCK.get());
+        this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
     }
 }
