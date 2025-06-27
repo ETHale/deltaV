@@ -28,8 +28,8 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
     // add loot tables to blocks here
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.KIMBERLITE.get());
-        this.dropSelf(ModBlocks.STEEL_BLOCK.get());
-        this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
+        for(Block block : getKnownBlocks()) {
+            this.dropSelf(block);
+        }
     }
 }
