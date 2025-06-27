@@ -29,9 +29,9 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<StairBlock> KIMBERLITE_STAIRS = BLOCKS.register(
         "kimberlite_stairs",
-        () -> new StairBlock(ModBlocks.KIMBERLITE.get().defaultBlockState(), 
+        registryName -> new StairBlock(ModBlocks.KIMBERLITE.get().defaultBlockState(), 
             BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
@@ -40,8 +40,8 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<SlabBlock> KIMBERLITE_SLAB = BLOCKS.register(
         "kimberlite_slab",
-        () -> new SlabBlock(BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, null))
+        registryName -> new SlabBlock(BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
@@ -50,9 +50,9 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<PressurePlateBlock> KIMBERLITE_PRESSURE_PLATE = BLOCKS.register(
         "kimberlite_pressure_plate",
-        () -> new PressurePlateBlock(BlockSetType.STONE,
+        registryName -> new PressurePlateBlock(BlockSetType.STONE,
             BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
@@ -61,9 +61,9 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = BLOCKS.register(
         "kimberlite_button",
-        () -> new ButtonBlock(BlockSetType.STONE, 25,
+        registryName -> new ButtonBlock(BlockSetType.STONE, 25,
             BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
@@ -73,8 +73,8 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = BLOCKS.register(
         "kimberlite_wall",
-        () -> new WallBlock(BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, null))
+        registryName -> new WallBlock(BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)

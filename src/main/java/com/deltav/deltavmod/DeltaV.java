@@ -58,26 +58,16 @@ public class DeltaV {
             .title(Component.translatable("itemGroup.deltav_blocks")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                 ModBlocks.BLOCKS.getEntries().stream()
-                    .map(DeferredHolder::value)
-                    .map(Block::asItem)
-                    .filter(item -> item != Items.AIR) // in case any are non-item blocks
-                    .forEach(output::accept);
-            }).build());
+            .displayItems(DeltaV::populateBlockTab)
+            .build());
     
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
+    /*public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.deltav_items")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                 ModBlocks.BLOCKS.getEntries().stream()
-                    .map(DeferredHolder::value)
-                    .map(Block::asItem)
-                    .filter(item -> item != Items.AIR) // in case any are non-item blocks
-                    .forEach(output::accept);
-            }).build());
-
+            .displayItems(DeltaV::populateBlockTab)
+            .build());
+    */
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
@@ -123,6 +113,16 @@ public class DeltaV {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
 
         }
+    }
+
+    private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
+            Block block = blockHolder.value();
+            if (block != Blocks.AIR) {
+                Item item = block.asItem();
+                output.accept(item);
+            }
+        });
     }
 
 
