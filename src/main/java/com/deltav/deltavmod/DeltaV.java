@@ -6,6 +6,7 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.data.DeltaVDataGenerators;
 import com.deltav.deltavmod.item.ModItems;
+import com.deltav.deltavmod.recipe.ModRecipes;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.Minecraft;
@@ -71,6 +72,7 @@ public class DeltaV {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModRecipes.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
