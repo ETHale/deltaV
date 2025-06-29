@@ -68,26 +68,24 @@ public class ModBlocks {
             .sound(SoundType.METAL)
     );
 
-    public static final DeferredBlock<Block> ZINC_ORE = BLOCKS.register(
+    public static final DeferredBlock<Block> ZINC_ORE = BLOCKS.registerSimpleBlock(
         "zinc_ore",
-        registryName -> new DropExperienceBlock(UniformInt.of(2, 4),
         BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
             .requiresCorrectToolForDrops()
-            .strength(3.0F, 3.0F))
+            .strength(3.0F, 3.0F)
     );
 
-    public static final DeferredBlock<Block> DEEPSLATE_ZINC_ORE = BLOCKS.register(
+    public static final DeferredBlock<Block> DEEPSLATE_ZINC_ORE = BLOCKS.registerSimpleBlock(
         "deepslate_zinc_ore",
-        registryName -> new DropExperienceBlock(UniformInt.of(2, 4),
         BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
             .requiresCorrectToolForDrops()
-            .strength(3.0F, 3.0F))
+            .strength(3.0F, 3.0F)
     );
 
     public static final DeferredBlock<Block> RAW_ZINC_BLOCK = BLOCKS.registerSimpleBlock(
