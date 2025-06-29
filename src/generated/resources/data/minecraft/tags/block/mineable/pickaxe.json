@@ -1,5 +1,12 @@
 {
   "values": [
-    "deltav:kimberlite"
+    "deltav:steel_block",
+    "deltav:alloy_furnace",
+    "deltav:kimberlite",
+    "deltav:kimberlite_button",
+    "deltav:kimberlite_pressure_plate",
+    "deltav:kimberlite_slab",
+    "deltav:kimberlite_stairs",
+    "deltav:kimberlite_wall"
   ]
 }
