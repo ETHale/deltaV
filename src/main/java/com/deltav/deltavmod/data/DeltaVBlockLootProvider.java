@@ -3,6 +3,7 @@ package com.deltav.deltavmod.data;
 import java.util.Set;
 
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -28,5 +29,17 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.KIMBERLITE.get());
         this.dropSelf(ModBlocks.STEEL_BLOCK.get());
         this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
+        this.dropSelf(ModBlocks.KIMBERLITE_STAIRS.get());
+        this.add(ModBlocks.KIMBERLITE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.KIMBERLITE_SLAB.get()));
+        this.dropSelf(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.KIMBERLITE_BUTTON.get());
+        this.dropSelf(ModBlocks.KIMBERLITE_WALL.get());
+        this.add(ModBlocks.ZINC_ORE.get(), this.createOreDrop(ModBlocks.ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
+        this.add(ModBlocks.DEEPSLATE_ZINC_ORE.get(), this.createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
+        this.dropSelf(ModBlocks.ZINC_BLOCK.get());
+        this.dropSelf(ModBlocks.RAW_ZINC_BLOCK.get());
+        
+        
     }
 }

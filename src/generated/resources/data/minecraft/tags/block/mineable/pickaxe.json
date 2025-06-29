@@ -1,7 +1,16 @@
 {
   "values": [
-    "deltav:kimberlite",
+    "deltav:alloy_furnace",
     "deltav:steel_block",
-    "deltav:alloy_furnace"
+    "deltav:zinc_ore",
+    "deltav:deepslate_zinc_ore",
+    "deltav:zinc_block",
+    "deltav:raw_zinc_block",
+    "deltav:kimberlite",
+    "deltav:kimberlite_button",
+    "deltav:kimberlite_pressure_plate",
+    "deltav:kimberlite_slab",
+    "deltav:kimberlite_stairs",
+    "deltav:kimberlite_wall"
   ]
 }
