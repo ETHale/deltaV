@@ -28,5 +28,12 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.KIMBERLITE.get());
         this.dropSelf(ModBlocks.STEEL_BLOCK.get());
         this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
+
+        this.dropSelf(ModBlocks.KIMBERLITE_STAIRS.get());
+        this.add(ModBlocks.KIMBERLITE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.KIMBERLITE_SLAB.get()));
+        this.dropSelf(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.KIMBERLITE_BUTTON.get());
+        this.dropSelf(ModBlocks.KIMBERLITE_WALL.get());
     }
 }
