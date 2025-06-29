@@ -14,6 +14,8 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -65,6 +67,27 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModBlocks.RAW_ZINC_BLOCK)
             .unlockedBy("has_raw_zinc_block", this.has(ModBlocks.RAW_ZINC_BLOCK))
             .save(this.output);
+
+        /*
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+            .unlockedBy("has_zinc_ore", this.has(ModBlocks.ZINC_ORE))
+            .save(this.output);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+            .unlockedBy("has_deepslate_zinc_ore", this.has(ModBlocks.DEEPSLATE_ZINC_ORE))
+            .save(this.output);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+            .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
+            .save(this.output);
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+            .unlockedBy("has_zinc_ore", this.has(ModBlocks.ZINC_ORE))
+            .save(this.output);
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+            .unlockedBy("has_deepslate_zinc_ore", this.has(ModBlocks.DEEPSLATE_ZINC_ORE))
+            .save(this.output);
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+            .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
+            .save(this.output);
+        */
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
