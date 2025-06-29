@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "deltav:zinc_ingot"
+        "recipe": "minecraft:zinc_ingot_from_blasting_zinc_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_zinc_block": {
+    "has_zinc_ore": {
       "conditions": {
         "items": [
           {
-            "items": "deltav:zinc_block"
+            "items": "deltav:zinc_ore"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_zinc_block"
+      "has_zinc_ore"
     ]
   ],
   "rewards": {
     "recipes": [
-      "deltav:zinc_ingot"
+      "minecraft:zinc_ingot_from_blasting_zinc_ore"
     ]
   }
 }

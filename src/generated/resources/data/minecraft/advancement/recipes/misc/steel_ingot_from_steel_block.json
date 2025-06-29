@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "deltav:steel_ingot"
+        "recipe": "minecraft:steel_ingot_from_steel_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "deltav:steel_ingot"
+      "minecraft:steel_ingot_from_steel_block"
     ]
   }
 }
