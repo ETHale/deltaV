@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "deltav:kimberlite"
+  ],
+  "result": {
+    "count": 1,
+    "id": "deltav:kimberlite_button"
+  }
+}
