@@ -48,10 +48,11 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.familyWithExistingFullBlock(kimberlite).pressurePlate(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
 
         Block oil = ModBlocks.OIL_FLUID.get();
-        //blockModels.createTrivialCube(oil);
+        blockModels.createTrivialCube(oil);
         //blockModels.createSimpleBlock(oil, null)
         //blockModels.createNonTemplateModelBlock(oil);
-        blockModels.createAirLikeBlock(oil, ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil"));
+        //blockModels.createAirLikeBlock(oil, ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil"));
+        //blockModels.createAirLikeBlock(oil, ResourceLocation.withDefaultNamespace("lava"));
 
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

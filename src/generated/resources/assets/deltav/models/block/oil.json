@@ -1,5 +1,6 @@
 {
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "particle": "deltav:block/oil"
+    "all": "deltav:block/oil"
   }
 }
