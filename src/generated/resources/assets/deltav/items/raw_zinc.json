@@ -1,6 +1,6 @@
 {
-    "model": {
-        "type": "minecraft:model",
-        "model": "deltav:item/raw_zinc"
-    }
+  "model": {
+    "type": "minecraft:model",
+    "model": "deltav:item/raw_zinc"
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-    "": { "model": "deltav:block/zinc_ore" }
+  "variants": {
+    "": {
+      "model": "deltav:block/zinc_ore"
     }
+  }
 }
