@@ -15,6 +15,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.api.distmarker.Dist;
@@ -93,14 +94,14 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .pattern("ZZZ")
             .define('Z', ModItems.KIMBERLITE_ITEM)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
-            .save(this.output);
+            .save(this.output, "kimberlite_slab_from_kimberlite");
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_STAIRS, 4)
             .pattern("Z  ")
             .pattern("ZZ ")
             .pattern("ZZZ")
             .define('Z', ModItems.KIMBERLITE_ITEM)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
-            .save(this.output);
+            .save(this.output, "kimberlite_stairs_from_kimberlite");
         ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.KIMBERLITE_BUTTON)
             .requires(ModBlocks.KIMBERLITE)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
@@ -109,13 +110,22 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .pattern("ZZ")
             .define('Z', ModItems.KIMBERLITE_ITEM)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
-            .save(this.output);
+            .save(this.output, "kimberlite_pressure_plate_from_kimberlite");
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_WALL, 6)
             .pattern("ZZZ")
             .pattern("ZZZ")
             .define('Z', ModItems.KIMBERLITE_ITEM)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
-            .save(this.output);
+            .save(this.output, "kimberlite_wall_from_kimberlite");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_slab_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_stairs_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_WALL, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_wall_from_kimberlite_stonecutting");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

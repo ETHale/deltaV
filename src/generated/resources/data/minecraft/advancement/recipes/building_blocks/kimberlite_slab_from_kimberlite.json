@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "deltav:kimberlite_wall"
+        "recipe": "minecraft:kimberlite_slab_from_kimberlite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "deltav:kimberlite_wall"
+      "minecraft:kimberlite_slab_from_kimberlite"
     ]
   }
 }

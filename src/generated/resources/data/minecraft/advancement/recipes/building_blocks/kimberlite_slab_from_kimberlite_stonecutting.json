@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "deltav:kimberlite_pressure_plate"
+        "recipe": "minecraft:kimberlite_slab_from_kimberlite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "deltav:kimberlite_pressure_plate"
+      "minecraft:kimberlite_slab_from_kimberlite_stonecutting"
     ]
   }
 }

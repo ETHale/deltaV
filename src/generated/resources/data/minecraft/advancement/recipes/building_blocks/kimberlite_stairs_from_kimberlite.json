@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "deltav:kimberlite_stairs"
+        "recipe": "minecraft:kimberlite_stairs_from_kimberlite"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "deltav:kimberlite_stairs"
+      "minecraft:kimberlite_stairs_from_kimberlite"
     ]
   }
 }
