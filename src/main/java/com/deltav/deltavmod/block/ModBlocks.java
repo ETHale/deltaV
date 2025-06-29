@@ -6,7 +6,9 @@ import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -48,6 +50,49 @@ public class ModBlocks {
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
+    );
+
+    public static final DeferredBlock<Block> ZINC_BLOCK = BLOCKS.registerSimpleBlock(
+        "zinc_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BELL)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 6.0F)
+            .sound(SoundType.METAL)
+    );
+
+    public static final DeferredBlock<Block> ZINC_ORE = BLOCKS.register(
+        "zinc_ore",
+        registryName -> new DropExperienceBlock(UniformInt.of(2, 4),
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .mapColor(MapColor.STONE)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F))
+    );
+
+    public static final DeferredBlock<Block> DEEPSLATE_ZINC_ORE = BLOCKS.register(
+        "deepslate_zinc_ore",
+        registryName -> new DropExperienceBlock(UniformInt.of(2, 4),
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .mapColor(MapColor.STONE)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F))
+    );
+
+    public static final DeferredBlock<Block> RAW_ZINC_BLOCK = BLOCKS.registerSimpleBlock(
+        "raw_zinc_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
     );
 
     public static void register(IEventBus eventBus) {

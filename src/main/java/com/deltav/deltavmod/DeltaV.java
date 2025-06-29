@@ -61,6 +61,12 @@ public class DeltaV {
                 output.accept(ModBlocks.ALLOY_FURNACE.get());
                 output.accept(ModBlocks.KIMBERLITE.get());
                 output.accept(ModItems.STEEL_INGOT.get());
+                output.accept(ModBlocks.ZINC_BLOCK.get());
+                output.accept(ModBlocks.RAW_ZINC_BLOCK.get());
+                output.accept(ModBlocks.ZINC_ORE.get());
+                output.accept(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+                output.accept(ModItems.ZINC_INGOT.get());
+                output.accept(ModItems.RAW_ZINC.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

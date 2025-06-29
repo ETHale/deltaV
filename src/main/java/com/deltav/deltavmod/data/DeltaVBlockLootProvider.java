@@ -3,6 +3,7 @@ package com.deltav.deltavmod.data;
 import java.util.Set;
 
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -28,5 +29,13 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.KIMBERLITE.get());
         this.dropSelf(ModBlocks.STEEL_BLOCK.get());
         this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
+        this.dropOther(ModBlocks.ZINC_ORE.get(), ModItems.RAW_ZINC.get());
+        this.dropOther(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get());
+        this.dropSelf(ModBlocks.ZINC_BLOCK.get());
+        this.dropSelf(ModBlocks.RAW_ZINC_BLOCK.get());
+        /*this.add(ModBlocks.ZINC_ORE.get(),
+                this.createSilkTouchOnlyTable(ModBlocks.ZINC_ORE.get()));
+        this.add(ModBlocks.DEEPSLATE_ZINC_ORE.get(),
+                this.createSilkTouchOnlyTable(ModBlocks.DEEPSLATE_ZINC_ORE.get()));*/
     }
 }

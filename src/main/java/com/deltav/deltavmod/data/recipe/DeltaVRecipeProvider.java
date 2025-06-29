@@ -39,6 +39,32 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModBlocks.STEEL_BLOCK)
             .unlockedBy("has_steel_block", this.has(ModBlocks.STEEL_BLOCK))
             .save(this.output);
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZINC_BLOCK)
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.ZINC_INGOT)
+            .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
+            .save(this.output);
+
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.ZINC_INGOT, 9)
+            .requires(ModBlocks.ZINC_BLOCK)
+            .unlockedBy("has_zinc_block", this.has(ModBlocks.ZINC_BLOCK))
+            .save(this.output);
+        
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_ZINC_BLOCK)
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.RAW_ZINC)
+            .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
+            .save(this.output);
+
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.RAW_ZINC, 9)
+            .requires(ModBlocks.RAW_ZINC_BLOCK)
+            .unlockedBy("has_raw_zinc_block", this.has(ModBlocks.RAW_ZINC_BLOCK))
+            .save(this.output);
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
