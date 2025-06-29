@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
-import com.deltav.deltavmod.data.DeltaVDataGenerators;
+import com.deltav.deltavmod.fluid.ModFluids;
+import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.item.ModItems;
 import com.mojang.logging.LogUtils;
 
@@ -61,6 +62,8 @@ public class DeltaV {
                 output.accept(ModBlocks.ALLOY_FURNACE.get());
                 output.accept(ModBlocks.KIMBERLITE.get());
                 output.accept(ModItems.STEEL_INGOT.get());
+                //output.accept(ModBlocks.OIL_FLUID.get());
+                output.accept(ModItems.OIL_BUCKET.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -71,6 +74,8 @@ public class DeltaV {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
