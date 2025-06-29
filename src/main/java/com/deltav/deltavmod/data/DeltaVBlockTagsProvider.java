@@ -41,8 +41,11 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get()) 
             .add(ModBlocks.KIMBERLITE_SLAB.get())
             .add(ModBlocks.KIMBERLITE_STAIRS.get()) 
-            .add(ModBlocks.KIMBERLITE_WALL.get());
-        this.tag(BlockTags.WALLS).add(ModBlocks.KIMBERLITE_WALL.get());
+            .add(ModBlocks.KIMBERLITE_WALL.get())
+            .add(ModBlocks.POLISHED_KIMBERLITE.get())
+            .add(ModBlocks.POLISHED_KIMBERLITE_STAIRS.get())
+            .add(ModBlocks.POLISHED_KIMBERLITE_SLAB.get());
+        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.KIMBERLITE.get());
     }
     
 }

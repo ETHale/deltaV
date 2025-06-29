@@ -126,6 +126,39 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_WALL, 1)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
             .save(output, "kimberlite_wall_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_slab_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_stairs_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.POLISHED_KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_slab_from_polished_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.POLISHED_KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_stairs_from_polished_kimberlite_stonecutting");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 6)
+            .pattern("ZZZ")
+            .define('Z', ModItems.POLISHED_KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_slab_from_polished_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.POLISHED_KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_stairs_from_polished_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE, 4)
+            .pattern("ZZ")
+            .pattern("ZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_stairs_from_kimberlite");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

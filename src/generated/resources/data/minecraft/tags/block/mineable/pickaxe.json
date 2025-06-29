@@ -11,6 +11,9 @@
     "deltav:kimberlite_pressure_plate",
     "deltav:kimberlite_slab",
     "deltav:kimberlite_stairs",
-    "deltav:kimberlite_wall"
+    "deltav:kimberlite_wall",
+    "deltav:polished_kimberlite",
+    "deltav:polished_kimberlite_stairs",
+    "deltav:polished_kimberlite_slab"
   ]
 }

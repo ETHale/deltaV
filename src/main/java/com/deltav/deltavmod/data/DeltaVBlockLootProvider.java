@@ -35,11 +35,13 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
         this.dropSelf(ModBlocks.KIMBERLITE_BUTTON.get());
         this.dropSelf(ModBlocks.KIMBERLITE_WALL.get());
+        this.dropSelf(ModBlocks.POLISHED_KIMBERLITE.get());
+        this.add(ModBlocks.POLISHED_KIMBERLITE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.POLISHED_KIMBERLITE_SLAB.get()));
+        this.dropSelf(ModBlocks.POLISHED_KIMBERLITE_STAIRS.get());
         this.add(ModBlocks.ZINC_ORE.get(), this.createOreDrop(ModBlocks.ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.add(ModBlocks.DEEPSLATE_ZINC_ORE.get(), this.createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.dropSelf(ModBlocks.ZINC_BLOCK.get());
         this.dropSelf(ModBlocks.RAW_ZINC_BLOCK.get());
-        
-        
     }
 }

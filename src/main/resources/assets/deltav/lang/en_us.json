@@ -20,6 +20,9 @@
   "block.deltav.kimberlite_pressure_plate": "Kimberlite Pressure Plate",
   "block.deltav.kimberlite_button": "Kimberlite Button",
   "block.deltav.kimberlite_wall": "Kimberlite Wall",
+  "block.deltav.polished_kimberlite": "Polished Kimberlite",
+  "block.deltav.polished_kimberlite_stairs": "Polished Kimberlite Stairs",
+  "block.deltav.polished_kimberlite_slab": "Polished Kimberlite Slab",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",

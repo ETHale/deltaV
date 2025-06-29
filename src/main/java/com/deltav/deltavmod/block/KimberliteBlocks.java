@@ -80,4 +80,37 @@ public class KimberliteBlocks {
             .strength(1.4f, 5.0f)
             .mapColor(MapColor.COLOR_BLACK))
     );
+
+    // polished
+
+    public static final DeferredBlock<Block> POLISHED_KIMBERLITE = BLOCKS.registerSimpleBlock(
+        "polished_kimberlite", 
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(1.4f, 5.0f)
+            .mapColor(MapColor.COLOR_BLACK)
+    );
+
+    public static final DeferredBlock<StairBlock> POLISHED_KIMBERLITE_STAIRS = BLOCKS.register(
+        "polished_kimberlite_stairs",
+        registryName -> new StairBlock(ModBlocks.POLISHED_KIMBERLITE.get().defaultBlockState(), 
+            BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(1.4f, 5.0f)
+            .mapColor(MapColor.COLOR_BLACK))
+    );
+
+    public static final DeferredBlock<SlabBlock> POLISHED_KIMBERLITE_SLAB = BLOCKS.register(
+        "polished_kimberlite_slab",
+        registryName -> new SlabBlock(BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(1.4f, 5.0f)
+            .mapColor(MapColor.COLOR_BLACK))
+    );
 }

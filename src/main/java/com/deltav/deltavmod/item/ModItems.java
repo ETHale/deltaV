@@ -26,6 +26,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KIMBERLITE_PRESSURE_PLATE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_pressure_plate", ModBlocks.KIMBERLITE_PRESSURE_PLATE);
     public static final DeferredItem<BlockItem> KIMBERLITE_BUTTON_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_button", ModBlocks.KIMBERLITE_BUTTON);
     public static final DeferredItem<BlockItem> KIMBERLITE_WALL_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_wall", ModBlocks.KIMBERLITE_WALL);
+    public static final DeferredItem<BlockItem> POLISHED_KIMBERLITE_ITEM = ITEMS.registerSimpleBlockItem("polished_kimberlite", ModBlocks.POLISHED_KIMBERLITE);
+    public static final DeferredItem<BlockItem> POLISHED_KIMBERLITE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("polished_kimberlite_stairs", ModBlocks.POLISHED_KIMBERLITE_STAIRS);
+    public static final DeferredItem<BlockItem> POLISHED_KIMBERLITE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("polished_kimberlite_slab", ModBlocks.POLISHED_KIMBERLITE_SLAB);
 
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");

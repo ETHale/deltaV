@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:polished_kimberlite"
+  },
+  "pattern": [
+    "ZZZ"
+  ],
+  "result": {
+    "count": 6,
+    "id": "deltav:polished_kimberlite_slab"
+  }
+}
