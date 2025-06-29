@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:raw_zinc"
+  },
+  "pattern": [
+    "ZZZ",
+    "ZZZ",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "deltav:raw_zinc_block"
+  }
+}

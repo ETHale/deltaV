@@ -6,6 +6,13 @@
   "block.deltav.steel_block": "Block of Steel",
   "block.deltav.alloy_furnace": "Alloy Furnace",
   "item.deltav.steel_ingot": "Steel Ingot",
+  "block.deltav.zinc_block": "Block of Zinc",
+  "block.deltav.zinc_ore": "Zinc Ore",
+  "block.deltav.deepslate_zinc_ore": "Deepslate Zinc Ore",
+  "block.deltav.raw_zinc_block": "Block of Raw Zinc",
+  "item.deltav.zinc_ingot": "Zinc Ingot",
+  "item.deltav.raw_zinc": "Raw Zinc",
+
   
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",

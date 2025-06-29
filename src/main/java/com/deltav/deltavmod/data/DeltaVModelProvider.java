@@ -24,6 +24,10 @@ public class DeltaVModelProvider extends ModelProvider{
 
         // BLOCKS
         blockModels.createTrivialCube(ModBlocks.STEEL_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.ZINC_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.ZINC_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_ZINC_BLOCK.get());
 
 
         // alloy furnace
@@ -45,5 +49,7 @@ public class DeltaVModelProvider extends ModelProvider{
 
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.ZINC_INGOT.get(), ModelTemplates.FLAT_ITEM);
     }
 }

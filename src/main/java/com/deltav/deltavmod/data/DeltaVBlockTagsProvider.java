@@ -20,9 +20,20 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
     // add tags to blocks in this function 
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
-        this.tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL).add(ModBlocks.STEEL_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.STEEL_BLOCK.get());
+        // zinc blocks
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ZINC_ORE.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.ZINC_ORE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ZINC_BLOCK.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.ZINC_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.RAW_ZINC_BLOCK.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.RAW_ZINC_BLOCK.get());
+        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.ZINC_ORE.get());
+        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
         
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(ModBlocks.KIMBERLITE.get())
