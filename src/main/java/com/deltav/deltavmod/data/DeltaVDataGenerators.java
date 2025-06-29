@@ -1,15 +1,23 @@
 package com.deltav.deltavmod.data;
 
+import static com.deltav.deltavmod.block.ModBlocks.OIL_FLUID;
+
 import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.fluid.ModFluidTypes;
+import com.deltav.deltavmod.fluid.ModFluids;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 // event handler for data gen classes 
@@ -33,5 +41,12 @@ public class DeltaVDataGenerators {
                     LootContextParamSets.BLOCK
                 )
             ), lookupProvider));
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        // item models
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOWING.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
     }
 }

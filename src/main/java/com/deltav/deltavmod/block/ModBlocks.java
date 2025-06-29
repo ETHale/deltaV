@@ -56,16 +56,17 @@ public class ModBlocks {
     public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = KimberliteBlocks.KIMBERLITE_BUTTON;
     public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = KimberliteBlocks.KIMBERLITE_WALL;
 
-    public static final DeferredBlock<LiquidBlock> OIL_FLUID = BLOCKS.register(
-        "oil_block",
+    public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
+        "oil",
         registryName -> new LiquidBlock(
-            ModFluids.OIL_SOURCE.get(),
+            ModFluids.OIL_SOURCE.value(),
             BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.WATER)
                 .noCollission()
                 .strength(100)
                 .noLootTable()
+                .liquid()
         )
     );
 

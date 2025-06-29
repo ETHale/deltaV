@@ -19,6 +19,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -58,6 +59,7 @@ public class DeltaV {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
             .displayItems(DeltaV::populateBlockTab)
+            .displayItems(DeltaV::populateBlockTabWithItems)
             .build());
     
     /*public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
@@ -119,10 +121,17 @@ public class DeltaV {
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
             Block block = blockHolder.value();
-            if (block != Blocks.AIR) {
+            if (block != Blocks.AIR && !(block instanceof LiquidBlock)) {
                 Item item = block.asItem();
                 output.accept(item);
             }
+        });
+    }
+
+    private static void populateBlockTabWithItems(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        ModItems.ITEMS.getEntries().forEach(itemHolder -> {
+            Item item = itemHolder.value();
+            output.accept(item);
         });
     }
 

@@ -2,16 +2,20 @@ package com.deltav.deltavmod.data;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -43,7 +47,14 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.familyWithExistingFullBlock(kimberlite).wall(ModBlocks.KIMBERLITE_WALL.get());
         blockModels.familyWithExistingFullBlock(kimberlite).pressurePlate(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
 
+        Block oil = ModBlocks.OIL_FLUID.get();
+        //blockModels.createTrivialCube(oil);
+        //blockModels.createSimpleBlock(oil, null)
+        //blockModels.createNonTemplateModelBlock(oil);
+        blockModels.createAirLikeBlock(oil, ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil"));
+
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
     }
 }

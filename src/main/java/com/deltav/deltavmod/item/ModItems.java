@@ -34,7 +34,7 @@ public class ModItems {
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
         "oil_bucket",
         registryName -> new BucketItem(
-            ModFluids.OIL_SOURCE.get(),
+            ModFluids.OIL_SOURCE.value(),
             new Item.Properties()
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .craftRemainder(Items.BUCKET)

@@ -12,23 +12,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class ModFluidTypes {
-    public static final ResourceLocation WATER_STILL_RL = ResourceLocation.withDefaultNamespace("textures/block/water_still");
-    public static final ResourceLocation WATER_FLOWING_RL = ResourceLocation.withDefaultNamespace("textures/block/water_flow");
-    public static final ResourceLocation OIL_OVERLAY_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "misc/in_oil");
+    public static final ResourceLocation OIL_STILL_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
+    public static final ResourceLocation OIL_FLOWING_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
+    public static final ResourceLocation OIL_OVERLAY_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
 
     public static final DeferredRegister<FluidType> FLUID_TYPES =
-            DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, DeltaV.MODID);
+            DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, DeltaV.MODID);
 
-    public static final DeferredHolder<FluidType, FluidType> OIL_FLUID_TYPE = register("oil_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5));//.sound(SoundAction.get("drink"),
-                   // SoundEvents.HONEY_DRINK));
-
-
-
-    private static DeferredHolder<FluidType, FluidType> register(String name, FluidType.Properties properties) {
-        return FLUID_TYPES.register(name, () -> new BaseFluidType(WATER_STILL_RL, WATER_FLOWING_RL, OIL_OVERLAY_RL,
-                0xA1E038D0, new Vector4f(224f / 255f, 56f / 255f, 208f / 255f, 0.5f), properties));
-    }
+    public static final DeferredHolder<FluidType, FluidType> OIL_FLUID_TYPE = FLUID_TYPES.register("oil",
+        () -> new OilFluidType(FluidType.Properties.create().lightLevel(2).density(15).viscosity(5)));
 
     public static void register(IEventBus eventBus) {
         FLUID_TYPES.register(eventBus);
