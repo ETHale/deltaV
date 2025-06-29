@@ -16,7 +16,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -48,27 +50,22 @@ public class DeltaV {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new food item with the id "deltav:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
     // Creates a creative tab for deltav items, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB = CREATIVE_MODE_TABS.register("deltav_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.deltav")) //The language key for the title of your CreativeModeTab
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_BLOCK = CREATIVE_MODE_TABS.register("deltav_tab_blocks", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.deltav_blocks")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.STEEL_BLOCK.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                output.accept(ModBlocks.ALLOY_FURNACE.get());
-                output.accept(ModBlocks.KIMBERLITE.get());
-                output.accept(ModItems.STEEL_INGOT.get());
-                output.accept(ModBlocks.ZINC_BLOCK.get());
-                output.accept(ModBlocks.RAW_ZINC_BLOCK.get());
-                output.accept(ModBlocks.ZINC_ORE.get());
-                output.accept(ModBlocks.DEEPSLATE_ZINC_ORE.get());
-                output.accept(ModItems.ZINC_INGOT.get());
-                output.accept(ModItems.RAW_ZINC.get());
-            }).build());
-
+            .displayItems(DeltaV::populateBlockTab)
+            .build());
+    
+    /*public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.deltav_items")) //The language key for the title of your CreativeModeTab
+            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
+            .displayItems(DeltaV::populateBlockTab)
+            .build());
+    */
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
@@ -114,6 +111,16 @@ public class DeltaV {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
 
         }
+    }
+
+    private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
+            Block block = blockHolder.value();
+            if (block != Blocks.AIR) {
+                Item item = block.asItem();
+                output.accept(item);
+            }
+        });
     }
 
 

@@ -20,10 +20,11 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
     // add tags to blocks in this function 
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.KIMBERLITE.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
+
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.STEEL_BLOCK.get());
+
         // zinc blocks
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ZINC_ORE.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.ZINC_ORE.get());
@@ -35,6 +36,16 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.RAW_ZINC_BLOCK.get());
         this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.ZINC_ORE.get());
         this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+        
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .add(ModBlocks.KIMBERLITE.get())
+            .add(ModBlocks.KIMBERLITE_BUTTON.get())
+            .add(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get()) 
+            .add(ModBlocks.KIMBERLITE_SLAB.get())
+            .add(ModBlocks.KIMBERLITE_STAIRS.get()) 
+            .add(ModBlocks.KIMBERLITE_WALL.get());
+        this.tag(BlockTags.WALLS).add(ModBlocks.KIMBERLITE_WALL.get());
+
     }
     
 }

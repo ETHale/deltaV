@@ -1,10 +1,10 @@
 {
-  "itemGroup.deltav": "DeltaV",
+  "itemGroup.deltav_blocks": "DeltaV Blocks",
+  "itemGroup.deltav_items": "DeltaV Items",
   "block.deltav.example_block": "Example Block",
   "item.deltav.example_item": "Example Item",
   "block.deltav.steel_block": "Block of Steel",
   "block.deltav.alloy_furnace": "Alloy Furnace",
-  "block.deltav.kimberlite": "Kimberlite",
   "item.deltav.steel_ingot": "Steel Ingot",
   "block.deltav.zinc_block": "Block of Zinc",
   "block.deltav.zinc_ore": "Zinc Ore",
@@ -13,6 +13,14 @@
   "item.deltav.zinc_ingot": "Zinc Ingot",
   "item.deltav.raw_zinc": "Raw Zinc",
 
+  
+  "block.deltav.kimberlite": "Kimberlite",
+  "block.deltav.kimberlite_stairs": "Kimberlite Stairs",
+  "block.deltav.kimberlite_slab": "Kimberlite Slab",
+  "block.deltav.kimberlite_pressure_plate": "Kimberlite Pressure Plate",
+  "block.deltav.kimberlite_button": "Kimberlite Button",
+  "block.deltav.kimberlite_wall": "Kimberlite Wall",
+  
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml.title": "DeltaV Configs",
