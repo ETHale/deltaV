@@ -33,5 +33,7 @@ public class DeltaVDataGenerators {
                     LootContextParamSets.BLOCK
                 )
             ), lookupProvider));
+        // datapack
+        event.createDatapackRegistryObjects(DeltaVDatapackProvider.BUILDER);
     }
 }
