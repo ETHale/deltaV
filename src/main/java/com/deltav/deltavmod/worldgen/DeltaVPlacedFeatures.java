@@ -7,18 +7,36 @@ import com.deltav.deltavmod.DeltaV;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
 
 // general pipeline:
 // configured feature -> placed feature -> Biome modifier
 public class DeltaVPlacedFeatures {
+    public static final ResourceKey<PlacedFeature> KIMBERLITE_CARROT = registerKey("kimberlite_carrot");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        register(
+            context, 
+            KIMBERLITE_CARROT, 
+            configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.KIMBERLITE_CARROT), 
+            List.of(
+                RarityFilter.onAverageOnceEvery(100), // control spawn rate
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome()
+            )
+        );
     }
     
     private static ResourceKey<PlacedFeature> registerKey(String name) {

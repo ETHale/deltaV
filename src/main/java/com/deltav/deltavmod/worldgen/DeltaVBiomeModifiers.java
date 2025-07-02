@@ -2,20 +2,35 @@ package com.deltav.deltavmod.worldgen;
 
 import com.deltav.deltavmod.DeltaV;
 
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddCarversBiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
 
 // general pipeline:
 // configured feature -> placed feature -> Biome modifier
 public class DeltaVBiomeModifiers {
+    public static final ResourceKey<BiomeModifier> ADD_KIMBERLITE_CARROT = registerKey("add_kimberlite_carrot");
     
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var PlacedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
+
+        context.register(
+            ADD_KIMBERLITE_CARROT, 
+            new AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                HolderSet.direct(PlacedFeatures.getOrThrow(DeltaVPlacedFeatures.KIMBERLITE_CARROT)),
+                Decoration.UNDERGROUND_DECORATION
+            )
+        );
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
