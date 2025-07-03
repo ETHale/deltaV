@@ -71,7 +71,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
                             reachedSurface.setTrue();
                         }
                         float edgeBias = (float)(Math.sqrt(dist2) / currentRadius);
-                        placeBlock(level, pos, state, reachedSurface.booleanValue(), health.getValue(), edgeBias, random);
+                        placeBlock(context, level, pos, state, reachedSurface.booleanValue(), health.getValue(), edgeBias, random);
                     }
                 }
             );
@@ -79,7 +79,16 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
         return true;
     }
 
-    private void placeBlock(LevelAccessor level, BlockPos pos, BlockState state, boolean reachedSurface, float health, float edgeBias, RandomSource random) {
+    private void placeBlock(
+            FeaturePlaceContext<NoneFeatureConfiguration> context, 
+            LevelAccessor level, 
+            BlockPos pos, 
+            BlockState state, 
+            boolean reachedSurface, 
+            float health, 
+            float edgeBias, 
+            RandomSource random
+        ) {
         // we also don't want to replace grass blocks on the surface
         // and don't change liquids
         if (reachedSurface && (state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.MYCELIUM))
@@ -87,10 +96,44 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
         )
             return;
 
+        // ORES
+        if (state.is(Blocks.COAL_ORE) || state.is(Blocks.DEEPSLATE_COAL_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_COAL_ORE.get().defaultBlockState());
+        
+        else if (state.is(Blocks.COPPER_ORE) || state.is(Blocks.DEEPSLATE_COPPER_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_COPPER_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.DIAMOND_ORE) || state.is(Blocks.DEEPSLATE_DIAMOND_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_DIAMOND_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.EMERALD_ORE) || state.is(Blocks.DEEPSLATE_EMERALD_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_EMERALD_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.GOLD_ORE) || state.is(Blocks.DEEPSLATE_GOLD_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_GOLD_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.IRON_ORE) || state.is(Blocks.DEEPSLATE_IRON_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_IRON_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.LAPIS_ORE) || state.is(Blocks.DEEPSLATE_LAPIS_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_LAPIS_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.REDSTONE_ORE) || state.is(Blocks.DEEPSLATE_REDSTONE_ORE))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_REDSTONE_ORE.get().defaultBlockState());
+
+        else if (state.is(ModBlocks.ZINC_ORE.get()) || state.is(ModBlocks.DEEPSLATE_ZINC_ORE.get()))
+            setBlock(level, pos, ModBlocks.KIMBERLITE_ZINC_ORE.get().defaultBlockState());
+
+        else if (state.is(Blocks.BEDROCK)) {
+            float blockSelection = random.nextFloat();
+            if (blockSelection < 0.05f)
+                setBlock(level, pos, ModBlocks.MOLTEN_BEDROCK.get().defaultBlockState());
+        }
+        
         // we need to determine what blocks to place and where
         // as we run low of health and near the top we want to size fizzleing out - but more likely to fizzle out in the center
         //    (makes a crater)
-        if (state.is(BlockTags.OVERWORLD_CARVER_REPLACEABLES)) {
+        else if (state.is(BlockTags.OVERWORLD_CARVER_REPLACEABLES)) {
             if (health < 15F) {
                 // Blocks near the center (edgeBias close to 0) are more likely to fizzle out
                 float craterChance = Mth.clamp((1.0f - edgeBias) * (1.0f - (health / 15f)), 0f, 1f); // High near center, low near edge
@@ -98,11 +141,39 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
                     return;
                 }
             }
+
+            int worldMinY = context.chunkGenerator().getMinY();
+            int worldMaxY = level.getMaxY();
+            float depth = (float)(pos.getY() - worldMinY) / (worldMaxY - worldMinY); // 0.0 = bottom, 1.0 = top
             float blockSelection = random.nextFloat();
-            setBlock(level, pos, ModBlocks.KIMBERLITE_BUTTON.get().defaultBlockState());
+            BlockState filler = ModBlocks.KIMBERLITE_BUTTON.get().defaultBlockState();
+            if (depth < 0.02f) { // can only get diamond really near the bottom - not entirely accurate but game design
+                if (blockSelection < 0.005f) {
+                    setBlock(level, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
+                } else if (blockSelection < 0.01f) {
+                    setBlock(level, pos, Blocks.OBSIDIAN.defaultBlockState());
+                } else if (blockSelection < 0.015f) {
+                    setBlock(level, pos, ModBlocks.KIMBERLITE_DIAMOND_ORE.get().defaultBlockState());
+                } else {
+                    setBlock(level, pos, filler);
+                }
+            } else if (depth < 0.1f) {
+                if (blockSelection < 0.002f) {
+                    setBlock(level, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
+                } else if (blockSelection < 0.007f) {
+                    setBlock(level, pos, Blocks.OBSIDIAN.defaultBlockState());
+                } else {
+                    setBlock(level, pos, filler);
+                }
+            } else {
+                // Upper layers — more coal
+                if (blockSelection < 0.0015f) {
+                    setBlock(level, pos, ModBlocks.KIMBERLITE_COAL_ORE.get().defaultBlockState());
+                } else {
+                    setBlock(level, pos, filler);
+                }
+            }
         }
-        // TODO ore versions
-        // TODO Molten bedrock
-        // TODO vary what is placed + increase diamonds + magma at the bottom 
+        return;
     }
 }

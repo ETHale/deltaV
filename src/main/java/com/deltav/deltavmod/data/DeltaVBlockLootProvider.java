@@ -53,5 +53,6 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get(), this.createRedstoneOreDrops(ModBlocks.KIMBERLITE_REDSTONE_ORE.get()));
         this.add(ModBlocks.KIMBERLITE_ZINC_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.add(ModBlocks.KIMBERLITE_IRON_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_IRON_ORE.get(), Items.RAW_IRON));
+        this.dropSelf(ModBlocks.MOLTEN_BEDROCK.get());
     }
 }

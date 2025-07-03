@@ -79,6 +79,8 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
             .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
             ;
+        
+        this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.get());
     }
     
 }

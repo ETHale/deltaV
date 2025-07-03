@@ -3,6 +3,7 @@ package com.deltav.deltavmod.block;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
+import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -108,6 +109,20 @@ public class ModBlocks {
             .instrument(NoteBlockInstrument.BASEDRUM)
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
+    );
+
+    public static final DeferredBlock<MoltenBedrockBlock> MOLTEN_BEDROCK = BLOCKS.register(
+        "molten_bedrock",
+        registryName -> new MoltenBedrockBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.FIRE)
+                .strength(-1.0F, 3600000.0F)
+                .lightLevel(state -> 8)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+                .emissiveRendering((state, getter, pos) -> true)
+            )
     );
 
     public static void register(IEventBus eventBus) {

@@ -31,7 +31,7 @@ public class DeltaVPlacedFeatures {
             KIMBERLITE_CARROT, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.KIMBERLITE_CARROT), 
             List.of(
-                RarityFilter.onAverageOnceEvery(100), // control spawn rate
+                RarityFilter.onAverageOnceEvery(150), // control spawn rate
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()

@@ -38,7 +38,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KIMBERLITE_REDSTONE_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_redstone_ore", ModBlocks.KIMBERLITE_REDSTONE_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_ZINC_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_zinc_ore", ModBlocks.KIMBERLITE_ZINC_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_IRON_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_iron_ore", ModBlocks.KIMBERLITE_IRON_ORE);
-
+    
+    public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
+    
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");

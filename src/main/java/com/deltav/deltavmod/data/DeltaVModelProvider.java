@@ -60,6 +60,8 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
 
+        blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
+
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
