@@ -44,8 +44,41 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_WALL.get())
             .add(ModBlocks.POLISHED_KIMBERLITE.get())
             .add(ModBlocks.POLISHED_KIMBERLITE_STAIRS.get())
-            .add(ModBlocks.POLISHED_KIMBERLITE_SLAB.get());
-        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.KIMBERLITE.get());
+            .add(ModBlocks.POLISHED_KIMBERLITE_SLAB.get())
+            .add(ModBlocks.KIMBERLITE_COAL_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+            ;
+        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
+            .add(ModBlocks.KIMBERLITE.get())
+            .add(ModBlocks.KIMBERLITE_COAL_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+        ;
+        this.tag(BlockTags.NEEDS_STONE_TOOL)
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+            ;
+        this.tag(BlockTags.NEEDS_IRON_TOOL)
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
+            ;
     }
     
 }

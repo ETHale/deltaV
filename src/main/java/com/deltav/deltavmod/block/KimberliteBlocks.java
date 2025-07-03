@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -112,5 +113,88 @@ public class KimberliteBlocks {
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
             .mapColor(MapColor.COLOR_BLACK))
+    );
+
+    // ores
+    public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_zinc_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_coal_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_copper_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_diamond_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_emerald_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_gold_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_lapis_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_redstone_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+    public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = BLOCKS.registerSimpleBlock(
+        "kimberlite_iron_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.COLOR_BLACK)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
     );
 }

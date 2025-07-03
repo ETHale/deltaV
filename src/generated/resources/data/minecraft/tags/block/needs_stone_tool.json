@@ -4,6 +4,10 @@
     "deltav:zinc_ore",
     "deltav:deepslate_zinc_ore",
     "deltav:zinc_block",
-    "deltav:raw_zinc_block"
+    "deltav:raw_zinc_block",
+    "deltav:kimberlite_copper_ore",
+    "deltav:kimberlite_iron_ore",
+    "deltav:kimberlite_lapis_ore",
+    "deltav:kimberlite_zinc_ore"
   ]
 }
