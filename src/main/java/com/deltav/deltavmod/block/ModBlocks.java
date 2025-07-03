@@ -7,9 +7,7 @@ import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -118,10 +116,11 @@ public class ModBlocks {
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.FIRE)
                 .strength(-1.0F, 3600000.0F)
-                .lightLevel(state -> 8)
+                .lightLevel(state -> 3)
                 .sound(SoundType.STONE)
-                .noOcclusion()
-                .emissiveRendering((state, getter, pos) -> true)
+                .isValidSpawn((a, b, c, d) -> d.fireImmune())
+                .hasPostProcess((a, b ,c) -> true)
+                .emissiveRendering((a, b ,c) -> true)
             )
     );
 
