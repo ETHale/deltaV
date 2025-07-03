@@ -146,7 +146,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
             int worldMaxY = level.getMaxY();
             float depth = (float)(pos.getY() - worldMinY) / (worldMaxY - worldMinY); // 0.0 = bottom, 1.0 = top
             float blockSelection = random.nextFloat();
-            BlockState filler = ModBlocks.KIMBERLITE_BUTTON.get().defaultBlockState();
+            BlockState filler = ModBlocks.KIMBERLITE.get().defaultBlockState();
             if (depth < 0.02f) { // can only get diamond really near the bottom - not entirely accurate but game design
                 if (blockSelection < 0.005f) {
                     setBlock(level, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
