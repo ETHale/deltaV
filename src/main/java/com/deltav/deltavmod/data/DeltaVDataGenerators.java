@@ -23,6 +23,7 @@ public class DeltaVDataGenerators {
         event.createProvider(DeltaVModelProvider::new);
     }
 
+
     @SubscribeEvent
     public static void onGatherData(GatherDataEvent.Client event) {
         // block loot tables
@@ -33,5 +34,7 @@ public class DeltaVDataGenerators {
                     LootContextParamSets.BLOCK
                 )
             ), lookupProvider));
+        // datapack
+        event.createDatapackRegistryObjects(DeltaVDatapackProvider.BUILDER);
     }
 }

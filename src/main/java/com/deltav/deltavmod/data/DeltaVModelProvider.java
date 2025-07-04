@@ -46,6 +46,21 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.familyWithExistingFullBlock(kimberlite).slab(ModBlocks.KIMBERLITE_SLAB.get());
         blockModels.familyWithExistingFullBlock(kimberlite).wall(ModBlocks.KIMBERLITE_WALL.get());
         blockModels.familyWithExistingFullBlock(kimberlite).pressurePlate(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get());
+        Block polished_kimberlite = ModBlocks.POLISHED_KIMBERLITE.get();
+        blockModels.createTrivialCube(polished_kimberlite);
+        blockModels.familyWithExistingFullBlock(polished_kimberlite).stairs(ModBlocks.POLISHED_KIMBERLITE_STAIRS.get());
+        blockModels.familyWithExistingFullBlock(polished_kimberlite).slab(ModBlocks.POLISHED_KIMBERLITE_SLAB.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COAL_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COPPER_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_DIAMOND_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_EMERALD_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_GOLD_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_LAPIS_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_REDSTONE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_ZINC_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
+
+        blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

@@ -11,6 +11,18 @@
     "deltav:kimberlite_pressure_plate",
     "deltav:kimberlite_slab",
     "deltav:kimberlite_stairs",
-    "deltav:kimberlite_wall"
+    "deltav:kimberlite_wall",
+    "deltav:polished_kimberlite",
+    "deltav:polished_kimberlite_stairs",
+    "deltav:polished_kimberlite_slab",
+    "deltav:kimberlite_coal_ore",
+    "deltav:kimberlite_copper_ore",
+    "deltav:kimberlite_diamond_ore",
+    "deltav:kimberlite_emerald_ore",
+    "deltav:kimberlite_gold_ore",
+    "deltav:kimberlite_iron_ore",
+    "deltav:kimberlite_lapis_ore",
+    "deltav:kimberlite_redstone_ore",
+    "deltav:kimberlite_zinc_ore"
   ]
 }

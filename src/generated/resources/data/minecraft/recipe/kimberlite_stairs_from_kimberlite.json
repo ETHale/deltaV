@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:kimberlite"
+  },
+  "pattern": [
+    "Z  ",
+    "ZZ ",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 4,
+    "id": "deltav:kimberlite_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "deltav:block/polished_kimberlite",
+    "side": "deltav:block/polished_kimberlite",
+    "top": "deltav:block/polished_kimberlite"
+  }
+}

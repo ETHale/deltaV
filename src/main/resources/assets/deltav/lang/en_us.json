@@ -13,13 +13,26 @@
   "item.deltav.zinc_ingot": "Zinc Ingot",
   "item.deltav.raw_zinc": "Raw Zinc",
 
-  
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",
   "block.deltav.kimberlite_slab": "Kimberlite Slab",
   "block.deltav.kimberlite_pressure_plate": "Kimberlite Pressure Plate",
   "block.deltav.kimberlite_button": "Kimberlite Button",
   "block.deltav.kimberlite_wall": "Kimberlite Wall",
+  "block.deltav.polished_kimberlite": "Polished Kimberlite",
+  "block.deltav.polished_kimberlite_stairs": "Polished Kimberlite Stairs",
+  "block.deltav.polished_kimberlite_slab": "Polished Kimberlite Slab",
+  "block.deltav.kimberlite_coal_ore": "Kimberlite Coal Ore",
+  "block.deltav.kimberlite_copper_ore": "Kimberlite Copper Ore",
+  "block.deltav.kimberlite_diamond_ore": "Kimberlite Diamond Ore",
+  "block.deltav.kimberlite_emerald_ore": "Kimberlite Emerald Ore",
+  "block.deltav.kimberlite_gold_ore": "Kimberlite Gold Ore",
+  "block.deltav.kimberlite_iron_ore": "Kimberlite Iron Ore",
+  "block.deltav.kimberlite_lapis_ore": "Kimberlite Lapis Ore",
+  "block.deltav.kimberlite_redstone_ore": "Kimberlite Redstone Ore",
+  "block.deltav.kimberlite_zinc_ore": "Kimberlite Zinc Ore",
+
+  "block.deltav.molten_bedrock": "Molten Bedrock",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",

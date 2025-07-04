@@ -15,6 +15,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -86,7 +89,132 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
             .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
             .save(this.output, "zinc_ingot_from_blasting_raw_zinc");
-    }
+
+        // Kimberlite reciepes 
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_SLAB, 6)
+            .pattern("ZZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "kimberlite_slab_from_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_STAIRS, 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "kimberlite_stairs_from_kimberlite");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.KIMBERLITE_BUTTON)
+            .requires(ModBlocks.KIMBERLITE)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "kimberlite_button_from_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_PRESSURE_PLATE)
+            .pattern("ZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "kimberlite_pressure_plate_from_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_WALL, 6)
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "kimberlite_wall_from_kimberlite");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_slab_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_stairs_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_WALL, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "kimberlite_wall_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_slab_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_stairs_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_from_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.POLISHED_KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 2)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_slab_from_polished_kimberlite_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModItems.POLISHED_KIMBERLITE_ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 1)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(output, "polished_kimberlite_stairs_from_polished_kimberlite_stonecutting");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_SLAB, 6)
+            .pattern("ZZZ")
+            .define('Z', ModItems.POLISHED_KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_slab_from_polished_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE_STAIRS, 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModItems.POLISHED_KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_stairs_from_polished_kimberlite");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_KIMBERLITE, 4)
+            .pattern("ZZ")
+            .pattern("ZZ")
+            .define('Z', ModItems.KIMBERLITE_ITEM)
+            .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
+            .save(this.output, "polished_kimberlite_stairs_from_kimberlite");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, Items.COAL, 0.1F, 200)
+            .unlockedBy("has_kimberlite_coal_ore", this.has(ModBlocks.KIMBERLITE_COAL_ORE))
+            .save(this.output, "coal_from_smelting_kimberlite_coal_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, Items.COAL, 0.1F, 100)
+            .unlockedBy("has_kimberlite_coal_ore", this.has(ModBlocks.KIMBERLITE_COAL_ORE))
+            .save(this.output, "coal_from_blasting_kimberlite_coal_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, Items.COPPER_INGOT, 0.7F, 200)
+            .unlockedBy("has_kimberlite_copper_ore", this.has(ModBlocks.KIMBERLITE_COPPER_ORE))
+            .save(this.output, "copper_from_smelting_kimberlite_copper_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, Items.COPPER_INGOT, 0.7F, 100)
+            .unlockedBy("has_kimberlite_copper_ore", this.has(ModBlocks.KIMBERLITE_COPPER_ORE))
+            .save(this.output, "copper_from_blasting_kimberlite_copper_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, Items.DIAMOND, 1.0F, 200)
+            .unlockedBy("has_kimberlite_diamond_ore", this.has(ModBlocks.KIMBERLITE_DIAMOND_ORE))
+            .save(this.output, "diamond_from_smelting_kimberlite_diamond_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, Items.DIAMOND, 1.0F, 100)
+            .unlockedBy("has_kimberlite_diamond_ore", this.has(ModBlocks.KIMBERLITE_DIAMOND_ORE))
+            .save(this.output, "diamond_from_blasting_kimberlite_diamond_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, Items.EMERALD, 1.0F, 200)
+            .unlockedBy("has_kimberlite_emerald_ore", this.has(ModBlocks.KIMBERLITE_EMERALD_ORE))
+            .save(this.output, "emerald_from_smelting_kimberlite_emerald_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, Items.EMERALD, 1.0F, 100)
+            .unlockedBy("has_kimberlite_emerald_ore", this.has(ModBlocks.KIMBERLITE_EMERALD_ORE))
+            .save(this.output, "emerald_from_blasting_kimberlite_emerald_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 200)
+            .unlockedBy("has_kimberlite_gold_ore", this.has(ModBlocks.KIMBERLITE_GOLD_ORE))
+            .save(this.output, "gold_from_smelting_kimberlite_gold_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 100)
+            .unlockedBy("has_kimberlite_gold_ore", this.has(ModBlocks.KIMBERLITE_GOLD_ORE))
+            .save(this.output, "gold_from_blasting_kimberlite_gold_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, Items.IRON_INGOT, 0.7F, 200)
+            .unlockedBy("has_kimberlite_iron_ore", this.has(ModBlocks.KIMBERLITE_IRON_ORE))
+            .save(this.output, "iron_from_smelting_kimberlite_iron_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, Items.IRON_INGOT, 0.7F, 100)
+            .unlockedBy("has_kimberlite_iron_ore", this.has(ModBlocks.KIMBERLITE_IRON_ORE))
+            .save(this.output, "iron_from_blasting_kimberlite_iron_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 200)
+            .unlockedBy("has_kimberlite_lapis_ore", this.has(ModBlocks.KIMBERLITE_LAPIS_ORE))
+            .save(this.output, "lapis_from_smelting_kimberlite_lapis_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 100)
+            .unlockedBy("has_kimberlite_lapis_ore", this.has(ModBlocks.KIMBERLITE_LAPIS_ORE))
+            .save(this.output, "lapis_from_blasting_kimberlite_lapis_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, Items.REDSTONE, 0.3F, 200)
+            .unlockedBy("has_kimberlite_redstone_ore", this.has(ModBlocks.KIMBERLITE_REDSTONE_ORE))
+            .save(this.output, "redstone_from_smelting_kimberlite_redstone_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, Items.REDSTONE, 0.3F, 100)
+            .unlockedBy("has_kimberlite_redstone_ore", this.has(ModBlocks.KIMBERLITE_REDSTONE_ORE))
+            .save(this.output, "redstone_from_blasting_kimberlite_redstone_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 200)
+            .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
+            .save(this.output, "zinc_from_smelting_kimberlite_zinc_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100)
+            .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
+            .save(this.output, "zinc_from_blasting_kimberlite_zinc_ore");
+            }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
     public static class Runner extends RecipeProvider.Runner {
