@@ -214,7 +214,18 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100)
             .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
             .save(this.output, "zinc_from_blasting_kimberlite_zinc_ore");
-            }
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.REDSTONE_GENERATOR, 1)
+            .pattern("IZI")
+            .pattern("SRS")
+            .pattern("III")
+            .define('I', Items.IRON_INGOT)
+            .define('R', Items.REDSTONE_BLOCK)
+            .define('S', Items.STICK)
+            .define('Z', ModBlocks.ZINC_BLOCK)
+            .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
+            .save(this.output, "redstone_generator_from_crafting");
+    }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
     public static class Runner extends RecipeProvider.Runner {
