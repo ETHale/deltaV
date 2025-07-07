@@ -1,7 +1,10 @@
 package com.deltav.deltavmod.data;
 
+import java.util.stream.Stream;
+
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -10,12 +13,25 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
         super(output, DeltaV.MODID);
+    }
+
+    // CUSTOM ITEMS AND BLOCKS
+    // FOR CUSTOM BLOCKSTATES OR MODELS EDIT THIS TO FILTER THEM OUT
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        Stream<? extends Holder<Block>> list = BuiltInRegistries.BLOCK
+            .listElements()
+            .filter(holder -> holder.getKey().location().getNamespace().equals(modId))
+            .filter(holder -> !(holder.value() instanceof RedstoneGenerator));
+        return list;
     }
     
     // Generate models and associated files here
@@ -61,7 +77,7 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
-
+        
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);

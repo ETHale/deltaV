@@ -33,6 +33,7 @@
   "block.deltav.kimberlite_zinc_ore": "Kimberlite Zinc Ore",
 
   "block.deltav.molten_bedrock": "Molten Bedrock",
+  "block.deltav.redstone_generator": "Redstone Generator",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
