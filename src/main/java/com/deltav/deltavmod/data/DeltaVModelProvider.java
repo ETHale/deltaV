@@ -10,7 +10,10 @@ import com.deltav.deltavmod.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.BlockModelGenerators.WoodProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.core.Holder;
@@ -77,6 +80,15 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
+
+        TexturedModel.Provider bbTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
+            mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
+            .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
+            .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
+            .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
+        );
+        MultiVariant basic_battery_variant = blockModels.plainVariant(bbTextProvider.create(ModBlocks.BASIC_BATTERY.get(), blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.BASIC_BATTERY.get(), basic_battery_variant));
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

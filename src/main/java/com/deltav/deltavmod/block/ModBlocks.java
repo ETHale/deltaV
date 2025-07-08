@@ -4,7 +4,9 @@ package com.deltav.deltavmod.block;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
+import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
+import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -134,6 +137,21 @@ public class ModBlocks {
                 .strength(4.0F, 6.0F)
                 .sound(SoundType.IRON)
                 .noOcclusion()
+        )
+    );
+
+    public static final DeferredBlock<BasicBattery> BASIC_BATTERY = BLOCKS.register(
+        "basic_battery", 
+        registryName -> new BasicBattery(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.METAL)
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion(),
+            1500,
+            80,
+            80
         )
     );
 

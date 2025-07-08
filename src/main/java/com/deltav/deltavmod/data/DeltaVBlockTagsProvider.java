@@ -83,6 +83,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REDSTONE_GENERATOR.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.REDSTONE_GENERATOR.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.BASIC_BATTERY.get());
     }
     
 }

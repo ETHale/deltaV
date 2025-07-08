@@ -53,7 +53,6 @@ public class MoltenBedrockBlock extends Block{
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        DeltaV.LOGGER.debug("TICK");
         BubbleColumnBlock.updateColumn(level, pos.above(), state);
     }
 
