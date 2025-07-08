@@ -45,6 +45,7 @@ public class ModItems {
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");
+    public static final DeferredItem<Item> ZINC_BATTERY = ITEMS.registerSimpleItem("zinc_battery");
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

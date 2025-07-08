@@ -12,9 +12,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
@@ -51,18 +53,18 @@ public class DeltaV {
     // Creates a creative tab for deltav items, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_BLOCK = CREATIVE_MODE_TABS.register("deltav_tab_blocks", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.deltav_blocks")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
             .displayItems(DeltaV::populateBlockTab)
             .build());
     
-    /*public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.deltav_items")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
-            .displayItems(DeltaV::populateBlockTab)
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
+            .icon(() -> ModItems.ZINC_BATTERY.get().getDefaultInstance())
+            .displayItems(DeltaV::populateItemTab)
             .build());
-    */
+    
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
@@ -106,9 +108,6 @@ public class DeltaV {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-
-        }
     }
 
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
@@ -116,6 +115,15 @@ public class DeltaV {
             Block block = blockHolder.value();
             if (block != Blocks.AIR) {
                 Item item = block.asItem();
+                output.accept(item);
+            }
+        });
+    }
+
+    private static void populateItemTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+        ModItems.ITEMS.getEntries().forEach(itemHolder -> {
+            Item item = itemHolder.value();
+            if (item != Items.AIR && !(item instanceof BlockItem)) {
                 output.accept(item);
             }
         });

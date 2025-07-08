@@ -225,6 +225,16 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('Z', ModBlocks.ZINC_BLOCK)
             .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
             .save(this.output, "redstone_generator_from_crafting");
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModItems.ZINC_BATTERY, 1)
+            .pattern(" C ")
+            .pattern("ZRZ")
+            .pattern(" C ")
+            .define('R', Items.REDSTONE)
+            .define('C', Items.COPPER_INGOT)
+            .define('Z', ModItems.ZINC_INGOT)
+            .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
+            .save(this.output, "zinc_battery_from_crafting");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

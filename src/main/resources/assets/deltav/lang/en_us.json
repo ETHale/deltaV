@@ -34,6 +34,8 @@
 
   "block.deltav.molten_bedrock": "Molten Bedrock",
   "block.deltav.redstone_generator": "Redstone Generator",
+
+  "item.deltav.zinc_battery": "Zinc Battery",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
