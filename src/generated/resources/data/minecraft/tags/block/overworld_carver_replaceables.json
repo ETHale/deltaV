@@ -2,6 +2,8 @@
   "values": [
     "deltav:zinc_ore",
     "deltav:deepslate_zinc_ore",
+    "deltav:cobalt_ore",
+    "deltav:deepslate_cobalt_ore",
     "deltav:kimberlite",
     "deltav:kimberlite_coal_ore",
     "deltav:kimberlite_copper_ore",
@@ -11,6 +13,7 @@
     "deltav:kimberlite_iron_ore",
     "deltav:kimberlite_lapis_ore",
     "deltav:kimberlite_redstone_ore",
-    "deltav:kimberlite_zinc_ore"
+    "deltav:kimberlite_zinc_ore",
+    "deltav:kimberlite_cobalt_ore"
   ]
 }

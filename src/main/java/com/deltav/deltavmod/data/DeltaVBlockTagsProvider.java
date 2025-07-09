@@ -23,18 +23,41 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.STEEL_BLOCK.get());
-        // zinc blocks
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ZINC_ORE.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.ZINC_ORE.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ZINC_BLOCK.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.ZINC_BLOCK.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.RAW_ZINC_BLOCK.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.RAW_ZINC_BLOCK.get());
-        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.ZINC_ORE.get());
-        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(ModBlocks.DEEPSLATE_ZINC_ORE.get());
-        
+        // ores
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .add(ModBlocks.ZINC_ORE.get())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
+            .add(ModBlocks.ZINC_BLOCK.get())
+            .add(ModBlocks.RAW_ZINC_BLOCK.get())
+            .add(ModBlocks.COBALT_ORE.get())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
+            .add(ModBlocks.COBALT_BLOCK.get())
+            .add(ModBlocks.RAW_COBALT_BLOCK.get())
+            .add(ModBlocks.PRISMIUM_BLOCK.get())
+            ;
+        this.tag(BlockTags.NEEDS_STONE_TOOL)
+            .add(ModBlocks.ZINC_ORE.get())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
+            .add(ModBlocks.ZINC_BLOCK.get())
+            .add(ModBlocks.RAW_ZINC_BLOCK.get())
+            ;
+        this.tag(BlockTags.NEEDS_IRON_TOOL)
+            .add(ModBlocks.COBALT_ORE.get())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
+            .add(ModBlocks.COBALT_BLOCK.get())
+            .add(ModBlocks.RAW_COBALT_BLOCK.get())
+            ;
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .add(ModBlocks.PRISMIUM_BLOCK.get())
+            ;
+        this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
+            .add(ModBlocks.ZINC_ORE.get())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
+            .add(ModBlocks.COBALT_ORE.get())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
+            ;
+
+        // kimberlite
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(ModBlocks.KIMBERLITE.get())
             .add(ModBlocks.KIMBERLITE_BUTTON.get())
@@ -54,6 +77,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
             .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
             .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
             ;
         this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
             .add(ModBlocks.KIMBERLITE.get())
@@ -66,6 +90,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
             .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
             .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
         ;
         this.tag(BlockTags.NEEDS_STONE_TOOL)
             .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
@@ -78,6 +103,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
             .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
             .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
             ;
         
         this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.get());
