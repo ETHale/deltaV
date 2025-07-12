@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.item.ModItems;
+import com.deltav.deltavmod.screen.custom.CrusherScreen;
+import com.deltav.deltavmod.screen.custom.ModMenuTypes;
 import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
@@ -26,6 +28,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -72,6 +75,7 @@ public class DeltaV {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         DeltaVFeatures.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -137,6 +141,11 @@ public class DeltaV {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
         }
     }
 }

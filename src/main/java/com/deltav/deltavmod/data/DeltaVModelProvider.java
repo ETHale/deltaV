@@ -67,6 +67,8 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
+        blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
+
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);

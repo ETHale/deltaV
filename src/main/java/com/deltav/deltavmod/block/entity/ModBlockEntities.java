@@ -21,6 +21,15 @@ public class ModBlockEntities {
                 AlloyFurnaceBlockEntity::new,
                 false,
                 ModBlocks.ALLOY_FURNACE.get()));
+    
+    public static final Supplier<BlockEntityType<CrusherBlockEntity>> CRUSHER_BE = 
+        BLOCK_ENTITIES.register(
+            "crusher_be",
+            () -> new BlockEntityType<>(
+                CrusherBlockEntity::new,
+                false,
+                ModBlocks.CRUSHER.get()));
+    
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
