@@ -36,7 +36,7 @@ public class CrusherMenu extends AbstractContainerMenu{
         addPlayerHotbar(inv);
 
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 54, 34));
-        this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 1, 104, 34));
+        this.addSlot(new ResultSlotHandler(blockEntity.itemHandler, 1, 104, 34));
 
         addDataSlots(data);
     }
@@ -81,7 +81,7 @@ public class CrusherMenu extends AbstractContainerMenu{
         if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                    + TE_INVENTORY_SLOT_COUNT - 1, false)) {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
         } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
