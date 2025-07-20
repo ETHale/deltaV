@@ -1,15 +1,20 @@
 package com.deltav.deltavmod.data;
 
+import static com.deltav.deltavmod.block.entity.ModBlockEntities.BASIC_BATTERY_BE;
+
 import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 // event handler for data gen classes 
@@ -36,5 +41,14 @@ public class DeltaVDataGenerators {
             ), lookupProvider));
         // datapack
         event.createDatapackRegistryObjects(DeltaVDatapackProvider.BUILDER);
+    }
+
+    @SubscribeEvent 
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            BASIC_BATTERY_BE.get(), 
+            (be, side) -> be.getEnergyStorage(side)
+        );
     }
 }

@@ -6,6 +6,7 @@ import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
+import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
 import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
 
 import net.minecraft.core.registries.Registries;
@@ -148,11 +149,7 @@ public class ModBlocks {
                 .mapColor(MapColor.METAL)
                 .strength(3.0F, 6.0F)
                 .sound(SoundType.IRON)
-                .noOcclusion(),
-            1500,
-            80,
-            80
-        )
+                .noOcclusion())
     );
 
     public static void register(IEventBus eventBus) {

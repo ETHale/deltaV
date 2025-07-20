@@ -1,40 +1,25 @@
 package com.deltav.deltavmod.block.energy.batteries;
 
+import javax.annotation.Nullable;
+
+import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
+
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.energy.EnergyStorage;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class BasicBattery extends Block implements IEnergyStorage{
-    private EnergyStorage energyStorage;
+public class BasicBattery extends Block implements EntityBlock{
 
-    public BasicBattery(Properties properties, int capacity, int maxReceive, int maxExtract) {
+    public BasicBattery(Properties properties) {
         super(properties);
-        this.energyStorage = new EnergyStorage(capacity, maxReceive, maxExtract);
     }
 
     @Override
-    public int receiveEnergy(int toReceive, boolean simulate) {
-        return energyStorage.receiveEnergy(toReceive, simulate);
-    }
-    @Override
-    public int extractEnergy(int toExtract, boolean simulate) {
-        return energyStorage.extractEnergy(toExtract, simulate);
-    }
-    @Override
-    public int getEnergyStored() {
-        return energyStorage.getEnergyStored();
-    }
-    @Override
-    public int getMaxEnergyStored() {
-        return energyStorage.getMaxEnergyStored();
-    }
-    @Override
-    public boolean canExtract() {
-        return energyStorage.canExtract();
-    }
-    @Override
-    public boolean canReceive() {
-        return energyStorage.canReceive();
+    @Nullable
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BasicBatteryBlockEntity(pos, state);
     }
     
 }
