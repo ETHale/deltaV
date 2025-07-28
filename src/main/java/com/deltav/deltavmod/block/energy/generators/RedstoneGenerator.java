@@ -21,8 +21,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.redstone.Orientation;
-import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 // Thinking it would be cool if this generated power when its POWERED state changed
@@ -88,8 +88,9 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
         if (state.getValue(POWERED) && be != null) {
             if (be.canReceive()) {
                 DeltaV.LOGGER.debug("SENDING POWER");
-                be.receiveEnergy(REDSTONE_GENERATOR_CAPACITY, true);
+                be.receiveEnergy(REDSTONE_GENERATOR_CAPACITY, false);
             }
+            level.scheduleTick(pos, this, 20);
         }
     }
 

@@ -6,15 +6,20 @@ import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
-import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
+import com.deltav.deltavmod.menu.BasicBatteryMenu;
+import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.screen.BasicBatteryScreen;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 // event handler for data gen classes 
@@ -50,5 +55,10 @@ public class DeltaVDataGenerators {
             BASIC_BATTERY_BE.get(), 
             (be, side) -> be.getEnergyStorage(side)
         );
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
     }
 }

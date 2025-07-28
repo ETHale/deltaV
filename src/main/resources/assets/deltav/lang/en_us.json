@@ -44,5 +44,7 @@
   "deltav.configuration.items": "Item List",
   "deltav.configuration.logDirtBlock": "Log Dirt Block",
   "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
-  "deltav.configuration.magicNumber": "Magic Number"
+  "deltav.configuration.magicNumber": "Magic Number",
+
+  "gui.deltav.basic_battery": "Basic Battery"
 }
