@@ -33,8 +33,8 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
             this.imageWidth, this.imageHeight,
             256, 256
         );
-        int e = menu.energyStored;
-        int cap = menu.capacity;
+        int e = menu.getEnergyStored();
+        int cap = menu.getCapacity();
 
         Logger log = LogUtils.getLogger();
         log.debug(String.valueOf(e));
