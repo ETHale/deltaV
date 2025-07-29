@@ -44,6 +44,10 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.add(ModBlocks.DEEPSLATE_ZINC_ORE.get(), this.createOreDrop(ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.dropSelf(ModBlocks.ZINC_BLOCK.get());
         this.dropSelf(ModBlocks.RAW_ZINC_BLOCK.get());
+        this.add(ModBlocks.COBALT_ORE.get(), this.createOreDrop(ModBlocks.COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
+        this.add(ModBlocks.DEEPSLATE_COBALT_ORE.get(), this.createOreDrop(ModBlocks.DEEPSLATE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
+        this.dropSelf(ModBlocks.COBALT_BLOCK.get());
+        this.dropSelf(ModBlocks.RAW_COBALT_BLOCK.get());
         this.add(ModBlocks.KIMBERLITE_COAL_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_COAL_ORE.get(), Items.COAL));
         this.add(ModBlocks.KIMBERLITE_COPPER_ORE.get(), this.createCopperOreDrops(ModBlocks.KIMBERLITE_COPPER_ORE.get()));
         this.add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_DIAMOND_ORE.get(), Items.DIAMOND));
@@ -53,7 +57,9 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get(), this.createRedstoneOreDrops(ModBlocks.KIMBERLITE_REDSTONE_ORE.get()));
         this.add(ModBlocks.KIMBERLITE_ZINC_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_ZINC_ORE.get(), ModItems.RAW_ZINC.get()));
         this.add(ModBlocks.KIMBERLITE_IRON_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_IRON_ORE.get(), Items.RAW_IRON));
+        this.add(ModBlocks.KIMBERLITE_COBALT_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
         this.dropSelf(ModBlocks.MOLTEN_BEDROCK.get());
+        this.dropSelf(ModBlocks.PRISMIUM_BLOCK.get());
         this.dropSelf(ModBlocks.REDSTONE_GENERATOR.get());
         this.dropSelf(ModBlocks.BASIC_BATTERY.get());
     }

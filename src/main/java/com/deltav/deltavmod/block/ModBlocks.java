@@ -72,6 +72,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = KimberliteBlocks.KIMBERLITE_REDSTONE_ORE;
     public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = KimberliteBlocks.KIMBERLITE_ZINC_ORE;
     public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
 
     public static final DeferredBlock<Block> ZINC_BLOCK = BLOCKS.registerSimpleBlock(
         "zinc_block",
@@ -106,6 +107,47 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> RAW_ZINC_BLOCK = BLOCKS.registerSimpleBlock(
         "raw_zinc_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+    );
+
+    public static final DeferredBlock<Block> COBALT_BLOCK = BLOCKS.registerSimpleBlock(
+        "cobalt_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BELL)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 6.0F)
+            .sound(SoundType.METAL)
+    );
+
+    public static final DeferredBlock<Block> COBALT_ORE = BLOCKS.registerSimpleBlock(
+        "cobalt_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.STONE)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+
+    public static final DeferredBlock<Block> DEEPSLATE_COBALT_ORE = BLOCKS.registerSimpleBlock(
+        "deepslate_cobalt_ore",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.STONE)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F, 3.0F)
+    );
+
+    public static final DeferredBlock<Block> RAW_COBALT_BLOCK = BLOCKS.registerSimpleBlock(
+        "raw_cobalt_block",
         BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.METAL)
@@ -150,6 +192,17 @@ public class ModBlocks {
                 .strength(3.0F, 6.0F)
                 .sound(SoundType.IRON)
                 .noOcclusion())
+    );
+
+    public static final DeferredBlock<Block> PRISMIUM_BLOCK = BLOCKS.registerSimpleBlock(
+        "prismium_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.DIAMOND)
+            .instrument(NoteBlockInstrument.CHIME)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+            .sound(SoundType.AMETHYST)
     );
 
     public static void register(IEventBus eventBus) {

@@ -19,6 +19,13 @@ public class ModItems {
     public static final DeferredItem<BlockItem> ZINC_ORE_ITEM = ITEMS.registerSimpleBlockItem("zinc_ore", ModBlocks.ZINC_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_ZINC_ORE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_zinc_ore", ModBlocks.DEEPSLATE_ZINC_ORE);    
     public static final DeferredItem<BlockItem> RAW_ZINC_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("raw_zinc_block", ModBlocks.RAW_ZINC_BLOCK);
+
+    public static final DeferredItem<BlockItem> COBALT_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("cobalt_block", ModBlocks.COBALT_BLOCK);
+    public static final DeferredItem<BlockItem> COBALT_ORE_ITEM = ITEMS.registerSimpleBlockItem("cobalt_ore", ModBlocks.COBALT_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_COBALT_ORE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_cobalt_ore", ModBlocks.DEEPSLATE_COBALT_ORE);    
+    public static final DeferredItem<BlockItem> RAW_COBALT_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("raw_cobalt_block", ModBlocks.RAW_COBALT_BLOCK);
+
+    public static final DeferredItem<BlockItem> PRISMIUM_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("prismium_block", ModBlocks.PRISMIUM_BLOCK);
     
     public static final DeferredItem<BlockItem> KIMBERLITE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite", ModBlocks.KIMBERLITE);
     public static final DeferredItem<BlockItem> KIMBERLITE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_stairs", ModBlocks.KIMBERLITE_STAIRS);
@@ -38,6 +45,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KIMBERLITE_REDSTONE_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_redstone_ore", ModBlocks.KIMBERLITE_REDSTONE_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_ZINC_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_zinc_ore", ModBlocks.KIMBERLITE_ZINC_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_IRON_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_iron_ore", ModBlocks.KIMBERLITE_IRON_ORE);
+    public static final DeferredItem<BlockItem> KIMBERLITE_COBALT_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_cobalt_ore", ModBlocks.KIMBERLITE_COBALT_ORE);
     
     public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
@@ -46,6 +54,8 @@ public class ModItems {
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");
+    public static final DeferredItem<Item> COBALT_INGOT = ITEMS.registerSimpleItem("cobalt_ingot");
+    public static final DeferredItem<Item> RAW_COBALT = ITEMS.registerSimpleItem("raw_cobalt");
     public static final DeferredItem<Item> ZINC_BATTERY = ITEMS.registerSimpleItem("zinc_battery");
 
     public static void register(IEventBus eventBus) {

@@ -45,6 +45,7 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .unlockedBy("has_steel_block", this.has(ModBlocks.STEEL_BLOCK))
             .save(this.output, "steel_ingot_from_steel_block");
 
+        // ZINC
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZINC_BLOCK)
             .pattern("ZZZ")
             .pattern("ZZZ")
@@ -90,7 +91,53 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
             .save(this.output, "zinc_ingot_from_blasting_raw_zinc");
 
-        // Kimberlite reciepes 
+        // COBALT
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBALT_BLOCK)
+            .pattern("CCC")
+            .pattern("CCC")
+            .pattern("CCC")
+            .define('C', ModItems.COBALT_INGOT)
+            .unlockedBy("has_cobalt_ingot", this.has(ModItems.COBALT_INGOT))
+            .save(this.output);
+
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.COBALT_INGOT, 9)
+            .requires(ModBlocks.COBALT_BLOCK)
+            .unlockedBy("has_cobalt_block", this.has(ModBlocks.COBALT_BLOCK))
+            .save(this.output, "cobalt_ingot_from_cobalt_block");
+        
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_COBALT_BLOCK)
+            .pattern("CCC")
+            .pattern("CCC")
+            .pattern("CCC")
+            .define('C', ModItems.RAW_COBALT)
+            .unlockedBy("has_raw_cobalt", this.has(ModItems.RAW_COBALT))
+            .save(this.output);
+
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.RAW_COBALT, 9)
+            .requires(ModBlocks.RAW_COBALT_BLOCK)
+            .unlockedBy("has_raw_cobalt_block", this.has(ModBlocks.RAW_COBALT_BLOCK))
+            .save(this.output);
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+            .unlockedBy("has_cobalt_ore", this.has(ModBlocks.COBALT_ORE))
+            .save(this.output, "cobalt_ingot_from_smelting_cobalt_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+            .unlockedBy("has_deepslate_cobalt_ore", this.has(ModBlocks.DEEPSLATE_COBALT_ORE))
+            .save(this.output, "cobalt_ingot_from_smelting_deepslate_cobalt_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+            .unlockedBy("has_raw_cobalt", this.has(ModItems.RAW_COBALT))
+            .save(this.output, "cobalt_ingot_from_smelting_raw_cobalt");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+            .unlockedBy("has_cobalt_ore", this.has(ModBlocks.COBALT_ORE))
+            .save(this.output, "cobalt_ingot_from_blasting_cobalt_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+            .unlockedBy("has_deepslate_cobalt_ore", this.has(ModBlocks.DEEPSLATE_COBALT_ORE))
+            .save(this.output, "cobalt_ingot_from_blasting_deepslate_cobalt_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+            .unlockedBy("has_raw_cobalt", this.has(ModItems.RAW_COBALT))
+            .save(this.output, "cobalt_ingot_from_blasting_raw_cobalt");
+
+        // Kimberlite recipes 
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.KIMBERLITE_SLAB, 6)
             .pattern("ZZZ")
             .define('Z', ModItems.KIMBERLITE_ITEM)
@@ -214,6 +261,12 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100)
             .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
             .save(this.output, "zinc_from_blasting_kimberlite_zinc_ore");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 200)
+            .unlockedBy("has_kimberlite_cobalt_ore", this.has(ModBlocks.KIMBERLITE_COBALT_ORE))
+            .save(this.output, "cobalt_from_smelting_kimberlite_cobalt_ore");
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 100)
+            .unlockedBy("has_kimberlite_cobalt_ore", this.has(ModBlocks.KIMBERLITE_COBALT_ORE))
+            .save(this.output, "cobalt_from_blasting_kimberlite_cobalt_ore");
 
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.REDSTONE_GENERATOR, 1)
             .pattern("IZI")

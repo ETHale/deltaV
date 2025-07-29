@@ -6,6 +6,11 @@
     "deltav:deepslate_zinc_ore",
     "deltav:zinc_block",
     "deltav:raw_zinc_block",
+    "deltav:cobalt_ore",
+    "deltav:deepslate_cobalt_ore",
+    "deltav:cobalt_block",
+    "deltav:raw_cobalt_block",
+    "deltav:prismium_block",
     "deltav:kimberlite",
     "deltav:kimberlite_button",
     "deltav:kimberlite_pressure_plate",
@@ -24,6 +29,7 @@
     "deltav:kimberlite_lapis_ore",
     "deltav:kimberlite_redstone_ore",
     "deltav:kimberlite_zinc_ore",
+    "deltav:kimberlite_cobalt_ore",
     "deltav:redstone_generator"
   ]
 }

@@ -47,7 +47,11 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.RAW_ZINC_BLOCK.get());
-
+        blockModels.createTrivialCube(ModBlocks.COBALT_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.COBALT_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.DEEPSLATE_COBALT_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
 
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
@@ -78,6 +82,7 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_REDSTONE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COBALT_ORE.get());        
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
@@ -94,6 +99,8 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_COBALT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
     }
 }

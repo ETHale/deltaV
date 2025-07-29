@@ -12,6 +12,14 @@
   "block.deltav.raw_zinc_block": "Block of Raw Zinc",
   "item.deltav.zinc_ingot": "Zinc Ingot",
   "item.deltav.raw_zinc": "Raw Zinc",
+  "block.deltav.cobalt_block": "Block of Cobalt",
+  "block.deltav.cobalt_ore": "Cobalt Ore",
+  "block.deltav.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
+  "block.deltav.raw_cobalt_block": "Block of Raw Cobalt",
+  "item.deltav.cobalt_ingot": "Cobalt Ingot",
+  "item.deltav.raw_cobalt": "Raw Cobalt",
+
+  "block.deltav.prismium_block": "Block of Prismium",
 
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",
@@ -31,6 +39,7 @@
   "block.deltav.kimberlite_lapis_ore": "Kimberlite Lapis Ore",
   "block.deltav.kimberlite_redstone_ore": "Kimberlite Redstone Ore",
   "block.deltav.kimberlite_zinc_ore": "Kimberlite Zinc Ore",
+  "block.deltav.kimberlite_cobalt_ore": "Kimberlite Cobalt Ore",
 
   "block.deltav.molten_bedrock": "Molten Bedrock",
   "block.deltav.redstone_generator": "Redstone Generator",
