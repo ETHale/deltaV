@@ -46,13 +46,13 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
         int topPadding = 17;
 
         int barHeight = cap > 0 ? (int) ((e / (float) cap) * maxBarHeight) : 0;
-        guiGraphics.fill(leftPos + leftPadding, topPos + topPadding + maxBarHeight,
-               leftPos + leftPadding + barWidth, topPos + topPadding + (maxBarHeight - barHeight), 0xFF00FF00);
+        guiGraphics.fillGradient(leftPos + leftPadding,topPos + topPadding + (maxBarHeight - barHeight),
+               leftPos + leftPadding + barWidth, topPos + topPadding + maxBarHeight, 0xFF941400, 0xFFBD2008);
 
-        String energyLabel = e + " / " + cap;
-        int textX = leftPos + leftPadding + barWidth + 10;
-        int textY = topPos + topPadding + (maxBarHeight / 2); // Near bottom of bar
-        guiGraphics.drawString(this.font, energyLabel, textX, textY, 0xFF00FF00, false);
+        String energyLabel = e + "/" + cap + "RF";
+        int textX = leftPos + leftPadding + barWidth + 4;
+        int textY = topPos + topPadding + (maxBarHeight / 2);
+        guiGraphics.drawString(this.font, energyLabel, textX, textY, -12566464, false);
     }
 
     @Override
