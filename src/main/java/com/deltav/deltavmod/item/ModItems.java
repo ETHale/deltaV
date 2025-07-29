@@ -48,12 +48,15 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KIMBERLITE_COBALT_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_cobalt_ore", ModBlocks.KIMBERLITE_COBALT_ORE);
     
     public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
+    public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
+    public static final DeferredItem<BlockItem> BASIC_BATTERY_ITEM = ITEMS.registerSimpleBlockItem("basic_battery", ModBlocks.BASIC_BATTERY);
     
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");
     public static final DeferredItem<Item> COBALT_INGOT = ITEMS.registerSimpleItem("cobalt_ingot");
     public static final DeferredItem<Item> RAW_COBALT = ITEMS.registerSimpleItem("raw_cobalt");
+    public static final DeferredItem<Item> ZINC_BATTERY = ITEMS.registerSimpleItem("zinc_battery");
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

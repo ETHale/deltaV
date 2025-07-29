@@ -8,6 +8,8 @@
     "deltav:kimberlite_copper_ore",
     "deltav:kimberlite_iron_ore",
     "deltav:kimberlite_lapis_ore",
-    "deltav:kimberlite_zinc_ore"
+    "deltav:kimberlite_zinc_ore",
+    "deltav:redstone_generator",
+    "deltav:basic_battery"
   ]
 }

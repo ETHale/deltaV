@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "deltav:zinc_battery"
+  },
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "deltav:basic_battery"
+  }
+}

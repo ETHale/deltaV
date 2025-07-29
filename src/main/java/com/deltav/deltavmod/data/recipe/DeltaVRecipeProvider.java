@@ -267,7 +267,35 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 100)
             .unlockedBy("has_kimberlite_cobalt_ore", this.has(ModBlocks.KIMBERLITE_COBALT_ORE))
             .save(this.output, "cobalt_from_blasting_kimberlite_cobalt_ore");
-            }
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.REDSTONE_GENERATOR, 1)
+            .pattern("IZI")
+            .pattern("SRS")
+            .pattern("III")
+            .define('I', Items.IRON_INGOT)
+            .define('R', Items.REDSTONE_BLOCK)
+            .define('S', Items.STICK)
+            .define('Z', ModBlocks.ZINC_BLOCK)
+            .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
+            .save(this.output, "redstone_generator_from_crafting");
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModItems.ZINC_BATTERY, 1)
+            .pattern(" C ")
+            .pattern("ZRZ")
+            .pattern(" C ")
+            .define('R', Items.REDSTONE)
+            .define('C', Items.COPPER_INGOT)
+            .define('Z', ModItems.ZINC_INGOT)
+            .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
+            .save(this.output, "zinc_battery_from_crafting");
+        
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.BASIC_BATTERY, 1)
+            .pattern("BB")
+            .pattern("BB")
+            .define('B', ModItems.ZINC_BATTERY)
+            .unlockedBy("has_basic_battery", this.has(ModItems.BASIC_BATTERY_ITEM))
+            .save(this.output, "basic_battery_from_zinc_battery");
+    }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
     public static class Runner extends RecipeProvider.Runner {

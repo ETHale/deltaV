@@ -42,6 +42,10 @@
   "block.deltav.kimberlite_cobalt_ore": "Kimberlite Cobalt Ore",
 
   "block.deltav.molten_bedrock": "Molten Bedrock",
+  "block.deltav.redstone_generator": "Redstone Generator",
+  "block.deltav.basic_battery": "Basic Battery",
+
+  "item.deltav.zinc_battery": "Zinc Battery",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
@@ -49,5 +53,7 @@
   "deltav.configuration.items": "Item List",
   "deltav.configuration.logDirtBlock": "Log Dirt Block",
   "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
-  "deltav.configuration.magicNumber": "Magic Number"
+  "deltav.configuration.magicNumber": "Magic Number",
+
+  "gui.deltav.basic_battery": "Basic Battery"
 }

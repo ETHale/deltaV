@@ -1,21 +1,40 @@
 package com.deltav.deltavmod.data;
 
+import java.util.stream.Stream;
+
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.BlockModelGenerators.WoodProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
         super(output, DeltaV.MODID);
+    }
+
+    // CUSTOM ITEMS AND BLOCKS
+    // FOR CUSTOM BLOCKSTATES OR MODELS EDIT THIS TO FILTER THEM OUT
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        Stream<? extends Holder<Block>> list = BuiltInRegistries.BLOCK
+            .listElements()
+            .filter(holder -> holder.getKey().location().getNamespace().equals(modId))
+            .filter(holder -> !(holder.value() instanceof RedstoneGenerator));
+        return list;
     }
     
     // Generate models and associated files here
@@ -67,11 +86,21 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
+        TexturedModel.Provider bbTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
+            mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
+            .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
+            .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
+            .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
+        );
+        MultiVariant basic_battery_variant = blockModels.plainVariant(bbTextProvider.create(ModBlocks.BASIC_BATTERY.get(), blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.BASIC_BATTERY.get(), basic_battery_variant));
+        
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_COBALT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
     }
 }
