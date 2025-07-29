@@ -22,6 +22,9 @@ public class BasicBatteryMenu extends AbstractContainerMenu {
         this.capacity = be.getEnergyStorage(null).getMaxEnergyStored();
         this.energyStored = be.getEnergyStorage(null).getEnergyStored();
 
+        // player inv
+        addStandardInventorySlots(inv, 8, 84);
+
         addDataSlot(new DataSlot() {
             @Override public int get(){ return energyStored; }
             @Override public void set(int v){ energyStored = v; }

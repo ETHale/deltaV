@@ -22,12 +22,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 // Thinking it would be cool if this generated power when its POWERED state changed
 public class RedstoneGenerator extends HorizontalDirectionalBlock {
-    public static final int REDSTONE_GENERATOR_CAPACITY = 20;
+    public static final int REDSTONE_GENERATOR_CAPACITY = 5;
     public static final MapCodec<RedstoneGenerator> CODEC = simpleCodec(RedstoneGenerator::new);
 
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
@@ -78,16 +77,16 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
         Direction facing = state.getValue(FACING);
         BlockPos targetPos = pos.relative(facing);
 
-        BlockState targetState = level.getBlockState(targetPos);
-        DeltaV.LOGGER.debug("Block to the front: {}", targetState.getBlock().getName());
-        BlockEntity targetBE = level.getBlockEntity(targetPos);
-        DeltaV.LOGGER.debug("BlockEntity to the front: {}", targetBE);
+        //BlockState targetState = level.getBlockState(targetPos);
+        //DeltaV.LOGGER.debug("Block to the front: {}", targetState.getBlock().getName());
+        //BlockEntity targetBE = level.getBlockEntity(targetPos);
+        //DeltaV.LOGGER.debug("BlockEntity to the front: {}", targetBE);
 
 
         IEnergyStorage be = level.getCapability(Capabilities.EnergyStorage.BLOCK, targetPos, Direction.SOUTH);
         if (state.getValue(POWERED) && be != null) {
             if (be.canReceive()) {
-                DeltaV.LOGGER.debug("SENDING POWER");
+                //DeltaV.LOGGER.debug("SENDING POWER");
                 be.receiveEnergy(REDSTONE_GENERATOR_CAPACITY, false);
             }
             level.scheduleTick(pos, this, 20);

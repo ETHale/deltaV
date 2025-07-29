@@ -33,6 +33,6 @@ public class SmartEnergyStorage extends EnergyStorage {
 
     public void setEnergy(int energy) {
         this.energy = Mth.clamp(energy, 0, getMaxEnergyStored());
-        changeListener.run(); // Call this if you want it to notify the BE
+        changeListener.run();
     }
 }
