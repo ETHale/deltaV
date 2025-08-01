@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobalt_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "deltav:cobalt_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cobalt_ingot_from_blasting_cobalt_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cobalt_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cobalt_ingot_from_blasting_cobalt_ore"
+    ]
+  }
+}

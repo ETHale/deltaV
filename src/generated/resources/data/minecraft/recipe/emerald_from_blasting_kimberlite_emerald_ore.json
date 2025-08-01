@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": "deltav:kimberlite_emerald_ore",
+  "result": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

@@ -7,13 +7,15 @@ import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.item.ModItems;
+import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -34,7 +36,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -43,7 +44,7 @@ public class DeltaV {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "deltav";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "deltav" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "deltav" namespace
@@ -56,19 +57,18 @@ public class DeltaV {
     // Creates a creative tab for deltav items, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_BLOCK = CREATIVE_MODE_TABS.register("deltav_tab_blocks", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.deltav_blocks")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
             .displayItems(DeltaV::populateBlockTab)
-            .displayItems(DeltaV::populateBlockTabWithItems)
             .build());
     
-    /*public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> DELTAV_TAB_ITEMS = CREATIVE_MODE_TABS.register("deltav_tab_items", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.deltav_items")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.ALLOY_FURNACE_ITEM.get().getDefaultInstance())
-            .displayItems(DeltaV::populateBlockTab)
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
+            .icon(() -> ModItems.ZINC_BATTERY.get().getDefaultInstance())
+            .displayItems(DeltaV::populateItemTab)
             .build());
-    */
+    
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
@@ -77,6 +77,8 @@ public class DeltaV {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        DeltaVFeatures.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
@@ -113,9 +115,6 @@ public class DeltaV {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-
-        }
     }
 
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
@@ -128,10 +127,12 @@ public class DeltaV {
         });
     }
 
-    private static void populateBlockTabWithItems(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+    private static void populateItemTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         ModItems.ITEMS.getEntries().forEach(itemHolder -> {
             Item item = itemHolder.value();
-            output.accept(item);
+            if (item != Items.AIR && !(item instanceof BlockItem)) {
+                output.accept(item);
+            }
         });
     }
 
@@ -143,14 +144,4 @@ public class DeltaV {
         LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-        }
-    }
 }
