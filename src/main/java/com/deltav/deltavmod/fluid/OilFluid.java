@@ -1,5 +1,7 @@
 package com.deltav.deltavmod.fluid;
 
+import java.util.Optional;
+
 import javax.annotation.Nullable;
 
 import com.deltav.deltavmod.block.ModBlocks;
@@ -10,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -19,7 +22,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -92,8 +97,8 @@ public abstract class OilFluid extends FlowingFluid {
 
     @Override
     protected void beforeDestroyingBlock(LevelAccessor level, BlockPos pos, BlockState state) {
-        // BlockEntity blockentity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
-        // Block.dropResources(state, level, pos, blockentity);
+        BlockEntity blockentity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
+        Block.dropResources(state, level, pos, blockentity);
     }
 
     // @Override
@@ -113,7 +118,7 @@ public abstract class OilFluid extends FlowingFluid {
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER;
+        return fluid == ModFluids.OIL_SOURCE.get() || fluid == ModFluids.OIL_FLOWING.get();
     }
 
     @Override
@@ -137,10 +142,10 @@ public abstract class OilFluid extends FlowingFluid {
         return 100.0F;
     }
 
-    // @Override
-    // public Optional<SoundEvent> getPickupSound() {
-    //     return Optional.of(SoundEvents.BUCKET_FILL);
-    // }
+    @Override
+    public Optional<SoundEvent> getPickupSound() {
+        return Optional.of(SoundEvents.BUCKET_FILL);
+    }
 
     public static class Flowing extends OilFluid {
         @Override

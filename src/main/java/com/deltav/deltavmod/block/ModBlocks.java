@@ -12,6 +12,7 @@ import com.deltav.deltavmod.fluid.ModFluids;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -212,11 +214,14 @@ public class ModBlocks {
             ModFluids.OIL_SOURCE.value(),
             BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.WATER)
+                .mapColor(MapColor.COLOR_BLACK)
                 .noCollission()
-                .strength(100)
+                .strength(100.0F)
                 .noLootTable()
                 .liquid()
+                .replaceable()
+                .pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.EMPTY)
         )
     );
 

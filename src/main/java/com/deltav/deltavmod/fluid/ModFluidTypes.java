@@ -12,9 +12,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class ModFluidTypes {
-    public static final ResourceLocation OIL_STILL_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
-    public static final ResourceLocation OIL_FLOWING_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
-    public static final ResourceLocation OIL_OVERLAY_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
+    public static final ResourceLocation OIL_STILL_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil");
+    public static final ResourceLocation OIL_FLOWING_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_flow");
+    public static final ResourceLocation OIL_OVERLAY_RL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_overlay");
 
     public static final DeferredRegister<FluidType> FLUID_TYPES =
             DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, DeltaV.MODID);
@@ -25,4 +25,5 @@ public class ModFluidTypes {
     public static void register(IEventBus eventBus) {
         FLUID_TYPES.register(eventBus);
     }
+
 }

@@ -15,9 +15,14 @@ import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -26,6 +31,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -74,5 +81,39 @@ public class DeltaVDataGenerators {
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOWING.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+    }
+
+    @SubscribeEvent
+    static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            private static final ResourceLocation OIL_STILL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil");
+            private static final ResourceLocation OIL_FLOW = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_flow");
+            private static final ResourceLocation OIL_OVERLAY = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_overlay");
+
+            @Override
+            public ResourceLocation getStillTexture() {
+                return OIL_STILL;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return OIL_FLOW;
+            }
+
+            @Override
+            public ResourceLocation getOverlayTexture() {
+                return OIL_OVERLAY;
+            }
+
+            @Override
+            public int getTintColor() {
+                return 0xFF3F76E4;
+            }
+
+            @Override
+            public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
+                return BiomeColors.getAverageWaterColor(getter, pos) | 0xFF000000;
+            }
+        }, ModFluidTypes.OIL_FLUID_TYPE.get());
     }
 }

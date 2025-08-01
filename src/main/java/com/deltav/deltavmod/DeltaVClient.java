@@ -27,38 +27,4 @@ public class DeltaVClient {
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
-
-    @SubscribeEvent
-    static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerFluidType(new IClientFluidTypeExtensions() {
-            private static final ResourceLocation OIL_STILL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
-            private static final ResourceLocation OIL_FLOW = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
-            private static final ResourceLocation OIL_OVERLAY = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
-
-            @Override
-            public ResourceLocation getStillTexture() {
-                return OIL_STILL;
-            }
-
-            @Override
-            public ResourceLocation getFlowingTexture() {
-                return OIL_FLOW;
-            }
-
-            @Override
-            public ResourceLocation getOverlayTexture() {
-                return OIL_OVERLAY;
-            }
-
-            @Override
-            public int getTintColor() {
-                return 0xFF3F76E4;
-            }
-
-            @Override
-            public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
-                return BiomeColors.getAverageWaterColor(getter, pos) | 0xFF000000;
-            }
-        }, ModFluidTypes.OIL_FLUID_TYPE.get());
-    }
 }
