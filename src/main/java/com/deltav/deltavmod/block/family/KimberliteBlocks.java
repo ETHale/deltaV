@@ -1,5 +1,7 @@
-package com.deltav.deltavmod.block;
+package com.deltav.deltavmod.block.family;
 import static com.deltav.deltavmod.block.ModBlocks.BLOCKS;
+
+import com.deltav.deltavmod.block.ModBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

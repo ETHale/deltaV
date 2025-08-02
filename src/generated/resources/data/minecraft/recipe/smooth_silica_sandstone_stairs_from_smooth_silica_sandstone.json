@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:smooth_silica_sandstone"
+  },
+  "pattern": [
+    "Z  ",
+    "ZZ ",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 4,
+    "id": "deltav:smooth_silica_sandstone_stairs"
+  }
+}

@@ -1,23 +1,31 @@
 package com.deltav.deltavmod.data;
 
+import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
+import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.BlockModelGenerators.BlockFamilyProvider;
 import net.minecraft.client.data.models.BlockModelGenerators.WoodProvider;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 
@@ -94,6 +102,57 @@ public class DeltaVModelProvider extends ModelProvider{
         );
         MultiVariant basic_battery_variant = blockModels.plainVariant(bbTextProvider.create(ModBlocks.BASIC_BATTERY.get(), blockModels.modelOutput));
         blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.BASIC_BATTERY.get(), basic_battery_variant));
+
+        blockModels.createTrivialCube(ModBlocks.SILICA_SAND.get());
+        Block silica_sandstone = ModBlocks.SILICA_SANDSTONE.get();
+        // dont ask how I found this 
+        Map<Block, TexturedModel> TEXTURED_MODELS = ImmutableMap.<Block, TexturedModel>builder()
+            .put(ModBlocks.SILICA_SANDSTONE.get(), TexturedModel.TOP_BOTTOM_WITH_WALL.get(ModBlocks.SILICA_SANDSTONE.get()))
+            .put(ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), 
+                TexturedModel.createAllSame(TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get(), "_top"))
+            )
+            .put(ModBlocks.CUT_SILICA_SANDSTONE.get(),
+                TexturedModel.COLUMN
+                    .get(ModBlocks.SILICA_SANDSTONE.get())
+                    .updateTextures(map -> map.put(
+                        TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.CUT_SILICA_SANDSTONE.get()))
+                    )
+            )
+            .put(ModBlocks.CHISELED_SILICA_SANDSTONE.get(),
+                TexturedModel.COLUMN
+                    .get(ModBlocks.CHISELED_SILICA_SANDSTONE.get())
+                    .updateTextures(map -> {
+                        map.put(TextureSlot.END, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get(), "_top"));
+                        map.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.CHISELED_SILICA_SANDSTONE.get()));
+                    })
+            )
+
+            .build();
+        TEXTURED_MODELS.forEach((block, textureModel) -> {
+            MultiVariant multivariant = blockModels.plainVariant(textureModel.create(block, blockModels.modelOutput));
+            blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(block, multivariant));
+        });
+        TextureMapping silicaSandstoneMapping = new TextureMapping()
+            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get()))
+            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get(), "_top"))
+            .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get()));
+        BlockFamilyProvider silicaSandstoneFamilyProvider = createTempFamilyProvider(silicaSandstoneMapping, ModBlocks.SILICA_SANDSTONE.get(), blockModels);
+
+        silicaSandstoneFamilyProvider.stairs(ModBlocks.SILICA_SANDSTONE_STAIRS.get());
+        silicaSandstoneFamilyProvider.slab(ModBlocks.SILICA_SANDSTONE_SLAB.get());
+        blockModels.familyWithExistingFullBlock(silica_sandstone).wall(ModBlocks.SILICA_SANDSTONE_WALL.get());
+
+        TextureMapping cutSilicaSandstoneMapping = new TextureMapping()
+            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.CUT_SILICA_SANDSTONE.get()))
+            .put(TextureSlot.END, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get(), "_top"));
+        BlockFamilyProvider cutSilicaSandstoneFamilyProvider = createTempFamilyProvider(cutSilicaSandstoneMapping, ModBlocks.CUT_SILICA_SANDSTONE.get(), blockModels);
+        cutSilicaSandstoneFamilyProvider.slab(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get());
+
+        TextureMapping smoothSilicaSandstoneMapping = new TextureMapping()
+            .put(TextureSlot.ALL, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get(), "_top"));
+        BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
+        smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
+        smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
@@ -102,5 +161,20 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.RAW_COBALT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {
+        BlockFamilyProvider famProv = blockModels.new BlockFamilyProvider(mapping);
+        try {
+            Field field = BlockFamilyProvider.class.getDeclaredField("fullBlock");
+            field.setAccessible(true);
+            Variant variant = new Variant(ModelLocationUtils.getModelLocation(block));
+            field.set(famProv, variant);
+            return famProv;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

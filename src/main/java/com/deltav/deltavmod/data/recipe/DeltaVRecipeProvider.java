@@ -288,13 +288,99 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('Z', ModItems.ZINC_INGOT)
             .unlockedBy("has_zinc_ingot", this.has(ModItems.ZINC_INGOT))
             .save(this.output, "zinc_battery_from_crafting");
-        
+
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.BASIC_BATTERY, 1)
             .pattern("BB")
             .pattern("BB")
             .define('B', ModItems.ZINC_BATTERY)
             .unlockedBy("has_basic_battery", this.has(ModItems.BASIC_BATTERY_ITEM))
             .save(this.output, "basic_battery_from_zinc_battery");
+        
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE.get(), 4)
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModBlocks.SILICA_SAND.get())
+            .unlockedBy("has_silica_sand", this.has(ModBlocks.SILICA_SAND.get()))
+            .save(this.output, "silica_sandstone_from_silica_sand");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_STAIRS.get(), 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.SILICA_SANDSTONE.get())
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_stairs_from_silica_sandstone");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_SLAB.get(), 6)
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.SILICA_SANDSTONE.get())
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_slab_from_silica_sandstone");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_WALL.get(), 6)
+            .pattern("ZZZ")
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.SILICA_SANDSTONE.get())
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_wall_from_silica_sandstone");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_SLAB.get(), 2)
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_slab_from_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_STAIRS.get(), 1)
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_stairs_from_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SANDSTONE_WALL.get(), 1)
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "silica_sandstone_walls_from_stonecutting");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_SILICA_SANDSTONE.get(), 1)
+            .pattern("S")
+            .pattern("S")
+            .define('S', ModBlocks.SILICA_SANDSTONE_SLAB.get())
+            .unlockedBy("has_silica_sandstone_slab", this.has(ModBlocks.SILICA_SANDSTONE_SLAB.get()))
+            .save(this.output, "chiseled_silica_sandstone_from_slab");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get(), 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.SMOOTH_SILICA_SANDSTONE.get())
+            .unlockedBy("has_smooth_silica_sandstone", this.has(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()))
+            .save(this.output, "smooth_silica_sandstone_stairs_from_smooth_silica_sandstone");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get(), 6)
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.SMOOTH_SILICA_SANDSTONE.get())
+            .unlockedBy("has_smooth_silica_sandstone", this.has(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()))
+            .save(this.output, "smooth_silica_sandstone_slab_from_smooth_silica_sandstone");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get(), 2)
+            .unlockedBy("has_smooth_silica_sandstone", this.has(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()))
+            .save(this.output, "smooth_silica_sandstone_slab_from_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get(), 1)
+            .unlockedBy("has_smooth_silica_sandstone", this.has(ModBlocks.SMOOTH_SILICA_SANDSTONE.get()))
+            .save(this.output, "smooth_silica_sandstone_stairs_from_stonecutting");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_SILICA_SANDSTONE.get(), 1)
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModBlocks.SILICA_SANDSTONE.get())
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "cut_silica_sandstone_from_silica_sandstone");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.CUT_SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get(), 2)
+            .unlockedBy("has_cut_silica_sandstone", this.has(ModBlocks.CUT_SILICA_SANDSTONE.get()))
+            .save(this.output, "cut_silica_sandstone_slab_from_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get(), 2)
+            .unlockedBy("has_cut_silica_sandstone", this.has(ModBlocks.CUT_SILICA_SANDSTONE.get()))
+            .save(this.output, "cut_silica_sandstone_slab_from_silica_sandstone_stonecutting");
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_SILICA_SANDSTONE.get(), 1)
+            .unlockedBy("has_cut_silica_sandstone", this.has(ModBlocks.CUT_SILICA_SANDSTONE.get()))
+            .save(this.output, "cut_silica_sandstone_from_silica_sandstone_stonecutting");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.SILICA_SANDSTONE), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), 0.1F, 200)
+            .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
+            .save(this.output, "smooth_silica_sandstone_from_smelting");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SAND.get(), 1)
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModItems.SILICA_DUST.get())
+            .unlockedBy("has_silica_dust", this.has(ModItems.SILICA_DUST.get()))
+            .save(this.output, "silica_sand_from_silica_dust");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.SILICA_DUST.get(), 4)
+            .requires(ModBlocks.SILICA_SAND.get())
+            .unlockedBy("has_silica_sand", this.has(ModBlocks.SILICA_SAND.get()))
+            .save(this.output, "silica_dust_from_silica_sand");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
