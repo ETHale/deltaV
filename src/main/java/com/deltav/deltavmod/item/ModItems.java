@@ -70,6 +70,7 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_COBALT = ITEMS.registerSimpleItem("raw_cobalt");
     public static final DeferredItem<Item> ZINC_BATTERY = ITEMS.registerSimpleItem("zinc_battery");
     public static final DeferredItem<Item> SILICA_DUST = ITEMS.registerSimpleItem("silica_dust");
+    public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

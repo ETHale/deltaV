@@ -381,6 +381,9 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModBlocks.SILICA_SAND.get())
             .unlockedBy("has_silica_sand", this.has(ModBlocks.SILICA_SAND.get()))
             .save(this.output, "silica_dust_from_silica_sand");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SILICA_DUST), RecipeCategory.MISC, ModItems.SILICON.get(), 0.5F, 200)
+            .unlockedBy("has_silica_dust", this.has(ModItems.SILICA_DUST.get()))
+            .save(this.output, "silcon_from_smelting");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

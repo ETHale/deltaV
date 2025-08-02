@@ -58,6 +58,7 @@
 
   "item.deltav.zinc_battery": "Zinc Battery",
   "item.deltav.silica_dust": "Silica Dust",
+  "item.deltav.silicon": "Silicon",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
