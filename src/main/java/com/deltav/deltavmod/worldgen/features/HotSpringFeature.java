@@ -10,8 +10,10 @@ import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.Tags;
 
 public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
     public HotSpringFeature(Codec<HotSpringFeatureConfiguration> codec) {
@@ -80,8 +84,8 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                     for (Direction dir : Direction.values()) {
                         BlockPos bufferPos = carvedPos.relative(dir);
                         BlockState current = level.getBlockState(bufferPos);
-                        if (!carved.contains(bufferPos) && !current.isAir() && !current.is(BlockTags.FEATURES_CANNOT_REPLACE) && !level.canSeeSky(bufferPos)) {
-                            level.setBlock(bufferPos, ModBlocks.SILICA_SANDSTONE.get().defaultBlockState(), 2);
+                        if (!carved.contains(bufferPos) && !current.isAir() && isCarverReplaceable(current, context.config().rim()) && !level.canSeeSky(bufferPos)) {
+                            level.setBlock(bufferPos, context.config().rim(), 2);
                         }
                     }
                 }
@@ -92,12 +96,10 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
     }
 
     private boolean tryPlaceSingle(FeaturePlaceContext<HotSpringFeatureConfiguration> context, BlockPos offset, Set<BlockPos> carved) {
-        int seaLevel = context.level().getSeaLevel();
-        if (context.level().getFluidState(offset).is(FluidTags.WATER)
-            && offset.getY() >= seaLevel - 1) {
+        if (context.level().getFluidState(offset).is(Fluids.WATER)) {
             return false;
         }
-
+        
         // small local buffer based on size
         RandomSource rand = context.random();
         HotSpringFeatureConfiguration conf = context.config();
@@ -106,18 +108,18 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         BlockState contents = conf.contents();
         BlockState rim = conf.rim();
         BlockState base = conf.base();
-
+        
         if (offset.getY() <= context.level().getMinY() + 4) return false;
         BlockPos start = offset.below(radius + 1);
-
+        
         int diam = radius * 2 + 1;
         boolean[][][] mask = new boolean[diam][diam/2][diam];
-
+        
         // carve single ellipsoid
         double rx = radius + rand.nextDouble() * 0.5;
         double ry = (radius/2.0) + rand.nextDouble() * 0.5;
         double rz = radius + rand.nextDouble() * 0.5;
-
+        
         for (int x = 0; x < diam; x++) {
             for (int y = 0; y < diam/2; y++) {
                 for (int z = 0; z < diam; z++) {
@@ -132,15 +134,15 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
             }
         }
 
-        // validate environment
         for (int x = 0; x < diam; x++) {
-            for (int y = 0; y < diam/2; y++) {
+            for (int y = 0; y < diam / 2; y++) {
                 for (int z = 0; z < diam; z++) {
                     if (!mask[x][y][z]) continue;
                     BlockPos pos = start.offset(x, y, z);
                     BlockState state = context.level().getBlockState(pos);
-                    if (y >= ry && state.liquid()) return false;
-                    if (y < ry && !state.isSolid() && !state.equals(contents)) return false;
+
+                    // If below the midpoint, ensure we can replace this block
+                    if (!state.getFluidState().is(Fluids.EMPTY) || !isCarverReplaceable(state, contents)) return false;
                 }
             }
         }
@@ -151,14 +153,14 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                 for (int z = 0; z < diam; z++) {
                     if (!mask[x][y][z]) continue;
                     BlockPos pos = start.offset(x, y, z);
-                    if (carved.contains(pos)) continue;
+                    if (carved.contains(pos) || context.level().getFluidState(offset).is(Fluids.WATER) || context.level().getFluidState(offset).is(Fluids.LAVA)) continue;
                     boolean aboveWater = y >= ry;
                     context.level().setBlock(pos, aboveWater ? Blocks.AIR.defaultBlockState() : contents, 2);
-                    carved.add(pos);
                     if (aboveWater) {
                         context.level().scheduleTick(pos, Blocks.AIR, 0);
                         markAboveForPostProcessing(context.level(), pos);
-                    }
+                    } else 
+                        carved.add(pos);   
                 }
             }
         }
@@ -182,7 +184,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                         BlockPos pos = start.offset(x, y, z);
                         if (carved.contains(pos)) continue;
                         BlockState current = context.level().getBlockState(pos);
-                        if (current.isSolid() && !current.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
+                        if (isCarverReplaceable(current, rim) && !context.level().canSeeSky(pos)) {
                             context.level().setBlock(pos, y < rimDepth-1 ? base : rim, 2);
                             markAboveForPostProcessing(context.level(), pos);
                             carved.add(pos);
@@ -194,4 +196,12 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
 
         return true;
     }
+
+    private boolean isCarverReplaceable(BlockState state, BlockState contents) {
+        if (state.is(contents.getBlock())) return true;
+        if (state.is(BlockTags.FEATURES_CANNOT_REPLACE)) return false;
+
+        return state.is(BlockTags.OVERWORLD_CARVER_REPLACEABLES);
+    }
+
 }

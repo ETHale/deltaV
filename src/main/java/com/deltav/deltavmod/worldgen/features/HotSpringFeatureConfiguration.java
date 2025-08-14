@@ -34,7 +34,7 @@ public record HotSpringFeatureConfiguration(
         Blocks.WATER.defaultBlockState(),
         ModBlocks.SILICA_SAND.get().defaultBlockState(),
         ModBlocks.SILICA_SANDSTONE.get().defaultBlockState(),
-        UniformInt.of(1, 8),
+        UniformInt.of(3, 8),
         ConstantInt.of(1),
         UniformInt.of(4,10)
     );

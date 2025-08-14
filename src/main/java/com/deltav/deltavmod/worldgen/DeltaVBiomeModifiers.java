@@ -36,7 +36,7 @@ public class DeltaVBiomeModifiers {
             new AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(PlacedFeatures.getOrThrow(DeltaVPlacedFeatures.HOT_SPRING)),
-                Decoration.LOCAL_MODIFICATIONS
+                Decoration.LAKES
             )
         );
     }
