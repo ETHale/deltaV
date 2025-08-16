@@ -4,25 +4,32 @@
     "base": {
       "Name": "deltav:silica_sandstone"
     },
+    "cell_size": 16,
     "contents": {
       "Name": "minecraft:water",
       "Properties": {
         "level": "0"
       }
     },
-    "pool_count": {
+    "max_per_cell": {
       "type": "minecraft:uniform",
-      "max_inclusive": 10,
-      "min_inclusive": 4
+      "max_inclusive": 6,
+      "min_inclusive": 1
     },
     "rim": {
       "Name": "deltav:silica_sand"
     },
-    "rim_size": 1,
+    "rim_size": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "search_padding": 64,
     "size": {
       "type": "minecraft:uniform",
       "max_inclusive": 8,
       "min_inclusive": 3
-    }
+    },
+    "spawn_chance": 0.9
   }
 }

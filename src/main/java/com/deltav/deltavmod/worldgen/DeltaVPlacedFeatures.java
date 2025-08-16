@@ -45,10 +45,9 @@ public class DeltaVPlacedFeatures {
             HOT_SPRING, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.HOT_SPRING), 
             List.of(
+                CountPlacement.of(1),
                 InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE,
-                CountPlacement.of(50),
-                BiomeFilter.biome()
+                PlacementUtils.FULL_RANGE
             )
         );
     }
