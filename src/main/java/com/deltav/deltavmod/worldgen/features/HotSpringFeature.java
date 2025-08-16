@@ -58,11 +58,12 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                 RandomSource cellRand = RandomSource.create(cellSeed);
 
                 // Sample maxPerCell ONCE for the cell (deterministic)
+                if (cellRand.nextFloat() >= conf.spawnChance()) continue;
                 int attempts = Math.max(0, conf.maxPerCell().sample(cellRand));
+                int baseY = determineCenterYDeterministic(level, cellRand);
 
                 for (int attemptIndex = 0; attemptIndex < attempts; attemptIndex++) {
                     // deterministic spawn decision for this attempt
-                    if (cellRand.nextFloat() >= conf.spawnChance()) continue;
 
                     // deterministic candidate pos inside the cell
                     int localX = cellRand.nextInt(cellSize);
@@ -79,7 +80,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                     int rimDepth = conf.rimSize().sample(poolRand);
 
                     // SAMPLE deterministic centerY from poolRand (guaranteed identical across chunks)
-                    int centerY = determineCenterYDeterministic(level, poolRand);
+                    int centerY = baseY + poolRand.nextInt(-conf.yVariance().sample(poolRand), conf.yVariance().sample(poolRand));
                     int surfaceY = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, candidateX, candidateZ);
                     if (centerY > surfaceY) centerY = surfaceY;
 
@@ -87,6 +88,8 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                     if (!sphereIntersectsChunk(candidateX, candidateZ, radius, chunkMinX, chunkMinZ, chunkMaxX, chunkMaxZ)) {
                         continue;
                     }
+
+                    DeltaV.LOGGER.debug("Pool at: {} {} {}", candidateX, centerY, candidateZ);
 
                     // carve only portion inside this chunk — pass poolRand, radius, rimDepth (poolRand will continue to be used for mask jitter)
                     boolean carved = tryCarvePartial(context,
@@ -225,6 +228,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                     } else {
                         // Place contents. If it's a fluid that already exists in-world here, this is a no-op, but safe.
                         this.setBlock(level, pos, contents);
+                        markAboveForPostProcessing(level, pos);
                         carved.add(pos); // record placement so neighbors can see it
                     }
 
@@ -234,8 +238,8 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         }
 
         int rimPlaced = 0;
-        for (int x = 0; x < diam; x++) {
-            for (int y = 0; y < halfY; y++) {
+        for (int y = 0; y < halfY; y++) {
+            for (int x = 0; x < diam; x++) {
                 for (int z = 0; z < diam; z++) {
                     if (mask[x][y][z]) continue; // only consider outside-mask positions for rims
 

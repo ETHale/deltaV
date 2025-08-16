@@ -18,7 +18,8 @@ public record HotSpringFeatureConfiguration(
     int cellSize,         
     float spawnChance,   
     IntProvider maxPerCell,
-    int searchPadding      
+    int searchPadding,
+    IntProvider yVariance      
 ) implements FeatureConfiguration {
     public static final Codec<HotSpringFeatureConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         IntProvider.CODEC.fieldOf("size").forGetter(HotSpringFeatureConfiguration::size),
@@ -29,7 +30,8 @@ public record HotSpringFeatureConfiguration(
         Codec.INT.fieldOf("cell_size").orElse(16).forGetter(HotSpringFeatureConfiguration::cellSize),
         Codec.FLOAT.fieldOf("spawn_chance").orElse(0.25F).forGetter(HotSpringFeatureConfiguration::spawnChance),
         IntProvider.CODEC.fieldOf("max_per_cell").forGetter(HotSpringFeatureConfiguration::maxPerCell),
-        Codec.INT.fieldOf("search_padding").orElse(24).forGetter(HotSpringFeatureConfiguration::searchPadding)
+        Codec.INT.fieldOf("search_padding").orElse(24).forGetter(HotSpringFeatureConfiguration::searchPadding),
+        IntProvider.CODEC.fieldOf("y_variance").forGetter(HotSpringFeatureConfiguration::yVariance)
     ).apply(instance, HotSpringFeatureConfiguration::new));
 
     public static final HotSpringFeatureConfiguration INSTANCE = new HotSpringFeatureConfiguration(
@@ -39,8 +41,9 @@ public record HotSpringFeatureConfiguration(
         ModBlocks.SILICA_SAND.get().defaultBlockState(),
         ModBlocks.SILICA_SANDSTONE.get().defaultBlockState(),
         16,
-        0.9F,
-        UniformInt.of(1, 6),
-        64
+        0.005F,
+        UniformInt.of(3, 6),
+        64,
+        UniformInt.of(1,8)
     );
 }
