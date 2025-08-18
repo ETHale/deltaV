@@ -4,37 +4,27 @@
     "base": {
       "Name": "deltav:silica_sandstone"
     },
-    "cell_size": 16,
     "contents": {
       "Name": "minecraft:water",
       "Properties": {
         "level": "0"
       }
     },
-    "max_per_cell": {
+    "detail_amp": 0.15,
+    "exponent": 2.0,
+    "max_depth": {
       "type": "minecraft:uniform",
-      "max_inclusive": 6,
-      "min_inclusive": 3
+      "max_inclusive": 3,
+      "min_inclusive": 1
     },
+    "noise_scale": 0.06,
+    "octaves": 1,
+    "plateau_threshold": 0.59,
     "rim": {
       "Name": "deltav:silica_sand"
     },
-    "rim_size": {
-      "type": "minecraft:uniform",
-      "max_inclusive": 2,
-      "min_inclusive": 1
-    },
+    "rim_thickness": 1,
     "search_padding": 64,
-    "size": {
-      "type": "minecraft:uniform",
-      "max_inclusive": 8,
-      "min_inclusive": 3
-    },
-    "spawn_chance": 0.005,
-    "y_variance": {
-      "type": "minecraft:uniform",
-      "max_inclusive": 8,
-      "min_inclusive": 1
-    }
+    "threshold": 0.93
   }
 }
