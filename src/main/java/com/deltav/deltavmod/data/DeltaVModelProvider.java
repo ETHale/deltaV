@@ -99,13 +99,6 @@ public class DeltaVModelProvider extends ModelProvider{
         MultiVariant basic_battery_variant = blockModels.plainVariant(bbTextProvider.create(ModBlocks.BASIC_BATTERY.get(), blockModels.modelOutput));
         blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.BASIC_BATTERY.get(), basic_battery_variant));
         
-        Block oil = ModBlocks.OIL_FLUID.get();
-        blockModels.createTrivialCube(oil);
-        //blockModels.createSimpleBlock(oil, null)
-        //blockModels.createNonTemplateModelBlock(oil);
-        //blockModels.createAirLikeBlock(oil, ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil"));
-        //blockModels.createAirLikeBlock(oil, ResourceLocation.withDefaultNamespace("lava"));
-
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
@@ -114,5 +107,9 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+
+        // FLUIDS
+        Block oil = ModBlocks.OIL_FLUID.get();
+        blockModels.createNonTemplateModelBlock(oil);
     }
 }

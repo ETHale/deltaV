@@ -17,7 +17,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -30,8 +29,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.WaterFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class OilFluid extends FlowingFluid {
@@ -101,11 +98,6 @@ public abstract class OilFluid extends FlowingFluid {
         Block.dropResources(state, level, pos, blockentity);
     }
 
-    // @Override
-    // protected void entityInside(Level p_404956_, BlockPos p_405311_, Entity p_405780_, InsideBlockEffectApplier p_405240_) {
-    //     p_405240_.apply(InsideBlockEffectType.EXTINGUISH);
-    // }
-
     @Override
     public int getSlopeFindDistance(LevelReader level) {
         return 4;
@@ -133,7 +125,7 @@ public abstract class OilFluid extends FlowingFluid {
 
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockReader, BlockPos pos, Fluid fluid, Direction direction) {
-		return !this.isSame(fluid);
+		return false;
 		// return direction == Direction.DOWN && !fluid.is(FluidTags.WATER);
     }
 

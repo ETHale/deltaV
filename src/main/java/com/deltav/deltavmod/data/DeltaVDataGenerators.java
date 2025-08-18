@@ -1,21 +1,16 @@
 package com.deltav.deltavmod.data;
 
 import static com.deltav.deltavmod.block.entity.ModBlockEntities.BASIC_BATTERY_BE;
-import static com.deltav.deltavmod.block.ModBlocks.OIL_FLUID;
 
 import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
-import com.deltav.deltavmod.menu.BasicBatteryMenu;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.screen.BasicBatteryScreen;
-import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.BlockPos;
@@ -33,7 +28,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 // event handler for data gen classes 
@@ -86,9 +80,9 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(new IClientFluidTypeExtensions() {
-            private static final ResourceLocation OIL_STILL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil");
-            private static final ResourceLocation OIL_FLOW = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_flow");
-            private static final ResourceLocation OIL_OVERLAY = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/block/oil_overlay");
+            private static final ResourceLocation OIL_STILL = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
+            private static final ResourceLocation OIL_FLOW = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
+            private static final ResourceLocation OIL_OVERLAY = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
 
             @Override
             public ResourceLocation getStillTexture() {
@@ -107,12 +101,13 @@ public class DeltaVDataGenerators {
 
             @Override
             public int getTintColor() {
-                return 0xFF3F76E4;
+                return 0xFF010A1C;
             }
 
             @Override
             public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
-                return BiomeColors.getAverageWaterColor(getter, pos) | 0xFF000000;
+                // return BiomeColors.getAverageWaterColor(getter, pos) | 0xFF000000;
+                return getTintColor();
             }
         }, ModFluidTypes.OIL_FLUID_TYPE.get());
     }

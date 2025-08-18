@@ -1,7 +1,5 @@
 package com.deltav.deltavmod.fluid;
 
-import org.joml.Vector4f;
-
 import com.deltav.deltavmod.DeltaV;
 
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +18,12 @@ public class ModFluidTypes {
             DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, DeltaV.MODID);
 
     public static final DeferredHolder<FluidType, FluidType> OIL_FLUID_TYPE = FLUID_TYPES.register("oil",
-        () -> new OilFluidType(FluidType.Properties.create().lightLevel(2).density(15).viscosity(5)));
+        () -> new FluidType(FluidType.Properties.create()
+            .lightLevel(2)
+            .density(15)
+            .viscosity(5)
+            .canExtinguish(false)
+            .temperature(0)));
 
     public static void register(IEventBus eventBus) {
         FLUID_TYPES.register(eventBus);
