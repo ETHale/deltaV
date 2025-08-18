@@ -7,13 +7,18 @@ import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
+import com.deltav.deltavmod.block.family.KimberliteBlocks;
+import com.deltav.deltavmod.block.family.SilicaBlocks;
 import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
@@ -204,6 +209,18 @@ public class ModBlocks {
             .strength(5.0F, 6.0F)
             .sound(SoundType.AMETHYST)
     );
+
+    public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
+    public static final DeferredBlock<Block> SILICA_SANDSTONE = SilicaBlocks.SILICA_SANDSTONE;
+    public static final DeferredBlock<WallBlock> SILICA_SANDSTONE_WALL = SilicaBlocks.SILICA_SANDSTONE_WALL;
+    public static final DeferredBlock<StairBlock> SILICA_SANDSTONE_STAIRS = SilicaBlocks.SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SILICA_SANDSTONE_SLAB = SilicaBlocks.SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CHISELED_SILICA_SANDSTONE = SilicaBlocks.CHISELED_SILICA_SANDSTONE;
+    public static final DeferredBlock<Block> SMOOTH_SILICA_SANDSTONE = SilicaBlocks.SMOOTH_SILICA_SANDSTONE;
+    public static final DeferredBlock<StairBlock> SMOOTH_SILICA_SANDSTONE_STAIRS = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SMOOTH_SILICA_SANDSTONE_SLAB = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
+    public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

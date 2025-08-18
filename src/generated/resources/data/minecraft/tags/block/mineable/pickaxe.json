@@ -30,6 +30,16 @@
     "deltav:kimberlite_redstone_ore",
     "deltav:kimberlite_zinc_ore",
     "deltav:kimberlite_cobalt_ore",
-    "deltav:redstone_generator"
+    "deltav:redstone_generator",
+    "deltav:silica_sandstone",
+    "deltav:silica_sandstone_slab",
+    "deltav:silica_sandstone_stairs",
+    "deltav:silica_sandstone_wall",
+    "deltav:chiseled_silica_sandstone",
+    "deltav:cut_silica_sandstone",
+    "deltav:cut_silica_sandstone_slab",
+    "deltav:smooth_silica_sandstone",
+    "deltav:smooth_silica_sandstone_slab",
+    "deltav:smooth_silica_sandstone_stairs"
   ]
 }
