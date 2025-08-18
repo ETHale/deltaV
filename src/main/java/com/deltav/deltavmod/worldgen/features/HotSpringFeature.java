@@ -127,7 +127,6 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
             }
         }
         debug_avg = debug_avg/(sx * sz);
-        DeltaV.LOGGER.debug("value: {} / {}", debug_avg, threshold);
 
         if (!foundAny) return false;
 
@@ -256,7 +255,6 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                         this.setBlock(level, pos, conf.contents());
                         placedContent.add(pos);
                         markAboveForPostProcessing(level, pos);
-                        DeltaV.LOGGER.debug("Check here mate: {} {} {}", pos.getX(), pos.getY(), pos.getZ());
                         placedAny = true;
                     }
 

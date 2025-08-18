@@ -40,18 +40,18 @@ public record HotSpringFeatureConfiguration(
     ).apply(inst, HotSpringFeatureConfiguration::new));
 
     public static final HotSpringFeatureConfiguration INSTANCE = new HotSpringFeatureConfiguration(
-        0.06,                    // noiseScale
+        0.01,                    // noiseScale
         1,                       // octaves
-        0.93f,                   // threshold
+        0.78f,                   // threshold
         UniformInt.of(1, 3),     // maxDepth
         Blocks.WATER.defaultBlockState(),
         ModBlocks.SILICA_SAND.get().defaultBlockState(),
         ModBlocks.SILICA_SANDSTONE.get().defaultBlockState(),
         1,                       // rimThickness
         64,                      // searchPadding
-        2.0,                     // exponent
-        0.59,                    // plateauThreshold
-        0.15                     // detailAmp
+        2.5,                     // exponent
+        0.7,                    // plateauThreshold
+        0.6                     // detailAmp
     );
 
     // convenience: sample deterministic "group" Y from a cell RNG (keeps clusters vertically stable)
