@@ -1,24 +1,20 @@
 package com.deltav.deltavmod.block;
 
-
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
-import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
-import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
+import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
-import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
@@ -26,8 +22,8 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -208,6 +204,23 @@ public class ModBlocks {
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
             .sound(SoundType.AMETHYST)
+    );
+
+    public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
+        "oil",
+        registryName -> new LiquidBlock(
+            ModFluids.OIL_SOURCE.value(),
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_BLACK)
+                .noCollission()
+                .strength(100.0F)
+                .noLootTable()
+                .liquid()
+                .replaceable()
+                .pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.EMPTY)
+        )
     );
 
     public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
