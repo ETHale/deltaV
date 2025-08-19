@@ -31,6 +31,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidType;
 
+/**
+ * The Oil fluid class. Includes nested sub-classes for both
+ * source and flowing variants.
+ * 
+ * @author Adam Crawley
+ */
 public abstract class OilFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
@@ -52,27 +58,38 @@ public abstract class OilFluid extends FlowingFluid {
 		return ModFluidTypes.OIL_FLUID_TYPE.get();
 	}
 
+    /**
+     * Animate the fluid's behavior.
+     * This method is called to handle animations for the fluid,
+     * such as sound effects and particle effects.
+     *
+     * @param level  The level in which the fluid is located.
+     * @param pos    The position of the fluid.
+     * @param state  The current state of the fluid.
+     * @param random The random source for generating animations.
+     */
     @Override
-    public void animateTick(Level p_230606_, BlockPos p_230607_, FluidState p_230608_, RandomSource p_230609_) {
-        if (!p_230608_.isSource() && !p_230608_.getValue(FALLING)) {
-            if (p_230609_.nextInt(64) == 0) {
-                p_230606_.playLocalSound(
-                    p_230607_.getX() + 0.5,
-                    p_230607_.getY() + 0.5,
-                    p_230607_.getZ() + 0.5,
+    public void animateTick(Level level, BlockPos pos, FluidState state, RandomSource random) {
+        if (!state.isSource() && !state.getValue(FALLING)) {
+            if (random.nextInt(64) == 0) {
+                level.playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
                     SoundEvents.WATER_AMBIENT,
                     SoundSource.AMBIENT,
-                    p_230609_.nextFloat() * 0.25F + 0.75F,
-                    p_230609_.nextFloat() + 0.5F,
+                    random.nextFloat() * 0.25F + 0.75F,
+                    random.nextFloat() + 0.5F,
                     false
                 );
             }
-        } else if (p_230609_.nextInt(10) == 0) {
-            p_230606_.addParticle(
+        } else if (random.nextInt(10) == 0) {
+            // SFI: Could change from blue water particle to custom particle
+            level.addParticle(
                 ParticleTypes.UNDERWATER,
-                p_230607_.getX() + p_230609_.nextDouble(),
-                p_230607_.getY() + p_230609_.nextDouble(),
-                p_230607_.getZ() + p_230609_.nextDouble(),
+                pos.getX() + random.nextDouble(),
+                pos.getY() + random.nextDouble(),
+                pos.getZ() + random.nextDouble(),
                 0.0,
                 0.0,
                 0.0
@@ -86,9 +103,14 @@ public abstract class OilFluid extends FlowingFluid {
         return ParticleTypes.DRIPPING_WATER;
     }
 
+    /**
+     * Returns whether the fluid can create a source.
+     *
+     * @param level The level in which the fluid is located.
+     * @return true if the fluid can create a source, false otherwise
+     */
     @Override
-    protected boolean canConvertToSource(ServerLevel p_376722_) {
-        // return p_376722_.getGameRules().getBoolean(GameRules.RULE_WATER_SOURCE_CONVERSION);
+    protected boolean canConvertToSource(ServerLevel level) {
 		return false;
 	}
 
@@ -119,14 +141,22 @@ public abstract class OilFluid extends FlowingFluid {
     }
 
     @Override
-    public int getTickDelay(LevelReader p_76454_) {
+    public int getTickDelay(LevelReader level) {
         return 5;
     }
 
+    /**
+     * Whether a fluid can be replaced with another fluid.
+     * 
+     * @param fluidState  The current state of the fluid.
+     * @param blockReader The block reader for the level.
+     * @param pos         The position of the fluid.
+     * @param fluid       The fluid to replace with.
+     * @param direction   The direction of the replacement.
+     */
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockReader, BlockPos pos, Fluid fluid, Direction direction) {
 		return false;
-		// return direction == Direction.DOWN && !fluid.is(FluidTags.WATER);
     }
 
     @Override
