@@ -51,6 +51,18 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KIMBERLITE_ZINC_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_zinc_ore", ModBlocks.KIMBERLITE_ZINC_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_IRON_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_iron_ore", ModBlocks.KIMBERLITE_IRON_ORE);
     public static final DeferredItem<BlockItem> KIMBERLITE_COBALT_ORE_ITEM = ITEMS.registerSimpleBlockItem("kimberlite_cobalt_ore", ModBlocks.KIMBERLITE_COBALT_ORE);
+    public static final DeferredItem<BlockItem> SILICA_SAND_ITEM = ITEMS.registerSimpleBlockItem("silica_sand", ModBlocks.SILICA_SAND);
+    public static final DeferredItem<BlockItem> SILICA_SANDSTONE_ITEM = ITEMS.registerSimpleBlockItem("silica_sandstone", ModBlocks.SILICA_SANDSTONE);
+    public static final DeferredItem<BlockItem> SILICA_SANDSTONE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("silica_sandstone_slab", ModBlocks.SILICA_SANDSTONE_SLAB);
+    public static final DeferredItem<BlockItem> SILICA_SANDSTONE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("silica_sandstone_stairs", ModBlocks.SILICA_SANDSTONE_STAIRS);
+    public static final DeferredItem<BlockItem> SILICA_SANDSTONE_WALL_ITEM = ITEMS.registerSimpleBlockItem("silica_sandstone_wall", ModBlocks.SILICA_SANDSTONE_WALL);
+    public static final DeferredItem<BlockItem> CUT_SILICA_SANDSTONE_ITEM = ITEMS.registerSimpleBlockItem("cut_silica_sandstone", ModBlocks.CUT_SILICA_SANDSTONE);
+    public static final DeferredItem<BlockItem> CUT_SILICA_SANDSTONE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("cut_silica_sandstone_slab", ModBlocks.CUT_SILICA_SANDSTONE_SLAB);
+    public static final DeferredItem<BlockItem> CHISELED_SILICA_SANDSTONE_ITEM = ITEMS.registerSimpleBlockItem("chiseled_silica_sandstone", ModBlocks.CHISELED_SILICA_SANDSTONE);
+    public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone", ModBlocks.SMOOTH_SILICA_SANDSTONE);
+    public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_stairs", ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS);
+    public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_slab", ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB);
+
     
     public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
@@ -62,6 +74,8 @@ public class ModItems {
     public static final DeferredItem<Item> COBALT_INGOT = ITEMS.registerSimpleItem("cobalt_ingot");
     public static final DeferredItem<Item> RAW_COBALT = ITEMS.registerSimpleItem("raw_cobalt");
     public static final DeferredItem<Item> ZINC_BATTERY = ITEMS.registerSimpleItem("zinc_battery");
+    public static final DeferredItem<Item> SILICA_DUST = ITEMS.registerSimpleItem("silica_dust");
+    public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
 
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(

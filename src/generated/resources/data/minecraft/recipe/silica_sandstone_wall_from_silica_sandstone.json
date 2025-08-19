@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:silica_sandstone"
+  },
+  "pattern": [
+    "ZZZ",
+    "ZZZ"
+  ],
+  "result": {
+    "count": 6,
+    "id": "deltav:silica_sandstone_wall"
+  }
+}
