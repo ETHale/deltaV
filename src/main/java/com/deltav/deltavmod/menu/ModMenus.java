@@ -2,6 +2,7 @@ package com.deltav.deltavmod.menu;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
+import com.deltav.deltavmod.screen.custom.CrusherMenu;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +24,11 @@ public class ModMenus {
                 return new BasicBatteryMenu(windowId, inv, buffer);
             }
         )
+    );
+
+    public static final DeferredHolder<MenuType<?>, MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register(
+        "crusher",
+        () -> IMenuTypeExtension.create(CrusherMenu::new)
     );
 
     public static void register(IEventBus eventBus) {

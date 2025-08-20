@@ -142,9 +142,4 @@ public class DeltaV {
         LOGGER.info("HELLO from server starting");
     }
 
-    @SubscribeEvent
-        public static void registerScreens(RegisterMenuScreensEvent event) {
-            event.register(ModMenus.CRUSHER_MENU.get(), CrusherScreen::new);
-    }
-
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.screen.BasicBatteryScreen;
+import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -61,6 +62,7 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
+        event.register(ModMenus.CRUSHER_MENU.get(), CrusherScreen::new);
     }
 
     @SubscribeEvent

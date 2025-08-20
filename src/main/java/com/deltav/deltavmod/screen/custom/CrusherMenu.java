@@ -1,6 +1,7 @@
 package com.deltav.deltavmod.screen.custom;
 
 import com.deltav.deltavmod.block.entity.CrusherBlockEntity;
+import com.deltav.deltavmod.menu.ModMenus;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
