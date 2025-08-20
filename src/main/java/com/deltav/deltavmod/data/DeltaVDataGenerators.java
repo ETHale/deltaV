@@ -1,14 +1,13 @@
 package com.deltav.deltavmod.data;
 
-import static com.deltav.deltavmod.block.entity.ModBlockEntities.BASIC_BATTERY_BE;
-
 import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
-import com.deltav.deltavmod.menu.ModMenus;
-import com.deltav.deltavmod.screen.BasicBatteryScreen;
+import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
+import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.fluid.ModFluids;
+import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
@@ -20,8 +19,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
 // event handler for data gen classes 
 // MAKE SURE EVERYTHING IS STATIC
@@ -53,14 +52,33 @@ public class DeltaVDataGenerators {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
             Capabilities.EnergyStorage.BLOCK,
-            BASIC_BATTERY_BE.get(), 
+            ModBlockEntities.BASIC_BATTERY_BE.get(), 
             (be, side) -> be.getEnergyStorage(side)
         );
-    }
 
-    @SubscribeEvent
-    public static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(ModMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
+        // Register that the Fractionator block entity has a fluid handler capability.
+        event.registerBlockEntity(
+            Capabilities.FluidHandler.BLOCK,
+            ModBlockEntities.FRACTIONATOR_BE.get(),
+            (be, side) -> {
+                if (be instanceof FractionatorBlockEntity fbe) {
+                    return fbe.getFluidHandler(side);
+                }
+                return null;
+            }
+        );
+
+        /**
+         * Register that the Barrel item has a fluid handler capability. The fluid name is
+         * provided by ModDataComponents.GENERIC_FLUID.
+         */
+        event.registerItem(
+            Capabilities.FluidHandler.ITEM,
+            (stack, ctx) -> new FluidHandlerItemStack(
+                ModDataComponents.GENERIC_FLUID,
+                stack,
+                4000
+            ), ModItems.BARREL.get());
     }
 
     @SubscribeEvent

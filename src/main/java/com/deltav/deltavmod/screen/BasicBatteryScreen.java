@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.BasicBatteryMenu;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.deltav.deltavmod.menu.ModMenus;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,7 +13,12 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
+@EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu>{
     private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/basic_battery.png");
     
@@ -47,7 +52,7 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
 
         int barHeight = cap > 0 ? (int) ((e / (float) cap) * maxBarHeight) : 0;
         guiGraphics.fillGradient(leftPos + leftPadding,topPos + topPadding + (maxBarHeight - barHeight),
-               leftPos + leftPadding + barWidth, topPos + topPadding + maxBarHeight, 0xFF941400, 0xFFBD2008);
+               leftPos + leftPadding + barWidth, topPos + topPadding + maxBarHeight, 0xFF010A1C, 0xFF02112E);
 
         String energyLabel = e + "/" + cap + "RF";
         int textX = leftPos + leftPadding + barWidth + 4;
@@ -60,5 +65,14 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
         this.renderBackground(g, mouseX, mouseY, partialTicks);
         super.render(g, mouseX, mouseY, partialTicks);
         this.renderTooltip(g, mouseX, mouseY);
+    }
+
+    /**
+     * Register the basic battery screen when client is registering screens.
+     * @param event
+     */
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
     }
 }

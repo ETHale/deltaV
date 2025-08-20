@@ -30,6 +30,14 @@ public class ModBlockEntities {
                 false,
                 ModBlocks.BASIC_BATTERY.get()));
 
+    public static final Supplier<BlockEntityType<FractionatorBlockEntity>> FRACTIONATOR_BE =
+        BLOCK_ENTITIES.register(
+            "fractionator_be",
+            () -> new BlockEntityType<>(
+                FractionatorBlockEntity::new,
+                false,
+                ModBlocks.FRACTIONATOR.get()));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

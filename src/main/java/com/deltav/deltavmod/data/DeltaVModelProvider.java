@@ -58,6 +58,8 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
 
+        blockModels.createTrivialCube(ModBlocks.FRACTIONATOR.get());
+
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
             mapping.put(TextureSlot.SIDE, this.modLocation("block/alloy_furnace_side"))
@@ -159,6 +161,7 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
         Block oil = ModBlocks.OIL_FLUID.get();

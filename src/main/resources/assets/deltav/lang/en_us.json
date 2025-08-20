@@ -69,5 +69,9 @@
   "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
   "deltav.configuration.magicNumber": "Magic Number",
 
-  "gui.deltav.basic_battery": "Basic Battery"
+  "gui.deltav.basic_battery": "Basic Battery",
+
+  "block.deltav.fractionator": "Fractionator",
+  "gui.deltav.fractionator": "Fractionator",
+  "item.deltav.barrel": "Barrel"
 }

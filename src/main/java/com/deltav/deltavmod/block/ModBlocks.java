@@ -2,6 +2,7 @@ package com.deltav.deltavmod.block;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
+import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
@@ -235,8 +236,18 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
     public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
 
+    public static final DeferredBlock<FractionatorBlock> FRACTIONATOR = BLOCKS.register(
+        "fractionator", 
+        registryName -> new FractionatorBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.METAL)
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion())
+    );
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
-
 }
