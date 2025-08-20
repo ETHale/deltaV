@@ -1,20 +1,15 @@
 package com.deltav.deltavmod.screen.custom;
 
-import com.deltav.deltavmod.block.ModBlocks;
-import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.entity.CrusherBlockEntity;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
@@ -23,7 +18,6 @@ public class CrusherMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public CrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        // this(pContainerId, inv, inv.player.level().getBlockEntity(new BlockPos(10, 56, -9)), new SimpleContainerData(2));
         this(pContainerId, inv, (CrusherBlockEntity) inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
@@ -33,8 +27,6 @@ public class CrusherMenu extends AbstractContainerMenu {
         this.data = data;
 
         addStandardInventorySlots(inv, 8, 84);
-        // addPlayerInventory(inv);
-        // addPlayerHotbar(inv);
 
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 54, 34));
         this.addSlot(new ResultSlotHandler(blockEntity.itemHandler, 1, 104, 34));
@@ -107,20 +99,6 @@ public class CrusherMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return blockEntity.getLevel().getBlockEntity(blockEntity.getBlockPos()) == blockEntity;
-    }
-
-    private void addPlayerInventory(Inventory playerInventory) {
-        for (int i=0; i<3; i++) {
-            for (int j=0; j<9; j++) {
-                this.addSlot(new Slot(playerInventory, j+i*9+9, 8+j*18, 84+i*18));
-            }
-        }
-    }
-
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i=0; i<9; i++) {
-            this.addSlot(new Slot(playerInventory, i, 8+i*18, 142));
-        }
     }
 
 }
