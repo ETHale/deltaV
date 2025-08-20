@@ -109,6 +109,27 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             ;
         
         this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REDSTONE_GENERATOR.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.REDSTONE_GENERATOR.get());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.BASIC_BATTERY.get());
+
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.SILICA_SAND.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.SILICA_SANDSTONE.get())
+                .add(ModBlocks.SILICA_SANDSTONE_SLAB.get())
+                .add(ModBlocks.SILICA_SANDSTONE_STAIRS.get())
+                .add(ModBlocks.SILICA_SANDSTONE_WALL.get())
+                
+                .add(ModBlocks.CHISELED_SILICA_SANDSTONE.get())
+                .add(ModBlocks.CUT_SILICA_SANDSTONE.get())
+                .add(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get())
+                
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE.get())
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get())
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
+        this.tag(BlockTags.WALLS)
+            .add(ModBlocks.KIMBERLITE_WALL.get())
+            .add(ModBlocks.SILICA_SANDSTONE_WALL.get());
     }
     
 }

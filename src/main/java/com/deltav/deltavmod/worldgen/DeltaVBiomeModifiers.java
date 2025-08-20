@@ -11,13 +11,13 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.neoforged.neoforge.common.world.BiomeModifiers.AddCarversBiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
 
 // general pipeline:
-// configured feature -> placed feature -> Biome modifier
+// configured feature -> configured feature -> placed feature -> Biome modifier
 public class DeltaVBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_KIMBERLITE_CARROT = registerKey("add_kimberlite_carrot");
+    public static final ResourceKey<BiomeModifier> ADD_HOT_SPRING = registerKey("add_hot_spring");
     
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var PlacedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -29,6 +29,14 @@ public class DeltaVBiomeModifiers {
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(PlacedFeatures.getOrThrow(DeltaVPlacedFeatures.KIMBERLITE_CARROT)),
                 Decoration.UNDERGROUND_DECORATION
+            )
+        );
+        context.register(
+            ADD_HOT_SPRING, 
+            new AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                HolderSet.direct(PlacedFeatures.getOrThrow(DeltaVPlacedFeatures.HOT_SPRING)),
+                Decoration.LAKES
             )
         );
     }

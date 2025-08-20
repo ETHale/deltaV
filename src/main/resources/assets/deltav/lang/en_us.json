@@ -25,6 +25,7 @@
   "gui.deltav.crusher": "Crusher",
 
 
+  "item.deltav.oil_bucket": "Oil Bucket",
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",
   "block.deltav.kimberlite_slab": "Kimberlite Slab",
@@ -44,8 +45,25 @@
   "block.deltav.kimberlite_redstone_ore": "Kimberlite Redstone Ore",
   "block.deltav.kimberlite_zinc_ore": "Kimberlite Zinc Ore",
   "block.deltav.kimberlite_cobalt_ore": "Kimberlite Cobalt Ore",
+  "block.deltav.silica_sand": "Silica Sand",
+  "block.deltav.silica_sandstone": "Silica Sandstone",
+  "block.deltav.silica_sandstone_slab": "Silica Sandstone Slab",
+  "block.deltav.silica_sandstone_stairs": "Silica Sandstone Stairs",
+  "block.deltav.silica_sandstone_wall": "Silica Sandstone Wall",
+  "block.deltav.cut_silica_sandstone": "Cut Silica Sandstone",
+  "block.deltav.cut_silica_sandstone_slab": "Cut Silica Sandstone Slab",
+  "block.deltav.chiseled_silica_sandstone": "Chiseled Silica Sandstone",
+  "block.deltav.smooth_silica_sandstone": "Smooth Silica Sandstone",
+  "block.deltav.smooth_silica_sandstone_stairs": "Smooth Silica Sandstone Stairs",
+  "block.deltav.smooth_silica_sandstone_slab": "Smooth Silica Sandstone Slab",
 
   "block.deltav.molten_bedrock": "Molten Bedrock",
+  "block.deltav.redstone_generator": "Redstone Generator",
+  "block.deltav.basic_battery": "Basic Battery",
+
+  "item.deltav.zinc_battery": "Zinc Battery",
+  "item.deltav.silica_dust": "Silica Dust",
+  "item.deltav.silicon": "Silicon",
   
   "deltav.configuration.title": "DeltaV Configs",
   "deltav.configuration.section.deltav.common.toml": "DeltaV Configs",
@@ -53,5 +71,7 @@
   "deltav.configuration.items": "Item List",
   "deltav.configuration.logDirtBlock": "Log Dirt Block",
   "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
-  "deltav.configuration.magicNumber": "Magic Number"
+  "deltav.configuration.magicNumber": "Magic Number",
+
+  "gui.deltav.basic_battery": "Basic Battery"
 }

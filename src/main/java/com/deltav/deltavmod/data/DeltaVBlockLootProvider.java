@@ -61,5 +61,21 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.add(ModBlocks.KIMBERLITE_COBALT_ORE.get(), this.createOreDrop(ModBlocks.KIMBERLITE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
         this.dropSelf(ModBlocks.MOLTEN_BEDROCK.get());
         this.dropSelf(ModBlocks.PRISMIUM_BLOCK.get());
+        this.dropSelf(ModBlocks.REDSTONE_GENERATOR.get());
+        this.dropSelf(ModBlocks.BASIC_BATTERY.get());
+        this.dropSelf(ModBlocks.SILICA_SAND.get());
+        this.dropSelf(ModBlocks.SILICA_SANDSTONE.get());
+        this.dropSelf(ModBlocks.CHISELED_SILICA_SANDSTONE.get());
+        this.dropSelf(ModBlocks.CUT_SILICA_SANDSTONE.get());
+        this.dropSelf(ModBlocks.SMOOTH_SILICA_SANDSTONE.get());
+        this.add(ModBlocks.SILICA_SANDSTONE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.SILICA_SANDSTONE_SLAB.get()));
+        this.add(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get()));
+        this.add(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get()));
+        this.dropSelf(ModBlocks.SILICA_SANDSTONE_STAIRS.get());
+        this.dropSelf(ModBlocks.SILICA_SANDSTONE_WALL.get());
+        this.dropSelf(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
     }
 }

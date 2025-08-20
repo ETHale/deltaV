@@ -1,15 +1,20 @@
 package com.deltav.deltavmod.block;
 
-
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
+import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
+import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
+import com.deltav.deltavmod.block.family.KimberliteBlocks;
+import com.deltav.deltavmod.block.family.SilicaBlocks;
+import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -18,6 +23,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -167,6 +173,29 @@ public class ModBlocks {
             )
     );
 
+    public static final DeferredBlock<RedstoneGenerator> REDSTONE_GENERATOR =  BLOCKS.register(
+        "redstone_generator", 
+        registryName -> new RedstoneGenerator(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.METAL)
+                .strength(4.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion()
+        )
+    );
+
+    public static final DeferredBlock<BasicBattery> BASIC_BATTERY = BLOCKS.register(
+        "basic_battery", 
+        registryName -> new BasicBattery(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.METAL)
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion())
+    );
+
     public static final DeferredBlock<Block> PRISMIUM_BLOCK = BLOCKS.registerSimpleBlock(
         "prismium_block",
         BlockBehaviour.Properties.of()
@@ -189,6 +218,35 @@ public class ModBlocks {
             .strength(5.0F, 6.0F)
         )
     );
+
+    public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
+        "oil",
+        registryName -> new LiquidBlock(
+            ModFluids.OIL_SOURCE.value(),
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_BLACK)
+                .noCollission()
+                .strength(100.0F)
+                .noLootTable()
+                .liquid()
+                .replaceable()
+                .pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.EMPTY)
+        )
+    );
+
+    public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
+    public static final DeferredBlock<Block> SILICA_SANDSTONE = SilicaBlocks.SILICA_SANDSTONE;
+    public static final DeferredBlock<WallBlock> SILICA_SANDSTONE_WALL = SilicaBlocks.SILICA_SANDSTONE_WALL;
+    public static final DeferredBlock<StairBlock> SILICA_SANDSTONE_STAIRS = SilicaBlocks.SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SILICA_SANDSTONE_SLAB = SilicaBlocks.SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CHISELED_SILICA_SANDSTONE = SilicaBlocks.CHISELED_SILICA_SANDSTONE;
+    public static final DeferredBlock<Block> SMOOTH_SILICA_SANDSTONE = SilicaBlocks.SMOOTH_SILICA_SANDSTONE;
+    public static final DeferredBlock<StairBlock> SMOOTH_SILICA_SANDSTONE_STAIRS = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SMOOTH_SILICA_SANDSTONE_SLAB = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
+    public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

@@ -31,6 +31,14 @@ public class ModBlockEntities {
                 ModBlocks.CRUSHER.get()));
     
 
+    public static final Supplier<BlockEntityType<BasicBatteryBlockEntity>> BASIC_BATTERY_BE =
+        BLOCK_ENTITIES.register(
+            "basic_battery_be",
+            () -> new BlockEntityType<>(
+                BasicBatteryBlockEntity::new,
+                false,
+                ModBlocks.BASIC_BATTERY.get()));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

@@ -1,0 +1,30 @@
+{
+  "type": "deltav:hot_spring",
+  "config": {
+    "base": {
+      "Name": "deltav:silica_sandstone"
+    },
+    "contents": {
+      "Name": "minecraft:water",
+      "Properties": {
+        "level": "0"
+      }
+    },
+    "detail_amp": 0.6,
+    "exponent": 2.5,
+    "max_depth": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
+    "noise_scale": 0.01,
+    "octaves": 1,
+    "plateau_threshold": 0.7,
+    "rim": {
+      "Name": "deltav:silica_sand"
+    },
+    "rim_thickness": 1,
+    "search_padding": 64,
+    "threshold": 0.78
+  }
+}
