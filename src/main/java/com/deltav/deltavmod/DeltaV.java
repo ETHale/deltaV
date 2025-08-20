@@ -6,7 +6,7 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.item.ModItems;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
-import com.deltav.deltavmod.screen.custom.ModMenuTypes;
+import com.deltav.deltavmod.screen.custom.ModMenus;
 import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
@@ -75,7 +75,7 @@ public class DeltaV {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         DeltaVFeatures.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
+        ModMenus.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -145,7 +145,7 @@ public class DeltaV {
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
-            event.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
+            event.register(ModMenus.CRUSHER_MENU.get(), CrusherScreen::new);
         }
     }
 }

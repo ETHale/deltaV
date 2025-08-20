@@ -1,6 +1,7 @@
 package com.deltav.deltavmod.screen.custom;
 
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.entity.CrusherBlockEntity;
 
 import net.minecraft.core.BlockPos;
@@ -17,23 +18,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class CrusherMenu extends AbstractContainerMenu{
+public class CrusherMenu extends AbstractContainerMenu {
     public final CrusherBlockEntity blockEntity;
-    private final Level level;
     private final ContainerData data;
 
     public CrusherMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(new BlockPos(10, 56, -9)), new SimpleContainerData(2));
+        // this(pContainerId, inv, inv.player.level().getBlockEntity(new BlockPos(10, 56, -9)), new SimpleContainerData(2));
+        this(pContainerId, inv, (CrusherBlockEntity) inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public CrusherMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.CRUSHER_MENU.get(), pContainerId);
+        super(ModMenus.CRUSHER_MENU.get(), pContainerId);
         this.blockEntity = ((CrusherBlockEntity) entity);
-        this.level = inv.player.level();
         this.data = data;
 
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
+        addStandardInventorySlots(inv, 8, 84);
+        // addPlayerInventory(inv);
+        // addPlayerHotbar(inv);
 
         this.addSlot(new SlotItemHandler(blockEntity.itemHandler, 0, 54, 34));
         this.addSlot(new ResultSlotHandler(blockEntity.itemHandler, 1, 104, 34));
@@ -105,7 +106,7 @@ public class CrusherMenu extends AbstractContainerMenu{
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.CRUSHER.get());
+        return blockEntity.getLevel().getBlockEntity(blockEntity.getBlockPos()) == blockEntity;
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

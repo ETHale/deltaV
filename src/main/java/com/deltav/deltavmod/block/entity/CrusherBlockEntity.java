@@ -17,26 +17,28 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-public class CrusherBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer{
+public class CrusherBlockEntity extends BlockEntity implements MenuProvider, WorldlyContainer {
     public final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
-            items.set(slot, itemHandler.getStackInSlot(slot));
             if(!level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
@@ -53,16 +55,14 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
     private int progress = 0;
     private int maxProgress = 72;
 
-    protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
-
     public CrusherBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CRUSHER_BE.get(), pos, blockState);
         data = new ContainerData() {
             @Override
             public int get(int i) {
                 return switch(i) {
-                    case 0 -> CrusherBlockEntity.this.progress;
-                    case 1 -> CrusherBlockEntity.this.maxProgress;
+                    case 0 -> progress;
+                    case 1 -> maxProgress;
                     default -> 0;
                 };
             }
@@ -70,8 +70,8 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
             @Override
             public void set(int i, int value) {
                 switch(i) {
-                    case 0: CrusherBlockEntity.this.progress = value;
-                    case 1: CrusherBlockEntity.this.maxProgress = value;
+                    case 0: progress = value;
+                    case 1: maxProgress = value;
                 }
             }
 
@@ -84,8 +84,8 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
 
     @Override
     @Nullable
-    public AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return new CrusherMenu(i, inventory, this, this.data);
+    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        return new CrusherMenu(id, inventory, this, data);
     }
 
     @Override
@@ -93,46 +93,47 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
         return Component.translatable("block.deltav.crusher");
     }
 
+    /**
+     * Handle block removal, drop all items from internal inventory
+     *
+     * @param pos   position the block is placed
+     * @param state state of the block
+     */
     @Override
-    public Component getDefaultName() {
-        return Component.translatable("block.deltav.crusher");
-    }
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
 
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        /*
+        // Drop items from internal ItemHandler
         for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+            ItemStack stack = itemHandler.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                Containers.dropItemStack(this.level, pos.getX(), pos.getY(), pos.getZ(), stack);
+            }
         }
-        */
-
-        for (int i = 0; i < items.size(); i++) {
-            inventory.setItem(i, items.get(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
+        itemHandler.serialize(output);
         output.putInt("crusher.progress", progress);
         output.putInt("crusher.max_progress", maxProgress);
-        ContainerHelper.saveAllItems(output, this.items);
     }
 
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.items);
-
+        itemHandler.deserialize(input);
         progress = input.getIntOr("crusher.progress", 0);
         maxProgress = input.getIntOr("crusher.max_progress", maxProgress);
     }
 
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
+        if (level.isClientSide()) {
+            return; // Only run on server side
+        }
+
         if(hasRecipe()) {
             increaseCraftingProgress();
             setChanged(level, blockPos, blockState);
@@ -160,6 +161,7 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
     private void resetProgress() {
         progress = 0;
         maxProgress = 72;
+        setChanged();
     }
 
     private void increaseCraftingProgress() {
@@ -185,30 +187,83 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
         return maxCount >= currentCount + count;
     }
 
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return saveWithoutMetadata(registries);
-    }
+    // @Override
+    // public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+    //     return saveWithoutMetadata(registries);
+    // }
 
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
+    // @Nullable
+    // @Override
+    // public Packet<ClientGamePacketListener> getUpdatePacket() {
+    //     return ClientboundBlockEntityDataPacket.create(this);
+    // }
 
     @Override
     public int getContainerSize() {
-        return this.items.size();
+        return this.itemHandler.getSlots();
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
-        return this.items;
+    public boolean isEmpty() {
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            if (!itemHandler.getStackInSlot(i).isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> items) {
-        this.items = items;
+    public ItemStack removeItem(int index, int count) {
+        ItemStack stack = itemHandler.getStackInSlot(index);
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        ItemStack result = stack.split(count);
+        if (!result.isEmpty()) {
+            setChanged();
+        }
+        return result;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int index) {
+        ItemStack stack = itemHandler.getStackInSlot(index);
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        itemHandler.setStackInSlot(index, ItemStack.EMPTY);
+        return stack;
+    }
+
+    @Override
+    public void clearContent() {
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+        }
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        if (this.level == null || this.level.getBlockEntity(this.worldPosition) != this) {
+            return false;
+        }
+        return player.distanceToSqr(
+            (double)this.worldPosition.getX() + 0.5D,
+            (double)this.worldPosition.getY() + 0.5D,
+            (double)this.worldPosition.getZ() + 0.5D
+        ) <= 64.0D; // TODO: Don't think this is required, but keeping for now
+    }
+
+    @Override
+    public ItemStack getItem(int index) {
+        return this.itemHandler.getStackInSlot(index);
+    }
+
+    @Override
+    public void setItem(int index, ItemStack items) {
+        this.itemHandler.setStackInSlot(index, items);
+        setChanged();
     }
 
     @Override
@@ -225,6 +280,4 @@ public class CrusherBlockEntity extends BaseContainerBlockEntity implements Worl
     public int[] getSlotsForFace(Direction side) {
         return side == Direction.UP ? INPUTS : OUTPUTS;
     }
-
-
 }
