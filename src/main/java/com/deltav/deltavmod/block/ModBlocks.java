@@ -2,6 +2,7 @@ package com.deltav.deltavmod.block;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
+import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
@@ -204,6 +205,18 @@ public class ModBlocks {
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
             .sound(SoundType.AMETHYST)
+    );
+
+    public static final DeferredBlock<Block> CRUSHER = BLOCKS.register(
+        "crusher",
+        registryName -> new CrusherBlock(
+            BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, registryName))
+            .mapColor(MapColor.METAL)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F, 6.0F)
+        )
     );
 
     public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
