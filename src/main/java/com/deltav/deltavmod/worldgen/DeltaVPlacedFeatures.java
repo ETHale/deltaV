@@ -47,7 +47,8 @@ public class DeltaVPlacedFeatures {
             List.of(
                 CountPlacement.of(1),
                 InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE
+                PlacementUtils.FULL_RANGE,
+                BiomeFilter.biome()
             )
         );
     }
