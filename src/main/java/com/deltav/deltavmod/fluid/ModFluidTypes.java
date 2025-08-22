@@ -2,8 +2,6 @@ package com.deltav.deltavmod.fluid;
 
 import com.deltav.deltavmod.DeltaV;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
