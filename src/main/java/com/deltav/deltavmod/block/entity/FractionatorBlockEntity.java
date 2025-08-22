@@ -1,7 +1,10 @@
 package com.deltav.deltavmod.block.entity;
 
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
+import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 import com.deltav.deltavmod.menu.FractionatorMenu;
@@ -35,17 +38,39 @@ import net.neoforged.neoforge.items.ItemStackHandler;
  * @author Adam Crawley
  */
 public class FractionatorBlockEntity extends BlockEntity implements MenuProvider {
-    private static final String PROGRESS_NBT = "fractionator.progress";
-    private static final String MAX_PROGRESS_NBT = "fractionator.max_progress";
-    
-    private static final int MAX_TANK_CAPACITY = 10_000; // 10 buckets
-    private static final int MAX_PROGRESS = 5;
-    private static final int DRAIN = 50; // Drains 50 mB per 5 ticks
+    // Named Binary Tags for internal progress data
+    private static final String ARROW_PROGRESS_NBT = "fractionator.arrow_progress";
+    private static final String MAX_ARROW_PROGRESS_NBT = "fractionator.max_arrow_progress";
 
+    private static final int MAX_TANK_CAPACITY = 10_000; // 10 buckets
+
+    private static final int OIL_DRAIN     = 10; // mB/tick
+    private static final int PETROL_GAIN   = 5;  // mB/tick
+    private static final int NAPHTHA_GAIN  = 1;  // mB/tick
+    private static final int KEROSENE_GAIN = 3;  // mB/tick
+
+    private static final int INPUT_SLOT = 0;
+    private static final int MIDDLE_OUTPUT_SLOT = 1;
+    private static final int TOP_OUTPUT_SLOT = 2;
+    private static final int BOTTOM_OUTPUT_SLOT = 3;
+
+    private static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.OIL_SOURCE.get(), OIL_DRAIN);
+    private static final Map<Integer, FluidStack> OUTPUTS = Map.of(
+        TOP_OUTPUT_SLOT, new FluidStack(ModFluids.NAPHTHA_SOURCE.get(), NAPHTHA_GAIN),
+        MIDDLE_OUTPUT_SLOT, new FluidStack(ModFluids.PETROL_SOURCE.get(), PETROL_GAIN),
+        BOTTOM_OUTPUT_SLOT, new FluidStack(ModFluids.KEROSENE_SOURCE.get(), KEROSENE_GAIN)
+    );
+
+    // Arrow progress rate max. 1 progress is applied every tick up to ARROW_MAX_PROGRESS, then loops back to 0
+    // This setting is PURELY GUI, and does NOT change the rate at which oil is processed
+    private static final int ARROW_MAX_PROGRESS = 25;
+
+    // Public since menu may need to create a Fractionator block entity to open the menu
+    // Number of items within synchronised ContainerData
     public static final int INTERNAL_DATA_COUNT = 4;
 
     // Holds all items within the fractionator
-    public final ItemStackHandler inventory = new ItemStackHandler(2) {
+    public final ItemStackHandler inventory = new ItemStackHandler(4) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
             return 1; // In every slot only 1 item can be stored
@@ -56,17 +81,17 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             setChanged();
             if (!level.isClientSide) {
                 // Sync the inventory with the client
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3); // TODO: Is this necessary?
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
     };
 
-    // Internal state
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
-    private int progress = 0;
-    private int maxProgress = MAX_PROGRESS; // TODO: This variable could most likely be removed
-    private ContainerData data; // Synchronization data
+    // Internal progress state
+    private int arrowProgress = 0;
+    private int arrowMaxProgress = ARROW_MAX_PROGRESS;
+
+    // Container to synchronise data between client and server
+    private ContainerData data;
     private final FluidTank tank = new FluidTank(MAX_TANK_CAPACITY) {
         @Override
         protected void onContentsChanged() {
@@ -86,10 +111,10 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> progress;
-                    case 1 -> maxProgress;
-                    case 2 -> tank.getFluidAmount();
-                    case 3 -> tank.getCapacity();
+                    case 0 -> tank.getFluidAmount();
+                    case 1 -> tank.getCapacity();
+                    case 2 -> arrowProgress;
+                    case 3 -> arrowMaxProgress;
                     default -> 0;
                 };
             }
@@ -97,10 +122,10 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> progress = value;
-                    case 1 -> maxProgress = value;
-                    case 2 -> tank.setFluid(new FluidStack(ModFluids.OIL_SOURCE.get(), value));
-                    case 3 -> tank.setCapacity(value);
+                    case 0 -> tank.setFluid(new FluidStack(ModFluids.OIL_SOURCE.get(), value));
+                    case 1 -> tank.setCapacity(value);
+                    case 2 -> arrowProgress = value;
+                    case 3 -> arrowMaxProgress = value;
                 }
             }
 
@@ -142,24 +167,26 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     protected void saveAdditional(ValueOutput out) {
+        // Internal state
         super.saveAdditional(out);
         inventory.serialize(out);
-        out.putInt(PROGRESS_NBT, progress);
-        out.putInt(MAX_PROGRESS_NBT, maxProgress);
-
-        // Save tank
         tank.serialize(out);
+
+        // Arrow progress
+        out.putInt(ARROW_PROGRESS_NBT, arrowProgress);
+        out.putInt(MAX_ARROW_PROGRESS_NBT, arrowMaxProgress);
     }
 
     @Override
     protected void loadAdditional(ValueInput in) {
+        // Internal state
         super.loadAdditional(in);
         inventory.deserialize(in);
-        progress = in.getIntOr(PROGRESS_NBT, 0);
-        maxProgress = in.getIntOr(MAX_PROGRESS_NBT, maxProgress);
-
-        // Load tank
         tank.deserialize(in);
+
+        // Arrow progress
+        arrowProgress = in.getIntOr(ARROW_PROGRESS_NBT, 0);
+        arrowMaxProgress = in.getIntOr(MAX_ARROW_PROGRESS_NBT, arrowMaxProgress);
     }
 
     public IFluidHandler getFluidHandler(@Nullable Direction side) {
@@ -175,25 +202,24 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     public void tick() {
         if (level == null || level.isClientSide) return;
 
-        attemptDrainInInput();
+        drainToTankFromInput();
 
         if (hasRecipe()) {
-            progress++;
-            setChanged();
-
-            if (progress >= maxProgress) {
-                craftItem();
-                resetProgress();
+            // Add arrow progress
+            if (arrowProgress >= arrowMaxProgress) {
+                resetArrowProgress();
             }
+ 
+            processOutputs();
         } else {
-            resetProgress();
+            resetArrowProgress();
         }
     }
 
     /*
      * Attempts to drain fluid from the input tank into the internal tank.
      */
-    private void attemptDrainInInput() {
+    private void drainToTankFromInput() {
         ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
         if (input.getItem() == ModItems.OIL_BUCKET.get()) {
             IFluidHandlerItem itemHandler = FluidHandler.ITEM.getCapability(input, null);
@@ -213,61 +239,61 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     }
 
     /**
-     * Checks if the current inventory setup has a valid recipe,
-     * i.e. oil is being converted / fractionated.
+     * Checks if the current inventory setup has a valid setup for
+     * oil processing.
      * 
      * @return true if a valid recipe is present, false otherwise.
      */
     private boolean hasRecipe() {
-        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
-
-        boolean tankHasSufficientOil = tank.getFluidAmount() >= DRAIN && tank.getFluid().getFluid() == ModFluids.OIL_SOURCE.get();
+        // Check if internal tank can be drained
+        boolean tankHasSufficientOil = (tank.getFluidAmount() >= OIL_DRAIN_STACK.getAmount())
+            && (tank.getFluid().getFluid() == OIL_DRAIN_STACK.getFluid());
         if (!tankHasSufficientOil) return false;
 
-        if (output.getItem() != ModItems.BARREL.get()) return false;
+        // Check every output slot for valid barrels
+        for (int SLOT : OUTPUTS.keySet()) {
+            ItemStack output = inventory.getStackInSlot(SLOT);
 
-        // If it's a barrel, check if it can accept more (simulate)
-        IFluidHandlerItem barrelHandler = output.getCapability(FluidHandler.ITEM);
-        if (barrelHandler == null) return false;
-        // Try to simulate adding up to 1k mB from the tank -- if any would fit, recipe is valid
-        int amountAvailable = Math.min(DRAIN, tank.getFluidAmount());
-        FluidStack simulate = new FluidStack(tank.getFluid().getFluid(), amountAvailable);
-        int canAccept = barrelHandler.fill(simulate, FluidAction.SIMULATE);
-        return canAccept > 0;
+            // If the output is not a barrel, we can't process into output
+            if (output.getItem() != ModItems.BARREL.get()) return false;
+
+            // Double-check barrel has fluid handler
+            IFluidHandlerItem barrelHandler = output.getCapability(FluidHandler.ITEM);
+            if (barrelHandler == null) return false;
+
+            // Check if barrel can accept more (simulate)
+            int canAccept = barrelHandler.fill(OUTPUTS.get(SLOT), FluidAction.SIMULATE);
+            if (canAccept <= 0) return false;
+        }
+        return true;
     }
 
     /**
-     * Crafts the output items from the internal tank fluid.
+     * Processes conversion from internal oil tank to output barrels.
+     * 
+     * @note Assumes that hasRecipe() was already called and returned true, i.e.
+     *       input tank has enough oil, all barrels are valid and can accept more
      */
-    private void craftItem() {
-        // We assume hasRecipe() was already called and returned true (so tank has oil)
-        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
+    private void processOutputs() {
+        // Drain from internal tank
+        tank.drain(OIL_DRAIN_STACK, FluidAction.EXECUTE);
 
-        // Determine how much we can try to move (max DRAIN per operation)
-        int amountAvailable = Math.min(DRAIN, tank.getFluidAmount());
-        FluidStack toAttempt = new FluidStack(tank.getFluid().getFluid(), amountAvailable);
-
-        if (output.getItem() == ModItems.BARREL.get()) {
+        // Iterate gain into each output barrel
+        for (int SLOT : OUTPUTS.keySet()) {
+            ItemStack output = inventory.getStackInSlot(SLOT);
             // Top up the existing barrel in-place
             IFluidHandlerItem existingHandler = output.getCapability(FluidHandler.ITEM);
-            if (existingHandler != null) {
-                int canFill = existingHandler.fill(toAttempt, FluidAction.SIMULATE);
-                if (canFill > 0) {
-                    FluidStack drained = tank.drain(canFill, FluidAction.EXECUTE);
-                    existingHandler.fill(drained, FluidAction.EXECUTE);
-                    setChanged(); // TODO: Is this required in craftItem?
-                }
-            }
+            existingHandler.fill(OUTPUTS.get(SLOT), FluidAction.EXECUTE);
+            setChanged(); // TODO: Is this required in processOil?
         }
     }
 
     /**
-     * Resets the progress of the crafting operation.
+     * Resets the progress of the arrow crafting operation.
      */
-    private void resetProgress() {
-        progress = 0;
-        maxProgress = MAX_PROGRESS;
-        setChanged();
+    private void resetArrowProgress() {
+        arrowProgress = 0;
+        arrowMaxProgress = ARROW_MAX_PROGRESS;
     }
 
     // TODO: Are getUpdateTag and getUpdatePacket necessary?

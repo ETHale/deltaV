@@ -52,13 +52,14 @@ public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu
         );
 
         // Render crafting arrow progress
-        if (menu.isCrafting()) {
+        final int arrowProgress = menu.getScaledArrowProgress(24);
+        if (arrowProgress > 0) {
             guiGraphics.blit(
                 RenderPipelines.GUI_TEXTURED, // This first parameter isn't actually required - include for completeness
                 ARROW,
                 this.leftPos + 103, this.topPos + 18,
                 0, 0,
-                menu.getScaledArrowProgress(), 52,
+                arrowProgress, 52,
                 24, 52
             );
         }
@@ -68,7 +69,7 @@ public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu
         final int tankFillHeight = menu.getScaledOilTankHeight(MAX_BAR_HEIGHT);
 
         guiGraphics.fillGradient(leftPos + LEFT_PADDING, topPos + TOP_PADDING + (MAX_BAR_HEIGHT - tankFillHeight),
-               leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF941400, 0xFFBD2008);
+               leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF010A1C, 0xFF051536);
 
         // TODO: Render tank overlay?
     }

@@ -35,31 +35,29 @@ public class FractionatorMenu extends AbstractContainerMenu {
         // player inv
         addStandardInventorySlots(inv, 8, 84);
 
-        addSlot(new SlotItemHandler(be.inventory, 0, 22, 36));
-        addSlot(new SlotItemHandler(be.inventory, 1, 139, 36));
+        addSlot(new SlotItemHandler(be.inventory, 0, 22, 36)); // INPUT_SLOT
+        addSlot(new SlotItemHandler(be.inventory, 1, 139, 36)); // MIDDLE_OUTPUT_SLOT
+        addSlot(new SlotItemHandler(be.inventory, 2, 139, 18)); // TOP_OUTPUT_SLOT
+        addSlot(new SlotItemHandler(be.inventory, 3, 139, 54)); // BOTTOM_OUTPUT_SLOT
 
         addDataSlots(data); // Stores progress values
     }
 
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledArrowProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        return maxProgress != 0 ? progress * 24 / maxProgress : 0;
+    public int getScaledArrowProgress(int arrowLength) {
+        int progress = this.data.get(2);
+        int maxProgress = this.data.get(3);
+        return maxProgress != 0 ? progress * arrowLength / maxProgress : 0;
     }
 
     public int getScaledOilTankHeight(int maxBarHeight) {
-        int fluidAmount = this.data.get(2);
-        int tankCapacity = this.data.get(3);
+        int fluidAmount = this.data.get(0);
+        int tankCapacity = this.data.get(1);
         return tankCapacity != 0 ? fluidAmount * maxBarHeight / tankCapacity : 0;
     }
 
     public List<Component> getOilTankTooltip() {
-        int fluidAmount = this.data.get(2);
-        int tankCapacity = this.data.get(3);
+        int fluidAmount = this.data.get(0);
+        int tankCapacity = this.data.get(1);
         return List.of(Component.literal(fluidAmount + " / " + tankCapacity));
     }
 
