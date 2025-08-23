@@ -31,7 +31,12 @@ public class BarrelItem extends Item {
             Consumer<Component> tooltipAdder, TooltipFlag flag) {
         IFluidHandlerItem fluidHandler = FluidHandler.ITEM.getCapability(stack, null);
         if (fluidHandler != null) {
-            tooltipAdder.accept(Component.literal(fluidHandler.getFluidInTank(0).getAmount() + " / " + fluidHandler.getTankCapacity(0) + " - " + fluidHandler.getFluidInTank(0).getFluid().toString()));
+            if (!fluidHandler.getFluidInTank(0).isEmpty()) {
+                String amount = fluidHandler.getFluidInTank(0).getAmount() + " / " + fluidHandler.getTankCapacity(0) + "mB";
+                String fluidName = fluidHandler.getFluidInTank(0).getFluidType().getDescriptionId();
+                tooltipAdder.accept(Component.translatable(fluidName));
+                tooltipAdder.accept(Component.literal(amount));
+            }
         }
 
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);

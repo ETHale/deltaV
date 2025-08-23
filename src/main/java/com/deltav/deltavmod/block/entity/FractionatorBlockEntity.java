@@ -41,6 +41,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     // Named Binary Tags for internal progress data
     private static final String ARROW_PROGRESS_NBT = "fractionator.arrow_progress";
     private static final String MAX_ARROW_PROGRESS_NBT = "fractionator.max_arrow_progress";
+    private static final String RESIDUE_PROGRESS_NBT = "fractionator.residue_progress";
+    private static final String MAX_RESIDUE_PROGRESS_NBT = "fractionator.max_residue_progress";
 
     private static final int MAX_TANK_CAPACITY = 10_000; // 10 buckets
 
@@ -53,6 +55,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     private static final int MIDDLE_OUTPUT_SLOT = 1;
     private static final int TOP_OUTPUT_SLOT = 2;
     private static final int BOTTOM_OUTPUT_SLOT = 3;
+    private static final int RESIDUE_SLOT = 4;
 
     private static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.OIL_SOURCE.get(), OIL_DRAIN);
     private static final Map<Integer, FluidStack> OUTPUTS = Map.of(
@@ -65,12 +68,15 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     // This setting is PURELY GUI, and does NOT change the rate at which oil is processed
     private static final int ARROW_MAX_PROGRESS = 25;
 
+    // Amount of ticks that pass before creating residue from fractionating process
+    private static final int RESIDUE_MAX_PROGRESS = 50;
+
     // Public since menu may need to create a Fractionator block entity to open the menu
     // Number of items within synchronised ContainerData
     public static final int INTERNAL_DATA_COUNT = 4;
 
     // Holds all items within the fractionator
-    public final ItemStackHandler inventory = new ItemStackHandler(4) {
+    public final ItemStackHandler inventory = new ItemStackHandler(5) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
             return 1; // In every slot only 1 item can be stored
@@ -89,6 +95,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     // Internal progress state
     private int arrowProgress = 0;
     private int arrowMaxProgress = ARROW_MAX_PROGRESS;
+    private int residueProgress = 0;
+    private int residueMaxProgress = RESIDUE_MAX_PROGRESS;
 
     // Container to synchronise data between client and server
     private ContainerData data;
@@ -175,6 +183,10 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
         // Arrow progress
         out.putInt(ARROW_PROGRESS_NBT, arrowProgress);
         out.putInt(MAX_ARROW_PROGRESS_NBT, arrowMaxProgress);
+
+        // Residue progress
+        out.putInt(RESIDUE_PROGRESS_NBT, residueProgress);
+        out.putInt(MAX_RESIDUE_PROGRESS_NBT, residueMaxProgress);
     }
 
     @Override
@@ -187,6 +199,10 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
         // Arrow progress
         arrowProgress = in.getIntOr(ARROW_PROGRESS_NBT, 0);
         arrowMaxProgress = in.getIntOr(MAX_ARROW_PROGRESS_NBT, arrowMaxProgress);
+
+        // Residue progress
+        residueProgress = in.getIntOr(RESIDUE_PROGRESS_NBT, 0);
+        residueMaxProgress = in.getIntOr(MAX_RESIDUE_PROGRESS_NBT, residueMaxProgress);
     }
 
     public IFluidHandler getFluidHandler(@Nullable Direction side) {
@@ -201,6 +217,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      */
     public void tick() {
         if (level == null || level.isClientSide) return;
+        arrowProgress++;
+        residueProgress++;
 
         drainToTankFromInput();
 
@@ -209,7 +227,12 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             if (arrowProgress >= arrowMaxProgress) {
                 resetArrowProgress();
             }
- 
+
+            if (residueProgress >= residueMaxProgress) {
+                createResidue();
+                resetResidueProgress();
+            }
+
             processOutputs();
         } else {
             resetArrowProgress();
@@ -250,6 +273,13 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             && (tank.getFluid().getFluid() == OIL_DRAIN_STACK.getFluid());
         if (!tankHasSufficientOil) return false;
 
+        // Check that residue slot is not full and contains Gloopy Residue
+        ItemStack residue = inventory.getStackInSlot(RESIDUE_SLOT);
+        if (!residue.isEmpty()) {
+            if (residue.getItem() != ModItems.GLOOPY_RESIDUE.get()) return false;
+            if (residue.getCount() >= residue.getMaxStackSize()) return false;
+        }
+
         // Check every output slot for valid barrels
         for (int SLOT : OUTPUTS.keySet()) {
             ItemStack output = inventory.getStackInSlot(SLOT);
@@ -288,12 +318,30 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
         }
     }
 
+    private void createResidue() {
+        ItemStack residue = inventory.getStackInSlot(RESIDUE_SLOT);
+        if (residue.isEmpty()) {
+            residue = new ItemStack(ModItems.GLOOPY_RESIDUE.get());
+        } else {
+            residue.grow(1);
+        }
+        inventory.setStackInSlot(RESIDUE_SLOT, residue);
+    }
+
     /**
      * Resets the progress of the arrow crafting operation.
      */
     private void resetArrowProgress() {
         arrowProgress = 0;
         arrowMaxProgress = ARROW_MAX_PROGRESS;
+    }
+
+    /**
+     * Resets the progress of the residue crafting operation.
+     */
+    private void resetResidueProgress() {
+        residueProgress = 0;
+        residueMaxProgress = RESIDUE_MAX_PROGRESS;
     }
 
     // TODO: Are getUpdateTag and getUpdatePacket necessary?

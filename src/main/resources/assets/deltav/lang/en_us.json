@@ -73,5 +73,11 @@
 
   "block.deltav.fractionator": "Fractionator",
   "gui.deltav.fractionator": "Fractionator",
-  "item.deltav.barrel": "Barrel"
+  "item.deltav.barrel": "Barrel",
+  "item.deltav.gloopy_residue": "Gloopy Residue",
+
+  "fluid_type.deltav.oil": "Oil",
+  "fluid_type.deltav.petrol": "Petrol",
+  "fluid_type.deltav.naphta": "Naphta",
+  "fluid_type.deltav.kerosene": "Kerosene"
 }

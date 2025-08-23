@@ -39,6 +39,7 @@ public class FractionatorMenu extends AbstractContainerMenu {
         addSlot(new SlotItemHandler(be.inventory, 1, 139, 36)); // MIDDLE_OUTPUT_SLOT
         addSlot(new SlotItemHandler(be.inventory, 2, 139, 18)); // TOP_OUTPUT_SLOT
         addSlot(new SlotItemHandler(be.inventory, 3, 139, 54)); // BOTTOM_OUTPUT_SLOT
+        addSlot(new SlotItemHandler(be.inventory, 4, 79, 54)); // RESIDUE_SLOT
 
         addDataSlots(data); // Stores progress values
     }

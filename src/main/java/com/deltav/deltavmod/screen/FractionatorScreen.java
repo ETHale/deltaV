@@ -71,7 +71,10 @@ public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu
         guiGraphics.fillGradient(leftPos + LEFT_PADDING, topPos + TOP_PADDING + (MAX_BAR_HEIGHT - tankFillHeight),
                leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF010A1C, 0xFF051536);
 
-        // TODO: Render tank overlay?
+        // Output slot labels
+        guiGraphics.drawString(this.font, "N", this.leftPos + 158, this.topPos + 23, -12566464, false);
+        guiGraphics.drawString(this.font, "P", this.leftPos + 158, this.topPos + 41, -12566464, false);
+        guiGraphics.drawString(this.font, "K", this.leftPos + 158, this.topPos + 59, -12566464, false);
     }
 
     @Override
