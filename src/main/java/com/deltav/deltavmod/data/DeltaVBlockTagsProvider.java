@@ -34,6 +34,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.COBALT_BLOCK.get())
             .add(ModBlocks.RAW_COBALT_BLOCK.get())
             .add(ModBlocks.PRISMIUM_BLOCK.get())
+            .add(ModBlocks.CRUSHER.get())
             ;
         this.tag(BlockTags.NEEDS_STONE_TOOL)
             .add(ModBlocks.ZINC_ORE.get())
@@ -46,6 +47,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
             .add(ModBlocks.COBALT_BLOCK.get())
             .add(ModBlocks.RAW_COBALT_BLOCK.get())
+            .add(ModBlocks.CRUSHER.get())
             ;
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
             .add(ModBlocks.PRISMIUM_BLOCK.get())

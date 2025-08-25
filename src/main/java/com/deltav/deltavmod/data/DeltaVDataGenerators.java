@@ -6,6 +6,9 @@ import java.util.Set;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
+import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.screen.BasicBatteryScreen;
+import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
@@ -79,6 +82,12 @@ public class DeltaVDataGenerators {
                 stack,
                 4000
             ), ModItems.BARREL.get());
+        }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        // SFI: This could be moved into CrusherScreen class
+        event.register(ModMenus.CRUSHER_MENU.get(), CrusherScreen::new);
     }
 
     @SubscribeEvent

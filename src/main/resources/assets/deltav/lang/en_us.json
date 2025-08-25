@@ -21,6 +21,10 @@
 
   "block.deltav.prismium_block": "Block of Prismium",
 
+  "block.deltav.crusher": "Crusher",
+  "gui.deltav.crusher": "Crusher",
+
+
   "item.deltav.oil_bucket": "Oil Bucket",
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",

@@ -1,6 +1,8 @@
 package com.deltav.deltavmod.menu;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
+import com.deltav.deltavmod.screen.custom.CrusherMenu;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
@@ -24,6 +26,11 @@ public class ModMenus {
     public static final DeferredHolder<MenuType<?>,MenuType<FractionatorMenu>> FRACTIONATOR_MENU = MENUS.register(
         "fractionator",
         () -> IMenuTypeExtension.create(FractionatorMenu::new)
+    );
+    
+    public static final DeferredHolder<MenuType<?>, MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register(
+        "crusher",
+        () -> IMenuTypeExtension.create(CrusherMenu::new)
     );
 
     public static void register(IEventBus eventBus) {

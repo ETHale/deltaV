@@ -93,6 +93,8 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
+        blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
+
         TexturedModel.Provider bbTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
             mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
             .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
