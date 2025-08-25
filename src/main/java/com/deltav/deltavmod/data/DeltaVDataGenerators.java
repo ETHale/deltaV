@@ -22,6 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
@@ -81,8 +82,9 @@ public class DeltaVDataGenerators {
                 ModDataComponents.GENERIC_FLUID,
                 stack,
                 4000
-            ), ModItems.BARREL.get());
-        }
+            ), ModItems.BARREL.get()
+        );
+    }
 
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
