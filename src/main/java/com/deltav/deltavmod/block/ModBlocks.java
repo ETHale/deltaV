@@ -1,7 +1,5 @@
 package com.deltav.deltavmod.block;
 
-import java.util.function.Function;
-
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
@@ -11,13 +9,12 @@ import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
-import com.deltav.deltavmod.fluid.ModFluids;
+import com.deltav.deltavmod.fluid.ModFluidBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -26,7 +23,6 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -50,38 +46,6 @@ public class ModBlocks {
             .strength(5.0f, 6.0f)
             .sound(SoundType.IRON))
     );
-
-    public static final DeferredBlock<AlloyFurnaceBlock> ALLOY_FURNACE = BLOCKS.register(
-        "alloy_furnace",
-        registryName -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of()
-        .setId(ResourceKey.create(Registries.BLOCK, registryName))
-        .mapColor(MapColor.STONE)
-        .instrument(NoteBlockInstrument.BASEDRUM)
-        .requiresCorrectToolForDrops()
-        .strength(3.5f))
-    );
-    
-    // Kimberlite blocks have been moved to their own file to reduce file length
-    // but have still been added like so for convience of referencing
-    public static final DeferredBlock<Block> KIMBERLITE = KimberliteBlocks.KIMBERLITE;
-    public static final DeferredBlock<StairBlock> KIMBERLITE_STAIRS = KimberliteBlocks.KIMBERLITE_STAIRS;
-    public static final DeferredBlock<SlabBlock> KIMBERLITE_SLAB = KimberliteBlocks.KIMBERLITE_SLAB;
-    public static final DeferredBlock<PressurePlateBlock> KIMBERLITE_PRESSURE_PLATE = KimberliteBlocks.KIMBERLITE_PRESSURE_PLATE;
-    public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = KimberliteBlocks.KIMBERLITE_BUTTON;
-    public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = KimberliteBlocks.KIMBERLITE_WALL;
-    public static final DeferredBlock<Block> POLISHED_KIMBERLITE = KimberliteBlocks.POLISHED_KIMBERLITE;
-    public static final DeferredBlock<StairBlock> POLISHED_KIMBERLITE_STAIRS = KimberliteBlocks.POLISHED_KIMBERLITE_STAIRS;
-    public static final DeferredBlock<SlabBlock> POLISHED_KIMBERLITE_SLAB = KimberliteBlocks.POLISHED_KIMBERLITE_SLAB;
-    public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = KimberliteBlocks.KIMBERLITE_COAL_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = KimberliteBlocks.KIMBERLITE_COPPER_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = KimberliteBlocks.KIMBERLITE_DIAMOND_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = KimberliteBlocks.KIMBERLITE_EMERALD_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = KimberliteBlocks.KIMBERLITE_GOLD_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = KimberliteBlocks.KIMBERLITE_LAPIS_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = KimberliteBlocks.KIMBERLITE_REDSTONE_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = KimberliteBlocks.KIMBERLITE_ZINC_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
 
     public static final DeferredBlock<Block> ZINC_BLOCK = BLOCKS.registerSimpleBlock(
         "zinc_block",
@@ -214,6 +178,18 @@ public class ModBlocks {
             .sound(SoundType.AMETHYST)
     );
 
+    //#region Block entities
+
+    public static final DeferredBlock<AlloyFurnaceBlock> ALLOY_FURNACE = BLOCKS.register(
+        "alloy_furnace",
+        registryName -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of()
+        .setId(ResourceKey.create(Registries.BLOCK, registryName))
+        .mapColor(MapColor.STONE)
+        .instrument(NoteBlockInstrument.BASEDRUM)
+        .requiresCorrectToolForDrops()
+        .strength(3.5f))
+    );
+
     public static final DeferredBlock<Block> CRUSHER = BLOCKS.register(
         "crusher",
         registryName -> new CrusherBlock(
@@ -226,55 +202,30 @@ public class ModBlocks {
         )
     );
 
-    private static final BlockBehaviour.Properties FLUID_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
-        .noCollission()
-        .strength(100.0F)
-        .noLootTable()
-        .liquid()
-        .replaceable()
-        .pushReaction(PushReaction.DESTROY)
-        .sound(SoundType.EMPTY);
-
-    public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
-        "oil",
-        registryName -> new LiquidBlock(
-            ModFluids.OIL_SOURCE.value(),
-            FLUID_BLOCK_PROPERTIES
+    public static final DeferredBlock<FractionatorBlock> FRACTIONATOR = BLOCKS.register(
+        "fractionator", 
+        registryName -> new FractionatorBlock(
+            BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.COLOR_BLACK)
-        )
+                .mapColor(MapColor.METAL)
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion())
     );
 
-    public static final DeferredBlock<Block> NAPHTHA_FLUID = BLOCKS.register(
-        "naphtha",
-        registryName -> new LiquidBlock(
-            ModFluids.NAPHTHA_SOURCE.value(),
-            FLUID_BLOCK_PROPERTIES
-                .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.COLOR_YELLOW)
-        )
-    );
+    //#endregion
 
-    public static final DeferredBlock<Block> PETROL_FLUID = BLOCKS.register(
-        "petrol",
-        registryName -> new LiquidBlock(
-            ModFluids.PETROL_SOURCE.value(),
-            FLUID_BLOCK_PROPERTIES
-                .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.COLOR_YELLOW)
-        )
-    );
+    // Below blocks have been moved to separate files to reduce file length and
+    // improve modularity, they are referenced here for convenience of referencing
+    //#region Referenced blocks
 
-    public static final DeferredBlock<Block> KEROSENE_FLUID = BLOCKS.register(
-        "kerosene", 
-        registryName -> new LiquidBlock(
-            ModFluids.KEROSENE_SOURCE.value(),
-            FLUID_BLOCK_PROPERTIES
-                .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.COLOR_LIGHT_BLUE)
-        )
-    );
+    // Fluid blocks
+    public static final DeferredBlock<Block> OIL_FLUID = ModFluidBlocks.OIL_FLUID;
+    public static final DeferredBlock<Block> NAPHTHA_FLUID = ModFluidBlocks.NAPHTHA_FLUID;
+    public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
+    public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;
 
+    // Silica blocks
     public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
     public static final DeferredBlock<Block> SILICA_SANDSTONE = SilicaBlocks.SILICA_SANDSTONE;
     public static final DeferredBlock<WallBlock> SILICA_SANDSTONE_WALL = SilicaBlocks.SILICA_SANDSTONE_WALL;
@@ -287,16 +238,28 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
     public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
 
-    public static final DeferredBlock<FractionatorBlock> FRACTIONATOR = BLOCKS.register(
-        "fractionator", 
-        registryName -> new FractionatorBlock(
-            BlockBehaviour.Properties.of()
-                .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .mapColor(MapColor.METAL)
-                .strength(3.0F, 6.0F)
-                .sound(SoundType.IRON)
-                .noOcclusion())
-    );
+    // Kimberlite blocks
+    public static final DeferredBlock<Block> KIMBERLITE = KimberliteBlocks.KIMBERLITE;
+    public static final DeferredBlock<StairBlock> KIMBERLITE_STAIRS = KimberliteBlocks.KIMBERLITE_STAIRS;
+    public static final DeferredBlock<SlabBlock> KIMBERLITE_SLAB = KimberliteBlocks.KIMBERLITE_SLAB;
+    public static final DeferredBlock<PressurePlateBlock> KIMBERLITE_PRESSURE_PLATE = KimberliteBlocks.KIMBERLITE_PRESSURE_PLATE;
+    public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = KimberliteBlocks.KIMBERLITE_BUTTON;
+    public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = KimberliteBlocks.KIMBERLITE_WALL;
+    public static final DeferredBlock<Block> POLISHED_KIMBERLITE = KimberliteBlocks.POLISHED_KIMBERLITE;
+    public static final DeferredBlock<StairBlock> POLISHED_KIMBERLITE_STAIRS = KimberliteBlocks.POLISHED_KIMBERLITE_STAIRS;
+    public static final DeferredBlock<SlabBlock> POLISHED_KIMBERLITE_SLAB = KimberliteBlocks.POLISHED_KIMBERLITE_SLAB;
+    public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = KimberliteBlocks.KIMBERLITE_COAL_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = KimberliteBlocks.KIMBERLITE_COPPER_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = KimberliteBlocks.KIMBERLITE_DIAMOND_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = KimberliteBlocks.KIMBERLITE_EMERALD_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = KimberliteBlocks.KIMBERLITE_GOLD_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = KimberliteBlocks.KIMBERLITE_LAPIS_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = KimberliteBlocks.KIMBERLITE_REDSTONE_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = KimberliteBlocks.KIMBERLITE_ZINC_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
+
+    //#endregion
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

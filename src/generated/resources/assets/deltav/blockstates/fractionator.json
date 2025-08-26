@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "deltav:block/fractionator",
+      "y": 90
+    },
+    "facing=north": {
       "model": "deltav:block/fractionator"
+    },
+    "facing=south": {
+      "model": "deltav:block/fractionator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "deltav:block/fractionator",
+      "y": 270
     }
   }
 }

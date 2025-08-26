@@ -58,13 +58,15 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
 
-        // Fractionator
-        blockModels.createTrivialBlock(ModBlocks.FRACTIONATOR.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
-            mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
-            .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
-            .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
-            .put(TextureSlot.BOTTOM, this.modLocation("block/fractionator_bottom"))
-        ));
+        // Fractionator (obtained from https://docs.neoforged.net/docs/1.21.5/resources/client/models/datagen/#modelprovider)
+        blockModels.createHorizontallyRotatedBlock(
+            ModBlocks.FRACTIONATOR.get(),
+            TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
+                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
+                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+            )
+        );
 
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
