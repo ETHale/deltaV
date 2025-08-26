@@ -15,8 +15,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
-    public static final DeferredRegister.Items ITEMS =
-        DeferredRegister.createItems(DeltaV.MODID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(DeltaV.MODID);
 
     public static final DeferredItem<BlockItem> STEEL_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("steel_block", ModBlocks.STEEL_BLOCK);
     public static final DeferredItem<BlockItem> ALLOY_FURNACE_ITEM = ITEMS.registerSimpleBlockItem("alloy_furnace", ModBlocks.ALLOY_FURNACE);
@@ -78,6 +77,7 @@ public class ModItems {
     public static final DeferredItem<Item> SILICA_DUST = ITEMS.registerSimpleItem("silica_dust");
     public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
+    public static final DeferredItem<Item> GLOOPY_RESIDUE = ITEMS.registerSimpleItem("gloopy_residue");
 
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
         "oil_bucket",
@@ -88,6 +88,44 @@ public class ModItems {
                 .craftRemainder(Items.BUCKET)
                 .stacksTo(1)
     ));
+
+    public static final DeferredItem<BucketItem> NAPHTHA_BUCKET = ITEMS.register(
+        "naphtha_bucket",
+        registryName -> new BucketItem(
+            ModFluids.NAPHTHA_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BucketItem> PETROL_BUCKET = ITEMS.register(
+        "petrol_bucket",
+        registryName -> new BucketItem(
+            ModFluids.PETROL_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BucketItem> KEROSENE_BUCKET = ITEMS.register(
+        "kerosene_bucket",
+        registryName -> new BucketItem(
+            ModFluids.KEROSENE_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
+    public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
+        "barrel",
+        registryName -> new BarrelItem(
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+        ));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

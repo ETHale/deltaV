@@ -384,6 +384,14 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SILICA_DUST), RecipeCategory.MISC, ModItems.SILICON.get(), 0.5F, 200)
             .unlockedBy("has_silica_dust", this.has(ModItems.SILICA_DUST.get()))
             .save(this.output, "silcon_from_smelting");
+
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModItems.BARREL.get(), 1)
+            .pattern("SSS")
+            .pattern("S S")
+            .pattern("SSS")
+            .define('S', ModItems.STEEL_INGOT.get())
+            .unlockedBy("has_steel_ingot", this.has(ModItems.STEEL_INGOT.get()))
+            .save(this.output, "barrel_from_steel_ingots");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
