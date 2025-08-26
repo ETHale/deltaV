@@ -7,7 +7,6 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.menu.ModMenus;
-import com.deltav.deltavmod.screen.BasicBatteryScreen;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;

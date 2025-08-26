@@ -58,7 +58,13 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
 
-        blockModels.createTrivialCube(ModBlocks.FRACTIONATOR.get());
+        // Fractionator
+        blockModels.createTrivialBlock(ModBlocks.FRACTIONATOR.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
+            mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
+            .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
+            .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+            .put(TextureSlot.BOTTOM, this.modLocation("block/fractionator_bottom"))
+        ));
 
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->

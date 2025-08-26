@@ -1,6 +1,9 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "all": "deltav:block/fractionator"
+    "bottom": "deltav:block/fractionator_bottom",
+    "front": "deltav:block/fractionator_front",
+    "side": "deltav:block/fractionator_side",
+    "top": "deltav:block/fractionator_top"
   }
 }
