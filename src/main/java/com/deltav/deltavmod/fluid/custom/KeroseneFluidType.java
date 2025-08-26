@@ -1,9 +1,10 @@
-package com.deltav.deltavmod.fluid;
+package com.deltav.deltavmod.fluid.custom;
 
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector4f;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.fluid.ModFluidTypes;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -21,30 +22,30 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import net.neoforged.neoforge.fluids.FluidType;
 
 /**
- * Oil fluid type. Contains all oil specific fluid type properties.
+ * Kerosene fluid type. Contains all kerosene specific fluid type properties.
  * Subcribes to event bus for client extension fluid type registration.
  * 
  * @author Adam Crawley
  */
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
-public class OilFluidType extends FluidType {
+public class KeroseneFluidType extends FluidType {
     private static final ResourceLocation STILL_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
     private static final ResourceLocation FLOWING_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
     private static final ResourceLocation OVERLAY_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
-    private static final int TINT_COLOR = 0xFF010A1C;
-    private static final Vector4f FOG_COLOR = new Vector4f(1f / 255f, 10f / 255f, 28f / 255f, 1f);
+    private static final int TINT_COLOR = 0xFF00E2FF;
+    private static final Vector4f FOG_COLOR = new Vector4f(0f / 255f, 226f / 255f, 255f / 255f, 1f);
 
-    public OilFluidType() {
+    public KeroseneFluidType() {
         super(Properties.create()
             .lightLevel(2)
-            .density(15)
-            .viscosity(5)
+            .density(800)
+            .viscosity(1200)
             .canExtinguish(false)
-            .temperature(0));
+            .temperature(300));
     }
 
     /**
-     * Register the oil fluid type with {@code IClientFluidTypeExtensions}.
+     * Register the kerosene fluid type with {@code IClientFluidTypeExtensions}.
      *
      * @param event event from subscriber
      */
@@ -88,6 +89,6 @@ public class OilFluidType extends FluidType {
                 fogData.renderDistanceStart = 0f;
                 fogData.renderDistanceEnd = 1f;
             }
-        }, ModFluidTypes.OIL_FLUID_TYPE.get());
+        }, ModFluidTypes.KEROSENE_FLUID_TYPE.get());
     }
 }

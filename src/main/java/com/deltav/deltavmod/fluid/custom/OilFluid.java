@@ -1,10 +1,12 @@
-package com.deltav.deltavmod.fluid;
+package com.deltav.deltavmod.fluid.custom;
 
 import java.util.Optional;
 
 import javax.annotation.Nullable;
 
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.fluid.ModFluidTypes;
+import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.core.BlockPos;
@@ -40,7 +42,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 public abstract class OilFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
-        return ModFluids.OIL_FLOWING.get();
+        return ModFluids.OIL_FLOW.get();
     }
 
     @Override
@@ -132,7 +134,7 @@ public abstract class OilFluid extends FlowingFluid {
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluids.OIL_SOURCE.get() || fluid == ModFluids.OIL_FLOWING.get();
+        return fluid == ModFluids.OIL_SOURCE.get() || fluid == ModFluids.OIL_FLOW.get();
     }
 
     @Override

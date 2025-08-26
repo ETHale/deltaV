@@ -169,12 +169,19 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
-        Block oil = ModBlocks.OIL_FLUID.get();
-        blockModels.createNonTemplateModelBlock(oil);
+        blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.NAPHTHA_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());
+
+        // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
     }

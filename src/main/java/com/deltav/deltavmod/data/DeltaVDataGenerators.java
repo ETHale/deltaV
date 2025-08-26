@@ -94,7 +94,7 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         // item models
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOWING.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
     }
 }

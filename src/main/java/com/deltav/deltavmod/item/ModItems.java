@@ -89,6 +89,36 @@ public class ModItems {
                 .stacksTo(1)
     ));
 
+    public static final DeferredItem<BucketItem> NAPHTHA_BUCKET = ITEMS.register(
+        "naphtha_bucket",
+        registryName -> new BucketItem(
+            ModFluids.NAPHTHA_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BucketItem> PETROL_BUCKET = ITEMS.register(
+        "petrol_bucket",
+        registryName -> new BucketItem(
+            ModFluids.PETROL_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BucketItem> KEROSENE_BUCKET = ITEMS.register(
+        "kerosene_bucket",
+        registryName -> new BucketItem(
+            ModFluids.KEROSENE_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
     public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
     public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
         "barrel",

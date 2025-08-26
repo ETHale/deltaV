@@ -1,5 +1,7 @@
 package com.deltav.deltavmod.block;
 
+import java.util.function.Function;
+
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
@@ -31,6 +33,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlocks {
 
+    /**
+     * Mod block register, this variable can be referenced elsewhere
+     * (i.e. not in ModBlocks)
+     */
     public static final DeferredRegister.Blocks BLOCKS =
         DeferredRegister.createBlocks(DeltaV.MODID);
 
@@ -220,20 +226,52 @@ public class ModBlocks {
         )
     );
 
+    private static final BlockBehaviour.Properties FLUID_BLOCK_PROPERTIES = BlockBehaviour.Properties.of()
+        .noCollission()
+        .strength(100.0F)
+        .noLootTable()
+        .liquid()
+        .replaceable()
+        .pushReaction(PushReaction.DESTROY)
+        .sound(SoundType.EMPTY);
+
     public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
         "oil",
         registryName -> new LiquidBlock(
             ModFluids.OIL_SOURCE.value(),
-            BlockBehaviour.Properties.of()
+            FLUID_BLOCK_PROPERTIES
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.COLOR_BLACK)
-                .noCollission()
-                .strength(100.0F)
-                .noLootTable()
-                .liquid()
-                .replaceable()
-                .pushReaction(PushReaction.DESTROY)
-                .sound(SoundType.EMPTY)
+        )
+    );
+
+    public static final DeferredBlock<Block> NAPHTHA_FLUID = BLOCKS.register(
+        "naphtha",
+        registryName -> new LiquidBlock(
+            ModFluids.NAPHTHA_SOURCE.value(),
+            FLUID_BLOCK_PROPERTIES
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_YELLOW)
+        )
+    );
+
+    public static final DeferredBlock<Block> PETROL_FLUID = BLOCKS.register(
+        "petrol",
+        registryName -> new LiquidBlock(
+            ModFluids.PETROL_SOURCE.value(),
+            FLUID_BLOCK_PROPERTIES
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_YELLOW)
+        )
+    );
+
+    public static final DeferredBlock<Block> KEROSENE_FLUID = BLOCKS.register(
+        "kerosene", 
+        registryName -> new LiquidBlock(
+            ModFluids.KEROSENE_SOURCE.value(),
+            FLUID_BLOCK_PROPERTIES
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_LIGHT_BLUE)
         )
     );
 

@@ -1,6 +1,10 @@
 package com.deltav.deltavmod.fluid;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.fluid.custom.KeroseneFluidType;
+import com.deltav.deltavmod.fluid.custom.NaphthaFluidType;
+import com.deltav.deltavmod.fluid.custom.OilFluidType;
+import com.deltav.deltavmod.fluid.custom.PetrolFluidType;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -20,30 +24,14 @@ public class ModFluidTypes {
     public static final DeferredHolder<FluidType, FluidType> OIL_FLUID_TYPE = FLUID_TYPES.register(
         "oil", OilFluidType::new);
 
-    // Define fluids used in fractionator 
     public static final DeferredHolder<FluidType, FluidType> PETROL_FLUID_TYPE = FLUID_TYPES.register(
-        "petrol",
-        () -> new FluidType(FluidType.Properties.create()
-            .density(750)
-            .viscosity(1000)
-            .temperature(350)
-            .canPushEntity(false)));
+        "petrol", PetrolFluidType::new);
 
     public static final DeferredHolder<FluidType, FluidType> NAPHTHA_FLUID_TYPE = FLUID_TYPES.register(
-        "naphta",
-        () -> new FluidType(FluidType.Properties.create()
-            .density(780)
-            .viscosity(1100)
-            .temperature(320)
-            .canPushEntity(false)));
+        "naphtha", NaphthaFluidType::new);
 
     public static final DeferredHolder<FluidType, FluidType> KEROSENE_FLUID_TYPE = FLUID_TYPES.register(
-        "kerosene",
-        () -> new FluidType(FluidType.Properties.create()
-            .density(800)
-            .viscosity(1200)
-            .temperature(300)
-            .canPushEntity(false)));
+        "kerosene", KeroseneFluidType::new);
 
     /**
      * Register the fluid types.

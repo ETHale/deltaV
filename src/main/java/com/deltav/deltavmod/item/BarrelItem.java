@@ -18,7 +18,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
  * 
  * @author Adam Crawley
  */
-public class BarrelItem extends Item {
+public class BarrelItem extends Item { // TODO: Should this be a bucket item?
     public BarrelItem(Properties properties) {
         super(properties
             .stacksTo(1)
