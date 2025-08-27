@@ -33,7 +33,7 @@ public class DeltaVPlacedFeatures {
             KIMBERLITE_CARROT, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.KIMBERLITE_CARROT), 
             List.of(
-                RarityFilter.onAverageOnceEvery(110), // control spawn rate
+                RarityFilter.onAverageOnceEvery(110),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()
@@ -45,7 +45,7 @@ public class DeltaVPlacedFeatures {
             HOT_SPRING, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.HOT_SPRING), 
             List.of(
-                CountPlacement.of(1),
+                RarityFilter.onAverageOnceEvery(350),
                 InSquarePlacement.spread(),
                 PlacementUtils.FULL_RANGE,
                 BiomeFilter.biome()
