@@ -27,6 +27,11 @@ public class ModMenus {
         () -> IMenuTypeExtension.create(FractionatorMenu::new)
     );
 
+    public static final DeferredHolder<MenuType<?>, MenuType<PolymeriserMenu>> POLYMERISER_MENU = MENUS.register(
+        "polymeriser",
+        () -> IMenuTypeExtension.create(PolymeriserMenu::new)
+    );
+
     public static final DeferredHolder<MenuType<?>, MenuType<CrusherMenu>> CRUSHER_MENU = MENUS.register(
         "crusher",
         () -> IMenuTypeExtension.create(CrusherMenu::new)

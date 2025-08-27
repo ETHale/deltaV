@@ -6,9 +6,11 @@ import java.util.Set;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
+import com.deltav.deltavmod.block.entity.PolymeriserBlockEntity;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.fluid.ModFluids;
+import com.deltav.deltavmod.item.BarrelItem;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -71,6 +73,18 @@ public class DeltaVDataGenerators {
             }
         );
 
+        // Register that the Polymeriser block entity has a fluid handler capability.
+        event.registerBlockEntity(
+            Capabilities.FluidHandler.BLOCK,
+            ModBlockEntities.POLYMERISER_BE.get(),
+            (be, side) -> {
+                if (be instanceof PolymeriserBlockEntity pbe) {
+                    return pbe.getFluidHandler(side);
+                }
+                return null;
+            }
+        );
+
         /**
          * Register that the Barrel item has a fluid handler capability. The fluid name is
          * provided by ModDataComponents.GENERIC_FLUID.
@@ -80,7 +94,7 @@ public class DeltaVDataGenerators {
             (stack, ctx) -> new FluidHandlerItemStack(
                 ModDataComponents.GENERIC_FLUID,
                 stack,
-                4000
+                BarrelItem.CAPACITY
             ), ModItems.BARREL.get()
         );
     }
@@ -95,6 +109,6 @@ public class DeltaVDataGenerators {
     public static void onClientSetup(FMLClientSetupEvent event) {
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT); // TODO: Don't think this is required
     }
 }

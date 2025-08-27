@@ -85,5 +85,10 @@
   "fluid_type.deltav.oil": "Oil",
   "fluid_type.deltav.petrol": "Petrol",
   "fluid_type.deltav.naphtha": "Naphtha",
-  "fluid_type.deltav.kerosene": "Kerosene"
+  "fluid_type.deltav.kerosene": "Kerosene",
+
+  "gui.deltav.polymeriser": "Polymeriser",
+  "block.deltav.polymeriser": "Polymeriser",
+  "item.deltav.gold_dust": "Gold Dust",
+  "item.deltav.plastic_pellets": "Plastic Pellets"
 }

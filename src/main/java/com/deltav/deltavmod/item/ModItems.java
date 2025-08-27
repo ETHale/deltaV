@@ -77,6 +77,9 @@ public class ModItems {
     public static final DeferredItem<Item> SILICA_DUST = ITEMS.registerSimpleItem("silica_dust");
     public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
+    public static final DeferredItem<Item> GOLD_DUST = ITEMS.registerSimpleItem("gold_dust");
+    public static final DeferredItem<Item> PLASTIC_PELLETS = ITEMS.registerSimpleItem("plastic_pellets");
+
     public static final DeferredItem<Item> GLOOPY_RESIDUE = ITEMS.registerSimpleItem("gloopy_residue");
 
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
@@ -120,6 +123,7 @@ public class ModItems {
     ));
 
     public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
+    public static final DeferredItem<BlockItem> POLYMERISER = ITEMS.registerSimpleBlockItem("polymeriser", ModBlocks.POLYMERISER);
     public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
         "barrel",
         registryName -> new BarrelItem(

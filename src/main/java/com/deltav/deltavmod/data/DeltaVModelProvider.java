@@ -16,6 +16,7 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -46,7 +47,7 @@ public class DeltaVModelProvider extends ModelProvider{
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 
-        // BLOCKS
+        //#region Blocks
         blockModels.createTrivialCube(ModBlocks.STEEL_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.ZINC_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.ZINC_ORE.get());
@@ -57,24 +58,6 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_COBALT_ORE.get());
         blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
-
-        // Fractionator (obtained from https://docs.neoforged.net/docs/1.21.5/resources/client/models/datagen/#modelprovider)
-        blockModels.createHorizontallyRotatedBlock(
-            ModBlocks.FRACTIONATOR.get(),
-            TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
-                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
-                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
-                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
-            )
-        );
-
-        // alloy furnace
-        blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
-            mapping.put(TextureSlot.SIDE, this.modLocation("block/alloy_furnace_side"))
-            .put(TextureSlot.FRONT, this.modLocation("block/alloy_furnace_front"))
-            .put(TextureSlot.TOP, this.modLocation("block/alloy_furnace_top"))
-            .put(TextureSlot.BOTTOM, this.modLocation("block/alloy_furnace_bottom"))
-        ));
 
         // Kimberlite models
         Block kimberlite = ModBlocks.KIMBERLITE.get();
@@ -162,30 +145,64 @@ public class DeltaVModelProvider extends ModelProvider{
         BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
-        
-        // ITEMS
+
+        //#endregion
+
+        //#region Block entities
+        // Fractionator (obtained from https://docs.neoforged.net/docs/1.21.5/resources/client/models/datagen/#modelprovider)
+        blockModels.createHorizontallyRotatedBlock(
+            ModBlocks.FRACTIONATOR.get(),
+            TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
+                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
+                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+            )
+        );
+
+        // Polymeriser
+        blockModels.createHorizontallyRotatedBlock(
+            ModBlocks.POLYMERISER.get(),
+            TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side")) // TODO: Change texture
+                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
+                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+            )
+        );
+
+        // alloy furnace
+        blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
+            mapping.put(TextureSlot.SIDE, this.modLocation("block/alloy_furnace_side"))
+            .put(TextureSlot.FRONT, this.modLocation("block/alloy_furnace_front"))
+            .put(TextureSlot.TOP, this.modLocation("block/alloy_furnace_top"))
+            .put(TextureSlot.BOTTOM, this.modLocation("block/alloy_furnace_bottom"))
+        ));
+        //#endregion
+
+        //#region Items
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_ZINC.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_COBALT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.GOLD_DUST.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PLASTIC_PELLETS.get(), ModelTemplates.FLAT_ITEM);
+        //#endregion
 
-        // FLUIDS
+        //#region Fluids
         blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.NAPHTHA_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());
-
-        // Silica
-        itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
+        //#endregion
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

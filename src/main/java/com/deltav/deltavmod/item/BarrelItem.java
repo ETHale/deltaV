@@ -19,6 +19,8 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
  * @author Adam Crawley
  */
 public class BarrelItem extends Item {
+    public static final int CAPACITY = 4000;
+
     public BarrelItem(Properties properties) {
         super(properties
             .stacksTo(1)

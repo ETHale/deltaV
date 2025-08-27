@@ -5,6 +5,7 @@ import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
+import com.deltav.deltavmod.block.custom.PolymeriserBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
@@ -205,6 +206,17 @@ public class ModBlocks {
     public static final DeferredBlock<FractionatorBlock> FRACTIONATOR = BLOCKS.register(
         "fractionator", 
         registryName -> new FractionatorBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.METAL)
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.IRON)
+                .noOcclusion())
+    );
+
+    public static final DeferredBlock<PolymeriserBlock> POLYMERISER = BLOCKS.register(
+        "polymeriser",
+        registryName -> new PolymeriserBlock(
             BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.METAL)

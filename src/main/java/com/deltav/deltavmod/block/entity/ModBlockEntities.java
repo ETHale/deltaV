@@ -47,6 +47,14 @@ public class ModBlockEntities {
                 false,
                 ModBlocks.FRACTIONATOR.get()));
 
+    public static final Supplier<BlockEntityType<PolymeriserBlockEntity>> POLYMERISER_BE =
+        BLOCK_ENTITIES.register(
+            "polymeriser_be",
+            () -> new BlockEntityType<>(
+                PolymeriserBlockEntity::new,
+                false,
+                ModBlocks.POLYMERISER.get()));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

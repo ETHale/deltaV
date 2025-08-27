@@ -59,7 +59,7 @@ public class FractionatorMenu extends AbstractContainerMenu {
     public List<Component> getOilTankTooltip() {
         int fluidAmount = this.data.get(0);
         int tankCapacity = this.data.get(1);
-        return List.of(Component.literal(fluidAmount + " / " + tankCapacity));
+        return List.of(Component.literal(fluidAmount + " / " + tankCapacity + " mB"));
     }
 
     @Override

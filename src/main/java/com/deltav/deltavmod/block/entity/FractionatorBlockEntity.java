@@ -270,7 +270,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     private boolean hasRecipe() {
         // Check if internal tank can be drained
         boolean tankHasSufficientOil = (tank.getFluidAmount() >= OIL_DRAIN_STACK.getAmount())
-            && (tank.getFluid().getFluid() == OIL_DRAIN_STACK.getFluid());
+            && (FluidStack.isSameFluidSameComponents(tank.getFluid(), OIL_DRAIN_STACK));
         if (!tankHasSufficientOil) return false;
 
         // Check that residue slot is not full and contains Gloopy Residue
