@@ -5,10 +5,13 @@ import com.deltav.deltavmod.block.geyser.GeyserBlock.GeyserMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class GeyserBlockEntity extends BlockEntity {
     private int cooldown = 0;
@@ -96,6 +99,44 @@ public class GeyserBlockEntity extends BlockEntity {
 
     private boolean canPlaceFluidAt(BlockState state) {
         return state.isAir() && state.getFluidState().isEmpty();
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput in) {
+        // read our stored CompoundTag and extract fields
+        in.read("NeoForgeData", CompoundTag.CODEC).ifPresent(neo -> {
+            if (neo.contains("Cooldown")) this.cooldown = neo.getInt("Cooldown").orElse(0);
+            if (neo.contains("EruptionRemaining")) this.eruptionRemaining = neo.getInt("EruptionRemaining").orElse(0);
+
+            if (neo.contains("ActiveMode")) {
+                try {
+                    this.activeMode = GeyserMode.valueOf(neo.getString("ActiveMode").orElse(""));
+                } catch (IllegalArgumentException e) {
+                    this.activeMode = null;
+                }
+            } else {
+                this.activeMode = null;
+            }
+        });
+
+        // keep existing attachments handling
+        in.child(ATTACHMENTS_NBT_KEY).ifPresent(this::deserializeAttachments);
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput out) {
+        // pack our fields into a CompoundTag then store it using the CompoundTag codec
+        CompoundTag neo = new CompoundTag();
+        neo.putInt("Cooldown", this.cooldown);
+        neo.putInt("EruptionRemaining", this.eruptionRemaining);
+        neo.putString("ActiveMode", this.activeMode == null ? "NONE" : this.activeMode.name());
+
+        out.store("NeoForgeData", CompoundTag.CODEC, neo);
+
+        // keep existing attachments handling
+        var attachments = out.child(ATTACHMENTS_NBT_KEY);
+        serializeAttachments(attachments);
+        if (attachments.isEmpty()) out.discard(ATTACHMENTS_NBT_KEY);
     }
 
 }
