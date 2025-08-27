@@ -162,6 +162,15 @@ public class DeltaVModelProvider extends ModelProvider{
         BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
+
+        TexturedModel.Provider sgTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
+            mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
+            .put(TextureSlot.FRONT, this.modLocation("block/silica_sandstone"))
+            .put(TextureSlot.TOP, this.modLocation("block/steam_geyser_top"))
+            .put(TextureSlot.BOTTOM, this.modLocation("block/silica_sandstone"))
+        );
+        MultiVariant steam_geyser_variant = blockModels.plainVariant(sgTextProvider.create(ModBlocks.STEAM_GEYSER.get(), blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.STEAM_GEYSER.get(), steam_geyser_variant));
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

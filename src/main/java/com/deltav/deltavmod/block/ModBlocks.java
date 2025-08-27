@@ -9,6 +9,7 @@ import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
+import com.deltav.deltavmod.block.geyser.SteamGeyser;
 import com.deltav.deltavmod.fluid.ModFluidBlocks;
 
 import net.minecraft.core.registries.Registries;
@@ -211,6 +212,17 @@ public class ModBlocks {
                 .strength(3.0F, 6.0F)
                 .sound(SoundType.IRON)
                 .noOcclusion())
+    );
+
+    public static final DeferredBlock<SteamGeyser> STEAM_GEYSER = BLOCKS.register(
+        "steam_geyser", 
+        registryName -> new SteamGeyser(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.QUARTZ)
+                .instrument(NoteBlockInstrument.SNARE)
+                .strength(5.0f, 1.2F)
+                .sound(SoundType.SAND))
     );
 
     //#endregion
