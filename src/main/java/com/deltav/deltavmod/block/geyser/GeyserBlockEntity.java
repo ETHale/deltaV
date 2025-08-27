@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -80,21 +81,29 @@ public class GeyserBlockEntity extends BlockEntity {
     }
 
     private void handleEruptionTick(GeyserBlock block, ServerLevel server, BlockPos pos) {
-        if (activeMode == GeyserMode.GAS) {
-            // spawn particles server->clients
-            double cx = pos.getX() + 0.5;
-            double cy = pos.getY() + 1.0;
-            double cz = pos.getZ() + 0.5;
-            // spread and speed values are example
-            server.sendParticles((ParticleOptions) block.getParticleType(),
-                    cx, cy, cz,
-                    block.getParticleCountPerTick(),
-                    0.3, 0.6, 0.3,
-                    0.02);
-        } else if (activeMode == GeyserMode.LIQUID) {
-            // optionally you can push fluid or spawn extra effects during eruption
-            // left minimal: we already placed fluid at start
-        }
+        if (activeMode != GeyserMode.GAS) return;
+
+        int startY = pos.getY() + 1;
+
+        BlockPos checkPos = new BlockPos(pos.getX(), startY, pos.getZ());
+        BlockState startState = server.getBlockState(checkPos);
+
+        // if directly above is solid/has collision -> no particles
+        if (!startState.getCollisionShape(server, checkPos).isEmpty()) return;
+
+        // base burst that rises
+        double cx = pos.getX() + 0.5;
+        double cz = pos.getZ() + 0.5;
+        double baseY = startY + 0.15;
+
+        // strong burst at base that has upward motion
+        server.sendParticles(
+            block.getParticleType(),
+            cx, baseY, cz,
+            Math.max(1, block.getParticleCountPerTick()), // count
+            0, 0.2, 0,   // small spread in X,Y,Z (tight column)
+            0.1                // speed -> gives upward motion for many particles
+        );
     }
 
     private boolean canPlaceFluidAt(BlockState state) {

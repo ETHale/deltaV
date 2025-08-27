@@ -28,7 +28,7 @@ public class GeyserBlock extends Block implements EntityBlock{
     protected final double particleModeChance;     
     protected final BlockState fluidState;         
     protected final SimpleParticleType particleType; 
-    protected final int particleCountPerTick;      
+    protected final int particleCountPerTick;    
 
     public GeyserBlock(Properties properties,
                        int cooldownTicks,
