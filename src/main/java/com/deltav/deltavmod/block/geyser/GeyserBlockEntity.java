@@ -2,13 +2,13 @@ package com.deltav.deltavmod.block.geyser;
 
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.block.geyser.GeyserBlock.GeyserMode;
+import com.deltav.deltavmod.sound.ModSounds;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -77,6 +77,15 @@ public class GeyserBlockEntity extends BlockEntity {
             if (canPlaceFluidAt(targetState)) {
                 server.setBlock(target, block.getFluidState(), 3);
             }
+        } else {
+            server.playSound(
+                null,
+                pos,
+                ModSounds.GEYSER.value(),
+                SoundSource.BLOCKS,
+                0.8F,
+                1.0F
+            );
         }
     }
 

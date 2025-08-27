@@ -10,6 +10,9 @@
         "level": "0"
       }
     },
+    "geyser": {
+      "Name": "deltav:steam_geyser"
+    },
     "rim": {
       "Name": "deltav:silica_sandstone"
     },

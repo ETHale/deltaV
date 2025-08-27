@@ -8,8 +8,8 @@ public class SteamGeyser extends GeyserBlock{
     public SteamGeyser(Properties properties) {
         super(
             properties,
-            12,
-            100,
+            1200,
+            90,
             0.2,
             GeyserMode.GAS,
             1,

@@ -1,5 +1,8 @@
 package com.deltav.deltavmod.worldgen.features;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
@@ -23,6 +26,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
 
     @Override
     public boolean place(FeaturePlaceContext<HotSpringFeatureConfiguration> context) {
+        Set<BlockPos> baseBlocks = new HashSet<>();
         WorldGenLevel worldgenlevel = context.level();
         RandomSource randomsource = context.random();
         HotSpringFeatureConfiguration conf = context.config();
@@ -127,6 +131,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                                     BlockPos blockpos3 = blockpos.offset(j2, l3, j3);
                                     if (l3 < 3){
                                         worldgenlevel.setBlock(blockpos3, barrier, 2);
+                                        baseBlocks.add(blockpos3);
                                     }
                                     else if ((l3 <= 5 && !blockstate.isAir()) || (l3 == 3)) {
                                         worldgenlevel.setBlock(blockpos3, rim, 2);
@@ -137,6 +142,17 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                         }
                     }
                 }
+            }
+
+            int size = baseBlocks.size();
+            int index = randomsource.nextInt(size);
+            int k = 0;
+            for(BlockPos pos : baseBlocks) {
+                if (k == index) {
+                    worldgenlevel.setBlock(pos, conf.geyser(), 2);
+                    return true;
+                }
+                k++;
             }
             return true;
         }

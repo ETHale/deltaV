@@ -10,6 +10,7 @@ import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.sound.ModSounds;
 import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
@@ -81,6 +82,7 @@ public class DeltaV {
         ModFluids.register(modEventBus);
         ModDataComponents.register(modEventBus);
         ModParticles.register(modEventBus);
+        ModSounds.SOUND_EVENTS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered

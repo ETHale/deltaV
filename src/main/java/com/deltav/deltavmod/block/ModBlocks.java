@@ -222,7 +222,7 @@ public class ModBlocks {
                 .mapColor(MapColor.QUARTZ)
                 .instrument(NoteBlockInstrument.SNARE)
                 .strength(5.0f, 1.2F)
-                .sound(SoundType.SAND))
+                .sound(SoundType.STONE))
     );
 
     //#endregion

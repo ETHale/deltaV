@@ -11,6 +11,7 @@ import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
 import com.deltav.deltavmod.particle.ModParticles;
 import com.deltav.deltavmod.particle.SteamParticleProvider;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
+import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
@@ -39,6 +40,7 @@ public class DeltaVDataGenerators {
         event.createProvider(DeltaVBlockTagsProvider::new);
         event.createProvider(DeltaVModelProvider::new);
         event.createProvider(ModParticleDescriptionProvider::new);
+        event.createProvider(ModSoundDefinitionsProvider::new);
     }
 
 
