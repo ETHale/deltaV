@@ -30,6 +30,7 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.KIMBERLITE.get());
         this.dropSelf(ModBlocks.STEEL_BLOCK.get());
         this.dropSelf(ModBlocks.ALLOY_FURNACE.get());
+        this.dropSelf(ModBlocks.CRUSHER.get());
         this.dropSelf(ModBlocks.KIMBERLITE_STAIRS.get());
         this.add(ModBlocks.KIMBERLITE_SLAB.get(),
             block -> createSlabItemTable(ModBlocks.KIMBERLITE_SLAB.get()));
@@ -76,5 +77,6 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.SILICA_SANDSTONE_STAIRS.get());
         this.dropSelf(ModBlocks.SILICA_SANDSTONE_WALL.get());
         this.dropSelf(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
+        this.dropSelf(ModBlocks.FRACTIONATOR.get());
     }
 }

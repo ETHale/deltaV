@@ -58,6 +58,16 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.RAW_COBALT_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.PRISMIUM_BLOCK.get());
 
+        // Fractionator (obtained from https://docs.neoforged.net/docs/1.21.5/resources/client/models/datagen/#modelprovider)
+        blockModels.createHorizontallyRotatedBlock(
+            ModBlocks.FRACTIONATOR.get(),
+            TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
+                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
+                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+            )
+        );
+
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
             mapping.put(TextureSlot.SIDE, this.modLocation("block/alloy_furnace_side"))
@@ -90,6 +100,8 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COBALT_ORE.get());        
 
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
+
+        blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
 
         TexturedModel.Provider bbTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
             mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
@@ -159,10 +171,19 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
-        Block oil = ModBlocks.OIL_FLUID.get();
-        blockModels.createNonTemplateModelBlock(oil);
+        blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.NAPHTHA_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());
+
+        // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
     }

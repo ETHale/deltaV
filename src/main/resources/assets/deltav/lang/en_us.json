@@ -21,7 +21,9 @@
 
   "block.deltav.prismium_block": "Block of Prismium",
 
-  "item.deltav.oil_bucket": "Oil Bucket",
+  "block.deltav.crusher": "Crusher",
+  "gui.deltav.crusher": "Crusher",
+
   "block.deltav.kimberlite": "Kimberlite",
   "block.deltav.kimberlite_stairs": "Kimberlite Stairs",
   "block.deltav.kimberlite_slab": "Kimberlite Slab",
@@ -69,5 +71,19 @@
   "deltav.configuration.magicNumberIntroduction": "Magic Number Text",
   "deltav.configuration.magicNumber": "Magic Number",
 
-  "gui.deltav.basic_battery": "Basic Battery"
+  "gui.deltav.basic_battery": "Basic Battery",
+
+  "block.deltav.fractionator": "Fractionator",
+  "gui.deltav.fractionator": "Fractionator",
+  "item.deltav.barrel": "Barrel",
+  "item.deltav.gloopy_residue": "Gloopy Residue",
+
+  "item.deltav.oil_bucket": "Oil Bucket",
+  "item.deltav.petrol_bucket": "Petrol Bucket",
+  "item.deltav.naphtha_bucket": "Naphtha Bucket",
+  "item.deltav.kerosene_bucket": "Kerosene Bucket",
+  "fluid_type.deltav.oil": "Oil",
+  "fluid_type.deltav.petrol": "Petrol",
+  "fluid_type.deltav.naphtha": "Naphtha",
+  "fluid_type.deltav.kerosene": "Kerosene"
 }
