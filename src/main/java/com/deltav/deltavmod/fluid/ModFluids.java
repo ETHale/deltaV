@@ -5,6 +5,7 @@ import com.deltav.deltavmod.fluid.custom.KeroseneFluid;
 import com.deltav.deltavmod.fluid.custom.NaphthaFluid;
 import com.deltav.deltavmod.fluid.custom.OilFluid;
 import com.deltav.deltavmod.fluid.custom.PetrolFluid;
+import com.deltav.deltavmod.fluid.custom.ThermalWaterFluid;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -45,6 +46,12 @@ public class ModFluids {
 
     public static final DeferredHolder<Fluid, FlowingFluid> KEROSENE_FLOW = FLUIDS.register(
         "kerosene_flow", KeroseneFluid.Flowing::new);
+    
+    public static final DeferredHolder<Fluid, FlowingFluid> THERMAL_WATER_SOURCE = FLUIDS.register(
+        "thermal_water", ThermalWaterFluid.Source::new);
+
+    public static final DeferredHolder<Fluid, FlowingFluid> THERMAL_WATER_FLOW = FLUIDS.register(
+        "thermal_water_flow", ThermalWaterFluid.Flowing::new);
 
     /**
      * Register the fluids.

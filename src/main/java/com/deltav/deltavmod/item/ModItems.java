@@ -120,6 +120,16 @@ public class ModItems {
                 .stacksTo(1)
     ));
 
+    public static final DeferredItem<BucketItem> THERMAL_WATER_BUCKET = ITEMS.register(
+        "thermal_water_bucket",
+        registryName -> new BucketItem(
+            ModFluids.THERMAL_WATER_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
     public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
     public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
         "barrel",

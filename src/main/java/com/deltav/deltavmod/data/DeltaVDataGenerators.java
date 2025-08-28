@@ -103,6 +103,8 @@ public class DeltaVDataGenerators {
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
     }
 
     @SubscribeEvent

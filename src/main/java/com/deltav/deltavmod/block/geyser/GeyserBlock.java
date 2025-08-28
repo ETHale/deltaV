@@ -6,6 +6,8 @@ import com.deltav.deltavmod.block.entity.ModBlockEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -29,6 +31,11 @@ public class GeyserBlock extends Block implements EntityBlock{
     protected final BlockState fluidState;         
     protected final SimpleParticleType particleType; 
     protected final int particleCountPerTick;    
+    protected final float gasDamagePerHit; 
+    protected final int gasDamageIntervalTicks;
+    protected final float gasKnockup;          
+    protected final float gasRadius;   
+    protected final float eruptionHeight;        
 
     public GeyserBlock(Properties properties,
                        int cooldownTicks,
@@ -38,7 +45,12 @@ public class GeyserBlock extends Block implements EntityBlock{
                        double particleModeChance,
                        BlockState fluidState,
                        SimpleParticleType particleType,
-                       int particleCountPerTick) {
+                       int particleCountPerTick,
+                       float gasDamagePerHit,
+                       int gasDamageIntervalTicks,
+                       float gasKnockup,
+                       float gasRadius,
+                       float eruptionHeight) {
         super(properties);
         this.cooldownTicks = cooldownTicks;
         this.eruptionDurationTicks = eruptionDurationTicks;
@@ -48,6 +60,11 @@ public class GeyserBlock extends Block implements EntityBlock{
         this.fluidState = fluidState;
         this.particleType = particleType;
         this.particleCountPerTick = particleCountPerTick;
+        this.gasDamagePerHit = gasDamagePerHit;
+        this.gasDamageIntervalTicks = gasDamageIntervalTicks;
+        this.gasKnockup = gasKnockup;
+        this.gasRadius = gasRadius;
+        this.eruptionHeight = eruptionHeight;
     }
 
     @Nullable
@@ -80,4 +97,9 @@ public class GeyserBlock extends Block implements EntityBlock{
     public BlockState getFluidState() { return fluidState; }
     public net.minecraft.core.particles.SimpleParticleType getParticleType() { return particleType; }
     public int getParticleCountPerTick() { return particleCountPerTick; }
+    public float getGasDamage() { return gasDamagePerHit; }
+    public int getGasDamageInterval() { return gasDamageIntervalTicks; }
+    public float getGasKnockup() { return gasKnockup; }
+    public float getGasRadius() { return gasRadius; }
+    public float getEruptionHeight() { return eruptionHeight; }
 }

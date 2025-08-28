@@ -179,6 +179,52 @@ public class ModBlocks {
             .sound(SoundType.AMETHYST)
     );
 
+    // Below blocks have been moved to separate files to reduce file length and
+    // improve modularity, they are referenced here for convenience of referencing
+    //#region Referenced blocks
+
+    // Fluid blocks
+    public static final DeferredBlock<Block> OIL_FLUID = ModFluidBlocks.OIL_FLUID;
+    public static final DeferredBlock<Block> NAPHTHA_FLUID = ModFluidBlocks.NAPHTHA_FLUID;
+    public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
+    public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;
+    public static final DeferredBlock<Block> THERMAL_WATER_FLUID = ModFluidBlocks.THERMAL_WATER_FLUID;
+
+    // Silica blocks
+    public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
+    public static final DeferredBlock<Block> SILICA_SANDSTONE = SilicaBlocks.SILICA_SANDSTONE;
+    public static final DeferredBlock<WallBlock> SILICA_SANDSTONE_WALL = SilicaBlocks.SILICA_SANDSTONE_WALL;
+    public static final DeferredBlock<StairBlock> SILICA_SANDSTONE_STAIRS = SilicaBlocks.SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SILICA_SANDSTONE_SLAB = SilicaBlocks.SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CHISELED_SILICA_SANDSTONE = SilicaBlocks.CHISELED_SILICA_SANDSTONE;
+    public static final DeferredBlock<Block> SMOOTH_SILICA_SANDSTONE = SilicaBlocks.SMOOTH_SILICA_SANDSTONE;
+    public static final DeferredBlock<StairBlock> SMOOTH_SILICA_SANDSTONE_STAIRS = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS;
+    public static final DeferredBlock<SlabBlock> SMOOTH_SILICA_SANDSTONE_SLAB = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_SLAB;
+    public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
+    public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
+
+    // Kimberlite blocks
+    public static final DeferredBlock<Block> KIMBERLITE = KimberliteBlocks.KIMBERLITE;
+    public static final DeferredBlock<StairBlock> KIMBERLITE_STAIRS = KimberliteBlocks.KIMBERLITE_STAIRS;
+    public static final DeferredBlock<SlabBlock> KIMBERLITE_SLAB = KimberliteBlocks.KIMBERLITE_SLAB;
+    public static final DeferredBlock<PressurePlateBlock> KIMBERLITE_PRESSURE_PLATE = KimberliteBlocks.KIMBERLITE_PRESSURE_PLATE;
+    public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = KimberliteBlocks.KIMBERLITE_BUTTON;
+    public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = KimberliteBlocks.KIMBERLITE_WALL;
+    public static final DeferredBlock<Block> POLISHED_KIMBERLITE = KimberliteBlocks.POLISHED_KIMBERLITE;
+    public static final DeferredBlock<StairBlock> POLISHED_KIMBERLITE_STAIRS = KimberliteBlocks.POLISHED_KIMBERLITE_STAIRS;
+    public static final DeferredBlock<SlabBlock> POLISHED_KIMBERLITE_SLAB = KimberliteBlocks.POLISHED_KIMBERLITE_SLAB;
+    public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = KimberliteBlocks.KIMBERLITE_COAL_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = KimberliteBlocks.KIMBERLITE_COPPER_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = KimberliteBlocks.KIMBERLITE_DIAMOND_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = KimberliteBlocks.KIMBERLITE_EMERALD_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = KimberliteBlocks.KIMBERLITE_GOLD_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = KimberliteBlocks.KIMBERLITE_LAPIS_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = KimberliteBlocks.KIMBERLITE_REDSTONE_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = KimberliteBlocks.KIMBERLITE_ZINC_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
+    public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
+
+    //#endregion
     //#region Block entities
 
     public static final DeferredBlock<AlloyFurnaceBlock> ALLOY_FURNACE = BLOCKS.register(
@@ -224,52 +270,6 @@ public class ModBlocks {
                 .strength(5.0f, 1.2F)
                 .sound(SoundType.STONE))
     );
-
-    //#endregion
-
-    // Below blocks have been moved to separate files to reduce file length and
-    // improve modularity, they are referenced here for convenience of referencing
-    //#region Referenced blocks
-
-    // Fluid blocks
-    public static final DeferredBlock<Block> OIL_FLUID = ModFluidBlocks.OIL_FLUID;
-    public static final DeferredBlock<Block> NAPHTHA_FLUID = ModFluidBlocks.NAPHTHA_FLUID;
-    public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
-    public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;
-
-    // Silica blocks
-    public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;
-    public static final DeferredBlock<Block> SILICA_SANDSTONE = SilicaBlocks.SILICA_SANDSTONE;
-    public static final DeferredBlock<WallBlock> SILICA_SANDSTONE_WALL = SilicaBlocks.SILICA_SANDSTONE_WALL;
-    public static final DeferredBlock<StairBlock> SILICA_SANDSTONE_STAIRS = SilicaBlocks.SILICA_SANDSTONE_STAIRS;
-    public static final DeferredBlock<SlabBlock> SILICA_SANDSTONE_SLAB = SilicaBlocks.SILICA_SANDSTONE_SLAB;
-    public static final DeferredBlock<Block> CHISELED_SILICA_SANDSTONE = SilicaBlocks.CHISELED_SILICA_SANDSTONE;
-    public static final DeferredBlock<Block> SMOOTH_SILICA_SANDSTONE = SilicaBlocks.SMOOTH_SILICA_SANDSTONE;
-    public static final DeferredBlock<StairBlock> SMOOTH_SILICA_SANDSTONE_STAIRS = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS;
-    public static final DeferredBlock<SlabBlock> SMOOTH_SILICA_SANDSTONE_SLAB = SilicaBlocks.SMOOTH_SILICA_SANDSTONE_SLAB;
-    public static final DeferredBlock<Block> CUT_SILICA_SANDSTONE = SilicaBlocks.CUT_SILICA_SANDSTONE;
-    public static final DeferredBlock<SlabBlock> CUT_SILICA_SANDSTONE_SLAB = SilicaBlocks.CUT_SILICA_SANDSTONE_SLAB;
-
-    // Kimberlite blocks
-    public static final DeferredBlock<Block> KIMBERLITE = KimberliteBlocks.KIMBERLITE;
-    public static final DeferredBlock<StairBlock> KIMBERLITE_STAIRS = KimberliteBlocks.KIMBERLITE_STAIRS;
-    public static final DeferredBlock<SlabBlock> KIMBERLITE_SLAB = KimberliteBlocks.KIMBERLITE_SLAB;
-    public static final DeferredBlock<PressurePlateBlock> KIMBERLITE_PRESSURE_PLATE = KimberliteBlocks.KIMBERLITE_PRESSURE_PLATE;
-    public static final DeferredBlock<ButtonBlock> KIMBERLITE_BUTTON = KimberliteBlocks.KIMBERLITE_BUTTON;
-    public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = KimberliteBlocks.KIMBERLITE_WALL;
-    public static final DeferredBlock<Block> POLISHED_KIMBERLITE = KimberliteBlocks.POLISHED_KIMBERLITE;
-    public static final DeferredBlock<StairBlock> POLISHED_KIMBERLITE_STAIRS = KimberliteBlocks.POLISHED_KIMBERLITE_STAIRS;
-    public static final DeferredBlock<SlabBlock> POLISHED_KIMBERLITE_SLAB = KimberliteBlocks.POLISHED_KIMBERLITE_SLAB;
-    public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = KimberliteBlocks.KIMBERLITE_COAL_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = KimberliteBlocks.KIMBERLITE_COPPER_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = KimberliteBlocks.KIMBERLITE_DIAMOND_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = KimberliteBlocks.KIMBERLITE_EMERALD_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = KimberliteBlocks.KIMBERLITE_GOLD_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = KimberliteBlocks.KIMBERLITE_LAPIS_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = KimberliteBlocks.KIMBERLITE_REDSTONE_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = KimberliteBlocks.KIMBERLITE_ZINC_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
-    public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
 
     //#endregion
 

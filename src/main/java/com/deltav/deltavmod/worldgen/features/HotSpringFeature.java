@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
 /**
@@ -61,7 +62,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                 }
             }
 
-            BlockState contents = conf.contents();
+            FluidState contents = conf.contents();
 
             for (int k1 = 0; k1 < 16; k1++) {
                 for (int k = 0; k < 16; k++) {
@@ -81,7 +82,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                                 return false;
                             }
 
-                            if (l2 < 4 && blockstate3.getFluidState() != Fluids.EMPTY.defaultFluidState() && worldgenlevel.getBlockState(blockpos.offset(k1, l2, k)) != contents) {
+                            if (l2 < 4 && blockstate3.getFluidState() != Fluids.EMPTY.defaultFluidState() && worldgenlevel.getFluidState(blockpos.offset(k1, l2, k)) != contents) {
                                 return false;
                             }
                         }
@@ -96,7 +97,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                             BlockPos blockpos1 = blockpos.offset(l1, i3, i2);
                             if (this.canReplaceBlock(worldgenlevel.getBlockState(blockpos1))) {
                                 boolean flag1 = i3 >= 4;
-                                worldgenlevel.setBlock(blockpos1, flag1 ? Blocks.AIR.defaultBlockState() : contents, 2);
+                                worldgenlevel.setBlock(blockpos1, flag1 ? Blocks.AIR.defaultBlockState() : contents.createLegacyBlock(), 2);
                                 if (flag1) {
                                     worldgenlevel.scheduleTick(blockpos1, Blocks.AIR, 0);
                                     this.markAboveForPostProcessing(worldgenlevel, blockpos1);
@@ -145,14 +146,16 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
             }
 
             int size = baseBlocks.size();
-            int index = randomsource.nextInt(size);
-            int k = 0;
-            for(BlockPos pos : baseBlocks) {
-                if (k == index) {
-                    worldgenlevel.setBlock(pos, conf.geyser(), 2);
-                    return true;
+            if (size > 0) {
+                int index = randomsource.nextInt(size);
+                int k = 0;
+                for(BlockPos pos : baseBlocks) {
+                    if (k == index) {
+                        worldgenlevel.setBlock(pos, conf.geyser(), 2);
+                        return true;
+                    }
+                    k++;
                 }
-                k++;
             }
             return true;
         }

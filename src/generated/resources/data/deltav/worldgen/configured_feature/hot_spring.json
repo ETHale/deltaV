@@ -5,9 +5,9 @@
       "Name": "deltav:silica_sand"
     },
     "contents": {
-      "Name": "minecraft:water",
+      "Name": "deltav:thermal_water",
       "Properties": {
-        "level": "0"
+        "falling": "true"
       }
     },
     "geyser": {

@@ -83,10 +83,12 @@
   "item.deltav.petrol_bucket": "Petrol Bucket",
   "item.deltav.naphtha_bucket": "Naphtha Bucket",
   "item.deltav.kerosene_bucket": "Kerosene Bucket",
+  "item.deltav.thermal_water_bucket": "Thermal Water Bucket",
   "fluid_type.deltav.oil": "Oil",
   "fluid_type.deltav.petrol": "Petrol",
   "fluid_type.deltav.naphtha": "Naphtha",
   "fluid_type.deltav.kerosene": "Kerosene",
+  "fluid_type.deltav.thermal_water": "Thermal Water",
 
   "sound.deltav.geyser": "Geyser"
 }
