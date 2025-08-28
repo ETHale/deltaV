@@ -67,6 +67,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> CRUSHER_ITEM = ITEMS.registerSimpleBlockItem("crusher", ModBlocks.CRUSHER);
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
     public static final DeferredItem<BlockItem> BASIC_BATTERY_ITEM = ITEMS.registerSimpleBlockItem("basic_battery", ModBlocks.BASIC_BATTERY);
+    public static final DeferredItem<BlockItem> STEAM_GEYSER_ITEM = ITEMS.registerSimpleBlockItem("steam_geyser", ModBlocks.STEAM_GEYSER);
     
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
@@ -113,6 +114,16 @@ public class ModItems {
         "kerosene_bucket",
         registryName -> new BucketItem(
             ModFluids.KEROSENE_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
+    public static final DeferredItem<BucketItem> THERMAL_WATER_BUCKET = ITEMS.register(
+        "thermal_water_bucket",
+        registryName -> new BucketItem(
+            ModFluids.THERMAL_WATER_SOURCE.value(),
             new Item.Properties()
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .craftRemainder(Items.BUCKET)

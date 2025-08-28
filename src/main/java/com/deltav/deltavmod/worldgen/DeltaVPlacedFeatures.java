@@ -10,10 +10,8 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
@@ -33,7 +31,7 @@ public class DeltaVPlacedFeatures {
             KIMBERLITE_CARROT, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.KIMBERLITE_CARROT), 
             List.of(
-                RarityFilter.onAverageOnceEvery(110), // control spawn rate
+                RarityFilter.onAverageOnceEvery(110),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()
@@ -45,9 +43,10 @@ public class DeltaVPlacedFeatures {
             HOT_SPRING, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.HOT_SPRING), 
             List.of(
-                CountPlacement.of(1),
+                RarityFilter.onAverageOnceEvery(350),
                 InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE
+                PlacementUtils.FULL_RANGE,
+                BiomeFilter.biome()
             )
         );
     }

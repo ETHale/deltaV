@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.geyser.GeyserBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,6 +47,14 @@ public class ModBlockEntities {
                 FractionatorBlockEntity::new,
                 false,
                 ModBlocks.FRACTIONATOR.get()));
+    
+    public static final Supplier<BlockEntityType<GeyserBlockEntity>> GEYSER_BE =
+        BLOCK_ENTITIES.register(
+            "steam_geyser_be",
+            () -> new BlockEntityType<>(
+                GeyserBlockEntity::new,
+                false,
+                ModBlocks.STEAM_GEYSER.get())); // add all geyser blocks here after this one 
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

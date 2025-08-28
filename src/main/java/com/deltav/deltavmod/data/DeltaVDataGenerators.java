@@ -7,7 +7,11 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
+import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.particle.SteamParticleProvider;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
+import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
@@ -22,6 +26,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
@@ -34,6 +39,8 @@ public class DeltaVDataGenerators {
         // tags
         event.createProvider(DeltaVBlockTagsProvider::new);
         event.createProvider(DeltaVModelProvider::new);
+        event.createProvider(ModParticleDescriptionProvider::new);
+        event.createProvider(ModSoundDefinitionsProvider::new);
     }
 
 
@@ -96,5 +103,12 @@ public class DeltaVDataGenerators {
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+    }
+
+    @SubscribeEvent
+    public static void registerFactories(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ModParticles.STEAM.get(), SteamParticleProvider::new);
     }
 }

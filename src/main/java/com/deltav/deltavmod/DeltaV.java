@@ -9,6 +9,8 @@ import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.sound.ModSounds;
 import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
@@ -42,10 +44,6 @@ public class DeltaV {
     public static final String MODID = "deltav";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "deltav" namespace
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "deltav" namespace
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "deltav" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -71,18 +69,16 @@ public class DeltaV {
     public DeltaV(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-        ModItems.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         DeltaVFeatures.register(modEventBus);
         ModMenus.register(modEventBus);
-        ModFluidTypes.register(modEventBus);
-        ModFluids.register(modEventBus);
         ModDataComponents.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so blocks get registered
-        BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
-        ITEMS.register(modEventBus);
+        ModParticles.register(modEventBus);
+        ModSounds.SOUND_EVENTS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         

@@ -2,8 +2,8 @@
   "feature": "deltav:hot_spring",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 1
+      "type": "minecraft:rarity_filter",
+      "chance": 350
     },
     {
       "type": "minecraft:in_square"
@@ -19,6 +19,9 @@
           "above_bottom": 0
         }
       }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }
