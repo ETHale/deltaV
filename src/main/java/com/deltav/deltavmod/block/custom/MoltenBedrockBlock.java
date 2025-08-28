@@ -28,7 +28,8 @@ public class MoltenBedrockBlock extends Block{
         if (!entity.fireImmune() && !entity.isSteppingCarefully() && entity instanceof LivingEntity) {
             if (!entity.isInWater())
                 entity.igniteForSeconds(3.0f);
-            entity.hurt(level.damageSources().hotFloor(), 2.0F); // I know its depreciated but its what magma does so... 
+            if (!level.isClientSide())
+                entity.hurtServer((ServerLevel) level, level.damageSources().hotFloor(), 2.0F); // I know its depreciated but its what magma does so... 
         }
         super.stepOn(level, pos, state, entity);
     }

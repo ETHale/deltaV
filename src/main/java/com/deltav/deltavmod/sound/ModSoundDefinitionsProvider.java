@@ -25,7 +25,7 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider{
                     .stream(true)
                     .preload(true)
             )
-            .subtitle("sound."+DeltaV.MODID+"geyser")
+            .subtitle("sound."+DeltaV.MODID+".geyser")
             .replace(true)
         );
     }

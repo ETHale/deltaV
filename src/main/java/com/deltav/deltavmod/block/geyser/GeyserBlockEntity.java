@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -81,14 +80,16 @@ public class GeyserBlockEntity extends BlockEntity {
                 server.setBlock(target, block.getFluidState(), 3);
             }
         } else {
-            server.playSound(
-                null,
-                pos,
-                ModSounds.GEYSER.value(),
-                SoundSource.BLOCKS,
-                0.8F,
-                1.0F
-            );
+            if (level.getBlockState(pos.above()).getCollisionShape(server, pos.above()).isEmpty()) {
+                server.playSound(
+                    null,
+                    pos,
+                    ModSounds.GEYSER.value(),
+                    SoundSource.BLOCKS,
+                    0.8F,
+                    1.0F
+                );
+            }
         }
     }
 
@@ -172,7 +173,7 @@ public class GeyserBlockEntity extends BlockEntity {
                     p -> p.isAlive() && !p.isSpectator());
 
                 for (Player player : players) {
-                    player.hurt(level.damageSources().hotFloor(), dmg);
+                    player.hurtServer((ServerLevel) level, level.damageSources().hotFloor(), dmg);
                     var motion = player.getDeltaMovement();
                     double newY = Math.max(motion.y, block.getGasKnockup());
                     player.setDeltaMovement(motion.x, newY, motion.z);

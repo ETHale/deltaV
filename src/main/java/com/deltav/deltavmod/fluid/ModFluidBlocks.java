@@ -32,7 +32,7 @@ public class ModFluidBlocks {
     public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
         "oil",
         registryName -> new LiquidBlock(
-            ModFluids.OIL_SOURCE.value(),
+            ModFluids.OIL_SOURCE.get(),
             FLUID_BLOCK_PROPERTIES
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.COLOR_BLACK)
@@ -42,7 +42,7 @@ public class ModFluidBlocks {
     public static final DeferredBlock<Block> NAPHTHA_FLUID = BLOCKS.register(
         "naphtha",
         registryName -> new LiquidBlock(
-            ModFluids.NAPHTHA_SOURCE.value(),
+            ModFluids.NAPHTHA_SOURCE.get(),
             FLUID_BLOCK_PROPERTIES
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.SAND)
@@ -52,7 +52,7 @@ public class ModFluidBlocks {
     public static final DeferredBlock<Block> PETROL_FLUID = BLOCKS.register(
         "petrol",
         registryName -> new LiquidBlock(
-            ModFluids.PETROL_SOURCE.value(),
+            ModFluids.PETROL_SOURCE.get(),
             FLUID_BLOCK_PROPERTIES
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.COLOR_ORANGE)

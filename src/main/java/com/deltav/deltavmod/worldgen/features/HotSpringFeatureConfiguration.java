@@ -1,7 +1,6 @@
 package com.deltav.deltavmod.worldgen.features;
 
 import com.deltav.deltavmod.block.ModBlocks;
-import com.deltav.deltavmod.fluid.ModFluidBlocks;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

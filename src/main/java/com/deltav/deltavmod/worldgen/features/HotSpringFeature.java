@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
@@ -25,6 +26,9 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         super(codec);
     }
 
+    /**
+     * Places the hot spring feature in the world. Based from `place` in {@link LakeFeature}
+     */
     @Override
     public boolean place(FeaturePlaceContext<HotSpringFeatureConfiguration> context) {
         Set<BlockPos> baseBlocks = new HashSet<>();

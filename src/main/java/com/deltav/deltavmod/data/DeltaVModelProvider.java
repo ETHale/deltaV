@@ -103,15 +103,6 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
 
-        TexturedModel.Provider bbTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
-            mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
-            .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
-            .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
-            .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
-        );
-        MultiVariant basic_battery_variant = blockModels.plainVariant(bbTextProvider.create(ModBlocks.BASIC_BATTERY.get(), blockModels.modelOutput));
-        blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.BASIC_BATTERY.get(), basic_battery_variant));
-
         blockModels.createTrivialCube(ModBlocks.SILICA_SAND.get());
         Block silica_sandstone = ModBlocks.SILICA_SANDSTONE.get();
         // dont ask how I found this 
@@ -135,11 +126,22 @@ public class DeltaVModelProvider extends ModelProvider{
                         map.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.CHISELED_SILICA_SANDSTONE.get()));
                     })
             )
-
+            .put(ModBlocks.BASIC_BATTERY.get(), TexturedModel.ORIENTABLE.get(ModBlocks.BASIC_BATTERY.get()).updateTextures(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
+                .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
+                .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
+                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
+            ))
+            .put(ModBlocks.STEAM_GEYSER.get(), TexturedModel.ORIENTABLE.get(ModBlocks.STEAM_GEYSER.get()).updateTextures(mapping ->
+                mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
+                .put(TextureSlot.FRONT, this.modLocation("block/silica_sandstone"))
+                .put(TextureSlot.TOP, this.modLocation("block/steam_geyser_top"))
+                .put(TextureSlot.BOTTOM, this.modLocation("block/silica_sandstone_bottom"))
+            ))
             .build();
         TEXTURED_MODELS.forEach((block, textureModel) -> {
-            MultiVariant multivariant = blockModels.plainVariant(textureModel.create(block, blockModels.modelOutput));
-            blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(block, multivariant));
+            MultiVariant multivariant = BlockModelGenerators.plainVariant(textureModel.create(block, blockModels.modelOutput));
+            blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, multivariant));
         });
         TextureMapping silicaSandstoneMapping = new TextureMapping()
             .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.SILICA_SANDSTONE.get()))
@@ -162,15 +164,6 @@ public class DeltaVModelProvider extends ModelProvider{
         BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
-
-        TexturedModel.Provider sgTextProvider = TexturedModel.ORIENTABLE.updateTexture(mapping ->
-            mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
-            .put(TextureSlot.FRONT, this.modLocation("block/silica_sandstone"))
-            .put(TextureSlot.TOP, this.modLocation("block/steam_geyser_top"))
-            .put(TextureSlot.BOTTOM, this.modLocation("block/silica_sandstone"))
-        );
-        MultiVariant steam_geyser_variant = blockModels.plainVariant(sgTextProvider.create(ModBlocks.STEAM_GEYSER.get(), blockModels.modelOutput));
-        blockModels.blockStateOutput.accept(blockModels.createSimpleBlock(ModBlocks.STEAM_GEYSER.get(), steam_geyser_variant));
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
