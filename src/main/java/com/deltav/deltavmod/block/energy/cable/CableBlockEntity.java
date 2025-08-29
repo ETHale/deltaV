@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,6 +16,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelProperty;
 
 /*
  * Base cable block entity
@@ -33,6 +33,14 @@ public abstract class CableBlockEntity extends BlockEntity {
 
     private final EnergyStorage energy;
     private final Lazy<IEnergyStorage> energyHandler;
+
+    public static final ModelProperty<BlockState> FACADEID = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_NORTH = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_SOUTH = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_WEST  = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_EAST  = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_UP    = new ModelProperty<>();
+    public static final ModelProperty<ConnectorType> MODEL_DOWN  = new ModelProperty<>();
 
     public CableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int capacity, int maxTransfer) {
         super(type, pos, state);
@@ -166,5 +174,18 @@ public abstract class CableBlockEntity extends BlockEntity {
 
     public IEnergyStorage getEnergyHandler() {
         return energyHandler.get();
+    }
+
+    @Override
+    public ModelData getModelData() {
+        return ModelData.builder()
+            //.with(FACADEID, false) - ignore for now
+            .with(MODEL_NORTH, this.getBlockState().getValueOrElse(CableBlock.NORTH, ConnectorType.NONE))
+            .with(MODEL_SOUTH, this.getBlockState().getValueOrElse(CableBlock.SOUTH, ConnectorType.NONE))
+            .with(MODEL_WEST, this.getBlockState().getValueOrElse(CableBlock.WEST, ConnectorType.NONE))
+            .with(MODEL_EAST, this.getBlockState().getValueOrElse(CableBlock.EAST, ConnectorType.NONE))
+            .with(MODEL_UP, this.getBlockState().getValueOrElse(CableBlock.UP, ConnectorType.NONE))
+            .with(MODEL_DOWN, this.getBlockState().getValueOrElse(CableBlock.DOWN, ConnectorType.NONE))
+            .build();
     }
 }
