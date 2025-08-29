@@ -6,6 +6,7 @@ import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
+import com.deltav.deltavmod.block.energy.cable.cables.BasicCableBlock;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
@@ -270,6 +271,17 @@ public class ModBlocks {
                 .strength(5.0f, 1.2F)
                 .sound(SoundType.STONE))
     );
+
+    public static final DeferredBlock<BasicCableBlock> BASIC_CABLE = BLOCKS.register(
+        "basic_cable", 
+        registryName -> new BasicCableBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_ORANGE)
+                .instrument(NoteBlockInstrument.BELL)
+                .strength(1.0f)
+                .sound(SoundType.METAL)
+        ));
 
     //#endregion
 

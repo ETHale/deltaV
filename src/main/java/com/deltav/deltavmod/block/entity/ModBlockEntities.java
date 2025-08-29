@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.energy.cable.cables.BasicCableBlockEntity;
 import com.deltav.deltavmod.block.geyser.GeyserBlockEntity;
 
 import net.minecraft.core.registries.Registries;
@@ -55,6 +56,14 @@ public class ModBlockEntities {
                 GeyserBlockEntity::new,
                 false,
                 ModBlocks.STEAM_GEYSER.get())); // add all geyser blocks here after this one 
+
+    public static final Supplier<BlockEntityType<BasicCableBlockEntity>> BASIC_CABLE_BE =
+        BLOCK_ENTITIES.register(
+            "basic_cable_be", 
+            () -> new BlockEntityType<BasicCableBlockEntity>(
+                BasicCableBlockEntity::new, 
+                false,
+                ModBlocks.BASIC_CABLE.get()));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
