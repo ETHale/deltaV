@@ -1,5 +1,8 @@
 package com.deltav.deltavmod.block.energy.cable;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -10,7 +13,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * credit to: https://www.mcjty.eu/docs/1.20.4_neo/ep5
  */
 public class CableShapeCache {
-    private static VoxelShape[] shapeCache = fillCache();
+    private static ConcurrentMap<Integer, VoxelShape> shapeCache = new ConcurrentHashMap<Integer, VoxelShape>();
 
     private static final VoxelShape SHAPE_CABLE_NORTH = Shapes.box(.4, .4, 0, .6, .6, .4);
     private static final VoxelShape SHAPE_CABLE_SOUTH = Shapes.box(.4, .4, .6, .6, .6, 1);
@@ -33,28 +36,7 @@ public class CableShapeCache {
 
     public static VoxelShape getCachedCableShape(ConnectorType north, ConnectorType south, ConnectorType west, ConnectorType east, ConnectorType up, ConnectorType down) {
         int index = calculateShapeIndex(north, south, west, east, up, down);
-        return shapeCache[index];
-    }
-
-    private static VoxelShape[] fillCache() {
-        int length = ConnectorType.values().length;
-        VoxelShape[] tempCache = new VoxelShape[length * length * length * length * length * length];
-
-        for (ConnectorType up : ConnectorType.VALUES) {
-            for (ConnectorType down : ConnectorType.VALUES) {
-                for (ConnectorType north : ConnectorType.VALUES) {
-                    for (ConnectorType south : ConnectorType.VALUES) {
-                        for (ConnectorType east : ConnectorType.VALUES) {
-                            for (ConnectorType west : ConnectorType.VALUES) {
-                                int idx = calculateShapeIndex(north, south, west, east, up, down);
-                                tempCache[idx] = makeShape(north, south, west, east, up, down);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return tempCache;
+        return shapeCache.computeIfAbsent(index, i -> makeShape(north, south, west, east, up, down));
     }
 
     private static VoxelShape makeShape(ConnectorType north, ConnectorType south, ConnectorType west, ConnectorType east, ConnectorType up, ConnectorType down) {
