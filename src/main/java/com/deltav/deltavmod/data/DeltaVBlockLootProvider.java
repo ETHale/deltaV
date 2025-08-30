@@ -79,5 +79,6 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         this.dropSelf(ModBlocks.FRACTIONATOR.get());
         this.dropWhenSilkTouch(ModBlocks.STEAM_GEYSER.get());
+        this.dropSelf(ModBlocks.BASIC_CABLE.get());
     }
 }

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.energy.cable.CableLoaderBuilder;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
 import com.google.common.collect.ImmutableMap;
@@ -25,6 +26,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -190,6 +192,16 @@ public class DeltaVModelProvider extends ModelProvider{
         // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
+
+        // CABLES
+        blockModels.createTrivialBlock(
+            ModBlocks.BASIC_CABLE.get(), 
+            TexturedModel.createDefault(
+                block -> new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)),
+                ExtendedModelTemplateBuilder.builder()
+                    .customLoader(CableLoaderBuilder::new, loader -> {})
+                    .requiredTextureSlot(TextureSlot.ALL)
+                    .build()));
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {
