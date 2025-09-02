@@ -22,11 +22,13 @@ public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider
     private SmartEnergyStorage energyStorage;
     public BasicBatteryBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.BASIC_BATTERY_BE.get(), pos, blockState);
-        this.energyStorage = new SmartEnergyStorage(1500, 80, 80, this::setChanged);        
+        Direction[] dirs = new Direction[1];
+        dirs[0] = Direction.UP;
+        this.energyStorage = new SmartEnergyStorage(1500, 80, 80, this::setChanged, dirs);        
     }
 
     public IEnergyStorage getEnergyStorage(@Nullable Direction side) {
-        return energyStorage;
+        return energyStorage.getEnergyStorage(side);
     }
 
     @Override

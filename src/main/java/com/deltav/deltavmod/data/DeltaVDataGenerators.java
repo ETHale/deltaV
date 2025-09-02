@@ -67,6 +67,11 @@ public class DeltaVDataGenerators {
             ModBlockEntities.BASIC_BATTERY_BE.get(), 
             (be, side) -> be.getEnergyStorage(side)
         );
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            ModBlockEntities.BASIC_CABLE_BE.get(), 
+            (be, side) -> be.getEnergyHandler()
+        );
 
         // Register that the Fractionator block entity has a fluid handler capability.
         event.registerBlockEntity(

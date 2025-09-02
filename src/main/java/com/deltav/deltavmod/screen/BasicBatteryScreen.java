@@ -3,12 +3,9 @@ package com.deltav.deltavmod.screen;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.BasicBatteryMenu;
 import com.deltav.deltavmod.menu.ModMenus;
-import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -49,10 +46,6 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
         );
         int e = menu.getEnergyStored();
         int cap = menu.getCapacity();
-
-        Logger log = LogUtils.getLogger();
-        log.debug(String.valueOf(e));
-        log.debug(String.valueOf(cap));
 
         int barHeight = cap > 0 ? (int) ((e / (float) cap) * MAX_BAR_HEIGHT) : 0;
         guiGraphics.fillGradient(leftPos + LEFT_PADDING,topPos + TOP_PADDING + (MAX_BAR_HEIGHT - barHeight),

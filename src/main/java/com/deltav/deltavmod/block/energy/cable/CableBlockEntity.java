@@ -1,8 +1,13 @@
 package com.deltav.deltavmod.block.energy.cable;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
@@ -13,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.model.data.ModelData;
@@ -32,7 +36,6 @@ public abstract class CableBlockEntity extends BlockEntity {
     protected final int capacity;
 
     private final EnergyStorage energy;
-    private final Lazy<IEnergyStorage> energyHandler;
 
     public static final ModelProperty<BlockState> FACADEID = new ModelProperty<>();
     public static final ModelProperty<ConnectorType> MODEL_NORTH = new ModelProperty<>();
@@ -49,8 +52,11 @@ public abstract class CableBlockEntity extends BlockEntity {
 
         this.energy = new EnergyStorage(maxTransfer, capacity) {
             @Override
-            public int extractEnergy(int maxExtract, boolean simulate) {
-                return 0;
+            public int extractEnergy(int toExtract, boolean simulate) {
+                int energyExtracted = Math.min(this.energy, Math.min(this.maxExtract, toExtract));
+                if (!simulate)
+                    this.energy -= energyExtracted;
+                return energyExtracted;
             }
 
             @Override
@@ -70,26 +76,26 @@ public abstract class CableBlockEntity extends BlockEntity {
                 return true;
             }
         };
-        this.energyHandler = Lazy.of(() -> energy);
     }
 
-        // Cached outputs
-    private Set<BlockPos> outputs = null;
+    // Cached outputs
+    private Map<BlockPos, Direction> outputs = null;
 
     // Traverse cable network and cache outputs 
     private void checkOutputs() {
         if (outputs == null) {
-            outputs = new HashSet<>();
+            outputs = new HashMap<>();
             traverse(worldPosition, cable -> {
                 // Check for all energy receivers around this position (ignore cables)
                 for (Direction direction : Direction.values()) {
                     BlockPos p = cable.getBlockPos().relative(direction);
                     BlockEntity te = level.getBlockEntity(p);
                     if (te != null && !(te instanceof CableBlockEntity)) {
-                        IEnergyStorage handler = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, null);
+                        Direction dir = direction.getOpposite();
+                        IEnergyStorage handler = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, dir);
                         if (handler != null) {
                             if (handler.canReceive()) {
-                                outputs.add(p);
+                                outputs.put(p, dir);
                             }
                         }
                     }
@@ -136,25 +142,43 @@ public abstract class CableBlockEntity extends BlockEntity {
             if (!outputs.isEmpty()) {
                 // calculate avaliable outputs
                 // and get avaliable handlers - ordered by energy able to be recieved
-                TreeMap<IEnergyStorage, Integer> outputsAvaliable = new TreeMap<>();
-                for (BlockPos p : outputs) {
-                    IEnergyStorage handler = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, null);
+                List<Map.Entry<IEnergyStorage, Integer>> outputsAvaliable = new ArrayList<>();
+                for (Map.Entry<BlockPos, Direction> entry : outputs.entrySet()) {
+                    BlockPos p = entry.getKey();
+                    Direction dir = entry.getValue();
+
+                    if (p.equals(this.getBlockPos())) continue;
+
+                    IEnergyStorage handler = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, dir);
+                    
+                    if (handler.canExtract()) continue; // up to producers to give us energy
+
                     if (handler != null) {
                         if (handler.canReceive()) {
                             int received = handler.receiveEnergy(this.maxTransfer, true);
-                            outputsAvaliable.put(handler, received);
+                            if (received > 0)
+                                outputsAvaliable.add(new AbstractMap.SimpleEntry<>(handler, received));
                         }
                     }
                 }
 
+                if (outputsAvaliable.isEmpty()) return;
+
+                outputsAvaliable.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
                 // go through each handler giving it as much as possible
                 // this should account for when blocks don't take in the maximum amount
+                int remaining = energy.getEnergyStored();
                 int size = outputsAvaliable.size();
-                for (IEnergyStorage handler : outputsAvaliable.keySet()) {
-                    int amount = energy.getEnergyStored() / size;
-                    int received = handler.receiveEnergy(amount, true);
-                    energy.extractEnergy(received, false);
-                    size--;
+                for (Map.Entry<IEnergyStorage,Integer> e : outputsAvaliable) {
+                    if (remaining <= 0) break;
+                    IEnergyStorage handler = e.getKey();
+                    int want = Math.min(e.getValue(), (int)(remaining / size));
+                    int sent = handler.receiveEnergy(want, false);
+                    if (sent > 0) {
+                        energy.extractEnergy(sent, false);
+                        remaining -= sent;
+                        size -= 1;
+                    }
                 }
             }
         }
@@ -173,7 +197,7 @@ public abstract class CableBlockEntity extends BlockEntity {
     }
 
     public IEnergyStorage getEnergyHandler() {
-        return energyHandler.get();
+        return this.energy;
     }
 
     @Override
