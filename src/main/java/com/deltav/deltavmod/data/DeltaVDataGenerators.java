@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
-import com.deltav.deltavmod.block.energy.cable.CableUnbakedModelLoader;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.menu.ModMenus;
@@ -26,7 +26,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -120,7 +120,7 @@ public class DeltaVDataGenerators {
     }
 
     @SubscribeEvent
-    public static void registerLoaders(ModelEvent.RegisterLoaders event) {
-        event.register(CableUnbakedModelLoader.ID, CableUnbakedModelLoader.INSTANCE);
+    public static void registerDefinitions(RegisterBlockStateModels event) {
+        event.registerModel(CableBlockStateModel.Unbaked.ID, CableBlockStateModel.Unbaked.CODEC);
     }
 }

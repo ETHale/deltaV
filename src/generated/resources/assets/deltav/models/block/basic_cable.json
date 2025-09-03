@@ -1,6 +1,0 @@
-{
-  "loader": "deltav:cableloader",
-  "textures": {
-    "all": "deltav:block/basic_cable"
-  }
-}

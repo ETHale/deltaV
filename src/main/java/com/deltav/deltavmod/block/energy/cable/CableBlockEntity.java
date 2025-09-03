@@ -106,6 +106,7 @@ public abstract class CableBlockEntity extends BlockEntity {
 
     public void markDirty() {
         traverse(worldPosition, cable -> cable.outputs = null);
+        requestModelDataUpdate();
     }
 
     // This is a generic function that will traverse all cables connected to this cable

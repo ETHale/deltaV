@@ -6,13 +6,17 @@ import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
-import com.deltav.deltavmod.block.energy.cable.CableLoaderBuilder;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModelBuilder;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelState;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators.BlockFamilyProvider;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
@@ -25,8 +29,8 @@ import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -194,14 +198,15 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
 
         // CABLES
-        blockModels.createTrivialBlock(
-            ModBlocks.BASIC_CABLE.get(), 
-            TexturedModel.createDefault(
-                block -> new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)),
-                ExtendedModelTemplateBuilder.builder()
-                    .customLoader(CableLoaderBuilder::new, loader -> {})
-                    .requiredTextureSlot(TextureSlot.ALL)
-                    .build()));
+        CableModelState state = new CableModelState();
+        CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
+        CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
+        blockModels.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(
+                ModBlocks.BASIC_CABLE.get(), 
+                MultiVariant.of(builder)
+            )
+        );
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

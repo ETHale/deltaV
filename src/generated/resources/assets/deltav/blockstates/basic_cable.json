@@ -1,7 +1,9 @@
 {
   "variants": {
     "": {
-      "model": "deltav:block/basic_cable"
+      "type": "deltav:cable_model_loader",
+      "model": "deltav:cable_model_loader",
+      "state": {}
     }
   }
 }
