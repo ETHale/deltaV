@@ -3,6 +3,8 @@ package com.deltav.deltavmod.block.energy.cable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.deltav.deltavmod.DeltaV;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -90,6 +92,9 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
         if (state.getValue(BlockStateProperties.WATERLOGGED)) {
             scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level), TickPriority.NORMAL); 
         }
+        if (level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
+            cable.requestModelDataUpdate();
+        }
         return calculateState(level, pos, state);
     }
 
@@ -119,27 +124,36 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
         return te.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, pos, facing) != null;
     }
 
+
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
         super.neighborChanged(state, level, pos, neighborBlock, orientation, movedByPiston);
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
-            cable.markDirty();
-        }
+        DeltaV.LOGGER.debug("descriptionId");
+        updateBE(level, pos);
     }
 
     @Override
     public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
-            cable.markDirty();
-        }
+        updateBE(level, pos);
         BlockState blockState = calculateState(level, pos, state);
         if (state != blockState) {
             level.setBlockAndUpdate(pos, blockState);
         }
     }
 
-        @Override
+    private void updateBE(@Nonnull Level level, @Nonnull BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
+            if (!level.isClientSide) {
+                cable.markDirty();
+            } else {
+                level.sendBlockUpdated(pos, level.getBlockState(pos), level.getBlockState(pos), 3);
+                cable.requestModelDataUpdate();
+            }
+        }
+    }
+
+    @Override
     protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(BlockStateProperties.WATERLOGGED, NORTH, SOUTH, EAST, WEST, UP, DOWN);

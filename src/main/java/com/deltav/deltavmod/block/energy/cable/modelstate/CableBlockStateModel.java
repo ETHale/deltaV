@@ -3,6 +3,8 @@ package com.deltav.deltavmod.block.energy.cable.modelstate;
 import java.util.List;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.energy.cable.CableBlockEntity;
+import com.deltav.deltavmod.block.energy.cable.ConnectorType;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.client.renderer.block.model.BlockModelPart;
@@ -43,9 +45,74 @@ public record CableBlockStateModel(CableModelPart model) implements DynamicBlock
         // You can read the property using `get` with the `ModelProperty` key
         // Remember that your block entity should call `BlockEntity#requestModelDataUpdate` to sync the model data to the client
         ModelData data = level.getModelData(pos);
+        if (data == null) {
+            parts.add(CableModelPart.FULL_BLOCK);
+            return;
+        }
+        ConnectorType north = data.get(CableBlockEntity.MODEL_NORTH);
+        ConnectorType south = data.get(CableBlockEntity.MODEL_SOUTH);
+        ConnectorType down = data.get(CableBlockEntity.MODEL_DOWN);
+        ConnectorType up = data.get(CableBlockEntity.MODEL_UP);
+        ConnectorType east = data.get(CableBlockEntity.MODEL_EAST);
+        ConnectorType west = data.get(CableBlockEntity.MODEL_WEST);
 
-        // Add the model to be rendered
-        parts.add(this.model);
+        if (north != null)
+            switch (north) {
+                case CABLE -> parts.add(CableModelPart.NORTH_CABLE);
+                case BLOCK -> parts.add(CableModelPart.NORTH_BLOCK);
+                default -> parts.add(CableModelPart.NORTH_NOTHING);
+            }
+        else
+            parts.add(CableModelPart.NORTH_NOTHING);
+
+        if (south != null)
+            switch (south) {
+                case CABLE -> parts.add(CableModelPart.SOUTH_CABLE);
+                case BLOCK -> parts.add(CableModelPart.SOUTH_BLOCK);
+                default -> parts.add(CableModelPart.SOUTH_NOTHING);
+            }
+        else
+            parts.add(CableModelPart.SOUTH_NOTHING);
+
+        if (up != null) 
+            switch (up) {
+                case CABLE -> parts.add(CableModelPart.UP_CABLE);
+                case BLOCK -> parts.add(CableModelPart.UP_BLOCK);
+                default -> parts.add(CableModelPart.UP_NOTHING);
+            }
+        else {
+            parts.add(CableModelPart.UP_NOTHING);
+        }
+
+        if (down != null)
+            switch (down) {
+                case CABLE -> parts.add(CableModelPart.DOWN_CABLE);
+                case BLOCK -> parts.add(CableModelPart.DOWN_BLOCK);
+                default -> parts.add(CableModelPart.DOWN_NOTHING);
+            }
+
+        else {
+            parts.add(CableModelPart.DOWN_NOTHING);
+        }
+        if (east != null)
+            switch (east) {
+                case CABLE -> parts.add(CableModelPart.EAST_CABLE);
+                case BLOCK -> parts.add(CableModelPart.EAST_BLOCK);
+                default -> parts.add(CableModelPart.EAST_NOTHING);
+            }
+
+        else {
+            parts.add(CableModelPart.EAST_NOTHING);
+        }
+        if (west != null)
+            switch (west) {
+                case CABLE -> parts.add(CableModelPart.WEST_CABLE);
+                case BLOCK -> parts.add(CableModelPart.WEST_BLOCK);
+                default -> parts.add(CableModelPart.WEST_NOTHING);
+            } 
+        else {
+            parts.add(CableModelPart.WEST_NOTHING);
+        }   
     }
 
     // The unbaked model that is read from the block state json
