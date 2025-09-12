@@ -22,12 +22,12 @@ public class CableShapeCache {
     private static final VoxelShape SHAPE_CABLE_UP = Shapes.box(.4, .6, .4, .6, 1, .6);
     private static final VoxelShape SHAPE_CABLE_DOWN = Shapes.box(.4, 0, .4, .6, .4, .6);
 
-    private static final VoxelShape SHAPE_BLOCK_NORTH = Shapes.box(.2, .2, 0, .8, .8, .1);
-    private static final VoxelShape SHAPE_BLOCK_SOUTH = Shapes.box(.2, .2, .9, .8, .8, 1);
-    private static final VoxelShape SHAPE_BLOCK_WEST = Shapes.box(0, .2, .2, .1, .8, .8);
-    private static final VoxelShape SHAPE_BLOCK_EAST = Shapes.box(.9, .2, .2, 1, .8, .8);
-    private static final VoxelShape SHAPE_BLOCK_UP = Shapes.box(.2, .9, .2, .8, 1, .8);
-    private static final VoxelShape SHAPE_BLOCK_DOWN = Shapes.box(.2, 0, .2, .8, .1, .8);
+    private static final VoxelShape SHAPE_BLOCK_NORTH = Shapes.box(.3, .3, 0, .7, .7, .1);
+    private static final VoxelShape SHAPE_BLOCK_SOUTH = Shapes.box(.3, .3, .9, .7, .7, 1);
+    private static final VoxelShape SHAPE_BLOCK_WEST = Shapes.box(0, .3, .3, .1, .7, .7);
+    private static final VoxelShape SHAPE_BLOCK_EAST = Shapes.box(.9, .3, .3, 1, .7, .7);
+    private static final VoxelShape SHAPE_BLOCK_UP = Shapes.box(.3, .9, .3, .7, 1, .7);
+    private static final VoxelShape SHAPE_BLOCK_DOWN = Shapes.box(.3, 0, .3, .7, .1, .7);
 
     private static int calculateShapeIndex(ConnectorType north, ConnectorType south, ConnectorType west, ConnectorType east, ConnectorType up, ConnectorType down) {
         int l = ConnectorType.values().length;

@@ -3,8 +3,6 @@ package com.deltav.deltavmod.block.energy.cable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.deltav.deltavmod.DeltaV;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -128,7 +126,6 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
         super.neighborChanged(state, level, pos, neighborBlock, orientation, movedByPiston);
-        DeltaV.LOGGER.debug("descriptionId");
         updateBE(level, pos);
     }
 
