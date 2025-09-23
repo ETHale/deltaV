@@ -118,6 +118,7 @@ public abstract class CableBlockEntity extends BlockEntity {
         traverse(pos, traversed, consumer);
     }
 
+    // TODO: make sure that this respects connection to different cable types
     private void traverse(BlockPos pos, Set<BlockPos> traversed, Consumer<CableBlockEntity> consumer) {
         for (Direction direction : Direction.values()) {
             BlockPos p = pos.relative(direction);

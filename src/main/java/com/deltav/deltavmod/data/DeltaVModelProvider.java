@@ -12,6 +12,7 @@ import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelState;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -200,6 +201,7 @@ public class DeltaVModelProvider extends ModelProvider{
         CableModelState state = new CableModelState();
         CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
         CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
+        builder.setTemplate(new CableModelPartTemplate(""));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.BASIC_CABLE.get(), 

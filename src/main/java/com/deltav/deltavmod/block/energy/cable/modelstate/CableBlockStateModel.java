@@ -5,7 +5,9 @@ import java.util.List;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.energy.cable.CableBlockEntity;
 import com.deltav.deltavmod.block.energy.cable.ConnectorType;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
@@ -21,7 +23,7 @@ import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.model.data.ModelData;
 
-public record CableBlockStateModel(CableModelPart model) implements DynamicBlockStateModel {
+public record CableBlockStateModel(CableModelPart model, CableModelPartTemplate template) implements DynamicBlockStateModel {
     @Override
     public TextureAtlasSprite particleIcon() {
         return this.model.particleIcon();
@@ -46,7 +48,7 @@ public record CableBlockStateModel(CableModelPart model) implements DynamicBlock
         // Remember that your block entity should call `BlockEntity#requestModelDataUpdate` to sync the model data to the client
         ModelData data = level.getModelData(pos);
         if (data == null) {
-            parts.add(CableModelPart.FULL_BLOCK);
+            parts.add(template.FULL_BLOCK);
             return;
         }
         ConnectorType north = data.get(CableBlockEntity.MODEL_NORTH);
@@ -58,70 +60,72 @@ public record CableBlockStateModel(CableModelPart model) implements DynamicBlock
 
         if (north != null)
             switch (north) {
-                case CABLE -> parts.add(CableModelPart.NORTH_CABLE);
-                case BLOCK -> parts.add(CableModelPart.NORTH_BLOCK);
-                default -> parts.add(CableModelPart.NORTH_NOTHING);
+                case CABLE -> parts.add(template.NORTH_CABLE);
+                case BLOCK -> parts.add(template.NORTH_BLOCK);
+                default -> parts.add(template.NORTH_NOTHING);
             }
         else
-            parts.add(CableModelPart.NORTH_NOTHING);
+            parts.add(template.NORTH_NOTHING);
 
         if (south != null)
             switch (south) {
-                case CABLE -> parts.add(CableModelPart.SOUTH_CABLE);
-                case BLOCK -> parts.add(CableModelPart.SOUTH_BLOCK);
-                default -> parts.add(CableModelPart.SOUTH_NOTHING);
+                case CABLE -> parts.add(template.SOUTH_CABLE);
+                case BLOCK -> parts.add(template.SOUTH_BLOCK);
+                default -> parts.add(template.SOUTH_NOTHING);
             }
         else
-            parts.add(CableModelPart.SOUTH_NOTHING);
+            parts.add(template.SOUTH_NOTHING);
 
         if (up != null) 
             switch (up) {
-                case CABLE -> parts.add(CableModelPart.UP_CABLE);
-                case BLOCK -> parts.add(CableModelPart.UP_BLOCK);
-                default -> parts.add(CableModelPart.UP_NOTHING);
+                case CABLE -> parts.add(template.UP_CABLE);
+                case BLOCK -> parts.add(template.UP_BLOCK);
+                default -> parts.add(template.UP_NOTHING);
             }
         else {
-            parts.add(CableModelPart.UP_NOTHING);
+            parts.add(template.UP_NOTHING);
         }
 
         if (down != null)
             switch (down) {
-                case CABLE -> parts.add(CableModelPart.DOWN_CABLE);
-                case BLOCK -> parts.add(CableModelPart.DOWN_BLOCK);
-                default -> parts.add(CableModelPart.DOWN_NOTHING);
+                case CABLE -> parts.add(template.DOWN_CABLE);
+                case BLOCK -> parts.add(template.DOWN_BLOCK);
+                default -> parts.add(template.DOWN_NOTHING);
             }
 
         else {
-            parts.add(CableModelPart.DOWN_NOTHING);
+            parts.add(template.DOWN_NOTHING);
         }
         if (east != null)
             switch (east) {
-                case CABLE -> parts.add(CableModelPart.EAST_CABLE);
-                case BLOCK -> parts.add(CableModelPart.EAST_BLOCK);
-                default -> parts.add(CableModelPart.EAST_NOTHING);
+                case CABLE -> parts.add(template.EAST_CABLE);
+                case BLOCK -> parts.add(template.EAST_BLOCK);
+                default -> parts.add(template.EAST_NOTHING);
             }
 
         else {
-            parts.add(CableModelPart.EAST_NOTHING);
+            parts.add(template.EAST_NOTHING);
         }
         if (west != null)
             switch (west) {
-                case CABLE -> parts.add(CableModelPart.WEST_CABLE);
-                case BLOCK -> parts.add(CableModelPart.WEST_BLOCK);
-                default -> parts.add(CableModelPart.WEST_NOTHING);
+                case CABLE -> parts.add(template.WEST_CABLE);
+                case BLOCK -> parts.add(template.WEST_BLOCK);
+                default -> parts.add(template.WEST_NOTHING);
             } 
         else {
-            parts.add(CableModelPart.WEST_NOTHING);
+            parts.add(template.WEST_NOTHING);
         }   
     }
 
     // The unbaked model that is read from the block state json
-    public record Unbaked(CableModelPart.Unbaked model) implements CustomUnbakedBlockStateModel {
+    public record Unbaked(CableModelPart.Unbaked model, CableModelPartTemplate template) implements CustomUnbakedBlockStateModel {
 
         // The codec to register
-        public static final MapCodec<CableBlockStateModel.Unbaked> CODEC = CableModelPart.Unbaked.CODEC.xmap(
-            CableBlockStateModel.Unbaked::new, CableBlockStateModel.Unbaked::model
-        );
+        public static final MapCodec<CableBlockStateModel.Unbaked> CODEC =
+            RecordCodecBuilder.mapCodec(instance -> instance.group(
+                CableModelPart.Unbaked.CODEC.forGetter(Unbaked::model),
+                CableModelPartTemplate.CODEC.forGetter(Unbaked::template)
+            ).apply(instance, Unbaked::new));
         public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "cable_model_loader");
 
         @Override
@@ -133,7 +137,7 @@ public record CableBlockStateModel(CableModelPart model) implements DynamicBlock
         @Override
         public BlockStateModel bake(ModelBaker baker) {
             // Bake the model parts and pass into the block state model
-            return new CableBlockStateModel(this.model.bake(baker));
+            return new CableBlockStateModel(this.model.bake(baker), this.template);
         }
 
         @Override

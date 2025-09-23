@@ -1,5 +1,7 @@
 package com.deltav.deltavmod.block.energy.cable.modelstate;
 
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
+
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
@@ -8,7 +10,12 @@ import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     private CableModelPart.Unbaked model;
+    private CableModelPartTemplate template = CableModelPartTemplate.INSTANCE;
     public CableBlockStateModelBuilder() {}
+
+    public void setTemplate(CableModelPartTemplate template) {
+        this.template = template;
+    }
 
     @Override
     public CableBlockStateModelBuilder with(VariantMutator variantMutator) {
@@ -22,7 +29,7 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     public CableBlockStateModelBuilder with(UnbakedMutator unbakedMutator) {
         var result = new CableBlockStateModelBuilder();
         if (this.model != null) {
-            CableBlockStateModel.Unbaked stateUnbaked = new CableBlockStateModel.Unbaked(this.model);
+            CableBlockStateModel.Unbaked stateUnbaked = new CableBlockStateModel.Unbaked(this.model, template);
             BlockStateModel.Unbaked mutated = unbakedMutator.apply(stateUnbaked);
 
             if (mutated instanceof CableBlockStateModel.Unbaked casted) {
@@ -40,7 +47,7 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
         if (this.model == null) {
             throw new IllegalStateException("CableBlockStateModelBuilder: no model part present; ensure the builder was populated");
         }
-        return new CableBlockStateModel.Unbaked(this.model);
+        return new CableBlockStateModel.Unbaked(this.model, template);
     }
 
     public CableBlockStateModelBuilder part(CableModelPart.Unbaked model) {
