@@ -81,6 +81,8 @@ public abstract class CableBlockEntity extends BlockEntity {
     // Cached outputs
     private Map<BlockPos, Direction> outputs = null;
 
+    // TODO: make sure that this respects connection to different cable types
+    // so that different capacities are respected and will instead treat the new cable type as an energy reciever
     // Traverse cable network and cache outputs 
     private void checkOutputs() {
         if (outputs == null) {
@@ -118,7 +120,6 @@ public abstract class CableBlockEntity extends BlockEntity {
         traverse(pos, traversed, consumer);
     }
 
-    // TODO: make sure that this respects connection to different cable types
     private void traverse(BlockPos pos, Set<BlockPos> traversed, Consumer<CableBlockEntity> consumer) {
         for (Direction direction : Direction.values()) {
             BlockPos p = pos.relative(direction);

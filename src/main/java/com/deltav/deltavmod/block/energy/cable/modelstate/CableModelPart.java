@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.deltav.deltavmod.DeltaV;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.client.renderer.MaterialMapper;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.TextureSlots;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.QuadCollection;
@@ -110,15 +114,28 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             this(texturePath, .4, .1, .3);
         }
 
-        // TODO fix up cable looks odd - missing face
         public CableModelPartTemplate(String texturePath, double cableThickness, double connectorThickness, double connectorWidth) {
             this.texturePath = texturePath;
             this.cableThickness = cableThickness;
             this.connectorThickness = connectorThickness;
             this.connectorWidth = connectorWidth;
 
-            // Load the texture
-            TextureAtlasSprite spriteCable = null, spriteSide = null, spriteConnector = null; // TODO figure this out
+            // Load the texture TODO - fix this
+            TextureAtlasSprite spriteCable = null;
+            TextureAtlasSprite spriteSide = null;
+            TextureAtlasSprite spriteConnector = null;
+            try {
+                TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getModelManager().getAtlas(Sheets.BLOCKS_MAPPER.sheet());
+                DeltaV.LOGGER.debug("Loading cable texture: " + texturePath + " from " + ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath));
+                spriteCable = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath));;
+                spriteSide = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath + "_side"));;
+                spriteConnector = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath + "_connector"));;
+            } catch (Exception e) {
+                DeltaV.LOGGER.error("Error loading cable texture: " + texturePath, e);
+                spriteCable = null;
+                spriteSide = null;
+                spriteConnector = null;
+            }
     
             double o = cableThickness;      // Thickness of the cable. .0 would be full block, .5 is infinitely thin.
             double p = connectorThickness;      // Thickness of the connector as it is put on the connecting block
@@ -129,6 +146,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             up_cable.addUnculledFace(quad(v(1 - o, 1, o), v(1 - o, 1, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, o), spriteCable));
             up_cable.addUnculledFace(quad(v(o, 1, 1 - o), v(o, 1, o), v(o, 1 - o, o), v(o, 1 - o, 1 - o), spriteCable));
             up_cable.addUnculledFace(quad(v(o, 1, o), v(1 - o, 1, o), v(1 - o, 1 - o, o), v(o, 1 - o, o), spriteCable));
+            up_cable.addUnculledFace(quad(v(o, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1, 1 - o), v(o, 1, 1 - o), spriteCable));
             UP_CABLE = new CableModelPart(up_cable.build(), true, null);
     
             QuadCollection.Builder up_block = new QuadCollection.Builder();

@@ -201,7 +201,7 @@ public class DeltaVModelProvider extends ModelProvider{
         CableModelState state = new CableModelState();
         CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
         CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
-        builder.setTemplate(new CableModelPartTemplate(""));
+        builder.setTemplate(new CableModelPartTemplate("crusher"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.BASIC_CABLE.get(), 

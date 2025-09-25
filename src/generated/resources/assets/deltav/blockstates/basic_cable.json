@@ -7,7 +7,7 @@
       "connector_width": 0.3,
       "model": "deltav:cable_model_loader",
       "state": {},
-      "texture": ""
+      "texture": "crusher"
     }
   }
 }
