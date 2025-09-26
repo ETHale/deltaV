@@ -10,13 +10,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.client.renderer.MaterialMapper;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.TextureSlots;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.AtlasIds;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.client.resources.model.ResolvableModel;
@@ -39,7 +39,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
 
     // The unbaked model that is read from the block state json
     public record Unbaked(ResourceLocation modelLocation, CableModelState modelState) implements BlockModelPart.Unbaked {
-
+        
         // Used for the unbaked block state model
         public static final MapCodec<CableModelPart.Unbaked> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -77,13 +77,13 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
      */
     public static class CableModelPartTemplate {
         public static final MapCodec<CableModelPartTemplate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.STRING.fieldOf("texture").forGetter(template -> template.texturePath),
+            ResourceLocation.CODEC.fieldOf("texture").forGetter(template -> template.texture),
             Codec.DOUBLE.fieldOf("cable_thickness").orElse(.4).forGetter(template -> template.cableThickness),
             Codec.DOUBLE.fieldOf("connector_thickness").orElse(.1).forGetter(template -> template.connectorThickness),
             Codec.DOUBLE.fieldOf("connector_width").orElse(.3).forGetter(template -> template.connectorWidth)
         ).apply(instance, CableModelPartTemplate::new));
 
-        public static final CableModelPartTemplate INSTANCE = new CableModelPartTemplate(""); // TODO default texture?
+        public static final CableModelPartTemplate INSTANCE = new CableModelPartTemplate(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "")); // TODO default texture?
 
         public final CableModelPart UP_CABLE;
         public final CableModelPart UP_BLOCK;
@@ -105,17 +105,17 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
         public final CableModelPart SOUTH_NOTHING;
         public final CableModelPart FULL_BLOCK;
 
-        public final String texturePath;
+        public final ResourceLocation texture;
         public final double cableThickness;
         public final double connectorThickness;
         public final double connectorWidth;
 
-        public CableModelPartTemplate(String texturePath) {
-            this(texturePath, .4, .1, .3);
+        public CableModelPartTemplate(ResourceLocation texture) {
+            this(texture, .4, .1, .3);
         }
 
-        public CableModelPartTemplate(String texturePath, double cableThickness, double connectorThickness, double connectorWidth) {
-            this.texturePath = texturePath;
+        public CableModelPartTemplate(ResourceLocation texture, double cableThickness, double connectorThickness, double connectorWidth) {
+            this.texture = texture;
             this.cableThickness = cableThickness;
             this.connectorThickness = connectorThickness;
             this.connectorWidth = connectorWidth;
@@ -126,12 +126,13 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             TextureAtlasSprite spriteConnector = null;
             try {
                 TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getModelManager().getAtlas(Sheets.BLOCKS_MAPPER.sheet());
-                DeltaV.LOGGER.debug("Loading cable texture: " + texturePath + " from " + ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath));
-                spriteCable = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath));;
-                spriteSide = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath + "_side"));;
-                spriteConnector = atlas.getSprite(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, texturePath + "_connector"));;
+                DeltaV.LOGGER.debug("Loading cable texture: " + texture);
+                spriteCable = atlas.getSprite(texture);
+                spriteSide = atlas.getSprite(texture.withSuffix("_side"));
+                spriteConnector = atlas.getSprite(texture.withSuffix("_connector"));
+                DeltaV.LOGGER.debug("Spites loaded" + spriteCable + spriteCable + spriteConnector);
             } catch (Exception e) {
-                DeltaV.LOGGER.error("Error loading cable texture: " + texturePath, e);
+                DeltaV.LOGGER.error("Error loading cable texture: " + texture, e);
                 spriteCable = null;
                 spriteSide = null;
                 spriteConnector = null;
@@ -345,11 +346,10 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
     private static void putVertex(VertexConsumer builder, Position normal,
                                  double x, double y, double z, float u, float v,
                                  TextureAtlasSprite sprite) {
-        //float iu = sprite.getU(u);
-        //float iv = sprite.getV(v);
+        float iu = sprite.getU(u);
+        float iv = sprite.getV(v);
         builder.addVertex((float)x, (float)y, (float)z)
-                .setUv1(0, 0)
-                .setUv2(0, 0)
+                .setUv(iu, iv)
                 .setColor(1.0f, 1.0f, 1.0f, 1.0f)
                 .setNormal((float) normal.x(), (float) normal.y(), (float) normal.z());
     }

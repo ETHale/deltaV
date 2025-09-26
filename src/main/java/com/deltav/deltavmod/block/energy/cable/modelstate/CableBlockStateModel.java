@@ -1,6 +1,7 @@
 package com.deltav.deltavmod.block.energy.cable.modelstate;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.energy.cable.CableBlockEntity;
@@ -23,7 +24,43 @@ import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.model.data.ModelData;
 
-public record CableBlockStateModel(CableModelPart model, CableModelPartTemplate template) implements DynamicBlockStateModel {
+public final class CableBlockStateModel implements DynamicBlockStateModel {
+    private final CableModelPart model;
+    private final ResourceLocation texture;
+    private CableModelPartTemplate template = null;
+
+    public CableBlockStateModel(CableModelPart model, ResourceLocation texture) {
+        this.model = Objects.requireNonNull(model, "model");
+        this.texture = Objects.requireNonNull(texture, "texture");
+    }
+
+    // accessor methods match the record component names
+    public CableModelPart model() {
+        return model;
+    }
+
+    public ResourceLocation texture() {
+        return texture;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CableBlockStateModel)) return false;
+        CableBlockStateModel that = (CableBlockStateModel) o;
+        return Objects.equals(model, that.model) && Objects.equals(texture, that.texture);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(model, texture);
+    }
+
+    @Override
+    public String toString() {
+        return "CableBlockStateModel[model=" + model + ", texture=" + texture + "]";
+    }
+
     @Override
     public TextureAtlasSprite particleIcon() {
         return this.model.particleIcon();
@@ -46,6 +83,9 @@ public record CableBlockStateModel(CableModelPart model, CableModelPartTemplate 
         // You can call `BlockAndTintGetter#getModelData` with the block position
         // You can read the property using `get` with the `ModelProperty` key
         // Remember that your block entity should call `BlockEntity#requestModelDataUpdate` to sync the model data to the client
+        if (template == null) 
+            template = new CableModelPartTemplate(texture);
+
         ModelData data = level.getModelData(pos);
         if (data == null) {
             parts.add(template.FULL_BLOCK);
@@ -118,13 +158,13 @@ public record CableBlockStateModel(CableModelPart model, CableModelPartTemplate 
     }
 
     // The unbaked model that is read from the block state json
-    public record Unbaked(CableModelPart.Unbaked model, CableModelPartTemplate template) implements CustomUnbakedBlockStateModel {
+    public record Unbaked(CableModelPart.Unbaked model, ResourceLocation texture) implements CustomUnbakedBlockStateModel {
 
         // The codec to register
         public static final MapCodec<CableBlockStateModel.Unbaked> CODEC =
             RecordCodecBuilder.mapCodec(instance -> instance.group(
                 CableModelPart.Unbaked.CODEC.forGetter(Unbaked::model),
-                CableModelPartTemplate.CODEC.forGetter(Unbaked::template)
+                ResourceLocation.CODEC.fieldOf("texture").forGetter(Unbaked::texture)
             ).apply(instance, Unbaked::new));
         public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "cable_model_loader");
 
@@ -137,7 +177,7 @@ public record CableBlockStateModel(CableModelPart model, CableModelPartTemplate 
         @Override
         public BlockStateModel bake(ModelBaker baker) {
             // Bake the model parts and pass into the block state model
-            return new CableBlockStateModel(this.model.bake(baker), this.template);
+            return new CableBlockStateModel(this.model.bake(baker), texture);
         }
 
         @Override

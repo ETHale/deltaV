@@ -2,12 +2,9 @@
   "variants": {
     "": {
       "type": "deltav:cable_model_loader",
-      "cable_thickness": 0.4,
-      "connector_thickness": 0.1,
-      "connector_width": 0.3,
       "model": "deltav:cable_model_loader",
       "state": {},
-      "texture": "crusher"
+      "texture": "deltav:crusher"
     }
   }
 }

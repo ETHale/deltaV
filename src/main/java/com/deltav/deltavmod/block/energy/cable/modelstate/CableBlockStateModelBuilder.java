@@ -1,20 +1,19 @@
 package com.deltav.deltavmod.block.energy.cable.modelstate;
 
-import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
-
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
 import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     private CableModelPart.Unbaked model;
-    private CableModelPartTemplate template = CableModelPartTemplate.INSTANCE;
+    private ResourceLocation texture;
     public CableBlockStateModelBuilder() {}
 
-    public void setTemplate(CableModelPartTemplate template) {
-        this.template = template;
+    public void setTexture(ResourceLocation texture) {
+        this.texture = texture;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     public CableBlockStateModelBuilder with(UnbakedMutator unbakedMutator) {
         var result = new CableBlockStateModelBuilder();
         if (this.model != null) {
-            CableBlockStateModel.Unbaked stateUnbaked = new CableBlockStateModel.Unbaked(this.model, template);
+            CableBlockStateModel.Unbaked stateUnbaked = new CableBlockStateModel.Unbaked(this.model, texture);
             BlockStateModel.Unbaked mutated = unbakedMutator.apply(stateUnbaked);
 
             if (mutated instanceof CableBlockStateModel.Unbaked casted) {
@@ -47,7 +46,7 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
         if (this.model == null) {
             throw new IllegalStateException("CableBlockStateModelBuilder: no model part present; ensure the builder was populated");
         }
-        return new CableBlockStateModel.Unbaked(this.model, template);
+        return new CableBlockStateModel.Unbaked(this.model, texture);
     }
 
     public CableBlockStateModelBuilder part(CableModelPart.Unbaked model) {

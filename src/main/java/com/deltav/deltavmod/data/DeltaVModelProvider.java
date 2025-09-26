@@ -30,6 +30,7 @@ import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class DeltaVModelProvider extends ModelProvider{
@@ -201,7 +202,7 @@ public class DeltaVModelProvider extends ModelProvider{
         CableModelState state = new CableModelState();
         CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
         CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
-        builder.setTemplate(new CableModelPartTemplate("crusher"));
+        builder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/crusher"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.BASIC_CABLE.get(), 
