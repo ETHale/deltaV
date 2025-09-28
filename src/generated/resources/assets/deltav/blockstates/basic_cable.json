@@ -4,7 +4,7 @@
       "type": "deltav:cable_model_loader",
       "model": "deltav:cable_model_loader",
       "state": {},
-      "texture": "deltav:crusher"
+      "texture": "deltav:block/cable/copper_cable"
     }
   }
 }

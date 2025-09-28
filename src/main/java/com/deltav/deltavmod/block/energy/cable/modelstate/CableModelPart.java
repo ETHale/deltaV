@@ -333,25 +333,50 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
     public static BakedQuad quad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite) {
         Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
+        Direction face = Direction.getNearest((int)normal.x, (int)normal.y, (int)normal.z, Direction.UP);
+
         QuadBakingVertexConsumer builder = new QuadBakingVertexConsumer();
         builder.setSprite(sprite);
-        builder.setDirection(Direction.getNearest((int)normal.x, (int)normal.y, (int)normal.z, Direction.UP));
-        putVertex(builder, normal, v1.x, v1.y, v1.z, 0, 0, sprite);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, 0, 1, sprite);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, 1, 1, sprite);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, 1, 0, sprite);
+        builder.setDirection(face);
+        putVertex(builder, normal, v1, face, sprite);
+        putVertex(builder, normal, v2, face, sprite);
+        putVertex(builder, normal, v3, face, sprite);
+        putVertex(builder, normal, v4, face, sprite);
         return builder.bakeQuad();
     }
 
-    private static void putVertex(VertexConsumer builder, Position normal,
-                                 double x, double y, double z, float u, float v,
-                                 TextureAtlasSprite sprite) {
+    private static void putVertex(VertexConsumer builder, Vec3 normal,
+                                  Vec3 pos, Direction face, TextureAtlasSprite sprite) {
+        float u, v;
+
+        // Project onto the right plane depending on face
+        switch (face) {
+            case UP, DOWN -> { // X/Z plane
+                u = (float) pos.x;
+                v = (float) pos.z;
+            }
+            case NORTH, SOUTH -> { // X/Y plane
+                u = (float) pos.x;
+                v = (float) pos.y;
+            }
+            case EAST, WEST -> { // Z/Y plane
+                u = (float) pos.z;
+                v = (float) pos.y;
+            }
+            default -> {
+                u = 0;
+                v = 0;
+            }
+        }
+
+        // Convert to atlas coordinates
         float iu = sprite.getU(u);
         float iv = sprite.getV(v);
-        builder.addVertex((float)x, (float)y, (float)z)
-                .setUv(iu, iv)
-                .setColor(1.0f, 1.0f, 1.0f, 1.0f)
-                .setNormal((float) normal.x(), (float) normal.y(), (float) normal.z());
+
+        builder.addVertex((float) pos.x, (float) pos.y, (float) pos.z)
+            .setUv(iu, iv)
+            .setColor(1f, 1f, 1f, 1f)
+            .setNormal((float) normal.x, (float) normal.y, (float) normal.z);
     }
 
     public static Vec3 v(double x, double y, double z) {
