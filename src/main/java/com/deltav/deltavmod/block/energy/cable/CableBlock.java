@@ -3,6 +3,8 @@ package com.deltav.deltavmod.block.energy.cable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.deltav.deltavmod.block.ModBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -117,6 +119,9 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
         }
         BlockEntity te = world.getBlockEntity(pos);
         if (te == null) {
+            if (state.getBlock() == ModBlocks.REDSTONE_GENERATOR.get()) { // special case as this isn't specifically a be but does give power
+                return true;
+            }
             return false;
         }
         return te.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, pos, facing) != null;
