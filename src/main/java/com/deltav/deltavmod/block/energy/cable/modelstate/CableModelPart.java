@@ -104,6 +104,9 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
         public final CableModelPart FULL_BLOCK;
 
         public final ResourceLocation texture;
+        public TextureAtlasSprite spriteCable;
+        public TextureAtlasSprite spriteSide;
+        public TextureAtlasSprite spriteConnector;
         public final double cableThickness;
         public final double connectorThickness;
         public final double connectorWidth;
@@ -117,11 +120,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             this.cableThickness = cableThickness;
             this.connectorThickness = connectorThickness;
             this.connectorWidth = connectorWidth;
-
-            // Load the texture TODO - fix this
-            TextureAtlasSprite spriteCable = null;
-            TextureAtlasSprite spriteSide = null;
-            TextureAtlasSprite spriteConnector = null;
+            
             try {
                 TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getModelManager().getAtlas(Sheets.BLOCKS_MAPPER.sheet());
                 DeltaV.LOGGER.debug("Loading cable texture: " + texture);
@@ -368,8 +367,8 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
         }
 
         // Convert to atlas coordinates
-        float iu = sprite.getU(u);
-        float iv = sprite.getV(v);
+        float iu = sprite.getU(Math.round(u * 16f) / 16f);
+        float iv = sprite.getV(Math.round(v * 16f) / 16f);
 
         builder.addVertex((float) pos.x, (float) pos.y, (float) pos.z)
             .setUv(iu, iv)

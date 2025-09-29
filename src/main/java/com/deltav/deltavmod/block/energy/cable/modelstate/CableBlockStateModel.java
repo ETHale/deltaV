@@ -63,7 +63,10 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
 
     @Override
     public TextureAtlasSprite particleIcon() {
-        return this.model.particleIcon();
+        if (template == null)
+            template = new CableModelPartTemplate(texture);
+
+        return template.spriteCable;
     }
 
     @Override
