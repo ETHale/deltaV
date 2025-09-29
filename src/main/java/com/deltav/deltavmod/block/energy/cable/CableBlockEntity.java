@@ -81,8 +81,6 @@ public abstract class CableBlockEntity extends BlockEntity {
     // Cached outputs
     private Map<BlockPos, Direction> outputs = null;
 
-    // TODO: make sure that this respects connection to different cable types
-    // so that different capacities are respected and will instead treat the new cable type as an energy reciever
     // Traverse cable network and cache outputs 
     private void checkOutputs() {
         if (outputs == null) {
@@ -92,7 +90,7 @@ public abstract class CableBlockEntity extends BlockEntity {
                 for (Direction direction : Direction.values()) {
                     BlockPos p = cable.getBlockPos().relative(direction);
                     BlockEntity te = level.getBlockEntity(p);
-                    if (te != null && !(te instanceof CableBlockEntity)) {
+                    if (te != null && !(this.isSameCable(te))) {
                         Direction dir = direction.getOpposite();
                         IEnergyStorage handler = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, dir);
                         if (handler != null) {
@@ -105,6 +103,16 @@ public abstract class CableBlockEntity extends BlockEntity {
             });
         }
     }
+
+    private<T extends BlockEntity> boolean isSameCable(T blockEntity) {
+        if (!(blockEntity instanceof CableBlockEntity)) {
+            return false;
+        }
+        if (blockEntity.getBlockState().getBlock() == this.getBlockState().getBlock()) {
+            return true;
+        }
+        return false;
+    } 
 
     public void markDirty() {
         traverse(worldPosition, cable -> cable.outputs = null);

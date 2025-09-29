@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-// TODO Redstone gen doesn't connect
 // TODO battery needs to output up
 // TODO crafting reciepe
 // annoyingly only needed because of the block entity function
