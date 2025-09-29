@@ -2,6 +2,7 @@ package com.deltav.deltavmod.data;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
@@ -21,7 +22,10 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.model.DelegatedModel;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -32,6 +36,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -209,6 +214,7 @@ public class DeltaVModelProvider extends ModelProvider{
                 MultiVariant.of(builder)
             )
         );
+        itemModels.generateFlatItem(ModItems.BASIC_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {
