@@ -69,7 +69,7 @@ public class DeltaVDataGenerators {
         );
         event.registerBlockEntity(
             Capabilities.EnergyStorage.BLOCK,
-            ModBlockEntities.BASIC_CABLE_BE.get(), 
+            ModBlockEntities.COPPER_CABLE_BE.get(), 
             (be, side) -> be.getEnergyHandler()
         );
 

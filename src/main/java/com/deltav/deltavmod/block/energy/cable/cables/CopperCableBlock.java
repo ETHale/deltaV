@@ -8,15 +8,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+// TODO Redstone gen doesn't connect
+// TODO battery needs to output up
+// TODO crafting reciepe
 // annoyingly only needed because of the block entity function
-public class BasicCableBlock extends CableBlock{
-    public BasicCableBlock(Properties properties) {
+public class CopperCableBlock extends CableBlock{
+    public CopperCableBlock(Properties properties) {
         super(properties);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BasicCableBlockEntity(pos, state);
+        return new CopperCableBlockEntity(pos, state);
     }
 }

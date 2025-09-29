@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "deltav:item/basic_cable"
+    "model": "deltav:item/copper_cable"
   }
 }

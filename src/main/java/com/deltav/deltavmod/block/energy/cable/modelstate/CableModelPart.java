@@ -81,7 +81,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             Codec.DOUBLE.fieldOf("connector_width").orElse(.3).forGetter(template -> template.connectorWidth)
         ).apply(instance, CableModelPartTemplate::new));
 
-        public static final CableModelPartTemplate INSTANCE = new CableModelPartTemplate(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "")); // TODO default texture?
+        public static final CableModelPartTemplate INSTANCE = new CableModelPartTemplate(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, ""));
 
         public final CableModelPart UP_CABLE;
         public final CableModelPart UP_BLOCK;

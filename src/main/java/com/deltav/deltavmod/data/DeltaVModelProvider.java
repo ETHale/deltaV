@@ -210,11 +210,11 @@ public class DeltaVModelProvider extends ModelProvider{
         builder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
-                ModBlocks.BASIC_CABLE.get(), 
+                ModBlocks.COPPER_CABLE.get(), 
                 MultiVariant.of(builder)
             )
         );
-        itemModels.generateFlatItem(ModItems.BASIC_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

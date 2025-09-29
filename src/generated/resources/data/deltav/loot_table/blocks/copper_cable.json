@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "deltav:basic_cable"
+          "name": "deltav:copper_cable"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "deltav:blocks/basic_cable"
+  "random_sequence": "deltav:blocks/copper_cable"
 }
