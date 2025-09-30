@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "bottom": "deltav:block/basic_battery_top",
+    "bottom": "deltav:block/basic_battery_bottom",
     "front": "deltav:block/basic_battery_side",
     "side": "deltav:block/basic_battery_side",
     "top": "deltav:block/basic_battery_top"

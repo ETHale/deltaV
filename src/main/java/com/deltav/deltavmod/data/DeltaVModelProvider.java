@@ -142,7 +142,7 @@ public class DeltaVModelProvider extends ModelProvider{
                 mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
                 .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
                 .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
-                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
+                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_bottom"))
             ))
             .put(ModBlocks.STEAM_GEYSER.get(), TexturedModel.ORIENTABLE.get(ModBlocks.STEAM_GEYSER.get()).updateTextures(mapping ->
                 mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
