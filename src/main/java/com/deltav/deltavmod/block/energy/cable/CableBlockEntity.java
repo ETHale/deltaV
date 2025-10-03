@@ -66,6 +66,9 @@ public abstract class CableBlockEntity extends BlockEntity {
                 return super.receiveEnergy(maxReceive, simulate);
             }
 
+            // We are working with a system where things with power will push power into receivers 
+            // This avoids us polling all the connections to see if they can send power. 
+
             @Override
             public boolean canExtract() {
                 return false;

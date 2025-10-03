@@ -63,7 +63,7 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
     public void renderTooltip(GuiGraphics g, int mouseX, int mouseY) {
         super.renderTooltip(g, mouseX, mouseY);
 
-        String energyLabel = menu.getEnergyStored() + "/" + menu.getCapacity();
+        String energyLabel = menu.getEnergyStored() + " / " + menu.getCapacity() + " RF";
 
         // Render additional tank tooltip if hovered over
         boolean isHoveringOverTank = isHovering(LEFT_PADDING, TOP_PADDING, BAR_WIDTH, MAX_BAR_HEIGHT, mouseX, mouseY);

@@ -107,8 +107,9 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
                 case BLOCK -> parts.add(template.NORTH_BLOCK);
                 default -> parts.add(template.NORTH_NOTHING);
             }
-        else
+        else {
             parts.add(template.NORTH_NOTHING);
+        }
 
         if (south != null)
             switch (south) {
@@ -116,8 +117,9 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
                 case BLOCK -> parts.add(template.SOUTH_BLOCK);
                 default -> parts.add(template.SOUTH_NOTHING);
             }
-        else
+        else {
             parts.add(template.SOUTH_NOTHING);
+        }
 
         if (up != null) 
             switch (up) {
