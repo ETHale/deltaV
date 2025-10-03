@@ -117,6 +117,10 @@ public abstract class CableBlockEntity extends BlockEntity {
         return false;
     } 
 
+    /**
+     * Flags this block entity to update itself.
+     * Will update the block model and wipe the known outputs of the cable
+     */
     public void markDirty() {
         traverse(worldPosition, cable -> cable.outputs = null);
         requestModelDataUpdate();
@@ -131,6 +135,7 @@ public abstract class CableBlockEntity extends BlockEntity {
         traverse(pos, traversed, consumer);
     }
 
+    // Continues the traversal of the cables with a set of known traversed cables
     private void traverse(BlockPos pos, Set<BlockPos> traversed, Consumer<CableBlockEntity> consumer) {
         for (Direction direction : Direction.values()) {
             BlockPos p = pos.relative(direction);
