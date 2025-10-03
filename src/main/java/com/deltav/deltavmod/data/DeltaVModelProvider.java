@@ -2,20 +2,30 @@ package com.deltav.deltavmod.data;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModelBuilder;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelState;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
+import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators.BlockFamilyProvider;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.model.DelegatedModel;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -24,7 +34,9 @@ import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -130,7 +142,7 @@ public class DeltaVModelProvider extends ModelProvider{
                 mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
                 .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
                 .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
-                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_top"))
+                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_bottom"))
             ))
             .put(ModBlocks.STEAM_GEYSER.get(), TexturedModel.ORIENTABLE.get(ModBlocks.STEAM_GEYSER.get()).updateTextures(mapping ->
                 mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
@@ -190,6 +202,19 @@ public class DeltaVModelProvider extends ModelProvider{
         // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
+
+        // CABLES
+        CableModelState state = new CableModelState();
+        CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
+        CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
+        builder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
+        blockModels.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(
+                ModBlocks.COPPER_CABLE.get(), 
+                MultiVariant.of(builder)
+            )
+        );
+        itemModels.generateFlatItem(ModItems.COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

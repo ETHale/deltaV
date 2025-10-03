@@ -2,7 +2,6 @@ package com.deltav.deltavmod.block.energy.generators;
 
 import javax.annotation.Nullable;
 
-import com.deltav.deltavmod.DeltaV;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -55,16 +53,21 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
     }
 
     @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        this.neighborChanged(state, level, pos, null, null, false);
+    }
+
+    @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean bool) {
         if (!level.isClientSide) {
             boolean flag = state.getValue(POWERED);
             if (flag != level.hasNeighborSignal(pos)) {
-                if (flag) {
-                    level.scheduleTick(pos, this, 4);
-                } else {
+                if (!flag) {
                     level.setBlock(pos, state.cycle(POWERED), 2);
                 }
             }
+            level.scheduleTick(pos, this, 4);
         } 
     }
 
@@ -77,16 +80,9 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
         Direction facing = state.getValue(FACING);
         BlockPos targetPos = pos.relative(facing);
 
-        //BlockState targetState = level.getBlockState(targetPos);
-        //DeltaV.LOGGER.debug("Block to the front: {}", targetState.getBlock().getName());
-        //BlockEntity targetBE = level.getBlockEntity(targetPos);
-        //DeltaV.LOGGER.debug("BlockEntity to the front: {}", targetBE);
-
-
         IEnergyStorage be = level.getCapability(Capabilities.EnergyStorage.BLOCK, targetPos, Direction.SOUTH);
-        if (state.getValue(POWERED) && be != null) {
-            if (be.canReceive()) {
-                //DeltaV.LOGGER.debug("SENDING POWER");
+        if (state.getValue(POWERED)) {
+            if (be != null && be.canReceive()) {
                 be.receiveEnergy(REDSTONE_GENERATOR_CAPACITY, false);
             }
             level.scheduleTick(pos, this, 20);

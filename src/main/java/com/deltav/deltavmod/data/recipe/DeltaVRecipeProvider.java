@@ -17,8 +17,8 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -392,6 +392,11 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('S', ModItems.STEEL_INGOT.get())
             .unlockedBy("has_steel_ingot", this.has(ModItems.STEEL_INGOT.get()))
             .save(this.output, "barrel_from_steel_ingots");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.COPPER_CABLE.get(), 6)
+            .pattern("ZZZ")
+            .define('Z', Items.COPPER_INGOT)
+            .unlockedBy("has_copper_ingot", this.has(Items.COPPER_INGOT))
+            .save(this.output, "copper_cable_from_copper_ingots");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

@@ -1,11 +1,11 @@
 package com.deltav.deltavmod.screen;
 
-import org.slf4j.Logger;
+import java.util.List;
+import java.util.Optional;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.BasicBatteryMenu;
 import com.deltav.deltavmod.menu.ModMenus;
-import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,6 +22,11 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu>{
     private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/basic_battery.png");
+    
+    private static final int MAX_BAR_HEIGHT = 57;
+    private static final int LEFT_PADDING = 75;
+    private static final int BAR_WIDTH = 25;
+    private static final int TOP_PADDING = 17;
     
     public BasicBatteryScreen(BasicBatteryMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
@@ -41,23 +47,9 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
         int e = menu.getEnergyStored();
         int cap = menu.getCapacity();
 
-        Logger log = LogUtils.getLogger();
-        log.debug(String.valueOf(e));
-        log.debug(String.valueOf(cap));
-
-        int maxBarHeight = 57;
-        int leftPadding = 75;
-        int barWidth = 25;
-        int topPadding = 17;
-
-        int barHeight = cap > 0 ? (int) ((e / (float) cap) * maxBarHeight) : 0;
-        guiGraphics.fillGradient(leftPos + leftPadding,topPos + topPadding + (maxBarHeight - barHeight),
-               leftPos + leftPadding + barWidth, topPos + topPadding + maxBarHeight, 0xFF010A1C, 0xFF02112E);
-
-        String energyLabel = e + "/" + cap + "RF";
-        int textX = leftPos + leftPadding + barWidth + 4;
-        int textY = topPos + topPadding + (maxBarHeight / 2);
-        guiGraphics.drawString(this.font, energyLabel, textX, textY, -12566464, false);
+        int barHeight = cap > 0 ? (int) ((e / (float) cap) * MAX_BAR_HEIGHT) : 0;
+        guiGraphics.fillGradient(leftPos + LEFT_PADDING,topPos + TOP_PADDING + (MAX_BAR_HEIGHT - barHeight),
+               leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF941400, 0xFFBD2008);
     }
 
     @Override
@@ -65,6 +57,26 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
         this.renderBackground(g, mouseX, mouseY, partialTicks);
         super.render(g, mouseX, mouseY, partialTicks);
         this.renderTooltip(g, mouseX, mouseY);
+    }
+
+    @Override
+    public void renderTooltip(GuiGraphics g, int mouseX, int mouseY) {
+        super.renderTooltip(g, mouseX, mouseY);
+
+        String energyLabel = menu.getEnergyStored() + " / " + menu.getCapacity() + " RF";
+
+        // Render additional tank tooltip if hovered over
+        boolean isHoveringOverTank = isHovering(LEFT_PADDING, TOP_PADDING, BAR_WIDTH, MAX_BAR_HEIGHT, mouseX, mouseY);
+        if (isHoveringOverTank) {
+            g.setTooltipForNextFrame(
+                this.font,
+                List.of(Component.literal(energyLabel)),
+                Optional.empty(),
+                ItemStack.EMPTY,
+                mouseX,
+                mouseY
+            );
+        }
     }
 
     /**

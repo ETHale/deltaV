@@ -61,7 +61,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone", ModBlocks.SMOOTH_SILICA_SANDSTONE);
     public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_stairs", ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS);
     public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_slab", ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB);
-
+    public static final DeferredItem<BlockItem> COPPER_CABLE_ITEM = ITEMS.registerSimpleBlockItem("copper_cable", ModBlocks.COPPER_CABLE);
     
     public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
     public static final DeferredItem<BlockItem> CRUSHER_ITEM = ITEMS.registerSimpleBlockItem("crusher", ModBlocks.CRUSHER);
