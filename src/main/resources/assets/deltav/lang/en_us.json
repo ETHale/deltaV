@@ -61,6 +61,11 @@
   "block.deltav.basic_battery": "Basic Battery",
   "block.deltav.copper_cable": "Copper Cable",
 
+  "block.deltav.rubber_log": "Rubber Log",
+  "block.deltav.rubber_wood": "Rubber Wood",
+  "block.deltav.stripped_rubber_log": "Stripped Rubber Log",
+  "block.deltav.stripped_rubber_wood": "Stripped Rubber Wood",
+
   "item.deltav.zinc_battery": "Zinc Battery",
   "item.deltav.silica_dust": "Silica Dust",
   "item.deltav.silicon": "Silicon",

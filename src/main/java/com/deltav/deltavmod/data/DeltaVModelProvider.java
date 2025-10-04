@@ -176,6 +176,12 @@ public class DeltaVModelProvider extends ModelProvider{
         BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
+
+        blockModels.woodProvider(ModBlocks.RUBBER_LOG.get()).logWithHorizontal(ModBlocks.RUBBER_LOG.get()).wood(ModBlocks.RUBBER_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_RUBBER_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBER_LOG.get()).wood(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+        //this.createHangingSign(Blocks.STRIPPED_OAK_LOG, Blocks.OAK_HANGING_SIGN, Blocks.OAK_WALL_HANGING_SIGN);
+        //this.createPlantWithDefaultItem(Blocks.OAK_SAPLING, Blocks.POTTED_OAK_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        //this.createTintedLeaves(Blocks.OAK_LEAVES, TexturedModel.LEAVES, -12012264);
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "deltav:block/rubber_log",
+    "side": "deltav:block/rubber_log"
+  }
+}

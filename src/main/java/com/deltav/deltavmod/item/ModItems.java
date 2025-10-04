@@ -68,6 +68,11 @@ public class ModItems {
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
     public static final DeferredItem<BlockItem> BASIC_BATTERY_ITEM = ITEMS.registerSimpleBlockItem("basic_battery", ModBlocks.BASIC_BATTERY);
     public static final DeferredItem<BlockItem> STEAM_GEYSER_ITEM = ITEMS.registerSimpleBlockItem("steam_geyser", ModBlocks.STEAM_GEYSER);
+
+    public static final DeferredItem<BlockItem> RUBBER_LOG_ITEM = ITEMS.registerSimpleBlockItem("rubber_log", ModBlocks.RUBBER_LOG);
+    public static final DeferredItem<BlockItem> RUBBER_WOOD_ITEM = ITEMS.registerSimpleBlockItem("rubber_wood", ModBlocks.RUBBER_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_RUBBER_LOG_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubber_log", ModBlocks.STRIPPED_RUBBER_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_RUBBER_WOOD_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubber_wood", ModBlocks.STRIPPED_RUBBER_WOOD);
     
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");

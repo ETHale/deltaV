@@ -132,6 +132,23 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.WALLS)
             .add(ModBlocks.KIMBERLITE_WALL.get())
             .add(ModBlocks.SILICA_SANDSTONE_WALL.get());
+
+        // rubber wood
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+            .add(ModBlocks.RUBBER_LOG.get())
+            .add(ModBlocks.RUBBER_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+        this.tag(BlockTags.LOGS)
+            .add(ModBlocks.RUBBER_LOG.get())
+            .add(ModBlocks.RUBBER_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+        this.tag(BlockTags.LOGS_THAT_BURN)
+            .add(ModBlocks.RUBBER_LOG.get())
+            .add(ModBlocks.RUBBER_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
     }
     
 }

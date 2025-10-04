@@ -9,6 +9,7 @@ import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.cable.cables.CopperCableBlock;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
+import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
 import com.deltav.deltavmod.block.geyser.SteamGeyser;
 import com.deltav.deltavmod.fluid.ModFluidBlocks;
@@ -225,6 +226,12 @@ public class ModBlocks {
     public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = KimberliteBlocks.KIMBERLITE_IRON_ORE;
     public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
 
+    // Rubber wood
+    public static final DeferredBlock<Block> RUBBER_LOG = RubberWoodBlocks.RUBBER_LOG;
+    public static final DeferredBlock<Block> STRIPPED_RUBBER_LOG = RubberWoodBlocks.STRIPPED_RUBBER_LOG;
+    public static final DeferredBlock<Block> RUBBER_WOOD = RubberWoodBlocks.RUBBER_WOOD;
+    public static final DeferredBlock<Block> STRIPPED_RUBBER_WOOD = RubberWoodBlocks.STRIPPED_RUBBER_WOOD;
+    
     //#endregion
     //#region Block entities
 
