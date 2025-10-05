@@ -231,6 +231,10 @@ public class ModBlocks {
     public static final DeferredBlock<Block> STRIPPED_RUBBER_LOG = RubberWoodBlocks.STRIPPED_RUBBER_LOG;
     public static final DeferredBlock<Block> RUBBER_WOOD = RubberWoodBlocks.RUBBER_WOOD;
     public static final DeferredBlock<Block> STRIPPED_RUBBER_WOOD = RubberWoodBlocks.STRIPPED_RUBBER_WOOD;
+    public static final DeferredBlock<Block> RUBBER_PLANKS = RubberWoodBlocks.RUBBER_PLANKS;
+    public static final DeferredBlock<Block> RUBBER_LEAVES = RubberWoodBlocks.RUBBER_LEAVES;
+    public static final DeferredBlock<Block> RUBBER_SAPLING = RubberWoodBlocks.RUBBER_SAPLING;
+    public static final DeferredBlock<Block> POTTED_RUBBER_SAPLING = RubberWoodBlocks.POTTED_RUBBER_SAPLING;
     
     //#endregion
     //#region Block entities

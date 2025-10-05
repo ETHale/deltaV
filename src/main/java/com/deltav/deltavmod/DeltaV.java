@@ -114,7 +114,7 @@ public class DeltaV {
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
             Block block = blockHolder.value();
-            if (block != Blocks.AIR && !(block instanceof LiquidBlock)) {
+            if (block != Blocks.AIR && !(block instanceof LiquidBlock) && block != ModBlocks.POTTED_RUBBER_SAPLING.get()) {
                 Item item = block.asItem();
                 output.accept(item);
             }

@@ -10,6 +10,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 
 public class DeltaVBlockLootProvider extends BlockLootSubProvider{
     public DeltaVBlockLootProvider(HolderLookup.Provider lookupProvider) {
@@ -84,5 +85,10 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.RUBBER_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_RUBBER_LOG.get());
         this.dropSelf(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+        this.dropSelf(ModBlocks.RUBBER_PLANKS.get());
+        this.dropSelf(ModBlocks.RUBBER_SAPLING.get());
+        this.add(ModBlocks.RUBBER_LEAVES.get(), 
+            block -> createLeavesDrops(block, ModBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        this.dropPottedContents(ModBlocks.POTTED_RUBBER_SAPLING.get());
     }
 }

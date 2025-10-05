@@ -180,8 +180,9 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.woodProvider(ModBlocks.RUBBER_LOG.get()).logWithHorizontal(ModBlocks.RUBBER_LOG.get()).wood(ModBlocks.RUBBER_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_RUBBER_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBER_LOG.get()).wood(ModBlocks.STRIPPED_RUBBER_WOOD.get());
         //this.createHangingSign(Blocks.STRIPPED_OAK_LOG, Blocks.OAK_HANGING_SIGN, Blocks.OAK_WALL_HANGING_SIGN);
-        //this.createPlantWithDefaultItem(Blocks.OAK_SAPLING, Blocks.POTTED_OAK_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
-        //this.createTintedLeaves(Blocks.OAK_LEAVES, TexturedModel.LEAVES, -12012264);
+        blockModels.createPlantWithDefaultItem(ModBlocks.RUBBER_SAPLING.get(), ModBlocks.POTTED_RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createTintedLeaves(ModBlocks.RUBBER_LEAVES.get(), TexturedModel.LEAVES, -12031986);
+        blockModels.createTrivialCube(ModBlocks.RUBBER_PLANKS.get());
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

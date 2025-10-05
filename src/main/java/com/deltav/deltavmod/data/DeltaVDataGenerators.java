@@ -40,6 +40,7 @@ public class DeltaVDataGenerators {
     public static void gatherData(GatherDataEvent.Client event) {
         // tags
         event.createProvider(DeltaVBlockTagsProvider::new);
+        event.createProvider(DeltaVItemTagsProvider::new);
         event.createProvider(DeltaVModelProvider::new);
         event.createProvider(ModParticleDescriptionProvider::new);
         event.createProvider(ModSoundDefinitionsProvider::new);
