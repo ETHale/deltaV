@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TintedParticleLeavesBlock;
@@ -140,8 +141,8 @@ public class RubberWoodBlocks {
 
     public static final DeferredBlock<Block> POTTED_RUBBER_SAPLING = BLOCKS.register(
         "potted_rubber_sapling", 
-        registryName -> new net.minecraft.world.level.block.FlowerPotBlock(
-            () -> (net.minecraft.world.level.block.FlowerPotBlock) Blocks.FLOWER_POT, 
+        registryName -> new FlowerPotBlock(
+            () -> (FlowerPotBlock) Blocks.FLOWER_POT, 
             RUBBER_SAPLING,
             BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))

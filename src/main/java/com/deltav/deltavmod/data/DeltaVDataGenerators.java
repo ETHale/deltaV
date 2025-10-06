@@ -116,6 +116,10 @@ public class DeltaVDataGenerators {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+
+        // isn't deprecated because it will be removed but because they want jsons instead
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
     }
 
     @SubscribeEvent
