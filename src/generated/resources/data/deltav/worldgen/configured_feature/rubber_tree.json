@@ -10,15 +10,20 @@
     },
     "foliage_placer": {
       "type": "minecraft:random_spread_foliage_placer",
-      "foliage_height": 3,
-      "leaf_placement_attempts": 2,
-      "offset": 1,
-      "radius": 3
+      "foliage_height": 2,
+      "leaf_placement_attempts": 25,
+      "offset": 0,
+      "radius": 2
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "deltav:rubber_leaves"
+        "Name": "deltav:rubber_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "false",
+          "waterlogged": "false"
+        }
       }
     },
     "force_dirt": false,
@@ -31,13 +36,21 @@
     },
     "trunk_placer": {
       "type": "minecraft:upwards_branching_trunk_placer",
-      "base_height": 3,
+      "base_height": 5,
       "can_grow_through": [],
-      "extra_branch_length": 2,
-      "extra_branch_steps": 2,
-      "height_rand_a": 2,
+      "extra_branch_length": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": 2
+      },
+      "extra_branch_steps": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": 2
+      },
+      "height_rand_a": 3,
       "height_rand_b": 2,
-      "place_branch_per_log_probability": 0.4
+      "place_branch_per_log_probability": 0.6
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

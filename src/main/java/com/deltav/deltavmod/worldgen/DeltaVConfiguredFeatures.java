@@ -11,6 +11,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature ;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -47,9 +48,9 @@ public class DeltaVConfiguredFeatures {
             Feature.TREE,
             new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.RUBBER_LOG.get()),
-                new UpwardsBranchingTrunkPlacer(3, 2, 2, ConstantInt.of(2), 0.4f, ConstantInt.of(2), HolderSet.empty()),
+                new UpwardsBranchingTrunkPlacer(5, 3, 2, UniformInt.of(2,5), 0.6f, UniformInt.of(2,5), HolderSet.empty()),
                 BlockStateProvider.simple(ModBlocks.RUBBER_LEAVES.get()), 
-                new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1), ConstantInt.of(3), 2), 
+                new RandomSpreadFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), ConstantInt.of(2), 25), 
                 new TwoLayersFeatureSize(1, 0, 2)).build()
         );
     }

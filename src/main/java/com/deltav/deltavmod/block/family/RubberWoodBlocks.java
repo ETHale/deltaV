@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.TintedParticleLeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -98,14 +99,19 @@ public class RubberWoodBlocks {
 
     public static final DeferredBlock<Block> RUBBER_LEAVES = BLOCKS.register(
         "rubber_leaves", 
-        registryName -> new Block(BlockBehaviour.Properties.of()
+        registryName -> new TintedParticleLeavesBlock(0.01F, BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.PLANT)
-            .instrument(NoteBlockInstrument.HAT)
             .strength(0.2F)
+            .randomTicks()
             .sound(SoundType.GRASS)
             .noOcclusion()
-            .ignitedByLava()) {
+            .isValidSpawn(Blocks::ocelotOrParrot)
+            .isSuffocating((state, level, pos) -> false)
+            .isViewBlocking((state, level, pos) -> false)
+            .ignitedByLava()
+            .pushReaction(PushReaction.DESTROY)
+            .isRedstoneConductor((state, level, pos) -> false)) {
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
                     return true;

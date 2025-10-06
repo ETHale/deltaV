@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
@@ -16,6 +17,7 @@ import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
@@ -27,6 +29,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -123,5 +126,13 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void registerDefinitions(RegisterBlockStateModels event) {
         event.registerModel(CableBlockStateModel.Unbaked.ID, CableBlockStateModel.Unbaked.CODEC);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register(
+            (state, world, pos, tintIndex) -> tintIndex == 0 ? -12031986 : 0xFFFFFF,
+            ModBlocks.RUBBER_LEAVES.get()
+        );
     }
 }
