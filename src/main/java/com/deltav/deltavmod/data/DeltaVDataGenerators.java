@@ -21,6 +21,8 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -120,6 +122,7 @@ public class DeltaVDataGenerators {
         // isn't deprecated because it will be removed but because they want jsons instead
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBER_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBER_SAPLING.get());
     }
 
     @SubscribeEvent
