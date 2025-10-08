@@ -20,6 +20,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.UpwardsBranchingTrunkPlacer;
 
 // general pipeline:
@@ -48,9 +50,9 @@ public class DeltaVConfiguredFeatures {
             Feature.TREE,
             new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.RUBBER_LOG.get()),
-                new UpwardsBranchingTrunkPlacer(5, 3, 2, UniformInt.of(2,5), 0.6f, UniformInt.of(2,5), HolderSet.empty()),
+                new StraightTrunkPlacer(4, 1, 3),
                 BlockStateProvider.simple(ModBlocks.RUBBER_LEAVES.get()), 
-                new RandomSpreadFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), ConstantInt.of(2), 25), 
+                new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(5), 125), 
                 new TwoLayersFeatureSize(1, 0, 2)).build()
         );
     }

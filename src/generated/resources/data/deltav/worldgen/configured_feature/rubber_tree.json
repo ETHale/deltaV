@@ -10,10 +10,10 @@
     },
     "foliage_placer": {
       "type": "minecraft:random_spread_foliage_placer",
-      "foliage_height": 2,
-      "leaf_placement_attempts": 25,
+      "foliage_height": 5,
+      "leaf_placement_attempts": 125,
       "offset": 0,
-      "radius": 2
+      "radius": 3
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
@@ -35,22 +35,10 @@
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:upwards_branching_trunk_placer",
-      "base_height": 5,
-      "can_grow_through": [],
-      "extra_branch_length": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 5,
-        "min_inclusive": 2
-      },
-      "extra_branch_steps": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 5,
-        "min_inclusive": 2
-      },
-      "height_rand_a": 3,
-      "height_rand_b": 2,
-      "place_branch_per_log_probability": 0.6
+      "type": "minecraft:straight_trunk_placer",
+      "base_height": 4,
+      "height_rand_a": 1,
+      "height_rand_b": 3
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

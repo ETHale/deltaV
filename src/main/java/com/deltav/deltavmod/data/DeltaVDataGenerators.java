@@ -17,7 +17,6 @@ import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
