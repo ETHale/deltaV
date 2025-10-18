@@ -18,11 +18,19 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -231,10 +239,22 @@ public class ModBlocks {
     public static final DeferredBlock<Block> STRIPPED_RUBBER_LOG = RubberWoodBlocks.STRIPPED_RUBBER_LOG;
     public static final DeferredBlock<Block> RUBBER_WOOD = RubberWoodBlocks.RUBBER_WOOD;
     public static final DeferredBlock<Block> STRIPPED_RUBBER_WOOD = RubberWoodBlocks.STRIPPED_RUBBER_WOOD;
-    public static final DeferredBlock<Block> RUBBER_PLANKS = RubberWoodBlocks.RUBBER_PLANKS;
     public static final DeferredBlock<Block> RUBBER_LEAVES = RubberWoodBlocks.RUBBER_LEAVES;
     public static final DeferredBlock<Block> RUBBER_SAPLING = RubberWoodBlocks.RUBBER_SAPLING;
     public static final DeferredBlock<Block> POTTED_RUBBER_SAPLING = RubberWoodBlocks.POTTED_RUBBER_SAPLING;
+    public static final DeferredBlock<Block> RUBBERWOOD_PLANKS = RubberWoodBlocks.RUBBERWOOD_PLANKS;
+    public static final DeferredBlock<StairBlock> RUBBERWOOD_STAIRS = RubberWoodBlocks.RUBBERWOOD_STAIRS;
+    public static final DeferredBlock<SlabBlock> RUBBERWOOD_SLAB = RubberWoodBlocks.RUBBERWOOD_SLAB;
+    public static final DeferredBlock<PressurePlateBlock> RUBBERWOOD_PRESSURE_PLATE = RubberWoodBlocks.RUBBERWOOD_PRESSURE_PLATE;
+    public static final DeferredBlock<ButtonBlock> RUBBERWOOD_BUTTON = RubberWoodBlocks.RUBBERWOOD_BUTTON;
+    public static final DeferredBlock<FenceBlock> RUBBERWOOD_FENCE = RubberWoodBlocks.RUBBERWOOD_FENCE;
+    public static final DeferredBlock<FenceGateBlock> RUBBERWOOD_FENCE_GATE = RubberWoodBlocks.RUBBERWOOD_FENCE_GATE;
+    public static final DeferredBlock<DoorBlock> RUBBERWOOD_DOOR = RubberWoodBlocks.RUBBERWOOD_DOOR;
+    public static final DeferredBlock<TrapDoorBlock> RUBBERWOOD_TRAPDOOR = RubberWoodBlocks.RUBBERWOOD_TRAPDOOR;
+    public static final DeferredBlock<StandingSignBlock> RUBBERWOOD_SIGN = RubberWoodBlocks.RUBBERWOOD_SIGN;
+    public static final DeferredBlock<WallSignBlock> RUBBERWOOD_WALL_SIGN = RubberWoodBlocks.RUBBERWOOD_WALL_SIGN;
+    public static final DeferredBlock<CeilingHangingSignBlock> RUBBERWOOD_HANGING_SIGN = RubberWoodBlocks.RUBBERWOOD_HANGING_SIGN;
+    public static final DeferredBlock<WallHangingSignBlock> RUBBERWOOD_WALL_HANGING_SIGN = RubberWoodBlocks.RUBBERWOOD_WALL_HANGING_SIGN;
     
     //#endregion
     //#region Block entities

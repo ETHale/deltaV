@@ -85,10 +85,22 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.RUBBER_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_RUBBER_LOG.get());
         this.dropSelf(ModBlocks.STRIPPED_RUBBER_WOOD.get());
-        this.dropSelf(ModBlocks.RUBBER_PLANKS.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.dropSelf(ModBlocks.RUBBER_SAPLING.get());
         this.add(ModBlocks.RUBBER_LEAVES.get(), 
             block -> createLeavesDrops(block, ModBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         this.dropPottedContents(ModBlocks.POTTED_RUBBER_SAPLING.get());
+        this.add(ModBlocks.RUBBERWOOD_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.RUBBERWOOD_SLAB.get()));
+        this.dropSelf(ModBlocks.RUBBERWOOD_STAIRS.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_BUTTON.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_FENCE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_FENCE_GATE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
+        this.add(ModBlocks.RUBBERWOOD_DOOR.get(),
+            block -> createDoorTable(ModBlocks.RUBBERWOOD_DOOR.get()));
+        this.dropSelf(ModBlocks.RUBBERWOOD_SIGN.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_HANGING_SIGN.get());
     }
 }

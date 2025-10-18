@@ -22,6 +22,6 @@ public class DeltaVItemTagsProvider extends ItemTagsProvider{
             .add(ModBlocks.RUBBER_WOOD.get().asItem())
             .add(ModBlocks.STRIPPED_RUBBER_LOG.get().asItem())
             .add(ModBlocks.STRIPPED_RUBBER_WOOD.get().asItem());
-        this.tag(ItemTags.PLANKS).add(ModBlocks.RUBBER_PLANKS.get().asItem());
+        this.tag(ItemTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get().asItem());
     }
 }

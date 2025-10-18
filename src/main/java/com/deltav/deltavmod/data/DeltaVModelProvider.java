@@ -28,6 +28,7 @@ import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -173,10 +174,23 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.woodProvider(ModBlocks.RUBBER_LOG.get()).logWithHorizontal(ModBlocks.RUBBER_LOG.get()).wood(ModBlocks.RUBBER_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_RUBBER_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBER_LOG.get()).wood(ModBlocks.STRIPPED_RUBBER_WOOD.get());
-        //this.createHangingSign(Blocks.STRIPPED_OAK_LOG, Blocks.OAK_HANGING_SIGN, Blocks.OAK_WALL_HANGING_SIGN);
+        blockModels.createHangingSign(ModBlocks.STRIPPED_RUBBER_LOG.get(), ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get());
         blockModels.createPlantWithDefaultItem(ModBlocks.RUBBER_SAPLING.get(), ModBlocks.POTTED_RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTintedLeaves(ModBlocks.RUBBER_LEAVES.get(), TexturedModel.LEAVES, -12031986);
-        blockModels.createTrivialCube(ModBlocks.RUBBER_PLANKS.get());
+        blockModels.createTrivialCube(ModBlocks.RUBBERWOOD_PLANKS.get());
+        BlockFamily rubberwoodFamily = new BlockFamily.Builder(ModBlocks.RUBBERWOOD_PLANKS.get())
+            .stairs(ModBlocks.RUBBERWOOD_STAIRS.get())
+            .slab(ModBlocks.RUBBERWOOD_SLAB.get())
+            .pressurePlate(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get())
+            .button(ModBlocks.RUBBERWOOD_BUTTON.get())
+            .fence(ModBlocks.RUBBERWOOD_FENCE.get())
+            .fenceGate(ModBlocks.RUBBERWOOD_FENCE_GATE.get())
+            .door(ModBlocks.RUBBERWOOD_DOOR.get())
+            .sign(ModBlocks.RUBBERWOOD_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_SIGN.get())
+            .trapdoor(ModBlocks.RUBBERWOOD_TRAPDOOR.get())
+            .getFamily();
+        blockModels.familyWithExistingFullBlock(ModBlocks.RUBBERWOOD_PLANKS.get())
+            .generateFor(rubberwoodFamily);
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);

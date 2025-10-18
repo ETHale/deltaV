@@ -8,6 +8,7 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
+import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
 import com.deltav.deltavmod.particle.ModParticles;
@@ -18,6 +19,7 @@ import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.block.Blocks;
@@ -122,6 +124,8 @@ public class DeltaVDataGenerators {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBER_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBER_SAPLING.get());
+
+        Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
     }
 
     @SubscribeEvent

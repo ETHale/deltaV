@@ -114,7 +114,11 @@ public class DeltaV {
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
             Block block = blockHolder.value();
-            if (block != Blocks.AIR && !(block instanceof LiquidBlock) && block != ModBlocks.POTTED_RUBBER_SAPLING.get()) {
+            if (block != Blocks.AIR && !(block instanceof LiquidBlock) &&
+            block != ModBlocks.POTTED_RUBBER_SAPLING.get() &&
+            block != ModBlocks.RUBBERWOOD_WALL_SIGN.get() &&
+            block != ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
+            ) {
                 Item item = block.asItem();
                 output.accept(item);
             }

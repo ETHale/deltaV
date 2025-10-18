@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "deltav:block/rubberwood_slab"
+    },
+    "type=double": {
+      "model": "deltav:block/rubberwood_planks"
+    },
+    "type=top": {
+      "model": "deltav:block/rubberwood_slab_top"
+    }
+  }
+}

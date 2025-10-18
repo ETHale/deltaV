@@ -73,9 +73,19 @@ public class ModItems {
     public static final DeferredItem<BlockItem> RUBBER_WOOD_ITEM = ITEMS.registerSimpleBlockItem("rubber_wood", ModBlocks.RUBBER_WOOD);
     public static final DeferredItem<BlockItem> STRIPPED_RUBBER_LOG_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubber_log", ModBlocks.STRIPPED_RUBBER_LOG);
     public static final DeferredItem<BlockItem> STRIPPED_RUBBER_WOOD_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubber_wood", ModBlocks.STRIPPED_RUBBER_WOOD);
-    public static final DeferredItem<BlockItem> RUBBER_PLANKS_ITEM = ITEMS.registerSimpleBlockItem("rubber_planks", ModBlocks.RUBBER_PLANKS);
     public static final DeferredItem<BlockItem> RUBBER_LEAVES_ITEM = ITEMS.registerSimpleBlockItem("rubber_leaves", ModBlocks.RUBBER_LEAVES);
     public static final DeferredItem<BlockItem> RUBBER_SAPLING_ITEM = ITEMS.registerSimpleBlockItem("rubber_sapling", ModBlocks.RUBBER_SAPLING);
+    public static final DeferredItem<BlockItem> RUBBER_PLANKS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_planks", ModBlocks.RUBBERWOOD_PLANKS);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_stairs", ModBlocks.RUBBERWOOD_STAIRS);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_SLAB_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_slab", ModBlocks.RUBBERWOOD_SLAB);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_PRESSURE_PLATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_pressure_plate", ModBlocks.RUBBERWOOD_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_BUTTON_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_button", ModBlocks.RUBBERWOOD_BUTTON);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence", ModBlocks.RUBBERWOOD_FENCE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_GATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence_gate", ModBlocks.RUBBERWOOD_FENCE_GATE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_DOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_door", ModBlocks.RUBBERWOOD_DOOR);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_TRAPDOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_trapdoor", ModBlocks.RUBBERWOOD_TRAPDOOR);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_SIGN_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_sign", ModBlocks.RUBBERWOOD_SIGN);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_HANGING_SIGN_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_hanging_sign", ModBlocks.RUBBERWOOD_HANGING_SIGN);
     
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");

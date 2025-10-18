@@ -139,7 +139,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.RUBBER_WOOD.get())
             .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
             .add(ModBlocks.STRIPPED_RUBBER_WOOD.get())
-            .add(ModBlocks.RUBBER_PLANKS.get());
+            .add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.LOGS)
             .add(ModBlocks.RUBBER_LOG.get())
             .add(ModBlocks.RUBBER_WOOD.get())
@@ -150,7 +150,7 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
             .add(ModBlocks.RUBBER_WOOD.get())
             .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
             .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
-        this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBER_PLANKS.get());
+        this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE)
             .add(ModBlocks.RUBBER_LEAVES.get())
             .add(ModBlocks.RUBBER_SAPLING.get());
