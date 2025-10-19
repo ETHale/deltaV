@@ -20,10 +20,12 @@ import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,11 +33,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
 // event handler for data gen classes 
@@ -144,5 +148,21 @@ public class DeltaVDataGenerators {
             (state, world, pos, tintIndex) -> tintIndex == 0 ? -12031986 : 0xFFFFFF,
             ModBlocks.RUBBER_LEAVES.get()
         );
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
+        event.modify(
+            BlockEntityType.SIGN, 
+            ModBlocks.RUBBERWOOD_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_SIGN.get(),
+            ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(BlockEntityType.SIGN, SignRenderer::new);
     }
 }
