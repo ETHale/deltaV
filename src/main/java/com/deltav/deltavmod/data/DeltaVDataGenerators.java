@@ -118,6 +118,10 @@ public class DeltaVDataGenerators {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
+        });
+
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
@@ -128,8 +132,6 @@ public class DeltaVDataGenerators {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBER_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBER_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBER_SAPLING.get());
-
-        Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
     }
 
     @SubscribeEvent
@@ -155,7 +157,11 @@ public class DeltaVDataGenerators {
         event.modify(
             BlockEntityType.SIGN, 
             ModBlocks.RUBBERWOOD_SIGN.get(),
-            ModBlocks.RUBBERWOOD_WALL_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_SIGN.get()
+        );
+
+        event.modify(
+            BlockEntityType.HANGING_SIGN,
             ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
             ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
         );

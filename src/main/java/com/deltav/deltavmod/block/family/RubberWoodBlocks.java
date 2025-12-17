@@ -42,8 +42,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class RubberWoodBlocks {
     public static final String RUBBERWOOD_NAME = DeltaV.MODID + ":rubberwood";
-    public static final BlockSetType RUBBERWOOD_SET = new BlockSetType(RUBBERWOOD_NAME);
-    public static final WoodType RUBBERWOOD_TYPE = new WoodType(RUBBERWOOD_NAME, RUBBERWOOD_SET);
+    public static final BlockSetType RUBBERWOOD_SET = BlockSetType.register(new BlockSetType(RUBBERWOOD_NAME));
+    public static final WoodType RUBBERWOOD_TYPE = WoodType.register(new WoodType(RUBBERWOOD_NAME, RUBBERWOOD_SET));
 
     public static final DeferredBlock<Block> RUBBER_LOG = BLOCKS.register(
         "rubber_log", 
