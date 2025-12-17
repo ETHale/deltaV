@@ -8,8 +8,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -84,8 +86,24 @@ public class ModItems {
     public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_GATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence_gate", ModBlocks.RUBBERWOOD_FENCE_GATE);
     public static final DeferredItem<BlockItem> RUBBERWOOD_DOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_door", ModBlocks.RUBBERWOOD_DOOR);
     public static final DeferredItem<BlockItem> RUBBERWOOD_TRAPDOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_trapdoor", ModBlocks.RUBBERWOOD_TRAPDOOR);
-    public static final DeferredItem<BlockItem> RUBBERWOOD_SIGN_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_sign", ModBlocks.RUBBERWOOD_SIGN);
-    public static final DeferredItem<BlockItem> RUBBERWOOD_HANGING_SIGN_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_hanging_sign", ModBlocks.RUBBERWOOD_HANGING_SIGN);
+    public static final DeferredItem<SignItem> RUBBERWOOD_SIGN_ITEM = ITEMS.register(
+        "rubberwood_sign",
+        registryName -> new SignItem(
+            ModBlocks.RUBBERWOOD_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_SIGN.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(16)
+        ));
+    public static final DeferredItem<HangingSignItem> RUBBERWOOD_HANGING_SIGN_ITEM = ITEMS.register(
+        "rubberwood_hanging_sign", 
+        registryName -> new HangingSignItem(
+            ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(16)
+        ));
     
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
