@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -84,8 +85,14 @@ public class ModItems {
     public static final DeferredItem<BlockItem> RUBBERWOOD_BUTTON_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_button", ModBlocks.RUBBERWOOD_BUTTON);
     public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence", ModBlocks.RUBBERWOOD_FENCE);
     public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_GATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence_gate", ModBlocks.RUBBERWOOD_FENCE_GATE);
-    public static final DeferredItem<BlockItem> RUBBERWOOD_DOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_door", ModBlocks.RUBBERWOOD_DOOR);
     public static final DeferredItem<BlockItem> RUBBERWOOD_TRAPDOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_trapdoor", ModBlocks.RUBBERWOOD_TRAPDOOR);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_DOOR_ITEM = ITEMS.register(
+        "rubberwood_door", 
+        registryName -> new DoubleHighBlockItem(
+            ModBlocks.RUBBERWOOD_DOOR.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+        ));
     public static final DeferredItem<SignItem> RUBBERWOOD_SIGN_ITEM = ITEMS.register(
         "rubberwood_sign",
         registryName -> new SignItem(
