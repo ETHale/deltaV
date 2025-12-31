@@ -496,6 +496,11 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('S', ModBlocks.RUBBERWOOD_PLANKS)
             .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
             .save(this.output, "rubberwood_trapdoor_from_rubberwood_planks");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.INSULATED_COPPER_CABLE, 1)
+            .requires(ModBlocks.COPPER_CABLE)
+            .requires(ModItems.RUBBER.get())
+            .unlockedBy("has_copper_cable", this.has(ModBlocks.COPPER_CABLE))
+            .save(this.output, "insulated_copper_cable_from_copper_cable_and_rubber");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

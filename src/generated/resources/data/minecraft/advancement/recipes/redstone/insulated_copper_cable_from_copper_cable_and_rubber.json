@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_cable": {
+      "conditions": {
+        "items": [
+          {
+            "items": "deltav:copper_cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:insulated_copper_cable_from_copper_cable_and_rubber"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_cable"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:insulated_copper_cable_from_copper_cable_and_rubber"
+    ]
+  }
+}
