@@ -140,6 +140,7 @@ public class ModItems {
     public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
     public static final DeferredItem<Item> GLOOPY_RESIDUE = ITEMS.registerSimpleItem("gloopy_residue");
+    public static final DeferredItem<Item> RUBBER = ITEMS.registerSimpleItem("rubber");
 
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
         "oil_bucket",
