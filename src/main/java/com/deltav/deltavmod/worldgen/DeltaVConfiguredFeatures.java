@@ -45,9 +45,9 @@ public class DeltaVConfiguredFeatures {
             RUBBERWOODTREE,
             Feature.TREE,
             new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.RUBBERWOODLOG.get()),
+                BlockStateProvider.simple(ModBlocks.RUBBERWOOD_LOG.get()),
                 new StraightTrunkPlacer(4, 1, 3),
-                BlockStateProvider.simple(ModBlocks.RUBBERWOODLEAVES.get()), 
+                BlockStateProvider.simple(ModBlocks.RUBBERWOOD_LEAVES.get()), 
                 new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(5), 125), 
                 new TwoLayersFeatureSize(1, 0, 2)).build()
         );

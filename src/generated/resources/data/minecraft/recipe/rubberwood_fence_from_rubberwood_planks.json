@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": "minecraft:stick",
+    "S": "deltav:rubberwood_planks"
+  },
+  "pattern": [
+    "SIS",
+    "SIS"
+  ],
+  "result": {
+    "count": 3,
+    "id": "deltav:rubberwood_fence"
+  }
+}

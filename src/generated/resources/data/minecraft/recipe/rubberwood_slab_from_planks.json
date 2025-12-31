@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "Z": "deltav:rubberwood_planks"
+  },
+  "pattern": [
+    "ZZZ"
+  ],
+  "result": {
+    "count": 6,
+    "id": "deltav:rubberwood_slab"
+  }
+}

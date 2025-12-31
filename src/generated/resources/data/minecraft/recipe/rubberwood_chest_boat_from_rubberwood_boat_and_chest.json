@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "deltav:rubberwood_boat",
+    "minecraft:chest"
+  ],
+  "result": {
+    "count": 1,
+    "id": "deltav:rubberwood_chest_boat"
+  }
+}

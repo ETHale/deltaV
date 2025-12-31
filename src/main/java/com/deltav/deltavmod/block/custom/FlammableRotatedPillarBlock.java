@@ -47,11 +47,11 @@ public class FlammableRotatedPillarBlock extends RotatedPillarBlock {
 
         // if we add more logs would be worth switching to a map
         if (context.getItemInHand().getItem() instanceof AxeItem) {
-            if (state.is(ModBlocks.RUBBERWOODLOG.get())) {
-                return ModBlocks.STRIPPED_RUBBERWOODLOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBlocks.RUBBERWOOD_LOG.get())) {
+                return ModBlocks.STRIPPED_RUBBERWOOD_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
-            else if (state.is(ModBlocks.RUBBERWOODWOOD.get())) {
-                return ModBlocks.STRIPPED_RUBBERWOODWOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            else if (state.is(ModBlocks.RUBBERWOOD_WOOD.get())) {
+                return ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }
                 

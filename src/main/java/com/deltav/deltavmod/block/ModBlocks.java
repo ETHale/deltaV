@@ -235,13 +235,13 @@ public class ModBlocks {
     public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = KimberliteBlocks.KIMBERLITE_COBALT_ORE;
 
     // Rubber wood
-    public static final DeferredBlock<Block> RUBBERWOODLOG = RubberWoodBlocks.RUBBERWOODLOG;
-    public static final DeferredBlock<Block> STRIPPED_RUBBERWOODLOG = RubberWoodBlocks.STRIPPED_RUBBERWOODLOG;
-    public static final DeferredBlock<Block> RUBBERWOODWOOD = RubberWoodBlocks.RUBBERWOODWOOD;
-    public static final DeferredBlock<Block> STRIPPED_RUBBERWOODWOOD = RubberWoodBlocks.STRIPPED_RUBBERWOODWOOD;
-    public static final DeferredBlock<Block> RUBBERWOODLEAVES = RubberWoodBlocks.RUBBERWOODLEAVES;
-    public static final DeferredBlock<Block> RUBBERWOODSAPLING = RubberWoodBlocks.RUBBERWOODSAPLING;
-    public static final DeferredBlock<Block> POTTED_RUBBERWOODSAPLING = RubberWoodBlocks.POTTED_RUBBERWOODSAPLING;
+    public static final DeferredBlock<Block> RUBBERWOOD_LOG = RubberWoodBlocks.RUBBERWOOD_LOG;
+    public static final DeferredBlock<Block> STRIPPED_RUBBERWOOD_LOG = RubberWoodBlocks.STRIPPED_RUBBERWOOD_LOG;
+    public static final DeferredBlock<Block> RUBBERWOOD_WOOD = RubberWoodBlocks.RUBBERWOOD_WOOD;
+    public static final DeferredBlock<Block> STRIPPED_RUBBERWOOD_WOOD = RubberWoodBlocks.STRIPPED_RUBBERWOOD_WOOD;
+    public static final DeferredBlock<Block> RUBBERWOOD_LEAVES = RubberWoodBlocks.RUBBERWOOD_LEAVES;
+    public static final DeferredBlock<Block> RUBBERWOOD_SAPLING = RubberWoodBlocks.RUBBERWOOD_SAPLING;
+    public static final DeferredBlock<Block> POTTED_RUBBERWOOD_SAPLING = RubberWoodBlocks.POTTED_RUBBERWOOD_SAPLING;
     public static final DeferredBlock<Block> RUBBERWOOD_PLANKS = RubberWoodBlocks.RUBBERWOOD_PLANKS;
     public static final DeferredBlock<StairBlock> RUBBERWOOD_STAIRS = RubberWoodBlocks.RUBBERWOOD_STAIRS;
     public static final DeferredBlock<SlabBlock> RUBBERWOOD_SLAB = RubberWoodBlocks.RUBBERWOOD_SLAB;

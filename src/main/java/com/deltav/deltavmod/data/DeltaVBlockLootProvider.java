@@ -81,15 +81,15 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.FRACTIONATOR.get());
         this.dropWhenSilkTouch(ModBlocks.STEAM_GEYSER.get());
         this.dropSelf(ModBlocks.COPPER_CABLE.get());
-        this.dropSelf(ModBlocks.RUBBERWOODLOG.get());
-        this.dropSelf(ModBlocks.RUBBERWOODWOOD.get());
-        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOODLOG.get());
-        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_LOG.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_WOOD.get());
+        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get());
+        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
         this.dropSelf(ModBlocks.RUBBERWOOD_PLANKS.get());
-        this.dropSelf(ModBlocks.RUBBERWOODSAPLING.get());
-        this.add(ModBlocks.RUBBERWOODLEAVES.get(), 
-            block -> createLeavesDrops(block, ModBlocks.RUBBERWOODSAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-        this.dropPottedContents(ModBlocks.POTTED_RUBBERWOODSAPLING.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_SAPLING.get());
+        this.add(ModBlocks.RUBBERWOOD_LEAVES.get(), 
+            block -> createLeavesDrops(block, ModBlocks.RUBBERWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        this.dropPottedContents(ModBlocks.POTTED_RUBBERWOOD_SAPLING.get());
         this.add(ModBlocks.RUBBERWOOD_SLAB.get(),
             block -> createSlabItemTable(ModBlocks.RUBBERWOOD_SLAB.get()));
         this.dropSelf(ModBlocks.RUBBERWOOD_STAIRS.get());

@@ -139,9 +139,9 @@ public class DeltaVDataGenerators {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
 
         // isn't deprecated because it will be removed but because they want jsons instead
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBERWOODSAPLING.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBERWOODSAPLING.get(), ChunkSectionLayer.CUTOUT);
-        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBERWOODSAPLING.getId(), () -> ModBlocks.POTTED_RUBBERWOODSAPLING.get());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBERWOOD_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBERWOOD_SAPLING.get());
     }
 
     @SubscribeEvent
@@ -158,7 +158,7 @@ public class DeltaVDataGenerators {
     public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(
             (state, world, pos, tintIndex) -> tintIndex == 0 ? -12031986 : 0xFFFFFF,
-            ModBlocks.RUBBERWOODLEAVES.get()
+            ModBlocks.RUBBERWOOD_LEAVES.get()
         );
     }
 

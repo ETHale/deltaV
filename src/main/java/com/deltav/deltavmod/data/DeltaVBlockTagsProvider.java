@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 
 // adds tags to all our custom blocks
 // tags seem to be used to determine traits like - needs stone or higher pickaxe to mine
@@ -135,26 +136,41 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
 
         // rubber wood
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(ModBlocks.RUBBERWOODLOG.get())
-            .add(ModBlocks.RUBBERWOODWOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get())
+            .add(ModBlocks.RUBBERWOOD_LOG.get())
+            .add(ModBlocks.RUBBERWOOD_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get())
             .add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.LOGS)
-            .add(ModBlocks.RUBBERWOODLOG.get())
-            .add(ModBlocks.RUBBERWOODWOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
+            .add(ModBlocks.RUBBERWOOD_LOG.get())
+            .add(ModBlocks.RUBBERWOOD_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
         this.tag(BlockTags.LOGS_THAT_BURN)
-            .add(ModBlocks.RUBBERWOODLOG.get())
-            .add(ModBlocks.RUBBERWOODWOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
+            .add(ModBlocks.RUBBERWOOD_LOG.get())
+            .add(ModBlocks.RUBBERWOOD_WOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
         this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE)
-            .add(ModBlocks.RUBBERWOODLEAVES.get())
-            .add(ModBlocks.RUBBERWOODSAPLING.get());
-        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBERWOODLEAVES.get());
+            .add(ModBlocks.RUBBERWOOD_LEAVES.get())
+            .add(ModBlocks.RUBBERWOOD_SAPLING.get());
+        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBERWOOD_LEAVES.get());
+        this.tag(BlockTags.SAPLINGS).add(ModBlocks.RUBBERWOOD_SAPLING.get());
+        this.tag(BlockTags.WOODEN_SLABS).add(ModBlocks.RUBBERWOOD_SLAB.get());
+        this.tag(BlockTags.SLABS).add(ModBlocks.RUBBERWOOD_SLAB.get());
+        this.tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.get());
+        this.tag(BlockTags.STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.get());
+        this.tag(BlockTags.WOODEN_FENCES).add(ModBlocks.RUBBERWOOD_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES).add(ModBlocks.RUBBERWOOD_FENCE_GATE.get());
+        this.tag(BlockTags.WOODEN_DOORS).add(ModBlocks.RUBBERWOOD_DOOR.get());
+        this.tag(BlockTags.DOORS).add(ModBlocks.RUBBERWOOD_DOOR.get());
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
+        this.tag(BlockTags.TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
+        this.tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
+        this.tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
+        this.tag(BlockTags.BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
     }
-    
+
 }
