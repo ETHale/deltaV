@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/flower_pot_cross",
   "textures": {
-    "plant": "deltav:block/rubber_sapling"
+    "plant": "deltav:block/rubberwood_sapling"
   }
 }

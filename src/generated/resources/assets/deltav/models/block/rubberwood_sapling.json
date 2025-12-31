@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "deltav:block/rubber_sapling"
+    "cross": "deltav:block/rubberwood_sapling"
   }
 }

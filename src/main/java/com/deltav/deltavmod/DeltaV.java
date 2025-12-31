@@ -117,7 +117,7 @@ public class DeltaV {
         ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
             Block block = blockHolder.value();
             if (block != Blocks.AIR && !(block instanceof LiquidBlock) &&
-            block != ModBlocks.POTTED_RUBBER_SAPLING.get() &&
+            block != ModBlocks.POTTED_RUBBERWOODSAPLING.get() &&
             block != ModBlocks.RUBBERWOOD_WALL_SIGN.get() &&
             block != ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
             ) {

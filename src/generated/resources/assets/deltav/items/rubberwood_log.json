@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "deltav:block/stripped_rubber_log"
+    "model": "deltav:block/rubberwood_log"
   }
 }

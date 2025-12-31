@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-    "all": "deltav:block/rubber_leaves"
+    "all": "deltav:block/rubberwood_leaves"
   }
 }

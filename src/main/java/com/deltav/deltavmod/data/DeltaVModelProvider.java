@@ -172,11 +172,11 @@ public class DeltaVModelProvider extends ModelProvider{
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
 
-        blockModels.woodProvider(ModBlocks.RUBBER_LOG.get()).logWithHorizontal(ModBlocks.RUBBER_LOG.get()).wood(ModBlocks.RUBBER_WOOD.get());
-        blockModels.woodProvider(ModBlocks.STRIPPED_RUBBER_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBER_LOG.get()).wood(ModBlocks.STRIPPED_RUBBER_WOOD.get());
-        blockModels.createHangingSign(ModBlocks.STRIPPED_RUBBER_LOG.get(), ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get());
-        blockModels.createPlantWithDefaultItem(ModBlocks.RUBBER_SAPLING.get(), ModBlocks.POTTED_RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createTintedLeaves(ModBlocks.RUBBER_LEAVES.get(), TexturedModel.LEAVES, -12031986);
+        blockModels.woodProvider(ModBlocks.RUBBERWOODLOG.get()).logWithHorizontal(ModBlocks.RUBBERWOODLOG.get()).wood(ModBlocks.RUBBERWOODWOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_RUBBERWOODLOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBERWOODLOG.get()).wood(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_RUBBERWOODLOG.get(), ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get());
+        blockModels.createPlantWithDefaultItem(ModBlocks.RUBBERWOODSAPLING.get(), ModBlocks.POTTED_RUBBERWOODSAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createTintedLeaves(ModBlocks.RUBBERWOODLEAVES.get(), TexturedModel.LEAVES, -12031986);
         blockModels.createTrivialCube(ModBlocks.RUBBERWOOD_PLANKS.get());
         BlockFamily rubberwoodFamily = new BlockFamily.Builder(ModBlocks.RUBBERWOOD_PLANKS.get())
             .stairs(ModBlocks.RUBBERWOOD_STAIRS.get())

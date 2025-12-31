@@ -18,10 +18,10 @@ public class DeltaVItemTagsProvider extends ItemTagsProvider{
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(ItemTags.LOGS_THAT_BURN)
-            .add(ModBlocks.RUBBER_LOG.get().asItem())
-            .add(ModBlocks.RUBBER_WOOD.get().asItem())
-            .add(ModBlocks.STRIPPED_RUBBER_LOG.get().asItem())
-            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get().asItem());
+            .add(ModBlocks.RUBBERWOODLOG.get().asItem())
+            .add(ModBlocks.RUBBERWOODWOOD.get().asItem())
+            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get().asItem())
+            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get().asItem());
         this.tag(ItemTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get().asItem());
     }
 }

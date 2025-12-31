@@ -45,8 +45,8 @@ public class RubberWoodBlocks {
     public static final BlockSetType RUBBERWOOD_SET = BlockSetType.register(new BlockSetType(RUBBERWOOD_NAME));
     public static final WoodType RUBBERWOOD_TYPE = WoodType.register(new WoodType(RUBBERWOOD_NAME, RUBBERWOOD_SET));
 
-    public static final DeferredBlock<Block> RUBBER_LOG = BLOCKS.register(
-        "rubber_log", 
+    public static final DeferredBlock<Block> RUBBERWOODLOG = BLOCKS.register(
+        "rubberwood_log", 
         registryName -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.WOOD)
@@ -57,8 +57,8 @@ public class RubberWoodBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> RUBBER_WOOD = BLOCKS.register(
-        "rubber_wood", 
+    public static final DeferredBlock<Block> RUBBERWOODWOOD = BLOCKS.register(
+        "rubberwood_wood", 
         registryName -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.WOOD)
@@ -69,8 +69,8 @@ public class RubberWoodBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> STRIPPED_RUBBER_LOG = BLOCKS.register(
-        "stripped_rubber_log", 
+    public static final DeferredBlock<Block> STRIPPED_RUBBERWOODLOG = BLOCKS.register(
+        "stripped_rubberwood_log", 
         registryName -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.WOOD)
@@ -81,8 +81,8 @@ public class RubberWoodBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> STRIPPED_RUBBER_WOOD = BLOCKS.register(
-        "stripped_rubber_wood", 
+    public static final DeferredBlock<Block> STRIPPED_RUBBERWOODWOOD = BLOCKS.register(
+        "stripped_rubberwood_wood", 
         registryName -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.WOOD)
@@ -93,8 +93,8 @@ public class RubberWoodBlocks {
         )
     );
 
-    public static final DeferredBlock<Block> RUBBER_LEAVES = BLOCKS.register(
-        "rubber_leaves", 
+    public static final DeferredBlock<Block> RUBBERWOODLEAVES = BLOCKS.register(
+        "rubberwood_leaves", 
         registryName -> new TintedParticleLeavesBlock(0.01F, BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, registryName))
             .mapColor(MapColor.PLANT)
@@ -125,20 +125,20 @@ public class RubberWoodBlocks {
             }
     );
 
-    public static final DeferredBlock<Block> RUBBER_SAPLING = BLOCKS.register(
-        "rubber_sapling", 
+    public static final DeferredBlock<Block> RUBBERWOODSAPLING = BLOCKS.register(
+        "rubberwood_sapling", 
         registryName -> new SaplingBlock(
-            DeltaVTreeGrowers.RUBBER_TREE,
+            DeltaVTreeGrowers.RUBBERWOODTREE,
             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)
                 .setId(ResourceKey.create(Registries.BLOCK, registryName)
             )
     ));
 
-    public static final DeferredBlock<Block> POTTED_RUBBER_SAPLING = BLOCKS.register(
-        "potted_rubber_sapling", 
+    public static final DeferredBlock<Block> POTTED_RUBBERWOODSAPLING = BLOCKS.register(
+        "potted_rubberwood_sapling", 
         registryName -> new FlowerPotBlock(
             () -> (FlowerPotBlock) Blocks.FLOWER_POT, 
-            RUBBER_SAPLING,
+            RUBBERWOODSAPLING,
             BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .noOcclusion()

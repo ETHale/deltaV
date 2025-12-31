@@ -25,7 +25,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 public class DeltaVConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> KIMBERLITE_CARROT = registerKey("kimberlite_carrot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOT_SPRING = registerKey("hot_spring");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> RUBBER_TREE = registerKey("rubber_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RUBBERWOODTREE = registerKey("rubberwood_tree");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         register(
@@ -42,12 +42,12 @@ public class DeltaVConfiguredFeatures {
         );
         register(
             context,
-            RUBBER_TREE,
+            RUBBERWOODTREE,
             Feature.TREE,
             new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.RUBBER_LOG.get()),
+                BlockStateProvider.simple(ModBlocks.RUBBERWOODLOG.get()),
                 new StraightTrunkPlacer(4, 1, 3),
-                BlockStateProvider.simple(ModBlocks.RUBBER_LEAVES.get()), 
+                BlockStateProvider.simple(ModBlocks.RUBBERWOODLEAVES.get()), 
                 new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(5), 125), 
                 new TwoLayersFeatureSize(1, 0, 2)).build()
         );

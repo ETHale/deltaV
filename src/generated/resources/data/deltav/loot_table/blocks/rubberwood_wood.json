@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "deltav:stripped_rubber_log"
+          "name": "deltav:rubberwood_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "deltav:blocks/stripped_rubber_log"
+  "random_sequence": "deltav:blocks/rubberwood_wood"
 }

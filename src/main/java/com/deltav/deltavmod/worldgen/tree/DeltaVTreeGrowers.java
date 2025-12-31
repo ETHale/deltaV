@@ -8,10 +8,10 @@ import com.deltav.deltavmod.worldgen.DeltaVConfiguredFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 public class DeltaVTreeGrowers {
-    public static final TreeGrower RUBBER_TREE = new TreeGrower(
-        DeltaV.MODID + ":rubber_tree",
+    public static final TreeGrower RUBBERWOODTREE = new TreeGrower(
+        DeltaV.MODID + ":rubberwood_tree",
         Optional.empty(),
-        Optional.of(DeltaVConfiguredFeatures.RUBBER_TREE),
+        Optional.of(DeltaVConfiguredFeatures.RUBBERWOODTREE),
         Optional.empty()
     );
 }

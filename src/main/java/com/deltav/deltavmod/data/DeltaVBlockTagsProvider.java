@@ -135,26 +135,26 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
 
         // rubber wood
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(ModBlocks.RUBBER_LOG.get())
-            .add(ModBlocks.RUBBER_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get())
+            .add(ModBlocks.RUBBERWOODLOG.get())
+            .add(ModBlocks.RUBBERWOODWOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get())
             .add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.LOGS)
-            .add(ModBlocks.RUBBER_LOG.get())
-            .add(ModBlocks.RUBBER_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+            .add(ModBlocks.RUBBERWOODLOG.get())
+            .add(ModBlocks.RUBBERWOODWOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
         this.tag(BlockTags.LOGS_THAT_BURN)
-            .add(ModBlocks.RUBBER_LOG.get())
-            .add(ModBlocks.RUBBER_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBER_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+            .add(ModBlocks.RUBBERWOODLOG.get())
+            .add(ModBlocks.RUBBERWOODWOOD.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODLOG.get())
+            .add(ModBlocks.STRIPPED_RUBBERWOODWOOD.get());
         this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE)
-            .add(ModBlocks.RUBBER_LEAVES.get())
-            .add(ModBlocks.RUBBER_SAPLING.get());
-        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBER_LEAVES.get());
+            .add(ModBlocks.RUBBERWOODLEAVES.get())
+            .add(ModBlocks.RUBBERWOODSAPLING.get());
+        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBERWOODLEAVES.get());
     }
     
 }
