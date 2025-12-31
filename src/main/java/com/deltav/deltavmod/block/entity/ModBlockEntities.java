@@ -5,11 +5,11 @@ import java.util.function.Supplier;
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.cable.cables.CopperCableBlockEntity;
+import com.deltav.deltavmod.block.energy.cable.cables.InsulatedCopperCableBlockEntity;
 import com.deltav.deltavmod.block.geyser.GeyserBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -65,6 +65,13 @@ public class ModBlockEntities {
                 CopperCableBlockEntity::new, 
                 false,
                 ModBlocks.COPPER_CABLE.get()));
+    public static final Supplier<BlockEntityType<InsulatedCopperCableBlockEntity>> INSULATED_COPPER_CABLE_BE =
+        BLOCK_ENTITIES.register(
+            "insulated_copper_cable_be", 
+            () -> new BlockEntityType<InsulatedCopperCableBlockEntity>(
+                InsulatedCopperCableBlockEntity::new, 
+                false,
+                ModBlocks.INSULATED_COPPER_CABLE.get()));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

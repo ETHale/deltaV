@@ -81,6 +81,7 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.FRACTIONATOR.get());
         this.dropWhenSilkTouch(ModBlocks.STEAM_GEYSER.get());
         this.dropSelf(ModBlocks.COPPER_CABLE.get());
+        this.dropSelf(ModBlocks.INSULATED_COPPER_CABLE.get());
         this.dropSelf(ModBlocks.RUBBERWOOD_LOG.get());
         this.dropSelf(ModBlocks.RUBBERWOOD_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get());

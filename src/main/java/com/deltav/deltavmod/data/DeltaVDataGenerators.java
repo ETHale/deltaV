@@ -93,6 +93,11 @@ public class DeltaVDataGenerators {
             ModBlockEntities.COPPER_CABLE_BE.get(), 
             (be, side) -> be.getEnergyHandler()
         );
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            ModBlockEntities.INSULATED_COPPER_CABLE_BE.get(), 
+            (be, side) -> be.getEnergyHandler()
+        );
 
         // Register that the Fractionator block entity has a fluid handler capability.
         event.registerBlockEntity(

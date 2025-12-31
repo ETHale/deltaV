@@ -7,6 +7,7 @@ import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.cable.cables.CopperCableBlock;
+import com.deltav.deltavmod.block.energy.cable.cables.InsulatedCopperCableBlock;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.RubberWoodBlocks;
@@ -312,6 +313,17 @@ public class ModBlocks {
                 .instrument(NoteBlockInstrument.BELL)
                 .strength(1.0f)
                 .sound(SoundType.METAL)
+        ));
+
+    public static final DeferredBlock<InsulatedCopperCableBlock> INSULATED_COPPER_CABLE = BLOCKS.register(
+        "insulated_copper_cable", 
+        registryName -> new InsulatedCopperCableBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_BLACK)
+                .instrument(NoteBlockInstrument.BELL)
+                .strength(1.0f)
+                .sound(SoundType.WOOL)
         ));
 
     //#endregion

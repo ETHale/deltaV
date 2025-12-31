@@ -222,17 +222,28 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
 
         // CABLES
-        CableModelState state = new CableModelState();
-        CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
-        CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
-        builder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
+        CableModelState copperCableState = new CableModelState();
+        CableModelPart.Unbaked copperCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, copperCableState);
+        CableBlockStateModelBuilder copperCableBuilder = new CableBlockStateModelBuilder().part(copperCablePart);
+        copperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.COPPER_CABLE.get(), 
-                MultiVariant.of(builder)
+                MultiVariant.of(copperCableBuilder)
             )
         );
         itemModels.generateFlatItem(ModItems.COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        CableModelState insulatedCableState = new CableModelState();
+        CableModelPart.Unbaked insulatedCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, insulatedCableState);
+        CableBlockStateModelBuilder insulatedCopperCableBuilder = new CableBlockStateModelBuilder().part(insulatedCablePart);
+        insulatedCopperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/insulated_copper_cable"));
+        blockModels.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(
+                ModBlocks.INSULATED_COPPER_CABLE.get(), 
+                MultiVariant.of(insulatedCopperCableBuilder)
+            )
+        );
+        itemModels.generateFlatItem(ModItems.INSULATED_COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {
