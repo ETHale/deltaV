@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.data.ModDataComponents;
+import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
@@ -79,6 +80,7 @@ public class DeltaV {
         ModDataComponents.register(modEventBus);
         ModParticles.register(modEventBus);
         ModSounds.SOUND_EVENTS.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         

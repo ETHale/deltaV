@@ -206,6 +206,8 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THERMAL_WATER_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RUBBERWOOD_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RUBBERWOOD_CHEST_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
         blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());

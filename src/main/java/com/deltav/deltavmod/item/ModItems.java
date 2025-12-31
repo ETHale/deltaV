@@ -2,11 +2,13 @@ package com.deltav.deltavmod.item;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.HangingSignItem;
@@ -111,7 +113,23 @@ public class ModItems {
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .stacksTo(16)
         ));
-    
+    public static final DeferredItem<BoatItem> RUBBERWOOD_BOAT_ITEM = ITEMS.register(
+        "rubberwood_boat", 
+        registryName -> new BoatItem(
+            ModEntityTypes.RUBBERWOOD_BOAT.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(1)
+        ));
+    public static final DeferredItem<BoatItem> RUBBERWOOD_CHEST_BOAT_ITEM = ITEMS.register(
+        "rubberwood_chest_boat",
+        registryName -> new BoatItem(
+            ModEntityTypes.RUBBERWOOD_CHEST_BOAT.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(1)
+        ));
+
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");

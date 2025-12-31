@@ -9,6 +9,8 @@ import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.block.family.RubberWoodBlocks;
+import com.deltav.deltavmod.entity.ModEntityTypes;
+import com.deltav.deltavmod.entity.ModModelLayerLocations;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
 import com.deltav.deltavmod.particle.ModParticles;
@@ -18,11 +20,19 @@ import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -170,5 +180,26 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityType.SIGN, SignRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.RUBBERWOOD_BOAT.get(), (context) -> new BoatRenderer(
+                context, 
+                ModModelLayerLocations.RUBBERWOOD_BOAT
+            ));
+        event.registerEntityRenderer(ModEntityTypes.RUBBERWOOD_CHEST_BOAT.get(), (context) -> new BoatRenderer(
+                context, 
+                ModModelLayerLocations.RUBBERWOOD_CHEST_BOAT
+            ));
     }
+
+    @SubscribeEvent
+    public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(
+            ModModelLayerLocations.RUBBERWOOD_BOAT, 
+            () -> BoatModel.createBoatModel()
+        );
+        event.registerLayerDefinition(
+            ModModelLayerLocations.RUBBERWOOD_CHEST_BOAT, 
+            () -> BoatModel.createChestBoatModel()
+        );
+    }
+
 }

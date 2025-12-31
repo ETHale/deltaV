@@ -78,6 +78,8 @@
   "item.deltav.rubberwood_sign": "Rubberwood Sign",
   "item.deltav.rubberwood_hanging_sign": "Rubberwood Hanging Sign",
   "item.deltav.rubberwood_door": "Rubberwood Door",
+  "item.deltav.rubberwood_boat": "Rubberwood Boat",
+  "item.deltav.rubberwood_chest_boat": "Rubberwood Boat with Chest",
   
   "item.deltav.zinc_battery": "Zinc Battery",
   "item.deltav.silica_dust": "Silica Dust",
@@ -109,5 +111,8 @@
   "fluid_type.deltav.kerosene": "Kerosene",
   "fluid_type.deltav.thermal_water": "Thermal Water",
 
-  "sound.deltav.geyser": "Geyser"
+  "sound.deltav.geyser": "Geyser",
+
+  "entity.deltav.rubberwood_boat": "Rubberwood Boat",
+  "entity.deltav.rubberwood_chest_boat": "Rubberwood Boat with Chest"
 }
