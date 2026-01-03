@@ -10,12 +10,13 @@
         "falling": "true"
       }
     },
+    "depth": 6,
     "geyser": {
       "Name": "deltav:steam_geyser"
     },
+    "radius": 8,
     "rim": {
       "Name": "deltav:silica_sandstone"
-    },
-    "searchHeight": 32
+    }
   }
 }
