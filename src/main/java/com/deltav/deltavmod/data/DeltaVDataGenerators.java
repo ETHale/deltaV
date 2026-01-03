@@ -61,6 +61,7 @@ public class DeltaVDataGenerators {
         // tags
         event.createProvider(DeltaVBlockTagsProvider::new);
         event.createProvider(DeltaVItemTagsProvider::new);
+        event.createProvider(DeltaVBiomeTagsProvider::new);
         event.createProvider(DeltaVModelProvider::new);
         event.createProvider(ModParticleDescriptionProvider::new);
         event.createProvider(ModSoundDefinitionsProvider::new);
