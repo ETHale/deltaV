@@ -35,38 +35,71 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         // Create a sunken ground area
         int radius = conf.radius();
         int depth =  conf.depth();
-        Set<BlockPos> poolArea = createSunkenGround(worldgenlevel, origin, radius, depth, conf);
+        Set<BlockPos>[] areas = createSunkenGround(worldgenlevel, origin, radius, depth, conf, randomsource);
+        Set<BlockPos> poolArea = areas[0];
+        Set<BlockPos> edgeArea = areas[1];
 
         // Waterlog the area
         waterlogArea(worldgenlevel, poolArea, conf);
 
         // Place a geyser
-        placeGeyser(worldgenlevel, poolArea, conf);
+        placeGeyser(worldgenlevel, edgeArea, conf);
 
         return true;
     }
 
-    private Set<BlockPos> createSunkenGround(WorldGenLevel level, BlockPos origin, int radius, int depth, HotSpringFeatureConfiguration conf) {
+    private Set<BlockPos>[] createSunkenGround(WorldGenLevel level, BlockPos origin, int radius, int depth, HotSpringFeatureConfiguration conf, RandomSource rand) {
         Set<BlockPos> poolArea = new HashSet<>();
+        Set<BlockPos> edgeArea = new HashSet<>();
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-        for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-radius, -radius, -radius), origin.offset(radius, radius, radius))) {
-            int dx = pos.getX() - origin.getX();
-            int dz = pos.getZ() - origin.getZ();
-            if (dx * dx + dz * dz <= radius * radius) {
-                for (int y = 0; y < depth; y++) {
-                    mutablePos.set(pos.getX(), origin.getY() - y, pos.getZ());
+        int edgeWidth = 2; // Configurable edge width - TODO add to config?
+        for (int y = 0; y < depth; y++) {
+            // Adjust noise to create jagged edges
+            float noise = rand.nextFloat() * 0.4f; // tweak for more/less jagged edges - TODO add to config?
+            int newRadius = radius - y; // TODO add some rate of change to config?
+            float threshold = (1.0f - noise) * newRadius * newRadius;
+
+            //move centre around to add more noise 
+            BlockPos noisyOrigin = origin.offset(rand.nextInt(3) - 1, 0, rand.nextInt(3) - 1); // TODO add to config?
+            
+            int areaSize = (int) newRadius + (int) edgeWidth;
+
+            for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-areaSize, noisyOrigin.getY(), -areaSize), origin.offset(areaSize, noisyOrigin.getY(), areaSize))) {
+                int dx = pos.getX() - noisyOrigin.getX();
+                int dz = pos.getZ() - noisyOrigin.getZ();
+                float point = dx * dx + dz * dz;
+
+                // Check if the block is within the pool area
+                if (point <= threshold) {
+                    mutablePos.set(pos.getX(), noisyOrigin.getY() - y, pos.getZ());
                     if (canReplaceBlock(level.getBlockState(mutablePos))) {
-                        level.setBlock(mutablePos, conf.barrier(), 2);
-                        if (y == depth - 1) {
-                            poolArea.add(mutablePos.immutable());
+                        poolArea.add(mutablePos.immutable());
+                    }
+                }
+            }
+        }
+
+        // Determine edge area
+        for (BlockPos pos : poolArea) {
+            for (int dx = -edgeWidth; dx <= edgeWidth; dx++) {
+                for (int dz = -edgeWidth; dz <= edgeWidth; dz++) {
+                    for (int dy = 0; dy > -2; dy--) {
+                        mutablePos.set(pos.offset(dx, dy, dz));
+                        if (!poolArea.contains(mutablePos) && canReplaceBlock(level.getBlockState(mutablePos)) 
+                            && !edgeArea.contains(mutablePos) && level.getFluidState(mutablePos) != conf.contents()) {
+                            level.setBlock(mutablePos, conf.barrier(), 2);
+                            if (level.canSeeSky(mutablePos))
+                                edgeArea.add(mutablePos);
                         }
                     }
                 }
             }
         }
 
-        return poolArea;
+        @SuppressWarnings("unchecked")
+        Set<BlockPos>[] result = (Set<BlockPos>[]) new Set[]{poolArea, edgeArea};
+        return result;
     }
 
     private void waterlogArea(WorldGenLevel level, Set<BlockPos> poolArea, HotSpringFeatureConfiguration conf) {
@@ -75,12 +108,12 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         }
     }
 
-    private void placeGeyser(WorldGenLevel level, Set<BlockPos> poolArea, HotSpringFeatureConfiguration conf) {
-        if (poolArea.isEmpty()) return;
+    private void placeGeyser(WorldGenLevel level, Set<BlockPos> area, HotSpringFeatureConfiguration conf) {
+        if (area.isEmpty()) return;
 
-        BlockPos[] positions = poolArea.toArray(new BlockPos[0]);
+        BlockPos[] positions = area.toArray(new BlockPos[0]);
         BlockPos geyserPos = positions[level.getRandom().nextInt(positions.length)];
-        level.setBlock(geyserPos.above(), conf.geyser(), 2);
+        level.setBlock(geyserPos, conf.geyser(), 2);
     }
 
     private boolean canReplaceBlock(BlockState state) {
