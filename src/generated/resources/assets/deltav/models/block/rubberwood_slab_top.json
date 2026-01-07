@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "deltav:block/rubberwood_planks",
-    "side": "deltav:block/rubberwood_planks",
-    "top": "deltav:block/rubberwood_planks"
-  }
-}

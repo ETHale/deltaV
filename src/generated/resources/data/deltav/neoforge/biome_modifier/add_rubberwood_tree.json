@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#deltav:has_rubberwood_trees",
-  "features": "deltav:rubberwood_tree",
-  "step": "vegetal_decoration"
-}

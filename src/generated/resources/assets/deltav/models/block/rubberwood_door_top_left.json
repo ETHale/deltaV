@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_left",
-  "textures": {
-    "bottom": "deltav:block/rubberwood_door_bottom",
-    "top": "deltav:block/rubberwood_door_top"
-  }
-}

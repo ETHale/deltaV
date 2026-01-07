@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "deltav:block/rubberwood_log_top",
-    "side": "deltav:block/rubberwood_log"
-  }
-}

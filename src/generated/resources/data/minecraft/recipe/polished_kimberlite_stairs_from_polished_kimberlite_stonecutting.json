@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "deltav:polished_kimberlite",
-  "result": {
-    "count": 1,
-    "id": "deltav:polished_kimberlite_stairs"
-  }
-}

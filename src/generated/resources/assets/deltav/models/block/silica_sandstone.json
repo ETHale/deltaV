@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "deltav:block/silica_sandstone_bottom",
-    "side": "deltav:block/silica_sandstone",
-    "top": "deltav:block/silica_sandstone_top"
-  }
-}

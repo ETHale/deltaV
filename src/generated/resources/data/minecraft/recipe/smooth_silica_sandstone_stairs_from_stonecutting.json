@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "deltav:smooth_silica_sandstone",
-  "result": {
-    "count": 1,
-    "id": "deltav:smooth_silica_sandstone_stairs"
-  }
-}
