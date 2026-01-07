@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "deltav:block/polished_kimberlite",
-    "side": "deltav:block/polished_kimberlite",
-    "top": "deltav:block/polished_kimberlite"
-  }
-}

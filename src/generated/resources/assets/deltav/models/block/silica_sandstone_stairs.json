@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "deltav:block/silica_sandstone",
-    "side": "deltav:block/silica_sandstone",
-    "top": "deltav:block/silica_sandstone_top"
-  }
-}

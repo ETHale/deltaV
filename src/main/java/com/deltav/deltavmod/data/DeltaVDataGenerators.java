@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
+import com.deltav.deltavmod.block.family.RubberWoodBlocks;
+import com.deltav.deltavmod.entity.ModEntityTypes;
+import com.deltav.deltavmod.entity.ModModelLayerLocations;
 import com.deltav.deltavmod.menu.ModMenus;
 import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
 import com.deltav.deltavmod.particle.ModParticles;
@@ -16,9 +20,22 @@ import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -26,10 +43,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterBlockStateModels;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 
 // event handler for data gen classes 
@@ -40,6 +60,8 @@ public class DeltaVDataGenerators {
     public static void gatherData(GatherDataEvent.Client event) {
         // tags
         event.createProvider(DeltaVBlockTagsProvider::new);
+        event.createProvider(DeltaVItemTagsProvider::new);
+        event.createProvider(DeltaVBiomeTagsProvider::new);
         event.createProvider(DeltaVModelProvider::new);
         event.createProvider(ModParticleDescriptionProvider::new);
         event.createProvider(ModSoundDefinitionsProvider::new);
@@ -70,6 +92,11 @@ public class DeltaVDataGenerators {
         event.registerBlockEntity(
             Capabilities.EnergyStorage.BLOCK,
             ModBlockEntities.COPPER_CABLE_BE.get(), 
+            (be, side) -> be.getEnergyHandler()
+        );
+        event.registerBlockEntity(
+            Capabilities.EnergyStorage.BLOCK,
+            ModBlockEntities.INSULATED_COPPER_CABLE_BE.get(), 
             (be, side) -> be.getEnergyHandler()
         );
 
@@ -107,11 +134,20 @@ public class DeltaVDataGenerators {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
+        });
+
         // item models
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+
+        // isn't deprecated because it will be removed but because they want jsons instead
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
+        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBERWOOD_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBERWOOD_SAPLING.get());
     }
 
     @SubscribeEvent
@@ -123,4 +159,53 @@ public class DeltaVDataGenerators {
     public static void registerDefinitions(RegisterBlockStateModels event) {
         event.registerModel(CableBlockStateModel.Unbaked.ID, CableBlockStateModel.Unbaked.CODEC);
     }
+
+    @SubscribeEvent
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register(
+            (state, world, pos, tintIndex) -> tintIndex == 0 ? -12031986 : 0xFFFFFF,
+            ModBlocks.RUBBERWOOD_LEAVES.get()
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
+        event.modify(
+            BlockEntityType.SIGN, 
+            ModBlocks.RUBBERWOOD_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_SIGN.get()
+        );
+
+        event.modify(
+            BlockEntityType.HANGING_SIGN,
+            ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(BlockEntityType.SIGN, SignRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.RUBBERWOOD_BOAT.get(), (context) -> new BoatRenderer(
+                context, 
+                ModModelLayerLocations.RUBBERWOOD_BOAT
+            ));
+        event.registerEntityRenderer(ModEntityTypes.RUBBERWOOD_CHEST_BOAT.get(), (context) -> new BoatRenderer(
+                context, 
+                ModModelLayerLocations.RUBBERWOOD_CHEST_BOAT
+            ));
+    }
+
+    @SubscribeEvent
+    public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(
+            ModModelLayerLocations.RUBBERWOOD_BOAT, 
+            () -> BoatModel.createBoatModel()
+        );
+        event.registerLayerDefinition(
+            ModModelLayerLocations.RUBBERWOOD_CHEST_BOAT, 
+            () -> BoatModel.createChestBoatModel()
+        );
+    }
+
 }

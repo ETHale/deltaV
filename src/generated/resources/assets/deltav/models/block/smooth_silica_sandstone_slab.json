@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "deltav:block/silica_sandstone_top",
-    "side": "deltav:block/silica_sandstone_top",
-    "top": "deltav:block/silica_sandstone_top"
-  }
-}

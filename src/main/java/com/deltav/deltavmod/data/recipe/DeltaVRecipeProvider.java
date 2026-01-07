@@ -397,6 +397,110 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('Z', Items.COPPER_INGOT)
             .unlockedBy("has_copper_ingot", this.has(Items.COPPER_INGOT))
             .save(this.output, "copper_cable_from_copper_ingots");
+
+        // Rubberwood recipes
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_PLANKS, 4)
+            .requires(ModBlocks.RUBBERWOOD_LOG)
+            .unlockedBy("has_rubberwood_log", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "rubberwood_planks_from_log");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_SLAB, 6)
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_slab_from_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_STAIRS, 4)
+            .pattern("Z  ")
+            .pattern("ZZ ")
+            .pattern("ZZZ")
+            .define('Z', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_stairs_from_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_HANGING_SIGN, 6)
+            .pattern("C C")
+            .pattern("SSS")
+            .pattern("SSS")
+            .define('C', Items.CHAIN)
+            .define('S', ModBlocks.STRIPPED_RUBBERWOOD_LOG)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "rubberwood_hanging_sign_from_rubberwood_logs");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_SIGN, 3)
+            .pattern("SSS")
+            .pattern("SSS")
+            .pattern(" I ")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .define('I', Items.STICK)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_sign_from_rubberwood_logs");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_WOOD, 3)
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModBlocks.RUBBERWOOD_LOG)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "rubberwood_wood_from_rubberwood_logs");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_RUBBERWOOD_WOOD, 3)
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModBlocks.STRIPPED_RUBBERWOOD_LOG)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "stripped_rubberwood_wood_from_stripped_rubberwood_logs");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_PLANKS, 1)
+            .pattern("S")
+            .pattern("S")
+            .define('S', ModBlocks.RUBBERWOOD_SLAB)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_SLAB))
+            .save(this.output, "rubberwood_planks_from_rubberwood_slab");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModItems.RUBBERWOOD_BOAT_ITEM, 1)
+            .pattern("S S")
+            .pattern("SSS")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "rubberwood_boat_from_rubberwood_planks");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.RUBBERWOOD_CHEST_BOAT_ITEM, 1)
+            .requires(ModItems.RUBBERWOOD_BOAT_ITEM)
+            .requires(Items.CHEST)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
+            .save(this.output, "rubberwood_chest_boat_from_rubberwood_boat_and_chest");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_FENCE, 3)
+            .pattern("SIS")
+            .pattern("SIS")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .define('I', Items.STICK)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_fence_from_rubberwood_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_FENCE_GATE, 1)
+            .pattern("ISI")
+            .pattern("ISI")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .define('I', Items.STICK)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_fence_gate_from_rubberwood_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.DECORATIONS, ModBlocks.RUBBERWOOD_DOOR, 3)
+            .pattern("SS")
+            .pattern("SS")
+            .pattern("SS")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_door_from_rubberwood_planks");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.RUBBERWOOD_BUTTON, 1)
+            .requires(ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_button_from_rubberwood_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.RUBBERWOOD_PRESSURE_PLATE, 1)
+            .pattern("SS")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_pressure_plate_from_rubberwood_planks");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBERWOOD_TRAPDOOR, 2)
+            .pattern("SSS")
+            .pattern("SSS")
+            .define('S', ModBlocks.RUBBERWOOD_PLANKS)
+            .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_PLANKS))
+            .save(this.output, "rubberwood_trapdoor_from_rubberwood_planks");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.INSULATED_COPPER_CABLE, 1)
+            .requires(ModBlocks.COPPER_CABLE)
+            .requires(ModItems.RUBBER.get())
+            .unlockedBy("has_copper_cable", this.has(ModBlocks.COPPER_CABLE))
+            .save(this.output, "insulated_copper_cable_from_copper_cable_and_rubber");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

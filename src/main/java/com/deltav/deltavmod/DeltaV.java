@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.data.ModDataComponents;
+import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
@@ -79,6 +80,7 @@ public class DeltaV {
         ModDataComponents.register(modEventBus);
         ModParticles.register(modEventBus);
         ModSounds.SOUND_EVENTS.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         
@@ -114,7 +116,11 @@ public class DeltaV {
     private static void populateBlockTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         ModBlocks.BLOCKS.getEntries().forEach(blockHolder -> {
             Block block = blockHolder.value();
-            if (block != Blocks.AIR && !(block instanceof LiquidBlock)) {
+            if (block != Blocks.AIR && !(block instanceof LiquidBlock) &&
+            block != ModBlocks.POTTED_RUBBERWOOD_SAPLING.get() &&
+            block != ModBlocks.RUBBERWOOD_WALL_SIGN.get() &&
+            block != ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
+            ) {
                 Item item = block.asItem();
                 output.accept(item);
             }

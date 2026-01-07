@@ -60,7 +60,28 @@
   "block.deltav.redstone_generator": "Redstone Generator",
   "block.deltav.basic_battery": "Basic Battery",
   "block.deltav.copper_cable": "Copper Cable",
+  "block.deltav.insulated_copper_cable": "Insulated Copper Cable",
 
+  "block.deltav.rubberwood_log": "Rubberwood Log",
+  "block.deltav.rubberwood_wood": "Rubberwood Wood",
+  "block.deltav.stripped_rubberwood_log": "Stripped Rubberwood Log",
+  "block.deltav.stripped_rubberwood_wood": "Stripped Rubberwood Wood",
+  "block.deltav.rubberwood_planks": "Rubberwood Planks",
+  "block.deltav.rubberwood_stairs": "Rubberwood Stairs",
+  "block.deltav.rubberwood_slab": "Rubberwood Slab",
+  "block.deltav.rubberwood_pressure_plate": "Rubberwood Pressure Plate",
+  "block.deltav.rubberwood_button": "Rubberwood Button",
+  "block.deltav.rubberwood_fence": "Rubberwood Fence",
+  "block.deltav.rubberwood_fence_gate": "Rubberwood Fence Gate",
+  "block.deltav.rubberwood_trapdoor": "Rubberwood Trapdoor",
+  "block.deltav.rubberwood_leaves": "Rubberwood Leaves",
+  "block.deltav.rubberwood_sapling": "Rubberwood Sapling",
+  "item.deltav.rubberwood_sign": "Rubberwood Sign",
+  "item.deltav.rubberwood_hanging_sign": "Rubberwood Hanging Sign",
+  "item.deltav.rubberwood_door": "Rubberwood Door",
+  "item.deltav.rubberwood_boat": "Rubberwood Boat",
+  "item.deltav.rubberwood_chest_boat": "Rubberwood Boat with Chest",
+  
   "item.deltav.zinc_battery": "Zinc Battery",
   "item.deltav.silica_dust": "Silica Dust",
   "item.deltav.silicon": "Silicon",
@@ -91,5 +112,8 @@
   "fluid_type.deltav.kerosene": "Kerosene",
   "fluid_type.deltav.thermal_water": "Thermal Water",
 
-  "sound.deltav.geyser": "Geyser"
+  "sound.deltav.geyser": "Geyser",
+
+  "entity.deltav.rubberwood_boat": "Rubberwood Boat",
+  "entity.deltav.rubberwood_chest_boat": "Rubberwood Boat with Chest"
 }
