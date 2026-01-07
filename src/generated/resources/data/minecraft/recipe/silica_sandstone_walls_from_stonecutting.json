@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "deltav:silica_sandstone",
-  "result": {
-    "count": 1,
-    "id": "deltav:silica_sandstone_wall"
-  }
-}

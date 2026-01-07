@@ -3,6 +3,7 @@ package com.deltav.deltavmod.worldgen;
 import java.util.List;
 
 import com.deltav.deltavmod.DeltaV;
+import com.deltav.deltavmod.block.ModBlocks;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.levelgen.placement.RarityFilter;
 public class DeltaVPlacedFeatures {
     public static final ResourceKey<PlacedFeature> KIMBERLITE_CARROT = registerKey("kimberlite_carrot");
     public static final ResourceKey<PlacedFeature> HOT_SPRING = registerKey("hot_spring");
+    public static final ResourceKey<PlacedFeature> RUBBERWOOD_TREE = registerKey("rubberwood_tree");
     
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -46,6 +48,19 @@ public class DeltaVPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(350),
                 InSquarePlacement.spread(),
                 PlacementUtils.FULL_RANGE,
+                BiomeFilter.biome()
+            )
+        );
+
+        register(
+            context, 
+            RUBBERWOOD_TREE,
+            configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.RUBBERWOODTREE), 
+            List.of(
+                RarityFilter.onAverageOnceEvery(100),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                PlacementUtils.filteredByBlockSurvival(ModBlocks.RUBBERWOOD_SAPLING.get()),
                 BiomeFilter.biome()
             )
         );

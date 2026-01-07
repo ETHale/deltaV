@@ -2,14 +2,19 @@ package com.deltav.deltavmod.item;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -62,13 +67,70 @@ public class ModItems {
     public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_stairs", ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS);
     public static final DeferredItem<BlockItem> SMOOTH_SILICA_SANDSTONE_SLAB_ITEM = ITEMS.registerSimpleBlockItem("smooth_silica_sandstone_slab", ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB);
     public static final DeferredItem<BlockItem> COPPER_CABLE_ITEM = ITEMS.registerSimpleBlockItem("copper_cable", ModBlocks.COPPER_CABLE);
+    public static final DeferredItem<BlockItem> INSULATED_COPPER_CABLE_ITEM = ITEMS.registerSimpleBlockItem("insulated_copper_cable", ModBlocks.INSULATED_COPPER_CABLE);
     
     public static final DeferredItem<BlockItem> MOLTEN_BEDROCK_ITEM = ITEMS.registerSimpleBlockItem("molten_bedrock", ModBlocks.MOLTEN_BEDROCK);
     public static final DeferredItem<BlockItem> CRUSHER_ITEM = ITEMS.registerSimpleBlockItem("crusher", ModBlocks.CRUSHER);
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
     public static final DeferredItem<BlockItem> BASIC_BATTERY_ITEM = ITEMS.registerSimpleBlockItem("basic_battery", ModBlocks.BASIC_BATTERY);
     public static final DeferredItem<BlockItem> STEAM_GEYSER_ITEM = ITEMS.registerSimpleBlockItem("steam_geyser", ModBlocks.STEAM_GEYSER);
-    
+
+    public static final DeferredItem<BlockItem> RUBBERWOOD_LOG_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_log", ModBlocks.RUBBERWOOD_LOG);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_WOOD_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_wood", ModBlocks.RUBBERWOOD_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_RUBBERWOOD_LOG_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubberwood_log", ModBlocks.STRIPPED_RUBBERWOOD_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_RUBBERWOOD_WOOD_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubberwood_wood", ModBlocks.STRIPPED_RUBBERWOOD_WOOD);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_LEAVES_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_leaves", ModBlocks.RUBBERWOOD_LEAVES);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_SAPLING_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_sapling", ModBlocks.RUBBERWOOD_SAPLING);
+    public static final DeferredItem<BlockItem> RUBBERWOODPLANKS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_planks", ModBlocks.RUBBERWOOD_PLANKS);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_stairs", ModBlocks.RUBBERWOOD_STAIRS);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_SLAB_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_slab", ModBlocks.RUBBERWOOD_SLAB);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_PRESSURE_PLATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_pressure_plate", ModBlocks.RUBBERWOOD_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_BUTTON_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_button", ModBlocks.RUBBERWOOD_BUTTON);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence", ModBlocks.RUBBERWOOD_FENCE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_FENCE_GATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_fence_gate", ModBlocks.RUBBERWOOD_FENCE_GATE);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_TRAPDOOR_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_trapdoor", ModBlocks.RUBBERWOOD_TRAPDOOR);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_DOOR_ITEM = ITEMS.register(
+        "rubberwood_door", 
+        registryName -> new DoubleHighBlockItem(
+            ModBlocks.RUBBERWOOD_DOOR.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+        ));
+    public static final DeferredItem<SignItem> RUBBERWOOD_SIGN_ITEM = ITEMS.register(
+        "rubberwood_sign",
+        registryName -> new SignItem(
+            ModBlocks.RUBBERWOOD_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_SIGN.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(16)
+        ));
+    public static final DeferredItem<HangingSignItem> RUBBERWOOD_HANGING_SIGN_ITEM = ITEMS.register(
+        "rubberwood_hanging_sign", 
+        registryName -> new HangingSignItem(
+            ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
+            ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(16)
+        ));
+    public static final DeferredItem<BoatItem> RUBBERWOOD_BOAT_ITEM = ITEMS.register(
+        "rubberwood_boat", 
+        registryName -> new BoatItem(
+            ModEntityTypes.RUBBERWOOD_BOAT.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(1)
+        ));
+    public static final DeferredItem<BoatItem> RUBBERWOOD_CHEST_BOAT_ITEM = ITEMS.register(
+        "rubberwood_chest_boat",
+        registryName -> new BoatItem(
+            ModEntityTypes.RUBBERWOOD_CHEST_BOAT.get(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .stacksTo(1)
+        ));
+
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");
@@ -79,6 +141,7 @@ public class ModItems {
     public static final DeferredItem<Item> SILICON = ITEMS.registerSimpleItem("silicon");
 
     public static final DeferredItem<Item> GLOOPY_RESIDUE = ITEMS.registerSimpleItem("gloopy_residue");
+    public static final DeferredItem<Item> RUBBER = ITEMS.registerSimpleItem("rubber");
 
     public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
         "oil_bucket",

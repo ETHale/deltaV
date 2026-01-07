@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "deltav:block/fractionator_front",
-    "side": "deltav:block/fractionator_side",
-    "top": "deltav:block/fractionator_top"
-  }
-}

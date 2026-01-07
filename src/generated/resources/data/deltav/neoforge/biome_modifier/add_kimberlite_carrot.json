@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "deltav:kimberlite_carrot",
-  "step": "underground_decoration"
-}

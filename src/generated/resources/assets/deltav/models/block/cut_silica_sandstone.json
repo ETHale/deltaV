@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "deltav:block/silica_sandstone_top",
-    "side": "deltav:block/cut_silica_sandstone"
-  }
-}

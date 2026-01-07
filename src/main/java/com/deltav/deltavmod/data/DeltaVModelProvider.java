@@ -2,7 +2,6 @@ package com.deltav.deltavmod.data;
 
 import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
@@ -13,7 +12,6 @@ import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelState;
 import com.deltav.deltavmod.block.energy.generators.RedstoneGenerator;
 import com.deltav.deltavmod.item.ModItems;
-import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableModelPartTemplate;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -22,10 +20,7 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
-import net.minecraft.client.data.models.model.DelegatedModel;
-import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -33,10 +28,10 @@ import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -176,6 +171,26 @@ public class DeltaVModelProvider extends ModelProvider{
         BlockFamilyProvider smoothSilicaSandstoneFamilyProvider = createTempFamilyProvider(smoothSilicaSandstoneMapping, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), blockModels);
         smoothSilicaSandstoneFamilyProvider.stairs(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
         smoothSilicaSandstoneFamilyProvider.slab(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get());
+
+        blockModels.woodProvider(ModBlocks.RUBBERWOOD_LOG.get()).logWithHorizontal(ModBlocks.RUBBERWOOD_LOG.get()).wood(ModBlocks.RUBBERWOOD_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get()).wood(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get(), ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get());
+        blockModels.createPlantWithDefaultItem(ModBlocks.RUBBERWOOD_SAPLING.get(), ModBlocks.POTTED_RUBBERWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createTintedLeaves(ModBlocks.RUBBERWOOD_LEAVES.get(), TexturedModel.LEAVES, -12031986);
+        blockModels.createTrivialCube(ModBlocks.RUBBERWOOD_PLANKS.get());
+        BlockFamily rubberwoodFamily = new BlockFamily.Builder(ModBlocks.RUBBERWOOD_PLANKS.get())
+            .stairs(ModBlocks.RUBBERWOOD_STAIRS.get())
+            .slab(ModBlocks.RUBBERWOOD_SLAB.get())
+            .pressurePlate(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get())
+            .button(ModBlocks.RUBBERWOOD_BUTTON.get())
+            .fence(ModBlocks.RUBBERWOOD_FENCE.get())
+            .fenceGate(ModBlocks.RUBBERWOOD_FENCE_GATE.get())
+            .door(ModBlocks.RUBBERWOOD_DOOR.get())
+            .sign(ModBlocks.RUBBERWOOD_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_SIGN.get())
+            .trapdoor(ModBlocks.RUBBERWOOD_TRAPDOOR.get())
+            .getFamily();
+        blockModels.familyWithExistingFullBlock(ModBlocks.RUBBERWOOD_PLANKS.get())
+            .generateFor(rubberwoodFamily);
         
         // ITEMS
         itemModels.generateFlatItem(ModItems.STEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
@@ -191,6 +206,9 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THERMAL_WATER_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RUBBERWOOD_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RUBBERWOOD_CHEST_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RUBBER.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
         blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
@@ -204,17 +222,28 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.SILICON.get(), ModelTemplates.FLAT_ITEM);
 
         // CABLES
-        CableModelState state = new CableModelState();
-        CableModelPart.Unbaked part = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, state);
-        CableBlockStateModelBuilder builder = new CableBlockStateModelBuilder().part(part);
-        builder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
+        CableModelState copperCableState = new CableModelState();
+        CableModelPart.Unbaked copperCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, copperCableState);
+        CableBlockStateModelBuilder copperCableBuilder = new CableBlockStateModelBuilder().part(copperCablePart);
+        copperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.COPPER_CABLE.get(), 
-                MultiVariant.of(builder)
+                MultiVariant.of(copperCableBuilder)
             )
         );
         itemModels.generateFlatItem(ModItems.COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        CableModelState insulatedCableState = new CableModelState();
+        CableModelPart.Unbaked insulatedCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, insulatedCableState);
+        CableBlockStateModelBuilder insulatedCopperCableBuilder = new CableBlockStateModelBuilder().part(insulatedCablePart);
+        insulatedCopperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/insulated_copper_cable"));
+        blockModels.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(
+                ModBlocks.INSULATED_COPPER_CABLE.get(), 
+                MultiVariant.of(insulatedCopperCableBuilder)
+            )
+        );
+        itemModels.generateFlatItem(ModItems.INSULATED_COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

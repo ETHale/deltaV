@@ -10,6 +10,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 
 public class DeltaVBlockLootProvider extends BlockLootSubProvider{
     public DeltaVBlockLootProvider(HolderLookup.Provider lookupProvider) {
@@ -80,5 +81,27 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.FRACTIONATOR.get());
         this.dropWhenSilkTouch(ModBlocks.STEAM_GEYSER.get());
         this.dropSelf(ModBlocks.COPPER_CABLE.get());
+        this.dropSelf(ModBlocks.INSULATED_COPPER_CABLE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_LOG.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_WOOD.get());
+        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get());
+        this.dropSelf(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_PLANKS.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_SAPLING.get());
+        this.add(ModBlocks.RUBBERWOOD_LEAVES.get(), 
+            block -> createLeavesDrops(block, ModBlocks.RUBBERWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        this.dropPottedContents(ModBlocks.POTTED_RUBBERWOOD_SAPLING.get());
+        this.add(ModBlocks.RUBBERWOOD_SLAB.get(),
+            block -> createSlabItemTable(ModBlocks.RUBBERWOOD_SLAB.get()));
+        this.dropSelf(ModBlocks.RUBBERWOOD_STAIRS.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_BUTTON.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_FENCE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_FENCE_GATE.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
+        this.add(ModBlocks.RUBBERWOOD_DOOR.get(),
+            block -> createDoorTable(ModBlocks.RUBBERWOOD_DOOR.get()));
+        this.dropSelf(ModBlocks.RUBBERWOOD_SIGN.get());
+        this.dropSelf(ModBlocks.RUBBERWOOD_HANGING_SIGN.get());
     }
 }
