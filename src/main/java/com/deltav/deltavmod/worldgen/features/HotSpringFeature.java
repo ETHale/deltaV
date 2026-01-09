@@ -53,24 +53,25 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         Set<BlockPos> edgeArea = new HashSet<>();
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-        int edgeWidth = 2; // Configurable edge width - TODO add to config?
+        int edgeWidth = conf.edgeWidth();
         for (int y = 0; y < depth; y++) {
             // Adjust noise to create jagged edges
-            float noise = rand.nextFloat() * 0.4f; // tweak for more/less jagged edges - TODO add to config?
-            int newRadius = radius - y; // TODO add some rate of change to config?
-            float threshold = (1.0f - noise) * newRadius * newRadius;
-
+            int newRadius = (int)(radius - (conf.rateOfChange() * y));
+            
             //move centre around to add more noise 
-            BlockPos noisyOrigin = origin.offset(rand.nextInt(3) - 1, 0, rand.nextInt(3) - 1); // TODO add to config?
+            int originNoise = conf.originNoise();
+            BlockPos noisyOrigin = origin.offset(rand.nextInt(originNoise) - (originNoise / 2), 0, rand.nextInt(originNoise) - (originNoise / 2));
             
             int areaSize = (int) newRadius + (int) edgeWidth;
-
+            
             for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-areaSize, noisyOrigin.getY(), -areaSize), origin.offset(areaSize, noisyOrigin.getY(), areaSize))) {
                 int dx = pos.getX() - noisyOrigin.getX();
                 int dz = pos.getZ() - noisyOrigin.getZ();
                 float point = dx * dx + dz * dz;
-
+                
                 // Check if the block is within the pool area
+                float noise = rand.nextFloat() * conf.noiseScale(); 
+                float threshold = (1.0f - noise) * newRadius * newRadius;
                 if (point <= threshold) {
                     mutablePos.set(pos.getX(), noisyOrigin.getY() - y, pos.getZ());
                     if (canReplaceBlock(level.getBlockState(mutablePos))) {
