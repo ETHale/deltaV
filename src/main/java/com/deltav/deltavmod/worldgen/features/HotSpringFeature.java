@@ -89,9 +89,9 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                         mutablePos.set(pos.offset(dx, dy, dz));
                         if (!poolArea.contains(mutablePos) && canReplaceBlock(level.getBlockState(mutablePos)) 
                             && !edgeArea.contains(mutablePos) && level.getFluidState(mutablePos) != conf.contents()) {
-                            level.setBlock(mutablePos, conf.barrier(), 2);
-                            if (level.canSeeSky(mutablePos))
-                                edgeArea.add(mutablePos);
+                            level.setBlock(mutablePos, conf.barrier().getState(rand, mutablePos), 2);
+                            this.markAboveForPostProcessing(level, pos);
+                            edgeArea.add(mutablePos);
                         }
                     }
                 }
@@ -106,13 +106,25 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
     private void waterlogArea(WorldGenLevel level, Set<BlockPos> poolArea, HotSpringFeatureConfiguration conf) {
         for (BlockPos pos : poolArea) {
             level.setBlock(pos, conf.contents().createLegacyBlock(), 2);
+            this.markAboveForPostProcessing(level, pos);
         }
     }
 
     private void placeGeyser(WorldGenLevel level, Set<BlockPos> area, HotSpringFeatureConfiguration conf) {
         if (area.isEmpty()) return;
 
-        BlockPos[] positions = area.toArray(new BlockPos[0]);
+        // Filter positions to include only those visible to the sky
+        Set<BlockPos> skyVisiblePositions = new HashSet<>();
+        for (BlockPos pos : area) {
+            if (level.canSeeSky(pos)) {
+                skyVisiblePositions.add(pos);
+            }
+        }
+
+        if (skyVisiblePositions.isEmpty()) return;
+
+        // Select a random position from the filtered set
+        BlockPos[] positions = skyVisiblePositions.toArray(new BlockPos[0]);
         BlockPos geyserPos = positions[level.getRandom().nextInt(positions.length)];
         level.setBlock(geyserPos, conf.geyser(), 2);
     }
