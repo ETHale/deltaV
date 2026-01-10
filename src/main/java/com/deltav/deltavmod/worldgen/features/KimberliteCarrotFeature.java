@@ -3,7 +3,6 @@ package com.deltav.deltavmod.worldgen.features;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableFloat;
 
-import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.mojang.serialization.Codec;
 
@@ -12,6 +11,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -72,6 +72,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
                         }
                         float edgeBias = (float)(Math.sqrt(dist2) / currentRadius);
                         placeBlock(context, level, pos, state, reachedSurface.booleanValue(), health.getValue(), edgeBias, random);
+                        this.markAboveForPostProcessing((WorldGenLevel) level, pos);
                     }
                 }
             );
