@@ -75,7 +75,6 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         // Place a geyser
         placeGeyser(worldgenlevel, surfaceArea, conf);
         
-        DeltaV.LOGGER.debug("Placed Hot Spring Feature: {}", context.origin());
         return true;
     }
 
