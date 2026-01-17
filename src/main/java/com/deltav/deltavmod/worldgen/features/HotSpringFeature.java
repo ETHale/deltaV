@@ -3,6 +3,7 @@ package com.deltav.deltavmod.worldgen.features;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.deltav.deltavmod.DeltaV;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
@@ -32,7 +33,28 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         RandomSource randomsource = context.random();
         HotSpringFeatureConfiguration conf = context.config();
         BlockPos origin = context.origin();
-
+        
+        //check origin is not in liquid and give up if it is
+        BlockState originState = worldgenlevel.getBlockState(origin);
+        if (originState.getFluidState().isSource()) {
+            return false;
+        }
+        // if its air, move down until we hit ground or 15 blocks
+        if (originState.isAir()) {
+            int airCount = 0;
+            int airLimit = 15;
+            BlockPos checkPos = origin.below();
+            while (worldgenlevel.getBlockState(checkPos).isAir() && airCount < airLimit) {
+                origin = checkPos;
+                checkPos = checkPos.below();
+                airCount++;
+            }
+            // if we hit air 15 times, give up
+            if (airCount >= airLimit) {
+                return false;
+            }
+        }
+        
         // Create a sunken ground area
         int radius = conf.radius().sample(randomsource);
         int depth =  conf.depth().sample(randomsource);
@@ -40,19 +62,20 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
         Set<BlockPos> poolArea = areas[0];
         Set<BlockPos> edgeArea = areas[1];
         Set<BlockPos> surfaceArea = areas[2];
-
+        
         // Waterlog the area
         waterlogArea(worldgenlevel, poolArea, conf);
-
+        
         // Place edge blocks
         placeEdgeBlocks(worldgenlevel, edgeArea, conf, randomsource);
-
+        
         // Place surface blocks
         placeSurfaceBlocks(worldgenlevel, surfaceArea, conf, randomsource);
-
+        
         // Place a geyser
         placeGeyser(worldgenlevel, surfaceArea, conf);
-
+        
+        DeltaV.LOGGER.debug("Placed Hot Spring Feature: {}", context.origin());
         return true;
     }
 
@@ -90,6 +113,7 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
                         if (y < contentsDepth) {
                             notWaterLoggedPoolArea.add(mutablePos.immutable());
                             level.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 2);
+                            this.markAboveForPostProcessing(level, pos);
                         }
                     }
                 }
