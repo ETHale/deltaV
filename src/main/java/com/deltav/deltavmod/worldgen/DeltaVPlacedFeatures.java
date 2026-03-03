@@ -11,9 +11,12 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
@@ -45,9 +48,9 @@ public class DeltaVPlacedFeatures {
             HOT_SPRING, 
             configuredFeatures.getOrThrow(DeltaVConfiguredFeatures.HOT_SPRING), 
             List.of(
-                RarityFilter.onAverageOnceEvery(350),
-                InSquarePlacement.spread(),
-                PlacementUtils.FULL_RANGE,
+                RarityFilter.onAverageOnceEvery(170),
+                NoiseBasedCountPlacement.of(4, 60.0, 0.2),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(40), VerticalAnchor.belowTop(100)),
                 BiomeFilter.biome()
             )
         );
