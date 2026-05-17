@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.custom.TreeTapperBlock;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModelBuilder;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
@@ -45,7 +46,9 @@ public class DeltaVModelProvider extends ModelProvider{
         Stream<? extends Holder<Block>> list = BuiltInRegistries.BLOCK
             .listElements()
             .filter(holder -> holder.getKey().location().getNamespace().equals(modId))
-            .filter(holder -> !(holder.value() instanceof RedstoneGenerator));
+            .filter(holder -> 
+                !(holder.value() instanceof RedstoneGenerator) &&
+                !(holder.value() instanceof TreeTapperBlock));
         return list;
     }
     

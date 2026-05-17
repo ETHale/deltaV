@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "deltav:block/tree_tapper",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "deltav:block/tree_tapper"
+    },
+    "facing=south": {
+      "model": "deltav:block/tree_tapper",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "deltav:block/tree_tapper",
+      "y": 270
+    }
+  }
+}

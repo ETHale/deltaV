@@ -5,6 +5,7 @@ import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.FractionatorBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
+import com.deltav.deltavmod.block.custom.TreeTapperBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.cable.cables.CopperCableBlock;
 import com.deltav.deltavmod.block.energy.cable.cables.InsulatedCopperCableBlock;
@@ -177,6 +178,18 @@ public class ModBlocks {
                 .strength(3.0F, 6.0F)
                 .sound(SoundType.IRON)
                 .noOcclusion())
+    );
+
+    public static final DeferredBlock<TreeTapperBlock> TREE_TAPPER = BLOCKS.register(
+        "tree_tapper",
+        registryName -> new TreeTapperBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_BROWN)
+                .strength(0.0F, 0.0F)
+                .sound(SoundType.WOOD)
+                .noOcclusion()
+                .noCollission())
     );
 
     public static final DeferredBlock<Block> PRISMIUM_BLOCK = BLOCKS.registerSimpleBlock(

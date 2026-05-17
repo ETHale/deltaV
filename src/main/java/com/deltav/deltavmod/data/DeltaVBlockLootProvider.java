@@ -103,5 +103,6 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
             block -> createDoorTable(ModBlocks.RUBBERWOOD_DOOR.get()));
         this.dropSelf(ModBlocks.RUBBERWOOD_SIGN.get());
         this.dropSelf(ModBlocks.RUBBERWOOD_HANGING_SIGN.get());
+        this.dropSelf(ModBlocks.TREE_TAPPER.get());
     }
 }
