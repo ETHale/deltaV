@@ -194,6 +194,16 @@ public class ModItems {
                 .stacksTo(1)
     ));
 
+    public static final DeferredItem<BucketItem> LATEX_BUCKET = ITEMS.register(
+        "latex_bucket",
+        registryName -> new BucketItem(
+            ModFluids.LATEX_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
     public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
     public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
         "barrel",

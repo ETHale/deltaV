@@ -2,6 +2,7 @@ package com.deltav.deltavmod.fluid;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.fluid.custom.KeroseneFluid;
+import com.deltav.deltavmod.fluid.custom.LatexFluid;
 import com.deltav.deltavmod.fluid.custom.NaphthaFluid;
 import com.deltav.deltavmod.fluid.custom.OilFluid;
 import com.deltav.deltavmod.fluid.custom.PetrolFluid;
@@ -52,6 +53,12 @@ public class ModFluids {
 
     public static final DeferredHolder<Fluid, FlowingFluid> THERMAL_WATER_FLOW = FLUIDS.register(
         "thermal_water_flow", ThermalWaterFluid.Flowing::new);
+    
+    public static final DeferredHolder<Fluid, FlowingFluid> LATEX_SOURCE = FLUIDS.register(
+        "latex", LatexFluid.Source::new);
+
+    public static final DeferredHolder<Fluid, FlowingFluid> LATEX_FLOW = FLUIDS.register(
+        "latex_flow", LatexFluid.Flowing::new);
 
     /**
      * Register the fluids.

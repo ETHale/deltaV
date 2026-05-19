@@ -213,6 +213,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
     public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;
     public static final DeferredBlock<Block> THERMAL_WATER_FLUID = ModFluidBlocks.THERMAL_WATER_FLUID;
+    public static final DeferredBlock<Block> LATEX_FLUID = ModFluidBlocks.LATEX_FLUID;
 
     // Silica blocks
     public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;

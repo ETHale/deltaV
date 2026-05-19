@@ -206,6 +206,7 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.LATEX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THERMAL_WATER_BUCKET.get(), ModelTemplates.FLAT_ITEM);
@@ -219,6 +220,7 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.THERMAL_WATER_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.LATEX_FLUID.get());
 
         // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
