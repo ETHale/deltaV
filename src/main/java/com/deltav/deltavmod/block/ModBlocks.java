@@ -14,16 +14,20 @@ import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
 import com.deltav.deltavmod.block.geyser.SteamGeyser;
+import com.deltav.deltavmod.data.DeltaVCauldronRegistry;
 import com.deltav.deltavmod.fluid.ModFluidBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -201,6 +205,17 @@ public class ModBlocks {
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
             .sound(SoundType.AMETHYST)
+    );
+
+    // Cauldron blocks
+    public static final DeferredBlock<Block> LATEX_CAULDRON = BLOCKS.register(
+        "latex_cauldron",
+        registryName -> new LayeredCauldronBlock(
+            Biome.Precipitation.RAIN,
+            DeltaVCauldronRegistry.LATEX_INTERACTIONS,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+        )
     );
 
     // Below blocks have been moved to separate files to reduce file length and

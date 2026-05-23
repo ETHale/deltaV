@@ -212,6 +212,8 @@ public class ModItems {
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
         ));
 
+    public static final DeferredItem<BlockItem> LATEX_CAULDRON_ITEM = ITEMS.registerSimpleBlockItem("latex_cauldron", ModBlocks.LATEX_CAULDRON);
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

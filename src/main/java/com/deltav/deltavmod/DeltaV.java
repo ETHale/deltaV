@@ -15,7 +15,6 @@ import com.deltav.deltavmod.sound.ModSounds;
 import com.deltav.deltavmod.worldgen.features.DeltaVFeatures;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -97,16 +96,16 @@ public class DeltaV {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        // // Some common setup code
+        // LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-        }
+        // if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
+        //     LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
+        // }
 
-        LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
+        // LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
 
-        Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
+        // Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
     }
 
     // Add the example block item to the building blocks tab
@@ -119,7 +118,8 @@ public class DeltaV {
             if (block != Blocks.AIR && !(block instanceof LiquidBlock) &&
             block != ModBlocks.POTTED_RUBBERWOOD_SAPLING.get() &&
             block != ModBlocks.RUBBERWOOD_WALL_SIGN.get() &&
-            block != ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
+            block != ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get() &&
+            block != ModBlocks.LATEX_CAULDRON.get()
             ) {
                 Item item = block.asItem();
                 output.accept(item);

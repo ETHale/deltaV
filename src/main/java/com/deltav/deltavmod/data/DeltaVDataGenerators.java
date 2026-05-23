@@ -130,6 +130,7 @@ public class DeltaVDataGenerators {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
+            DeltaVCauldronRegistry.bootStrap();
         });
 
         // item models

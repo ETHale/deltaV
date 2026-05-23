@@ -249,6 +249,19 @@ public class DeltaVModelProvider extends ModelProvider{
             )
         );
         itemModels.generateFlatItem(ModItems.INSULATED_COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
+
+        // CAULDRONS 
+        itemModels.generateFlatItem(ModItems.LATEX_CAULDRON_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        blockModels.blockStateOutput
+            .accept(
+                BlockModelGenerators.createSimpleBlock(
+                    ModBlocks.LATEX_CAULDRON.get(),
+                    BlockModelGenerators.plainVariant(
+                        ModelTemplates.CAULDRON_FULL
+                            .create(ModBlocks.LATEX_CAULDRON.get(), TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), blockModels.modelOutput)
+                    )
+                )
+            );
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

@@ -171,6 +171,10 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
         this.tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
         this.tag(BlockTags.BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
+
+        // cauldrons
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .add(ModBlocks.LATEX_CAULDRON.get());
     }
 
 }
