@@ -8,7 +8,7 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
-import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.particle.ModParticlesTypes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -92,7 +92,7 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
                 0.0
             );
             level.addParticle(
-                ModParticles.STEAM.get(),
+                ModParticlesTypes.STEAM.get(),
                 pos.getX() + random.nextDouble(),
                 pos.getY() + random.nextDouble(),
                 pos.getZ() + random.nextDouble(),

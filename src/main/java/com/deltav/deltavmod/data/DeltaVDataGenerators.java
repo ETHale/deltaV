@@ -12,8 +12,9 @@ import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.entity.ModModelLayerLocations;
 import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.particle.LatexDripParticleProvider;
 import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
-import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.particle.ModParticlesTypes;
 import com.deltav.deltavmod.particle.SteamParticleProvider;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
@@ -149,10 +150,11 @@ public class DeltaVDataGenerators {
 
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.STEAM.get(), SteamParticleProvider::new);
+        event.registerSpriteSet(ModParticlesTypes.STEAM.get(), SteamParticleProvider::new);
+        event.registerSpriteSet(ModParticlesTypes.LATEX_DRIP.get(), LatexDripParticleProvider::new);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent 
     public static void registerDefinitions(RegisterBlockStateModels event) {
         event.registerModel(CableBlockStateModel.Unbaked.ID, CableBlockStateModel.Unbaked.CODEC);
     }

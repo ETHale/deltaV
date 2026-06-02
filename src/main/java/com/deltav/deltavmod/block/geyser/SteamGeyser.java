@@ -1,7 +1,7 @@
 package com.deltav.deltavmod.block.geyser;
 
 import com.deltav.deltavmod.block.ModBlocks;
-import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.particle.ModParticlesTypes;
 
 
 public class SteamGeyser extends GeyserBlock{
@@ -14,7 +14,7 @@ public class SteamGeyser extends GeyserBlock{
             GeyserMode.GAS,
             1,
             ModBlocks.THERMAL_WATER_FLUID.get().defaultBlockState(),
-            ModParticles.STEAM.get(),
+            ModParticlesTypes.STEAM.get(),
             30,
             1.5f,
             4,
