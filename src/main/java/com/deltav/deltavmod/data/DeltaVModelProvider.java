@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators.BlockFamilyProvider;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
@@ -33,6 +34,7 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -254,11 +256,44 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.LATEX_CAULDRON_ITEM.get(), ModelTemplates.FLAT_ITEM);
         blockModels.blockStateOutput
             .accept(
-                BlockModelGenerators.createSimpleBlock(
-                    ModBlocks.LATEX_CAULDRON.get(),
-                    BlockModelGenerators.plainVariant(
-                        ModelTemplates.CAULDRON_FULL
-                            .create(ModBlocks.LATEX_CAULDRON.get(), TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), blockModels.modelOutput)
+                MultiVariantGenerator.dispatch(ModBlocks.LATEX_CAULDRON.get())
+                .with(
+                    PropertyDispatch.initial(LayeredCauldronBlock.LEVEL)
+                    .select(
+                        1,
+                        BlockModelGenerators.plainVariant(
+                            ModelTemplates.CAULDRON_LEVEL1
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_level1",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
+                    )
+                    .select(
+                        2,
+                        BlockModelGenerators.plainVariant(
+                             ModelTemplates.CAULDRON_LEVEL2
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_level2",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
+                    )
+                    .select(
+                        3,
+                        BlockModelGenerators.plainVariant(
+                            ModelTemplates.CAULDRON_FULL
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_full",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
                     )
                 )
             );

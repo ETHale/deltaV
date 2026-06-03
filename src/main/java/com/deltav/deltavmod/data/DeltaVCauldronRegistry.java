@@ -21,7 +21,6 @@ public class DeltaVCauldronRegistry {
     @SubscribeEvent
     public static void registerCauldronContent(RegisterCauldronFluidContentEvent event) {
         // Registers your custom liquid for the vanilla cauldron block.
-        // Assuming your fluid uses the 1 to 3 level system, totalAmount is the mB per level (e.g. 250)
         event.register(
                 ModBlocks.LATEX_CAULDRON.get(), 
                 ModFluids.LATEX_SOURCE.get(), 

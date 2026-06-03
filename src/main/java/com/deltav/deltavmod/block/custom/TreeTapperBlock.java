@@ -10,12 +10,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
+import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.particle.ModParticlesTypes;
 
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -100,7 +103,29 @@ public class TreeTapperBlock extends HorizontalDirectionalBlock{
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(CONFIGURED)) {
+            BlockState below = level.getBlockState(pos.below());
+            boolean cauldronPresent = 
+                below.getBlock() == ModBlocks.LATEX_CAULDRON.get() ||
+                below.getBlock() == Blocks.CAULDRON;
 
+            if (cauldronPresent) {
+                float chance = level.random.nextFloat();
+                if (chance < 0.01) {
+                    try {
+                        BlockState newState = ModBlocks.LATEX_CAULDRON.get().defaultBlockState();
+                        if (below.getBlock() == Blocks.CAULDRON) {
+                            newState = newState.setValue(LayeredCauldronBlock.LEVEL, 1);
+                        } else {
+                            int currentLevel = below.getValue(LayeredCauldronBlock.LEVEL);
+                            newState = newState.setValue(LayeredCauldronBlock.LEVEL, Math.min(currentLevel + 1, 3));
+                        }
+                        level.setBlock(pos.below(), newState, UPDATE_ALL);
+                    } catch (Exception e) {
+                        DeltaV.LOGGER.error("Error processing latex drip", e);
+                    }
+                }
+            }
+            level.scheduleTick(pos, this, 4);
         }
     }
 
