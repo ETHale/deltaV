@@ -106,5 +106,6 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
         this.dropSelf(ModBlocks.RUBBERWOOD_HANGING_SIGN.get());
         this.dropSelf(ModBlocks.TREE_TAPPER.get());
         this.dropOther(ModBlocks.LATEX_CAULDRON.get(), Blocks.CAULDRON);
+        this.dropSelf(ModBlocks.COAGULATED_LATEX_BLOCK.get());
     }
 }

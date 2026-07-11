@@ -4,6 +4,7 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.FractionatorBlock;
+import com.deltav.deltavmod.block.custom.LatexCauldronBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
 import com.deltav.deltavmod.block.custom.TreeTapperBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
@@ -207,12 +208,19 @@ public class ModBlocks {
             .sound(SoundType.AMETHYST)
     );
 
+    public static final DeferredBlock<Block> COAGULATED_LATEX_BLOCK = BLOCKS.registerSimpleBlock(
+        "coagulated_latex_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.SNOW)
+            .friction(0.8F)
+            .sound(SoundType.SLIME_BLOCK)
+    );
+
     // Cauldron blocks
     public static final DeferredBlock<Block> LATEX_CAULDRON = BLOCKS.register(
         "latex_cauldron",
-        registryName -> new LayeredCauldronBlock(
-            Biome.Precipitation.RAIN,
-            DeltaVCauldronRegistry.LATEX_INTERACTIONS,
+        registryName -> new LatexCauldronBlock(
             BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
         )

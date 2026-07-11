@@ -30,9 +30,11 @@ public class DeltaVCauldronRegistry {
     }
 
     public static final CauldronInteraction.InteractionMap LATEX_INTERACTIONS = CauldronInteraction.newInteractionMap("latex");
+    public static final CauldronInteraction.InteractionMap COAGULATED_LATEX_INTERACTIONS = CauldronInteraction.newInteractionMap("coagulated_latex");
     
     public static void bootStrap() {
         var latex_map = LATEX_INTERACTIONS.map();
+        var coagulated_latex_map = COAGULATED_LATEX_INTERACTIONS.map();
         var empty_map = CauldronInteraction.EMPTY.map();
         
         latex_map.put(Items.BUCKET, (state, level, pos, player, hand, stack) -> 
@@ -60,8 +62,7 @@ public class DeltaVCauldronRegistry {
             )
         );
 
-        // Register latex bucket interaction with vanilla cauldron
-        empty_map.put(Items.BUCKET, (state, level, pos, player, hand, stack) -> 
+        coagulated_latex_map.put(null, (state, level, pos, player, hand, stack) -> 
             CauldronInteraction.fillBucket(
                 state, 
                 level, 
@@ -69,11 +70,13 @@ public class DeltaVCauldronRegistry {
                 player, 
                 hand, 
                 stack, 
-                new ItemStack(ModItems.LATEX_BUCKET.get()),
-                val -> val.getValue(LayeredCauldronBlock.LEVEL) == 3,
-                SoundEvents.BUCKET_FILL
+                new ItemStack(ModItems.COAGULATED_LATEX.get(), 3),
+                val -> true,
+                SoundEvents.SLIME_BLOCK_PLACE
             )
         );
+
+        // Register latex bucket interaction with vanilla cauldron
         empty_map.put(ModItems.LATEX_BUCKET.get(), (state, level, pos, player, hand, stack) -> 
             CauldronInteraction.emptyBucket(
                 level, 

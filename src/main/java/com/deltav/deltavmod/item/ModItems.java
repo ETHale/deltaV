@@ -131,7 +131,9 @@ public class ModItems {
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .stacksTo(1)
         ));
+    public static final DeferredItem<BlockItem> COAGULATED_LATEX_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("coagulated_latex_block", ModBlocks.COAGULATED_LATEX_BLOCK);
 
+    public static final DeferredItem<Item> COAGULATED_LATEX = ITEMS.registerSimpleItem("coagulated_latex");
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");

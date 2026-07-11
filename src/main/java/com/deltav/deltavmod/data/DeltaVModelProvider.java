@@ -110,7 +110,8 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COBALT_ORE.get());        
-
+        
+        blockModels.createTrivialCube(ModBlocks.COAGULATED_LATEX_BLOCK.get());        
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
         blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
@@ -215,6 +216,7 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.RUBBERWOOD_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RUBBERWOOD_CHEST_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RUBBER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COAGULATED_LATEX.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
         blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
