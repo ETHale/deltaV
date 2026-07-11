@@ -501,6 +501,21 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModItems.RUBBER.get())
             .unlockedBy("has_copper_cable", this.has(ModBlocks.COPPER_CABLE))
             .save(this.output, "insulated_copper_cable_from_copper_cable_and_rubber");
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.COAGULATED_LATEX_BLOCK, 1)
+            .pattern("SSS")
+            .pattern("SSS")
+            .pattern("SSS")
+            .define('S', ModItems.COAGULATED_LATEX.get())
+            .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
+            .save(this.output, "coagulated_latex_block_from_coagulated_latex");
+        ShapelessRecipeBuilder.shapeless(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModItems.COAGULATED_LATEX, 9)
+            .requires(ModBlocks.COAGULATED_LATEX_BLOCK)
+            .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
+            .save(this.output, "coagulated_latex_from_coagulated_latex_block");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.COAGULATED_LATEX), RecipeCategory.MISC, ModItems.RUBBER, 0.1F, 150)
+            .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
+            .save(this.output, "rubber_from_smelting_coagulated_latex");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)

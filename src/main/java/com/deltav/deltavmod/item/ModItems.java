@@ -74,6 +74,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> REDSTONE_GENERATOR_ITEM = ITEMS.registerSimpleBlockItem("redstone_generator", ModBlocks.REDSTONE_GENERATOR);
     public static final DeferredItem<BlockItem> BASIC_BATTERY_ITEM = ITEMS.registerSimpleBlockItem("basic_battery", ModBlocks.BASIC_BATTERY);
     public static final DeferredItem<BlockItem> STEAM_GEYSER_ITEM = ITEMS.registerSimpleBlockItem("steam_geyser", ModBlocks.STEAM_GEYSER);
+    public static final DeferredItem<BlockItem> TREE_TAPPER_ITEM = ITEMS.registerSimpleBlockItem("tree_tapper", ModBlocks.TREE_TAPPER);
 
     public static final DeferredItem<BlockItem> RUBBERWOOD_LOG_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_log", ModBlocks.RUBBERWOOD_LOG);
     public static final DeferredItem<BlockItem> RUBBERWOOD_WOOD_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_wood", ModBlocks.RUBBERWOOD_WOOD);
@@ -130,7 +131,9 @@ public class ModItems {
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .stacksTo(1)
         ));
+    public static final DeferredItem<BlockItem> COAGULATED_LATEX_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("coagulated_latex_block", ModBlocks.COAGULATED_LATEX_BLOCK);
 
+    public static final DeferredItem<Item> COAGULATED_LATEX = ITEMS.registerSimpleItem("coagulated_latex");
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot");
     public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerSimpleItem("zinc_ingot");
     public static final DeferredItem<Item> RAW_ZINC = ITEMS.registerSimpleItem("raw_zinc");
@@ -193,6 +196,16 @@ public class ModItems {
                 .stacksTo(1)
     ));
 
+    public static final DeferredItem<BucketItem> LATEX_BUCKET = ITEMS.register(
+        "latex_bucket",
+        registryName -> new BucketItem(
+            ModFluids.LATEX_SOURCE.value(),
+            new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, registryName))
+                .craftRemainder(Items.BUCKET)
+                .stacksTo(1)
+    ));
+
     public static final DeferredItem<BlockItem> FRACTIONATOR = ITEMS.registerSimpleBlockItem("fractionator", ModBlocks.FRACTIONATOR);
     public static final DeferredItem<BarrelItem> BARREL = ITEMS.register(
         "barrel",
@@ -200,6 +213,8 @@ public class ModItems {
             new Item.Properties()
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
         ));
+
+    public static final DeferredItem<BlockItem> LATEX_CAULDRON_ITEM = ITEMS.registerSimpleBlockItem("latex_cauldron", ModBlocks.LATEX_CAULDRON);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

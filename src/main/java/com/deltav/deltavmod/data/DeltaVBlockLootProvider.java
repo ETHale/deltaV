@@ -10,6 +10,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.fml.common.Mod;
 
 public class DeltaVBlockLootProvider extends BlockLootSubProvider{
@@ -103,5 +104,8 @@ public class DeltaVBlockLootProvider extends BlockLootSubProvider{
             block -> createDoorTable(ModBlocks.RUBBERWOOD_DOOR.get()));
         this.dropSelf(ModBlocks.RUBBERWOOD_SIGN.get());
         this.dropSelf(ModBlocks.RUBBERWOOD_HANGING_SIGN.get());
+        this.dropSelf(ModBlocks.TREE_TAPPER.get());
+        this.dropOther(ModBlocks.LATEX_CAULDRON.get(), Blocks.CAULDRON);
+        this.dropSelf(ModBlocks.COAGULATED_LATEX_BLOCK.get());
     }
 }

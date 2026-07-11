@@ -4,7 +4,9 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.custom.AlloyFurnaceBlock;
 import com.deltav.deltavmod.block.custom.CrusherBlock;
 import com.deltav.deltavmod.block.custom.FractionatorBlock;
+import com.deltav.deltavmod.block.custom.LatexCauldronBlock;
 import com.deltav.deltavmod.block.custom.MoltenBedrockBlock;
+import com.deltav.deltavmod.block.custom.TreeTapperBlock;
 import com.deltav.deltavmod.block.energy.batteries.BasicBattery;
 import com.deltav.deltavmod.block.energy.cable.cables.CopperCableBlock;
 import com.deltav.deltavmod.block.energy.cable.cables.InsulatedCopperCableBlock;
@@ -13,16 +15,20 @@ import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
 import com.deltav.deltavmod.block.geyser.SteamGeyser;
+import com.deltav.deltavmod.data.DeltaVCauldronRegistry;
 import com.deltav.deltavmod.fluid.ModFluidBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -179,6 +185,18 @@ public class ModBlocks {
                 .noOcclusion())
     );
 
+    public static final DeferredBlock<TreeTapperBlock> TREE_TAPPER = BLOCKS.register(
+        "tree_tapper",
+        registryName -> new TreeTapperBlock(
+            BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.COLOR_BROWN)
+                .strength(0.0F, 0.0F)
+                .sound(SoundType.WOOD)
+                .noOcclusion()
+                .noCollission())
+    );
+
     public static final DeferredBlock<Block> PRISMIUM_BLOCK = BLOCKS.registerSimpleBlock(
         "prismium_block",
         BlockBehaviour.Properties.of()
@@ -188,6 +206,24 @@ public class ModBlocks {
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
             .sound(SoundType.AMETHYST)
+    );
+
+    public static final DeferredBlock<Block> COAGULATED_LATEX_BLOCK = BLOCKS.registerSimpleBlock(
+        "coagulated_latex_block",
+        BlockBehaviour.Properties.of()
+            .setId(ResourceKey.create(Registries.BLOCK, null))
+            .mapColor(MapColor.SNOW)
+            .friction(0.8F)
+            .sound(SoundType.SLIME_BLOCK)
+    );
+
+    // Cauldron blocks
+    public static final DeferredBlock<Block> LATEX_CAULDRON = BLOCKS.register(
+        "latex_cauldron",
+        registryName -> new LatexCauldronBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+        )
     );
 
     // Below blocks have been moved to separate files to reduce file length and
@@ -200,6 +236,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
     public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;
     public static final DeferredBlock<Block> THERMAL_WATER_FLUID = ModFluidBlocks.THERMAL_WATER_FLUID;
+    public static final DeferredBlock<Block> LATEX_FLUID = ModFluidBlocks.LATEX_FLUID;
 
     // Silica blocks
     public static final DeferredBlock<Block> SILICA_SAND = SilicaBlocks.SILICA_SAND;

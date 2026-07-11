@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.block.ModBlocks;
+import com.deltav.deltavmod.block.custom.TreeTapperBlock;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModelBuilder;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart;
@@ -17,6 +18,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators.BlockFamilyProvider;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
@@ -32,6 +34,7 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 
 public class DeltaVModelProvider extends ModelProvider{
     public DeltaVModelProvider(PackOutput output) {
@@ -45,7 +48,9 @@ public class DeltaVModelProvider extends ModelProvider{
         Stream<? extends Holder<Block>> list = BuiltInRegistries.BLOCK
             .listElements()
             .filter(holder -> holder.getKey().location().getNamespace().equals(modId))
-            .filter(holder -> !(holder.value() instanceof RedstoneGenerator));
+            .filter(holder -> 
+                !(holder.value() instanceof RedstoneGenerator) &&
+                !(holder.value() instanceof TreeTapperBlock));
         return list;
     }
     
@@ -105,7 +110,8 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_ZINC_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_IRON_ORE.get());
         blockModels.createTrivialCube(ModBlocks.KIMBERLITE_COBALT_ORE.get());        
-
+        
+        blockModels.createTrivialCube(ModBlocks.COAGULATED_LATEX_BLOCK.get());        
         blockModels.createTrivialCube(ModBlocks.MOLTEN_BEDROCK.get());
 
         blockModels.createTrivialCube(ModBlocks.CRUSHER.get());
@@ -203,12 +209,14 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.LATEX_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BARREL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GLOOPY_RESIDUE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.THERMAL_WATER_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RUBBERWOOD_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RUBBERWOOD_CHEST_BOAT_ITEM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RUBBER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COAGULATED_LATEX.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
         blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
@@ -216,6 +224,7 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.THERMAL_WATER_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.LATEX_FLUID.get());
 
         // Silica
         itemModels.generateFlatItem(ModItems.SILICA_DUST.get(), ModelTemplates.FLAT_ITEM);
@@ -244,6 +253,52 @@ public class DeltaVModelProvider extends ModelProvider{
             )
         );
         itemModels.generateFlatItem(ModItems.INSULATED_COPPER_CABLE_ITEM.get(), ModelTemplates.FLAT_ITEM);
+
+        // CAULDRONS 
+        itemModels.generateFlatItem(ModItems.LATEX_CAULDRON_ITEM.get(), ModelTemplates.FLAT_ITEM);
+        blockModels.blockStateOutput
+            .accept(
+                MultiVariantGenerator.dispatch(ModBlocks.LATEX_CAULDRON.get())
+                .with(
+                    PropertyDispatch.initial(LayeredCauldronBlock.LEVEL)
+                    .select(
+                        1,
+                        BlockModelGenerators.plainVariant(
+                            ModelTemplates.CAULDRON_LEVEL1
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_level1",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
+                    )
+                    .select(
+                        2,
+                        BlockModelGenerators.plainVariant(
+                             ModelTemplates.CAULDRON_LEVEL2
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_level2",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
+                    )
+                    .select(
+                        3,
+                        BlockModelGenerators.plainVariant(
+                            ModelTemplates.CAULDRON_FULL
+                            .createWithSuffix(
+                                ModBlocks.LATEX_CAULDRON.get(), 
+                                "_full",
+                                TextureMapping.cauldron(TextureMapping.getBlockTexture(ModBlocks.LATEX_FLUID.get())), 
+                                blockModels.modelOutput
+                            )
+                        )
+                    )
+                )
+            );
     }
 
     private BlockFamilyProvider createTempFamilyProvider(TextureMapping mapping, Block block, BlockModelGenerators blockModels) {

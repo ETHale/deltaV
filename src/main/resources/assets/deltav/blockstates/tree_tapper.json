@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,configured=false": {
+      "model": "deltav:block/tree_tapper",
+      "y": 90
+    },
+    "facing=east,configured=true": {
+      "model": "deltav:block/tree_tapper",
+      "y": 90
+    },
+    "facing=north,configured=false": {
+      "model": "deltav:block/tree_tapper"
+    },
+    "facing=north,configured=true": {
+      "model": "deltav:block/tree_tapper"
+    },
+    "facing=south,configured=false": {
+      "model": "deltav:block/tree_tapper",
+      "y": 180
+    },
+    "facing=south,configured=true": {
+      "model": "deltav:block/tree_tapper",
+      "y": 180
+    },
+    "facing=west,configured=false": {
+      "model": "deltav:block/tree_tapper",
+      "y": 270
+    },
+    "facing=west,configured=true": {
+      "model": "deltav:block/tree_tapper",
+      "y": 270
+    }
+  }
+}

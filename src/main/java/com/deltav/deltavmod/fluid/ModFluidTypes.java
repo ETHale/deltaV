@@ -2,6 +2,7 @@ package com.deltav.deltavmod.fluid;
 
 import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.fluid.custom.KeroseneFluidType;
+import com.deltav.deltavmod.fluid.custom.LatexFluidType;
 import com.deltav.deltavmod.fluid.custom.NaphthaFluidType;
 import com.deltav.deltavmod.fluid.custom.OilFluidType;
 import com.deltav.deltavmod.fluid.custom.PetrolFluidType;
@@ -36,6 +37,9 @@ public class ModFluidTypes {
     
     public static final DeferredHolder<FluidType, FluidType> THERMAL_WATER_FLUID_TYPE = FLUID_TYPES.register(
         "thermal_fluid", ThermalWaterFluidType::new);
+        
+    public static final DeferredHolder<FluidType, FluidType> LATEX_FLUID_TYPE = FLUID_TYPES.register(
+        "latex", LatexFluidType::new);
 
     /**
      * Register the fluid types.

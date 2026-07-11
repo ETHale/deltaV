@@ -78,4 +78,14 @@ public class ModFluidBlocks {
                 .mapColor(MapColor.WATER)
         )
     );
+
+    public static final DeferredBlock<Block> LATEX_FLUID = BLOCKS.register(
+        "latex", 
+        registryName -> new LiquidBlock(
+            ModFluids.LATEX_SOURCE.get(),
+            FLUID_BLOCK_PROPERTIES
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .mapColor(MapColor.WOOL)
+        )
+    );
 }

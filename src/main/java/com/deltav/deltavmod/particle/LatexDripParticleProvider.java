@@ -1,0 +1,36 @@
+package com.deltav.deltavmod.particle;
+
+import com.deltav.deltavmod.fluid.ModFluidTypes;
+import com.deltav.deltavmod.fluid.ModFluids;
+
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.DripParticle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.core.particles.SimpleParticleType;
+
+public class LatexDripParticleProvider implements ParticleProvider<SimpleParticleType> {
+    private final SpriteSet spriteSet;
+
+    public LatexDripParticleProvider(SpriteSet spriteSet) {
+        this.spriteSet = spriteSet;
+    }
+
+    @Override
+    public TextureSheetParticle createParticle(
+        SimpleParticleType type,
+        ClientLevel level,
+        double x,
+        double y,
+        double z,
+        double xSpeed,
+        double ySpeed,
+        double zSpeed
+    ) {
+        TextureSheetParticle dripparticle = new DripParticle(level, x, y, z, ModFluids.LATEX_FLOW.get());
+        dripparticle.pickSprite(this.spriteSet);
+        dripparticle.setColor(252f / 255f, 255f / 255f, 232f / 255f);
+        return dripparticle;
+    }
+}

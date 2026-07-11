@@ -8,7 +8,6 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.fluid.ModFluidTypes;
 import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
-import com.deltav.deltavmod.particle.ModParticlesTypes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,28 +31,28 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class ThermalWaterFluid extends FlowingFluid {
+
+public abstract class LatexFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
-        return ModFluids.THERMAL_WATER_FLOW.get();
+        return ModFluids.LATEX_FLOW.get();
     }
 
     @Override
     public Fluid getSource() {
-        return ModFluids.THERMAL_WATER_SOURCE.get();
+        return ModFluids.LATEX_SOURCE.get();
     }
 
     @Override
     public Item getBucket() {
-        return ModItems.THERMAL_WATER_BUCKET.get();
+        return ModItems.LATEX_BUCKET.get();
     }
 
 	@Override
 	public FluidType getFluidType() {
-		return ModFluidTypes.THERMAL_WATER_FLUID_TYPE.get();
+		return ModFluidTypes.LATEX_FLUID_TYPE.get();
 	}
 
     /**
@@ -82,17 +81,9 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
                 );
             }
         } else if (random.nextInt(10) == 0) {
+            // SFI: Could change from blue water particle to custom particle
             level.addParticle(
                 ParticleTypes.UNDERWATER,
-                pos.getX() + random.nextDouble(),
-                pos.getY() + random.nextDouble(),
-                pos.getZ() + random.nextDouble(),
-                0.0,
-                0.0,
-                0.0
-            );
-            level.addParticle(
-                ModParticlesTypes.STEAM.get(),
                 pos.getX() + random.nextDouble(),
                 pos.getY() + random.nextDouble(),
                 pos.getZ() + random.nextDouble(),
@@ -133,12 +124,12 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
 
     @Override
     public BlockState createLegacyBlock(FluidState state) {
-        return ModBlocks.THERMAL_WATER_FLUID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state));
+        return ModBlocks.LATEX_FLUID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state));
     }
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluids.THERMAL_WATER_FLOW.get() || fluid == ModFluids.THERMAL_WATER_SOURCE.get();
+        return fluid == ModFluids.LATEX_SOURCE.get() || fluid == ModFluids.LATEX_FLOW.get();
     }
 
     @Override
@@ -162,9 +153,6 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
      */
     @Override
     public boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockReader, BlockPos pos, Fluid fluid, Direction direction) {
-        if (fluid == Fluids.WATER && !fluidState.isSource()) {
-            return true;
-        }
 		return false;
     }
 
@@ -178,7 +166,7 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
         return Optional.of(SoundEvents.BUCKET_FILL);
     }
 
-    public static class Flowing extends ThermalWaterFluid {
+    public static class Flowing extends LatexFluid {
         @Override
         protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
@@ -196,7 +184,7 @@ public abstract class ThermalWaterFluid extends FlowingFluid {
         }
     }
 
-    public static class Source extends ThermalWaterFluid {
+    public static class Source extends LatexFluid {
         @Override
         public int getAmount(FluidState state) {
             return 8;

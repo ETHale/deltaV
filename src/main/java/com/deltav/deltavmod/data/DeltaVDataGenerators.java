@@ -12,8 +12,9 @@ import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.entity.ModModelLayerLocations;
 import com.deltav.deltavmod.menu.ModMenus;
+import com.deltav.deltavmod.particle.LatexDripParticleProvider;
 import com.deltav.deltavmod.particle.ModParticleDescriptionProvider;
-import com.deltav.deltavmod.particle.ModParticles;
+import com.deltav.deltavmod.particle.ModParticlesTypes;
 import com.deltav.deltavmod.particle.SteamParticleProvider;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
@@ -21,18 +22,12 @@ import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -136,6 +131,7 @@ public class DeltaVDataGenerators {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
+            DeltaVCauldronRegistry.bootStrap();
         });
 
         // item models
@@ -143,6 +139,8 @@ public class DeltaVDataGenerators {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.LATEX_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.LATEX_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
 
         // isn't deprecated because it will be removed but because they want jsons instead
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
@@ -152,10 +150,11 @@ public class DeltaVDataGenerators {
 
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.STEAM.get(), SteamParticleProvider::new);
+        event.registerSpriteSet(ModParticlesTypes.STEAM.get(), SteamParticleProvider::new);
+        event.registerSpriteSet(ModParticlesTypes.LATEX_DRIP.get(), LatexDripParticleProvider::new);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent 
     public static void registerDefinitions(RegisterBlockStateModels event) {
         event.registerModel(CableBlockStateModel.Unbaked.ID, CableBlockStateModel.Unbaked.CODEC);
     }
