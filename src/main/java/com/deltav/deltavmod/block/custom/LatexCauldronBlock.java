@@ -50,7 +50,7 @@ public class LatexCauldronBlock extends LayeredCauldronBlock {
         }
         float chance = random.nextFloat();
 
-        if (chance <= 0.5) {
+        if (chance <= 0.15) {
             level.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 0.8F, 1.0F);
             Block.popResource(level, pos, new ItemStack(ModItems.COAGULATED_LATEX.get(), 3));
             level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());

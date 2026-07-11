@@ -512,6 +512,10 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModBlocks.COAGULATED_LATEX_BLOCK)
             .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
             .save(this.output, "coagulated_latex_from_coagulated_latex_block");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.COAGULATED_LATEX), RecipeCategory.MISC, ModItems.RUBBER, 0.1F, 150)
+            .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
+            .save(this.output, "rubber_from_smelting_coagulated_latex");
     }
 
     @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
