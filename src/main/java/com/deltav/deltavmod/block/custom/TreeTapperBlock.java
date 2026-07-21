@@ -84,7 +84,7 @@ public class TreeTapperBlock extends HorizontalDirectionalBlock{
 
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean bool) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             Direction facing = state.getValue(FACING).getOpposite();
             BlockPos adjacentPos = pos.relative(facing);
             BlockState adjacentState = level.getBlockState(adjacentPos);
@@ -109,7 +109,7 @@ public class TreeTapperBlock extends HorizontalDirectionalBlock{
                 below.getBlock() == Blocks.CAULDRON;
 
             if (cauldronPresent) {
-                float chance = level.random.nextFloat();
+                float chance = level.getRandom().nextFloat();
                 if (chance < 0.01) {
                     try {
                         BlockState newState = ModBlocks.LATEX_CAULDRON.get().defaultBlockState();

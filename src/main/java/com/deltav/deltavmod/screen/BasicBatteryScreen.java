@@ -7,11 +7,11 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.BasicBatteryMenu;
 import com.deltav.deltavmod.menu.ModMenus;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -21,21 +21,23 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu>{
-    private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/basic_battery.png");
+    private static final Identifier BG = Identifier.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/basic_battery.png");
     
     private static final int MAX_BAR_HEIGHT = 57;
     private static final int LEFT_PADDING = 75;
     private static final int BAR_WIDTH = 25;
     private static final int TOP_PADDING = 17;
+
+    protected final int imageWidth = 176;
+    protected final int imageHeight = 166;
     
     public BasicBatteryScreen(BasicBatteryMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
-        this.imageWidth = 176;
-        this.imageHeight = 166;
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(
             RenderPipelines.GUI_TEXTURED,
             BG,
@@ -52,16 +54,16 @@ public class BasicBatteryScreen extends AbstractContainerScreen<BasicBatteryMenu
                leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF941400, 0xFFBD2008);
     }
 
-    @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(g, mouseX, mouseY, partialTicks);
-        super.render(g, mouseX, mouseY, partialTicks);
-        this.renderTooltip(g, mouseX, mouseY);
-    }
+    // @Override
+    // public void render(GuiGraphics g, int mouseX, int mouseY, float partialTicks) {
+    //     this.renderBackground(g, mouseX, mouseY, partialTicks);
+    //     super.render(g, mouseX, mouseY, partialTicks);
+    //     this.renderTooltip(g, mouseX, mouseY);
+    // }
 
     @Override
-    public void renderTooltip(GuiGraphics g, int mouseX, int mouseY) {
-        super.renderTooltip(g, mouseX, mouseY);
+    public void extractTooltip(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+        super.extractTooltip(g, mouseX, mouseY);
 
         String energyLabel = menu.getEnergyStored() + " / " + menu.getCapacity() + " RF";
 

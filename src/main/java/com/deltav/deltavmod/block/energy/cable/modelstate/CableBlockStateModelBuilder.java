@@ -1,18 +1,18 @@
 package com.deltav.deltavmod.block.energy.cable.modelstate;
 
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.VariantMutator;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
 import net.neoforged.neoforge.client.model.generators.blockstate.UnbakedMutator;
 
 public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     private CableModelPart.Unbaked model;
-    private ResourceLocation texture;
+    private Identifier texture;
     public CableBlockStateModelBuilder() {}
 
-    public void setTexture(ResourceLocation texture) {
+    public void setTexture(Identifier texture) {
         this.texture = texture;
     }
 
@@ -27,16 +27,18 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
     @Override
     public CableBlockStateModelBuilder with(UnbakedMutator unbakedMutator) {
         var result = new CableBlockStateModelBuilder();
-        if (this.model != null) {
-            CableBlockStateModel.Unbaked stateUnbaked = new CableBlockStateModel.Unbaked(this.model, texture);
-            BlockStateModel.Unbaked mutated = unbakedMutator.apply(stateUnbaked);
+
+        if (this.texture != null) {
+            BlockStateModel.Unbaked mutated =
+                    unbakedMutator.apply(new CableBlockStateModel.Unbaked(this.texture));
 
             if (mutated instanceof CableBlockStateModel.Unbaked casted) {
-                result.model = casted.model();
+                result.texture = casted.texture();
             } else {
-                result.model = this.model;
+                result.texture = this.texture;
             }
         }
+
         return result;
     }
 
@@ -46,7 +48,7 @@ public class CableBlockStateModelBuilder extends CustomBlockStateModelBuilder{
         if (this.model == null) {
             throw new IllegalStateException("CableBlockStateModelBuilder: no model part present; ensure the builder was populated");
         }
-        return new CableBlockStateModel.Unbaked(this.model, texture);
+        return new CableBlockStateModel.Unbaked(texture);
     }
 
     public CableBlockStateModelBuilder part(CableModelPart.Unbaked model) {

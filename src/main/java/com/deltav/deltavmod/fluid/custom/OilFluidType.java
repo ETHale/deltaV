@@ -10,10 +10,6 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.material.FluidState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -29,10 +25,7 @@ import net.neoforged.neoforge.fluids.FluidType;
  */
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class OilFluidType extends FluidType {
-    private static final ResourceLocation STILL_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
-    private static final ResourceLocation FLOWING_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
-    private static final ResourceLocation OVERLAY_TEXTURE = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
-    private static final int TINT_COLOR = 0xFF010A1C;
+    //private static final int TINT_COLOR = 0xFF010A1C;
     private static final Vector4f FOG_COLOR = new Vector4f(1f / 255f, 10f / 255f, 28f / 255f, 1f);
 
     public OilFluidType() {
@@ -45,7 +38,7 @@ public class OilFluidType extends FluidType {
     }
 
     /**
-     * Register the oil fluid type with {@code IClientFluidTypeExtensions}.
+     * Register the kerosene fluid type with {@code IClientFluidTypeExtensions}.
      *
      * @param event event from subscriber
      */
@@ -53,34 +46,9 @@ public class OilFluidType extends FluidType {
     static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(new IClientFluidTypeExtensions() {
             @Override
-            public ResourceLocation getStillTexture() {
-                return STILL_TEXTURE;
-            }
-
-            @Override
-            public ResourceLocation getFlowingTexture() {
-                return FLOWING_TEXTURE;
-            }
-
-            @Override
-            public ResourceLocation getOverlayTexture() {
-                return OVERLAY_TEXTURE;
-            }
-
-            @Override
-            public int getTintColor() {
-                return TINT_COLOR;
-            }
-
-            @Override
-            public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
-                return getTintColor();
-            }
-
-            @Override
-            public Vector4f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
-                    int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
-                return FOG_COLOR;
+            public void modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance,
+                    float darkenWorldAmount, Vector4f fluidFogColor) {
+                fluidFogColor.set(FOG_COLOR);
             }
 
             @Override
@@ -89,6 +57,6 @@ public class OilFluidType extends FluidType {
                 fogData.renderDistanceStart = 0f;
                 fogData.renderDistanceEnd = 1f;
             }
-        }, ModFluidTypes.OIL_FLUID_TYPE.get());
+        }, ModFluidTypes.KEROSENE_FLUID_TYPE.get());
     }
 }

@@ -6,6 +6,7 @@ import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,16 +30,15 @@ public class DeltaVCauldronRegistry {
         );
     }
 
-    public static final CauldronInteraction.InteractionMap LATEX_INTERACTIONS = CauldronInteraction.newInteractionMap("latex");
-    public static final CauldronInteraction.InteractionMap COAGULATED_LATEX_INTERACTIONS = CauldronInteraction.newInteractionMap("coagulated_latex");
-    
+    public static final CauldronInteraction.Dispatcher LATEX_INTERACTIONS = new CauldronInteraction.Dispatcher();
+
     public static void bootStrap() {
-        var latex_map = LATEX_INTERACTIONS.map();
-        var coagulated_latex_map = COAGULATED_LATEX_INTERACTIONS.map();
-        var empty_map = CauldronInteraction.EMPTY.map();
+        var latex_map = LATEX_INTERACTIONS;
+        var empty_map = CauldronInteractions.EMPTY;
         
+        CauldronInteractions.addDefaultInteractions(latex_map);
         latex_map.put(Items.BUCKET, (state, level, pos, player, hand, stack) -> 
-            CauldronInteraction.fillBucket(
+            CauldronInteractions.fillBucket(
                 state, 
                 level, 
                 pos, 
@@ -51,7 +51,7 @@ public class DeltaVCauldronRegistry {
             )
         );
         latex_map.put(ModItems.LATEX_BUCKET.get(), (state, level, pos, player, hand, stack) -> 
-            CauldronInteraction.emptyBucket(
+            CauldronInteractions.emptyBucket(
                 level, 
                 pos,  
                 player, 
@@ -62,23 +62,9 @@ public class DeltaVCauldronRegistry {
             )
         );
 
-        coagulated_latex_map.put(null, (state, level, pos, player, hand, stack) -> 
-            CauldronInteraction.fillBucket(
-                state, 
-                level, 
-                pos, 
-                player, 
-                hand, 
-                stack, 
-                new ItemStack(ModItems.COAGULATED_LATEX.get(), 3),
-                val -> true,
-                SoundEvents.SLIME_BLOCK_PLACE
-            )
-        );
-
         // Register latex bucket interaction with vanilla cauldron
         empty_map.put(ModItems.LATEX_BUCKET.get(), (state, level, pos, player, hand, stack) -> 
-            CauldronInteraction.emptyBucket(
+            CauldronInteractions.emptyBucket(
                 level, 
                 pos,  
                 player, 

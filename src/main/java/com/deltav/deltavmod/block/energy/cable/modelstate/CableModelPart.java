@@ -1,47 +1,69 @@
 package com.deltav.deltavmod.block.energy.cable.modelstate;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
+
+import org.joml.Vector3f;
+
 import com.deltav.deltavmod.DeltaV;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.serialization.Codec;
+import com.mojang.math.Quadrant;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.TextureSlots;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.renderer.block.dispatch.ModelState;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad.MaterialFlags;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.ResolvedModel;
+import net.minecraft.client.resources.model.cuboid.CuboidFace;
+import net.minecraft.client.resources.model.cuboid.CuboidModelElement;
+import net.minecraft.client.resources.model.cuboid.FaceBakery;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
+import net.minecraft.client.resources.model.sprite.TextureSlots;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.model.pipeline.QuadBakingVertexConsumer;
 
 /*
  * Based on https://docs.neoforged.net/docs/resources/client/models/modelloaders#creating-custom-block-state-model-loaders
  */
-public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, TextureAtlasSprite particleIcon) implements BlockModelPart {
+public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, TextureAtlasSprite particleIcon) implements BlockStateModelPart {    
+    @Override
+    @MaterialFlags 
+    public int materialFlags() {
+        return 0;
+    }
+
+    @Override
+    public Material.Baked particleMaterial() {
+        return new Material.Baked(this.particleIcon, false);
+    }
 
     @Override
     public List<BakedQuad> getQuads(@Nullable Direction direction) {
         return this.quads.getQuads(direction);
     }
 
+    public static final Identifier MODEL_LOCATION = Identifier.fromNamespaceAndPath(DeltaV.MODID, "cable_model");
+
     // The unbaked model that is read from the block state json
-    public record Unbaked(ResourceLocation modelLocation, CableModelState modelState) implements BlockModelPart.Unbaked {
+    public record Unbaked(Identifier modelLocation, CableModelState modelState) implements BlockStateModelPart.Unbaked {
         
         // Used for the unbaked block state model
         public static final MapCodec<CableModelPart.Unbaked> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                ResourceLocation.CODEC.fieldOf("model").forGetter(CableModelPart.Unbaked::modelLocation),
+                Identifier.CODEC.fieldOf("model").forGetter(CableModelPart.Unbaked::modelLocation),
                 CableModelState.CODEC.fieldOf("state").forGetter(CableModelPart.Unbaked::modelState)
             ).apply(instance, CableModelPart.Unbaked::new)
         );
@@ -60,11 +82,11 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             // Get the necessary settings for the model part
             TextureSlots slots = resolvedModel.getTopTextureSlots();
             boolean ao = resolvedModel.getTopAmbientOcclusion();
-            TextureAtlasSprite particle = resolvedModel.resolveParticleSprite(slots, baker);
-            QuadCollection quads = resolvedModel.bakeTopGeometry(slots, baker, this.modelState);
+            Material.Baked particleMaterial = resolvedModel.resolveParticleMaterial(slots, baker);
+            QuadCollection quads = resolvedModel.bakeTopGeometry(slots, baker, (ModelState)this.modelState);
             
             // Return the baked part
-            return new CableModelPart(quads, ao, particle);
+            return new CableModelPart(quads, ao, particleMaterial.sprite());
         }
     }
 
@@ -74,14 +96,6 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
      * Needs the name of the block texture passed in to the constructor
      */
     public static class CableModelPartTemplate {
-        public static final MapCodec<CableModelPartTemplate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("texture").forGetter(template -> template.texture),
-            Codec.DOUBLE.fieldOf("cable_thickness").orElse(.4).forGetter(template -> template.cableThickness),
-            Codec.DOUBLE.fieldOf("connector_thickness").orElse(.1).forGetter(template -> template.connectorThickness),
-            Codec.DOUBLE.fieldOf("connector_width").orElse(.3).forGetter(template -> template.connectorWidth)
-        ).apply(instance, CableModelPartTemplate::new));
-
-        public static final CableModelPartTemplate INSTANCE = new CableModelPartTemplate(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, ""));
 
         public final CableModelPart UP_CABLE;
         public final CableModelPart UP_BLOCK;
@@ -103,7 +117,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
         public final CableModelPart SOUTH_NOTHING;
         public final CableModelPart FULL_BLOCK;
 
-        public final ResourceLocation texture;
+        public final Identifier texture;
         public TextureAtlasSprite spriteCable;
         public TextureAtlasSprite spriteSide;
         public TextureAtlasSprite spriteConnector;
@@ -111,18 +125,18 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
         public final double connectorThickness;
         public final double connectorWidth;
 
-        public CableModelPartTemplate(ResourceLocation texture) {
-            this(texture, .4, .1, .3);
+        public CableModelPartTemplate(ModelBaker baker, Identifier texture) {
+            this(baker, texture, .4, .1, .3);
         }
 
-        public CableModelPartTemplate(ResourceLocation texture, double cableThickness, double connectorThickness, double connectorWidth) {
+        public CableModelPartTemplate(ModelBaker baker, Identifier texture, double cableThickness, double connectorThickness, double connectorWidth) {
             this.texture = texture;
             this.cableThickness = cableThickness;
             this.connectorThickness = connectorThickness;
             this.connectorWidth = connectorWidth;
             
             try {
-                TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getModelManager().getAtlas(Sheets.BLOCKS_MAPPER.sheet());
+                TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(Sheets.BLOCKS_MAPPER.sheet());
                 DeltaV.LOGGER.debug("Loading cable texture: " + texture);
                 spriteCable = atlas.getSprite(texture);
                 spriteSide = atlas.getSprite(texture.withSuffix("_side"));
@@ -138,245 +152,224 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             double o = cableThickness;      // Thickness of the cable. .0 would be full block, .5 is infinitely thin.
             double p = connectorThickness;      // Thickness of the connector as it is put on the connecting block
             double q = connectorWidth;      // The wideness of the connector
-    
-            // UP
-            QuadCollection.Builder up_cable = new QuadCollection.Builder();
-            up_cable.addUnculledFace(quad(v(1 - o, 1, o), v(1 - o, 1, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, o), spriteCable));
-            up_cable.addUnculledFace(quad(v(o, 1, 1 - o), v(o, 1, o), v(o, 1 - o, o), v(o, 1 - o, 1 - o), spriteCable));
-            up_cable.addUnculledFace(quad(v(o, 1, o), v(1 - o, 1, o), v(1 - o, 1 - o, o), v(o, 1 - o, o), spriteCable));
-            up_cable.addUnculledFace(quad(v(o, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1, 1 - o), v(o, 1, 1 - o), spriteCable));
-            UP_CABLE = new CableModelPart(up_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder up_block = new QuadCollection.Builder();
-            up_block.addUnculledFace(quad(v(1 - o, 1 - p, o), v(1 - o, 1 - p, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, o), spriteCable));
-            up_block.addUnculledFace(quad(v(o, 1 - p, 1 - o), v(o, 1 - p, o), v(o, 1 - o, o), v(o, 1 - o, 1 - o), spriteCable));
-            up_block.addUnculledFace(quad(v(o, 1 - p, o), v(1 - o, 1 - p, o), v(1 - o, 1 - o, o), v(o, 1 - o, o), spriteCable));
-            up_block.addUnculledFace(quad(v(o, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - p, 1 - o), v(o, 1 - p, 1 - o), spriteCable));
-    
-            up_block.addUnculledFace(quad(v(1 - q, 1 - p, q), v(1 - q, 1, q), v(1 - q, 1, 1 - q), v(1 - q, 1 - p, 1 - q), spriteSide));
-            up_block.addUnculledFace(quad(v(q, 1 - p, 1 - q), v(q, 1, 1 - q), v(q, 1, q), v(q, 1 - p, q), spriteSide));
-            up_block.addUnculledFace(quad(v(q, 1, q), v(1 - q, 1, q), v(1 - q, 1 - p, q), v(q, 1 - p, q), spriteSide));
-            up_block.addUnculledFace(quad(v(q, 1 - p, 1 - q), v(1 - q, 1 - p, 1 - q), v(1 - q, 1, 1 - q), v(q, 1, 1 - q), spriteSide));
-    
-            up_block.addUnculledFace(quad(v(q, 1 - p, q), v(1 - q, 1 - p, q), v(1 - q, 1 - p, 1 - q), v(q, 1 - p, 1 - q), spriteConnector));
-            up_block.addUnculledFace(quad(v(q, 1, q), v(q, 1, 1 - q), v(1 - q, 1, 1 - q), v(1 - q, 1, q), spriteSide));
-            UP_BLOCK = new CableModelPart(up_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder up_nothing = new QuadCollection.Builder();
-            up_nothing.addCulledFace(Direction.UP, quad(v(o, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, o), v(o, 1 - o, o), spriteCable));
-            UP_NOTHING = new CableModelPart(up_nothing.build(), true, spriteCable);
-    
-    
-            // DOWN
-            QuadCollection.Builder down_cable = new QuadCollection.Builder();
-            down_cable.addUnculledFace(quad(v(1 - o, o, o), v(1 - o, o, 1 - o), v(1 - o, 0, 1 - o), v(1 - o, 0, o), spriteCable));
-            down_cable.addUnculledFace(quad(v(o, o, 1 - o), v(o, o, o), v(o, 0, o), v(o, 0, 1 - o), spriteCable));
-            down_cable.addUnculledFace(quad(v(o, o, o), v(1 - o, o, o), v(1 - o, 0, o), v(o, 0, o), spriteCable));
-            down_cable.addUnculledFace(quad(v(o, 0, 1 - o), v(1 - o, 0, 1 - o), v(1 - o, o, 1 - o), v(o, o, 1 - o), spriteCable));
-            DOWN_CABLE = new CableModelPart(down_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder down_block = new QuadCollection.Builder();
-            down_block.addUnculledFace(quad(v(1 - o, o, o), v(1 - o, o, 1 - o), v(1 - o, p, 1 - o), v(1 - o, p, o), spriteCable));
-            down_block.addUnculledFace(quad(v(o, o, 1 - o), v(o, o, o), v(o, p, o), v(o, p, 1 - o), spriteCable));
-            down_block.addUnculledFace(quad(v(o, o, o), v(1 - o, o, o), v(1 - o, p, o), v(o, p, o), spriteCable));
-            down_block.addUnculledFace(quad(v(o, p, 1 - o), v(1 - o, p, 1 - o), v(1 - o, o, 1 - o), v(o, o, 1 - o), spriteCable));
-    
-            down_block.addUnculledFace(quad(v(1 - q, 0, q), v(1 - q, p, q), v(1 - q, p, 1 - q), v(1 - q, 0, 1 - q), spriteSide));
-            down_block.addUnculledFace(quad(v(q, 0, 1 - q), v(q, p, 1 - q), v(q, p, q), v(q, 0, q), spriteSide));
-            down_block.addUnculledFace(quad(v(q, p, q), v(1 - q, p, q), v(1 - q, 0, q), v(q, 0, q), spriteSide));
-            down_block.addUnculledFace(quad(v(q, 0, 1 - q), v(1 - q, 0, 1 - q), v(1 - q, p, 1 - q), v(q, p, 1 - q), spriteSide));
-    
-            down_block.addUnculledFace(quad(v(q, p, 1 - q), v(1 - q, p, 1 - q), v(1 - q, p, q), v(q, p, q), spriteConnector));
-            down_block.addUnculledFace(quad(v(q, 0, 1 - q), v(q, 0, q), v(1 - q, 0, q), v(1 - q, 0, 1 - q), spriteSide));
-            DOWN_BLOCK = new CableModelPart(down_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder down_nothing = new QuadCollection.Builder();
-            down_nothing.addCulledFace(Direction.DOWN, quad(v(o, o, o), v(1 - o, o, o), v(1 - o, o, 1 - o), v(o, o, 1 - o), spriteCable));
-            DOWN_NOTHING = new CableModelPart(down_nothing.build(), true, spriteCable);
-    
-    
-            // EAST
-            QuadCollection.Builder east_cable = new QuadCollection.Builder();
-            east_cable.addUnculledFace(quad(v(1, 1 - o, 1 - o), v(1, 1 - o, o), v(1 - o, 1 - o, o), v(1 - o, 1 - o, 1 - o), spriteCable));
-            east_cable.addUnculledFace(quad(v(1, o, o), v(1, o, 1 - o), v(1 - o, o, 1 - o), v(1 - o, o, o), spriteCable));
-            east_cable.addUnculledFace(quad(v(1, 1 - o, o), v(1, o, o), v(1 - o, o, o), v(1 - o, 1 - o, o), spriteCable));
-            east_cable.addUnculledFace(quad(v(1, o, 1 - o), v(1, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, o, 1 - o), spriteCable));
-            EAST_CABLE = new CableModelPart(east_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder east_block = new QuadCollection.Builder();
-            east_block.addUnculledFace(quad(v(1 - p, 1 - o, 1 - o), v(1 - p, 1 - o, o), v(1 - o, 1 - o, o), v(1 - o, 1 - o, 1 - o), spriteCable));
-            east_block.addUnculledFace(quad(v(1 - p, o, o), v(1 - p, o, 1 - o), v(1 - o, o, 1 - o), v(1 - o, o, o), spriteCable));
-            east_block.addUnculledFace(quad(v(1 - p, 1 - o, o), v(1 - p, o, o), v(1 - o, o, o), v(1 - o, 1 - o, o), spriteCable));
-            east_block.addUnculledFace(quad(v(1 - p, o, 1 - o), v(1 - p, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, o, 1 - o), spriteCable));
-    
-            east_block.addUnculledFace(quad(v(1 - p, 1 - q, 1 - q), v(1, 1 - q, 1 - q), v(1, 1 - q, q), v(1 - p, 1 - q, q), spriteSide));
-            east_block.addUnculledFace(quad(v(1 - p, q, q), v(1, q, q), v(1, q, 1 - q), v(1 - p, q, 1 - q), spriteSide));
-            east_block.addUnculledFace(quad(v(1 - p, 1 - q, q), v(1, 1 - q, q), v(1, q, q), v(1 - p, q, q), spriteSide));
-            east_block.addUnculledFace(quad(v(1 - p, q, 1 - q), v(1, q, 1 - q), v(1, 1 - q, 1 - q), v(1 - p, 1 - q, 1 - q), spriteSide));
-    
-            east_block.addUnculledFace(quad(v(1 - p, q, 1 - q), v(1 - p, 1 - q, 1 - q), v(1 - p, 1 - q, q), v(1 - p, q, q), spriteConnector));
-            east_block.addUnculledFace(quad(v(1, q, 1 - q), v(1, q, q), v(1, 1 - q, q), v(1, 1 - q, 1 - q), spriteSide));
-            EAST_BLOCK = new CableModelPart(east_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder east_nothing = new QuadCollection.Builder();
-            east_nothing.addCulledFace(Direction.EAST, quad(v(1 - o, o, o), v(1 - o, 1 - o, o), v(1 - o, 1 - o, 1 - o), v(1 - o, o, 1 - o), spriteCable));
-            EAST_NOTHING = new CableModelPart(east_nothing.build(), true, spriteCable);
-    
-    
-            // WEST
-            QuadCollection.Builder west_cable = new QuadCollection.Builder();
-            west_cable.addUnculledFace(quad(v(o, 1 - o, 1 - o), v(o, 1 - o, o), v(0, 1 - o, o), v(0, 1 - o, 1 - o), spriteCable));
-            west_cable.addUnculledFace(quad(v(o, o, o), v(o, o, 1 - o), v(0, o, 1 - o), v(0, o, o), spriteCable));
-            west_cable.addUnculledFace(quad(v(o, 1 - o, o), v(o, o, o), v(0, o, o), v(0, 1 - o, o), spriteCable));
-            west_cable.addUnculledFace(quad(v(o, o, 1 - o), v(o, 1 - o, 1 - o), v(0, 1 - o, 1 - o), v(0, o, 1 - o), spriteCable));
-            WEST_CABLE = new CableModelPart(west_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder west_block = new QuadCollection.Builder();
-            west_block.addUnculledFace(quad(v(o, 1 - o, 1 - o), v(o, 1 - o, o), v(p, 1 - o, o), v(p, 1 - o, 1 - o), spriteCable));
-            west_block.addUnculledFace(quad(v(o, o, o), v(o, o, 1 - o), v(p, o, 1 - o), v(p, o, o), spriteCable));
-            west_block.addUnculledFace(quad(v(o, 1 - o, o), v(o, o, o), v(p, o, o), v(p, 1 - o, o), spriteCable));
-            west_block.addUnculledFace(quad(v(o, o, 1 - o), v(o, 1 - o, 1 - o), v(p, 1 - o, 1 - o), v(p, o, 1 - o), spriteCable));
-    
-            west_block.addUnculledFace(quad(v(0, 1 - q, 1 - q), v(p, 1 - q, 1 - q), v(p, 1 - q, q), v(0, 1 - q, q), spriteSide));
-            west_block.addUnculledFace(quad(v(0, q, q), v(p, q, q), v(p, q, 1 - q), v(0, q, 1 - q), spriteSide));
-            west_block.addUnculledFace(quad(v(0, 1 - q, q), v(p, 1 - q, q), v(p, q, q), v(0, q, q), spriteSide));
-            west_block.addUnculledFace(quad(v(0, q, 1 - q), v(p, q, 1 - q), v(p, 1 - q, 1 - q), v(0, 1 - q, 1 - q), spriteSide));
-    
-            west_block.addUnculledFace(quad(v(p, q, q), v(p, 1 - q, q), v(p, 1 - q, 1 - q), v(p, q, 1 - q), spriteConnector));
-            west_block.addUnculledFace(quad(v(0, q, q), v(0, q, 1 - q), v(0, 1 - q, 1 - q), v(0, 1 - q, q), spriteSide));
-            WEST_BLOCK = new CableModelPart(west_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder west_nothing = new QuadCollection.Builder();
-            west_nothing.addCulledFace(Direction.WEST, quad(v(o, o, 1 - o), v(o, 1 - o, 1 - o), v(o, 1 - o, o), v(o, o, o), spriteCable));
-            WEST_NOTHING = new CableModelPart(west_nothing.build(), true, spriteCable);
-    
-    
-            //NORTH
-            QuadCollection.Builder north_cable = new QuadCollection.Builder();
-            north_cable.addUnculledFace(quad(v(o, 1 - o, o), v(1 - o, 1 - o, o), v(1 - o, 1 - o, 0), v(o, 1 - o, 0), spriteCable));
-            north_cable.addUnculledFace(quad(v(o, o, 0), v(1 - o, o, 0), v(1 - o, o, o), v(o, o, o), spriteCable));
-            north_cable.addUnculledFace(quad(v(1 - o, o, 0), v(1 - o, 1 - o, 0), v(1 - o, 1 - o, o), v(1 - o, o, o), spriteCable));
-            north_cable.addUnculledFace(quad(v(o, o, o), v(o, 1 - o, o), v(o, 1 - o, 0), v(o, o, 0), spriteCable));
-            NORTH_CABLE = new CableModelPart(north_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder north_block = new QuadCollection.Builder();
-            north_block.addUnculledFace(quad(v(o, 1 - o, o), v(1 - o, 1 - o, o), v(1 - o, 1 - o, p), v(o, 1 - o, p), spriteCable));
-            north_block.addUnculledFace(quad(v(o, o, p), v(1 - o, o, p), v(1 - o, o, o), v(o, o, o), spriteCable));
-            north_block.addUnculledFace(quad(v(1 - o, o, p), v(1 - o, 1 - o, p), v(1 - o, 1 - o, o), v(1 - o, o, o), spriteCable));
-            north_block.addUnculledFace(quad(v(o, o, o), v(o, 1 - o, o), v(o, 1 - o, p), v(o, o, p), spriteCable));
-    
-            north_block.addUnculledFace(quad(v(q, 1 - q, p), v(1 - q, 1 - q, p), v(1 - q, 1 - q, 0), v(q, 1 - q, 0), spriteSide));
-            north_block.addUnculledFace(quad(v(q, q, 0), v(1 - q, q, 0), v(1 - q, q, p), v(q, q, p), spriteSide));
-            north_block.addUnculledFace(quad(v(1 - q, q, 0), v(1 - q, 1 - q, 0), v(1 - q, 1 - q, p), v(1 - q, q, p), spriteSide));
-            north_block.addUnculledFace(quad(v(q, q, p), v(q, 1 - q, p), v(q, 1 - q, 0), v(q, q, 0), spriteSide));
-    
-            north_block.addUnculledFace(quad(v(q, q, p), v(1 - q, q, p), v(1 - q, 1 - q, p), v(q, 1 - q, p), spriteConnector));
-            north_block.addUnculledFace(quad(v(q, q, 0), v(q, 1 - q, 0), v(1 - q, 1 - q, 0), v(1 - q, q, 0), spriteSide));
-            NORTH_BLOCK = new CableModelPart(north_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder north_nothing = new QuadCollection.Builder();
-            north_nothing.addCulledFace(Direction.NORTH, quad(v(o, 1 - o, o), v(1 - o, 1 - o, o), v(1 - o, o, o), v(o, o, o), spriteCable));
-            NORTH_NOTHING = new CableModelPart(north_nothing.build(), true, spriteCable);
-    
-    
-            //SOUTH
-            QuadCollection.Builder south_cable = new QuadCollection.Builder();
-            south_cable.addUnculledFace(quad(v(o, 1 - o, 1), v(1 - o, 1 - o, 1), v(1 - o, 1 - o, 1 - o), v(o, 1 - o, 1 - o), spriteCable));
-            south_cable.addUnculledFace(quad(v(o, o, 1 - o), v(1 - o, o, 1 - o), v(1 - o, o, 1), v(o, o, 1), spriteCable));
-            south_cable.addUnculledFace(quad(v(1 - o, o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, 1), v(1 - o, o, 1), spriteCable));
-            south_cable.addUnculledFace(quad(v(o, o, 1), v(o, 1 - o, 1), v(o, 1 - o, 1 - o), v(o, o, 1 - o), spriteCable));
-            SOUTH_CABLE = new CableModelPart(south_cable.build(), true, spriteCable);
-    
-            QuadCollection.Builder south_block = new QuadCollection.Builder();
-            south_block.addUnculledFace(quad(v(o, 1 - o, 1 - p), v(1 - o, 1 - o, 1 - p), v(1 - o, 1 - o, 1 - o), v(o, 1 - o, 1 - o), spriteCable));
-            south_block.addUnculledFace(quad(v(o, o, 1 - o), v(1 - o, o, 1 - o), v(1 - o, o, 1 - p), v(o, o, 1 - p), spriteCable));
-            south_block.addUnculledFace(quad(v(1 - o, o, 1 - o), v(1 - o, 1 - o, 1 - o), v(1 - o, 1 - o, 1 - p), v(1 - o, o, 1 - p), spriteCable));
-            south_block.addUnculledFace(quad(v(o, o, 1 - p), v(o, 1 - o, 1 - p), v(o, 1 - o, 1 - o), v(o, o, 1 - o), spriteCable));
-    
-            south_block.addUnculledFace(quad(v(q, 1 - q, 1), v(1 - q, 1 - q, 1), v(1 - q, 1 - q, 1 - p), v(q, 1 - q, 1 - p), spriteSide));
-            south_block.addUnculledFace(quad(v(q, q, 1 - p), v(1 - q, q, 1 - p), v(1 - q, q, 1), v(q, q, 1), spriteSide));
-            south_block.addUnculledFace(quad(v(1 - q, q, 1 - p), v(1 - q, 1 - q, 1 - p), v(1 - q, 1 - q, 1), v(1 - q, q, 1), spriteSide));
-            south_block.addUnculledFace(quad(v(q, q, 1), v(q, 1 - q, 1), v(q, 1 - q, 1 - p), v(q, q, 1 - p), spriteSide));
-    
-            south_block.addUnculledFace(quad(v(q, 1 - q, 1 - p), v(1 - q, 1 - q, 1 - p), v(1 - q, q, 1 - p), v(q, q, 1 - p), spriteConnector));
-            south_block.addUnculledFace(quad(v(q, 1 - q, 1), v(q, q, 1), v(1 - q, q, 1), v(1 - q, 1 - q, 1), spriteSide));
-            SOUTH_BLOCK = new CableModelPart(south_block.build(), true, spriteCable);
-    
-            QuadCollection.Builder south_nothing = new QuadCollection.Builder();
-            south_nothing.addCulledFace(Direction.SOUTH, quad(v(o, o, 1 - o), v(1 - o, o, 1 - o), v(1 - o, 1 - o, 1 - o), v(o, 1 - o, 1 - o), spriteCable));
-            SOUTH_NOTHING = new CableModelPart(south_nothing.build(), true, spriteCable);
-    
-            QuadCollection.Builder full_block = new QuadCollection.Builder();
-            full_block.addCulledFace(Direction.UP, quad(v(0, 1, 1), v(1, 1, 1), v(1, 1, 0), v(0, 1, 0), spriteSide));
-            full_block.addCulledFace(Direction.DOWN, quad(v(0, 0, 0), v(1, 0, 0), v(1, 0, 1), v(0, 0, 1), spriteSide));
-            full_block.addCulledFace(Direction.EAST, quad(v(1, 0, 0), v(1, 1, 0), v(1, 1, 1), v(1, 0, 1), spriteSide));
-            full_block.addCulledFace(Direction.WEST, quad(v(0, 0, 1), v(0, 1, 1), v(0, 1, 0), v(0, 0, 0), spriteSide));
-            full_block.addCulledFace(Direction.NORTH, quad(v(0, 1, 0), v(1, 1, 0), v(1, 0, 0), v(0, 0, 0), spriteSide));
-            full_block.addCulledFace(Direction.SOUTH, quad(v(0, 0, 1), v(1, 0, 1), v(1, 1, 1), v(0, 1, 1), spriteSide));
-            FULL_BLOCK = new CableModelPart(full_block.build(), true, spriteCable); 
+
+            List<CuboidModelElement> up_cable =  new ArrayList<>();
+            addBox(up_cable, o, 1 - o, o, 1 - o, 1, 1 - o, "#cable");
+            UP_CABLE = bakePart(baker, up_cable, spriteCable);
+
+            List<CuboidModelElement> up_block =  new ArrayList<>();
+            addBox(up_block, o, 1 - o, o, 1 - o, 1 - p, 1 - o, "#cable");
+            addBox(up_block, q, 1 - p, q, 1 - q, 1, 1 - q, "#side");
+            addFace(up_block, Direction.DOWN, q, 1 - p, q, 1 - q, 1 - p, 1 - q, "#connector");
+            UP_BLOCK = bakePart(baker, up_block, spriteCable);
+
+            List<CuboidModelElement> up_nothing =  new ArrayList<>();
+            addFace(up_nothing, Direction.UP, o, 1 - o, o, 1 - o, 1 - o, 1 - o, "#cable");
+            UP_NOTHING = bakePart(baker, up_nothing, spriteCable);
+
+            List<CuboidModelElement> down_cable =  new ArrayList<>();
+            addBox(down_cable, o, 0, o, 1 - o, o, 1 - o, "#cable");
+            DOWN_CABLE = bakePart(baker, down_cable, spriteCable);
+
+            List<CuboidModelElement> down_block =  new ArrayList<>();
+            addBox(down_block, o, 0, o, 1 - o, p, 1 - o, "#cable");
+            addBox(down_block, q, 0, q, 1 - q, p, 1 - q, "#side");
+            addFace(down_block, Direction.UP, q, p, q, 1 - q, p, 1 - q, "#connector");
+            DOWN_BLOCK = bakePart(baker, down_block, spriteCable);
+
+            List<CuboidModelElement> down_nothing =  new ArrayList<>();
+            addFace(down_nothing, Direction.DOWN, o, 0, o, 1 - o, 0, 1 - o, "#cable");
+            DOWN_NOTHING = bakePart(baker, down_nothing, spriteCable);
+
+            List<CuboidModelElement> east_cable =  new ArrayList<>();
+            addBox(east_cable, 1 - o, o, o, 1, 1 - o, 1 - o, "#cable");
+            EAST_CABLE = bakePart(baker, east_cable, spriteCable);
+
+            List<CuboidModelElement> east_block =  new ArrayList<>();
+            addBox(east_block, 1 - p, o, o, 1 - o, 1 - o, 1 - o, "cable");
+            addBox(east_block, 1 - p, q, q, 1, 1 - q, 1 - q, "#side");
+            addFace(east_block, Direction.WEST, 1 - p, q, q, 1 - p, 1 - q, 1 - q, "#connector");
+            EAST_BLOCK = bakePart(baker, east_block, spriteCable);
+
+            List<CuboidModelElement> east_nothing =  new ArrayList<>();
+            addFace(east_nothing, Direction.EAST, 1 - o, o, o, 1 - o, 1 - o, 1 - o, "#cable");
+            EAST_NOTHING = bakePart(baker, east_nothing, spriteCable);
+
+            List<CuboidModelElement> west_cable =  new ArrayList<>();
+            addBox(west_cable, 0, o, o, o, 1 - o, 1 - o, "#cable");
+            WEST_CABLE = bakePart(baker, west_cable, spriteCable);
+
+            List<CuboidModelElement> west_block =  new ArrayList<>();
+            addBox(west_block, p, o, o, o, 1 - o, 1 - o, "#cable");
+            addBox(west_block, 0, q, q, p, 1 - q, 1 - q, "#side");
+            addFace(west_block, Direction.EAST, p, q, q, p, 1 - q, 1 - q, "#connector");
+            WEST_BLOCK = bakePart(baker, west_block, spriteCable);
+
+            List<CuboidModelElement> west_nothing =  new ArrayList<>();
+            addFace(west_nothing, Direction.WEST, o, o, o, o, 1 - o, 1 - o, "#cable");
+            WEST_NOTHING = bakePart(baker, west_nothing, spriteCable);
+
+            List<CuboidModelElement> north_cable =  new ArrayList<>();
+            addBox(north_cable, o, o, 0, 1 - o, 1 - o, o, "#cable");
+            NORTH_CABLE = bakePart(baker, north_cable, spriteCable);
+
+            List<CuboidModelElement> north_block =  new ArrayList<>();
+            addBox(north_block, o, o, 0, 1 - o, 1 - o, p, "#cable");
+            addBox(north_block, q, q, 0, 1 - q, 1 - q, p, "#side");
+            addFace(north_block, Direction.SOUTH, q, q, p, 1 - q, 1 - q, p, "#connector");
+            NORTH_BLOCK = bakePart(baker, north_block, spriteCable);
+
+            List<CuboidModelElement> north_nothing =  new ArrayList<>();
+            addFace(north_nothing, Direction.NORTH, o, o, o, 1 - o, 1 - o, o, "#cable");
+            NORTH_NOTHING = bakePart(baker, north_nothing, spriteCable);
+
+            List<CuboidModelElement> south_cable =  new ArrayList<>();
+            addBox(south_cable, o, o, 1 - o, 1 - o, 1 - o, 1, "#cable");
+            SOUTH_CABLE = bakePart(baker, south_cable, spriteCable);
+
+            List<CuboidModelElement> south_block =  new ArrayList<>();
+            addBox(south_block, o, o, 1 - o, 1 - o, 1 - o, 1 - p, "#cable");
+            addBox(south_block, q, q, 1 - p, 1 - q, 1 - q, 1, "#side");
+            addFace(south_block, Direction.NORTH, q, q, 1 - p, 1 - q, 1 - q, 1 - p, "#connector");
+            SOUTH_BLOCK = bakePart(baker, south_block, spriteCable);
+
+            List<CuboidModelElement> south_nothing =  new ArrayList<>();
+            addFace(south_nothing, Direction.SOUTH, o, o, 1 - o, 1 - o, 1 - o, 1 - o, "#cable");
+            SOUTH_NOTHING = bakePart(baker, south_nothing, spriteCable);
+
+            List<CuboidModelElement> full_block =  new ArrayList<>();
+            addFace(full_block, Direction.UP, 0, 1, 0, 1, 1, 1, "#side");
+            addFace(full_block, Direction.DOWN, 0, 0, 0, 1, 0, 1, "#side");
+            addFace(full_block, Direction.EAST, 1, 0, 0, 1, 1, 1, "#side");
+            addFace(full_block, Direction.WEST, 0, 0, 1, 0, 1, 0, "#side");
+            addFace(full_block, Direction.NORTH, 0, 1, 0, 1, 0, 0, "#side");
+            addFace(full_block, Direction.SOUTH, 0, 0, 1, 1, 1, 1, "#side");
+            FULL_BLOCK = bakePart(baker, full_block, spriteCable);
         }
     }
 
-    public static BakedQuad quad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, int rotation) {
-        return switch (rotation) {
-            case 0 -> quad(v1, v2, v3, v4, sprite);
-            case 1 -> quad(v2, v3, v4, v1, sprite);
-            case 2 -> quad(v3, v4, v1, v2, sprite);
-            case 3 -> quad(v4, v1, v2, v3, sprite);
-            default -> quad(v1, v2, v3, v4, sprite);
-        };
-    }
+    private static void addBox(
+            List<CuboidModelElement> elements,
+            double x0, double y0, double z0,
+            double x1, double y1, double z1,
+            String texture)
+    {
+        Map<Direction, CuboidFace> faces = new EnumMap<>(Direction.class);
 
-    public static BakedQuad quad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite) {
-        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
-
-        Direction face = Direction.getNearest((int)normal.x, (int)normal.y, (int)normal.z, Direction.UP);
-
-        QuadBakingVertexConsumer builder = new QuadBakingVertexConsumer();
-        builder.setSprite(sprite);
-        builder.setDirection(face);
-        putVertex(builder, normal, v1, face, sprite);
-        putVertex(builder, normal, v2, face, sprite);
-        putVertex(builder, normal, v3, face, sprite);
-        putVertex(builder, normal, v4, face, sprite);
-        return builder.bakeQuad();
-    }
-
-    private static void putVertex(VertexConsumer builder, Vec3 normal,
-                                  Vec3 pos, Direction face, TextureAtlasSprite sprite) {
-        float u, v;
-
-        // Project onto the right plane depending on face
-        switch (face) {
-            case UP, DOWN -> { // X/Z plane
-                u = (float) pos.x;
-                v = (float) pos.z;
-            }
-            case NORTH, SOUTH -> { // X/Y plane
-                u = (float) pos.x;
-                v = (float) pos.y;
-            }
-            case EAST, WEST -> { // Z/Y plane
-                u = (float) pos.z;
-                v = (float) pos.y;
-            }
-            default -> {
-                u = 0;
-                v = 0;
-            }
+        for (Direction dir : Direction.values()) {
+            faces.put(dir,
+                new CuboidFace(
+                    dir,
+                    -1,
+                    texture,
+                    uvs(dir, x0, y0, z0, x1, y1, z1),
+                    Quadrant.R0
+                ));
         }
 
-        // Convert to atlas coordinates
-        float iu = sprite.getU(Math.round(u * 16f) / 16f);
-        float iv = sprite.getV(Math.round(v * 16f) / 16f);
+        elements.add(new CuboidModelElement(
+            new Vector3f(
+                (float)x0 * 16,
+                (float)y0 * 16,
+                (float)z0 * 16),
 
-        builder.addVertex((float) pos.x, (float) pos.y, (float) pos.z)
-            .setUv(iu, iv)
-            .setColor(1f, 1f, 1f, 1f)
-            .setNormal((float) normal.x, (float) normal.y, (float) normal.z);
+            new Vector3f(
+                (float)x1 * 16,
+                (float)y1 * 16,
+                (float)z1 * 16),
+
+            faces,
+            null,
+            true,
+            0
+        ));
+    }
+
+    private static void addFace(
+        List<CuboidModelElement> elements,
+        Direction face,
+        double x0, double y0, double z0,
+        double x1, double y1, double z1,
+        String texture)
+    {
+        elements.add(new CuboidModelElement(
+            new Vector3f((float)(x0 * 16), (float)(y0 * 16), (float)(z0 * 16)),
+            new Vector3f((float)(x1 * 16), (float)(y1 * 16), (float)(z1 * 16)),
+            Map.of(
+                face,
+                new CuboidFace(
+                    face,
+                    -1,
+                    texture,
+                    uvs(face, x0, y0, z0, x1, y1, z1),
+                    Quadrant.R0
+                )
+            ),
+            null,
+            true,
+            0
+        ));
     }
 
     public static Vec3 v(double x, double y, double z) {
         return new Vec3(x, y, z);
+    }
+
+    private static CuboidFace.UVs uvs(
+            Direction face,
+            double x0, double y0, double z0,
+            double x1, double y1, double z1) {
+
+        float minU, minV, maxU, maxV;
+
+        switch (face) {
+            case UP, DOWN -> {
+                minU = (float) Math.min(x0, x1) * 16f;
+                maxU = (float) Math.max(x0, x1) * 16f;
+                minV = (float) Math.min(z0, z1) * 16f;
+                maxV = (float) Math.max(z0, z1) * 16f;
+            }
+
+            case NORTH, SOUTH -> {
+                minU = (float) Math.min(x0, x1) * 16f;
+                maxU = (float) Math.max(x0, x1) * 16f;
+                minV = (float) Math.min(y0, y1) * 16f;
+                maxV = (float) Math.max(y0, y1) * 16f;
+            }
+
+            case EAST, WEST -> {
+                minU = (float) Math.min(z0, z1) * 16f;
+                maxU = (float) Math.max(z0, z1) * 16f;
+                minV = (float) Math.min(y0, y1) * 16f;
+                maxV = (float) Math.max(y0, y1) * 16f;
+            }
+
+            default -> throw new AssertionError(face);
+        }
+
+        return new CuboidFace.UVs(minU, minV, maxU, maxV);
+    }
+
+    private static CableModelPart bakePart(ModelBaker baker, List<CuboidModelElement> elements, TextureAtlasSprite sprite) {
+        QuadCollection.Builder builder = new QuadCollection.Builder();
+        for (CuboidModelElement element : elements) {
+            for (Direction dir : Direction.values()) {
+                CuboidFace face = element.faces().get(dir);
+                if (face == null) continue;
+                BakedQuad quad = FaceBakery.bakeQuad(
+                    baker,
+                    element.from(), element.to(),
+                    face,
+                    new Material.Baked(sprite, false),
+                    dir,
+                    new CableModelState(),
+                    element.rotation(),
+                    true,
+                    0
+                );
+                builder.addUnculledFace(quad); // use addCulledFace(dir, quad) instead if it should be face-culled
+            }
+        }
+        return new CableModelPart(builder.build(), true, sprite);
     }
 }

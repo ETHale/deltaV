@@ -6,11 +6,11 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.menu.FractionatorMenu;
 import com.deltav.deltavmod.menu.ModMenus;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -25,8 +25,8 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
  */
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu> {
-    private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/fractionator.png");
-    private static final ResourceLocation ARROW = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/arrow_progress.png");
+    private static final Identifier BG = Identifier.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/fractionator.png");
+    private static final Identifier ARROW = Identifier.fromNamespaceAndPath(DeltaV.MODID, "textures/gui/arrow_progress.png");
 
     // Tank coordinates
     private static final int TOP_PADDING = 18;
@@ -34,14 +34,16 @@ public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu
     private static final int MAX_BAR_HEIGHT = 50;
     private static final int BAR_WIDTH = 25;
 
+    protected final int imageWidth = 176;
+    protected final int imageHeight = 166;
+
     public FractionatorScreen(FractionatorMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
-        this.imageWidth = 176;
-        this.imageHeight = 166;
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(
             RenderPipelines.GUI_TEXTURED,
             BG,
@@ -72,21 +74,21 @@ public class FractionatorScreen extends AbstractContainerScreen<FractionatorMenu
                leftPos + LEFT_PADDING + BAR_WIDTH, topPos + TOP_PADDING + MAX_BAR_HEIGHT, 0xFF010A1C, 0xFF051536);
 
         // Output slot labels
-        guiGraphics.drawString(this.font, "N", this.leftPos + 158, this.topPos + 23, -12566464, false);
-        guiGraphics.drawString(this.font, "P", this.leftPos + 158, this.topPos + 41, -12566464, false);
-        guiGraphics.drawString(this.font, "K", this.leftPos + 158, this.topPos + 59, -12566464, false);
+        guiGraphics.text(this.font, "N", this.leftPos + 158, this.topPos + 23, -12566464, false);
+        guiGraphics.text(this.font, "P", this.leftPos + 158, this.topPos + 41, -12566464, false);
+        guiGraphics.text(this.font, "K", this.leftPos + 158, this.topPos + 59, -12566464, false);
     }
 
-    @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(g, mouseX, mouseY, partialTicks);
-        super.render(g, mouseX, mouseY, partialTicks);
-        this.renderTooltip(g, mouseX, mouseY);
-    }
+    // @Override
+    // public void render(GuiGraphics g, int mouseX, int mouseY, float partialTicks) {
+    //     this.renderBackground(g, mouseX, mouseY, partialTicks);
+    //     super.render(g, mouseX, mouseY, partialTicks);
+    //     this.renderTooltip(g, mouseX, mouseY);
+    // }
 
     @Override
-    public void renderTooltip(GuiGraphics g, int mouseX, int mouseY) {
-        super.renderTooltip(g, mouseX, mouseY);
+    public void extractTooltip(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+        super.extractTooltip(g, mouseX, mouseY);
 
         // Render additional tank tooltip if hovered over
         boolean isHoveringOverTank = isHovering(LEFT_PADDING, TOP_PADDING, BAR_WIDTH, MAX_BAR_HEIGHT, mouseX, mouseY);

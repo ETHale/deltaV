@@ -20,7 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
 
 public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider{
     private SmartEnergyStorage energyStorage;
@@ -29,10 +30,10 @@ public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider
         super(ModBlockEntities.BASIC_BATTERY_BE.get(), pos, blockState);
         Direction[] dirs = new Direction[1];
         dirs[0] = Direction.UP;
-        this.energyStorage = new SmartEnergyStorage(1500, MAX_TRANSFER, MAX_TRANSFER, this::setChanged, dirs);        
+        this.energyStorage = new SmartEnergyStorage(1500, MAX_TRANSFER, MAX_TRANSFER, dirs);        
     }
 
-    public IEnergyStorage getEnergyStorage(@Nullable Direction side) {
+    public EnergyHandler getEnergyStorage(@Nullable Direction side) {
         return energyStorage.getEnergyStorage(side);
     }
 
@@ -49,24 +50,20 @@ public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(ValueOutput out) {
         super.saveAdditional(out);
-        out.putInt("Energy", energyStorage.getEnergyStored());
+        out.putInt("Energy", energyStorage.getAmountAsInt());
     }
 
     @Override
     protected void loadAdditional(ValueInput in) {
         super.loadAdditional(in);
-        energyStorage.setEnergy(in.getIntOr("Energy", 0));
+        energyStorage.set(in.getIntOr("Energy", 0));
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
         BlockPos targetPos = blockPos.relative(Direction.UP);
 
-        IEnergyStorage be = level.getCapability(Capabilities.EnergyStorage.BLOCK, targetPos, Direction.DOWN);
-        if (be != null && be.canReceive() && this.energyStorage.canExtract()) {
-            int extracted = this.energyStorage.extractEnergy(MAX_TRANSFER, true);
-            int amount = be.receiveEnergy(extracted, false);
-            this.energyStorage.extractEnergy(amount, false);
-        }
+        EnergyHandler be = level.getCapability(Capabilities.Energy.BLOCK, targetPos, Direction.DOWN);
+        EnergyHandlerUtil.move(this.energyStorage, be, MAX_TRANSFER, null);
         level.scheduleTick(blockPos, blockState.getBlock(), 20);
     }
 

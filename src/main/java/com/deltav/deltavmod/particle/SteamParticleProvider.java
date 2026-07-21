@@ -6,6 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 import net.neoforged.api.distmarker.Dist;
 
 @OnlyIn(Dist.CLIENT)
@@ -19,7 +20,7 @@ public class SteamParticleProvider implements ParticleProvider<SimpleParticleTyp
     @Override
     public Particle createParticle(SimpleParticleType type, ClientLevel level,
                                    double x, double y, double z,
-                                   double dx, double dy, double dz) {
+                                   double dx, double dy, double dz, RandomSource random) {
         SteamParticle particle = new SteamParticle(level, x, y, z, dx, dy, dz, sprite);
         particle.setSpriteFromAge(this.sprite);
         return particle;

@@ -7,11 +7,11 @@ import com.deltav.deltavmod.item.ModItems;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.entity.vehicle.ChestBoat;
+import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.boat.ChestBoat;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -32,7 +32,7 @@ public class ModEntityTypes {
             .clientTrackingRange(10)
             .build(ResourceKey.create(
                 Registries.ENTITY_TYPE,
-                ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "rubberwood_boat")))
+                Identifier.fromNamespaceAndPath(DeltaV.MODID, "rubberwood_boat")))
     );
     private static EntityType.EntityFactory<Boat> boatFactory(Supplier<Item> boatItemGetter) {
         return (p_375558_, p_375559_) -> new Boat(p_375558_, p_375559_, boatItemGetter);
@@ -49,7 +49,7 @@ public class ModEntityTypes {
             .clientTrackingRange(10)
             .build(ResourceKey.create(
                 Registries.ENTITY_TYPE,
-                ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "rubberwood_chest_boat")))
+                Identifier.fromNamespaceAndPath(DeltaV.MODID, "rubberwood_chest_boat")))
     );
     private static EntityType.EntityFactory<ChestBoat> chestBoatFactory(Supplier<Item> boatItemGetter) {
         return (p_375555_, p_375556_) -> new ChestBoat(p_375555_, p_375556_, boatItemGetter);

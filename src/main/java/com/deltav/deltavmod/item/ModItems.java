@@ -82,7 +82,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> STRIPPED_RUBBERWOOD_WOOD_ITEM = ITEMS.registerSimpleBlockItem("stripped_rubberwood_wood", ModBlocks.STRIPPED_RUBBERWOOD_WOOD);
     public static final DeferredItem<BlockItem> RUBBERWOOD_LEAVES_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_leaves", ModBlocks.RUBBERWOOD_LEAVES);
     public static final DeferredItem<BlockItem> RUBBERWOOD_SAPLING_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_sapling", ModBlocks.RUBBERWOOD_SAPLING);
-    public static final DeferredItem<BlockItem> RUBBERWOODPLANKS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_planks", ModBlocks.RUBBERWOOD_PLANKS);
+    public static final DeferredItem<BlockItem> RUBBERWOOD_PLANKS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_planks", ModBlocks.RUBBERWOOD_PLANKS);
     public static final DeferredItem<BlockItem> RUBBERWOOD_STAIRS_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_stairs", ModBlocks.RUBBERWOOD_STAIRS);
     public static final DeferredItem<BlockItem> RUBBERWOOD_SLAB_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_slab", ModBlocks.RUBBERWOOD_SLAB);
     public static final DeferredItem<BlockItem> RUBBERWOOD_PRESSURE_PLATE_ITEM = ITEMS.registerSimpleBlockItem("rubberwood_pressure_plate", ModBlocks.RUBBERWOOD_PRESSURE_PLATE);

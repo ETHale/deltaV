@@ -17,8 +17,8 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -72,22 +72,22 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .unlockedBy("has_raw_zinc_block", this.has(ModBlocks.RAW_ZINC_BLOCK))
             .save(this.output);
 
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
             .unlockedBy("has_zinc_ore", this.has(ModBlocks.ZINC_ORE))
             .save(this.output, "zinc_ingot_from_smelting_zinc_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
             .unlockedBy("has_deepslate_zinc_ore", this.has(ModBlocks.DEEPSLATE_ZINC_ORE))
             .save(this.output, "zinc_ingot_from_smelting_deepslate_zinc_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 200)
             .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
             .save(this.output, "zinc_ingot_from_smelting_raw_zinc");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
             .unlockedBy("has_zinc_ore", this.has(ModBlocks.ZINC_ORE))
             .save(this.output, "zinc_ingot_from_blasting_zinc_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
             .unlockedBy("has_deepslate_zinc_ore", this.has(ModBlocks.DEEPSLATE_ZINC_ORE))
             .save(this.output, "zinc_ingot_from_blasting_deepslate_zinc_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_ZINC), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT, 0.7F, 100)
             .unlockedBy("has_raw_zinc", this.has(ModItems.RAW_ZINC))
             .save(this.output, "zinc_ingot_from_blasting_raw_zinc");
 
@@ -118,22 +118,22 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .unlockedBy("has_raw_cobalt_block", this.has(ModBlocks.RAW_COBALT_BLOCK))
             .save(this.output);
 
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
             .unlockedBy("has_cobalt_ore", this.has(ModBlocks.COBALT_ORE))
             .save(this.output, "cobalt_ingot_from_smelting_cobalt_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
             .unlockedBy("has_deepslate_cobalt_ore", this.has(ModBlocks.DEEPSLATE_COBALT_ORE))
             .save(this.output, "cobalt_ingot_from_smelting_deepslate_cobalt_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 200)
             .unlockedBy("has_raw_cobalt", this.has(ModItems.RAW_COBALT))
             .save(this.output, "cobalt_ingot_from_smelting_raw_cobalt");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
             .unlockedBy("has_cobalt_ore", this.has(ModBlocks.COBALT_ORE))
             .save(this.output, "cobalt_ingot_from_blasting_cobalt_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.DEEPSLATE_COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
             .unlockedBy("has_deepslate_cobalt_ore", this.has(ModBlocks.DEEPSLATE_COBALT_ORE))
             .save(this.output, "cobalt_ingot_from_blasting_deepslate_cobalt_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModItems.RAW_COBALT), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT, 0.7F, 100)
             .unlockedBy("has_raw_cobalt", this.has(ModItems.RAW_COBALT))
             .save(this.output, "cobalt_ingot_from_blasting_raw_cobalt");
 
@@ -207,64 +207,64 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .define('Z', ModItems.KIMBERLITE_ITEM)
             .unlockedBy("has_kimberlite", this.has(ModItems.KIMBERLITE_ITEM))
             .save(this.output, "polished_kimberlite_stairs_from_kimberlite");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, Items.COAL, 0.1F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.COAL, 0.1F, 200)
             .unlockedBy("has_kimberlite_coal_ore", this.has(ModBlocks.KIMBERLITE_COAL_ORE))
             .save(this.output, "coal_from_smelting_kimberlite_coal_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, Items.COAL, 0.1F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COAL_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.COAL, 0.1F, 100)
             .unlockedBy("has_kimberlite_coal_ore", this.has(ModBlocks.KIMBERLITE_COAL_ORE))
             .save(this.output, "coal_from_blasting_kimberlite_coal_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, Items.COPPER_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.COPPER_INGOT, 0.7F, 200)
             .unlockedBy("has_kimberlite_copper_ore", this.has(ModBlocks.KIMBERLITE_COPPER_ORE))
             .save(this.output, "copper_from_smelting_kimberlite_copper_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, Items.COPPER_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COPPER_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.COPPER_INGOT, 0.7F, 100)
             .unlockedBy("has_kimberlite_copper_ore", this.has(ModBlocks.KIMBERLITE_COPPER_ORE))
             .save(this.output, "copper_from_blasting_kimberlite_copper_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, Items.DIAMOND, 1.0F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.DIAMOND, 1.0F, 200)
             .unlockedBy("has_kimberlite_diamond_ore", this.has(ModBlocks.KIMBERLITE_DIAMOND_ORE))
             .save(this.output, "diamond_from_smelting_kimberlite_diamond_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, Items.DIAMOND, 1.0F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_DIAMOND_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.DIAMOND, 1.0F, 100)
             .unlockedBy("has_kimberlite_diamond_ore", this.has(ModBlocks.KIMBERLITE_DIAMOND_ORE))
             .save(this.output, "diamond_from_blasting_kimberlite_diamond_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, Items.EMERALD, 1.0F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.EMERALD, 1.0F, 200)
             .unlockedBy("has_kimberlite_emerald_ore", this.has(ModBlocks.KIMBERLITE_EMERALD_ORE))
             .save(this.output, "emerald_from_smelting_kimberlite_emerald_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, Items.EMERALD, 1.0F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_EMERALD_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.EMERALD, 1.0F, 100)
             .unlockedBy("has_kimberlite_emerald_ore", this.has(ModBlocks.KIMBERLITE_EMERALD_ORE))
             .save(this.output, "emerald_from_blasting_kimberlite_emerald_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GOLD_INGOT, 1.0F, 200)
             .unlockedBy("has_kimberlite_gold_ore", this.has(ModBlocks.KIMBERLITE_GOLD_ORE))
             .save(this.output, "gold_from_smelting_kimberlite_gold_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_GOLD_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GOLD_INGOT, 1.0F, 100)
             .unlockedBy("has_kimberlite_gold_ore", this.has(ModBlocks.KIMBERLITE_GOLD_ORE))
             .save(this.output, "gold_from_blasting_kimberlite_gold_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, Items.IRON_INGOT, 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.IRON_INGOT, 0.7F, 200)
             .unlockedBy("has_kimberlite_iron_ore", this.has(ModBlocks.KIMBERLITE_IRON_ORE))
             .save(this.output, "iron_from_smelting_kimberlite_iron_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, Items.IRON_INGOT, 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_IRON_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.IRON_INGOT, 0.7F, 100)
             .unlockedBy("has_kimberlite_iron_ore", this.has(ModBlocks.KIMBERLITE_IRON_ORE))
             .save(this.output, "iron_from_blasting_kimberlite_iron_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 200)
             .unlockedBy("has_kimberlite_lapis_ore", this.has(ModBlocks.KIMBERLITE_LAPIS_ORE))
             .save(this.output, "lapis_from_smelting_kimberlite_lapis_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_LAPIS_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.LAPIS_LAZULI, 0.2F, 100)
             .unlockedBy("has_kimberlite_lapis_ore", this.has(ModBlocks.KIMBERLITE_LAPIS_ORE))
             .save(this.output, "lapis_from_blasting_kimberlite_lapis_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, Items.REDSTONE, 0.3F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.REDSTONE, 0.3F, 200)
             .unlockedBy("has_kimberlite_redstone_ore", this.has(ModBlocks.KIMBERLITE_REDSTONE_ORE))
             .save(this.output, "redstone_from_smelting_kimberlite_redstone_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, Items.REDSTONE, 0.3F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_REDSTONE_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, Items.REDSTONE, 0.3F, 100)
             .unlockedBy("has_kimberlite_redstone_ore", this.has(ModBlocks.KIMBERLITE_REDSTONE_ORE))
             .save(this.output, "redstone_from_blasting_kimberlite_redstone_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 200)
             .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
             .save(this.output, "zinc_from_smelting_kimberlite_zinc_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_ZINC_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100)
             .unlockedBy("has_kimberlite_zinc_ore", this.has(ModBlocks.KIMBERLITE_ZINC_ORE))
             .save(this.output, "zinc_from_blasting_kimberlite_zinc_ore");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 200)
             .unlockedBy("has_kimberlite_cobalt_ore", this.has(ModBlocks.KIMBERLITE_COBALT_ORE))
             .save(this.output, "cobalt_from_smelting_kimberlite_cobalt_ore");
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 100)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ModBlocks.KIMBERLITE_COBALT_ORE), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.COBALT_INGOT.get(), 0.7F, 100)
             .unlockedBy("has_kimberlite_cobalt_ore", this.has(ModBlocks.KIMBERLITE_COBALT_ORE))
             .save(this.output, "cobalt_from_blasting_kimberlite_cobalt_ore");
 
@@ -368,7 +368,7 @@ public class DeltaVRecipeProvider extends RecipeProvider{
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBlocks.SILICA_SANDSTONE.get()), RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_SILICA_SANDSTONE.get(), 1)
             .unlockedBy("has_cut_silica_sandstone", this.has(ModBlocks.CUT_SILICA_SANDSTONE.get()))
             .save(this.output, "cut_silica_sandstone_from_silica_sandstone_stonecutting");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.SILICA_SANDSTONE), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), 0.1F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.SILICA_SANDSTONE), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.MISC, ModBlocks.SMOOTH_SILICA_SANDSTONE.get(), 0.1F, 200)
             .unlockedBy("has_silica_sandstone", this.has(ModBlocks.SILICA_SANDSTONE.get()))
             .save(this.output, "smooth_silica_sandstone_from_smelting");
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILICA_SAND.get(), 1)
@@ -381,7 +381,7 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .requires(ModBlocks.SILICA_SAND.get())
             .unlockedBy("has_silica_sand", this.has(ModBlocks.SILICA_SAND.get()))
             .save(this.output, "silica_dust_from_silica_sand");
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SILICA_DUST), RecipeCategory.MISC, ModItems.SILICON.get(), 0.5F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.SILICA_DUST), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.SILICON.get(), 0.5F, 200)
             .unlockedBy("has_silica_dust", this.has(ModItems.SILICA_DUST.get()))
             .save(this.output, "silcon_from_smelting");
 
@@ -419,7 +419,7 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .pattern("C C")
             .pattern("SSS")
             .pattern("SSS")
-            .define('C', Items.CHAIN)
+            .define('C', Items.IRON_CHAIN)
             .define('S', ModBlocks.STRIPPED_RUBBERWOOD_LOG)
             .unlockedBy("has_rubberwood_planks", this.has(ModBlocks.RUBBERWOOD_LOG))
             .save(this.output, "rubberwood_hanging_sign_from_rubberwood_logs");
@@ -513,7 +513,7 @@ public class DeltaVRecipeProvider extends RecipeProvider{
             .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
             .save(this.output, "coagulated_latex_from_coagulated_latex_block");
 
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.COAGULATED_LATEX), RecipeCategory.MISC, ModItems.RUBBER, 0.1F, 150)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.COAGULATED_LATEX), RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.RUBBER, 0.1F, 150)
             .unlockedBy("has_coagulated_latex", this.has(ModItems.COAGULATED_LATEX))
             .save(this.output, "rubber_from_smelting_coagulated_latex");
     }

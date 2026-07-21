@@ -20,7 +20,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 // Thinking it would be cool if this generated power when its POWERED state changed
 public class RedstoneGenerator extends HorizontalDirectionalBlock {
@@ -60,7 +62,7 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
 
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean bool) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             boolean flag = state.getValue(POWERED);
             if (flag != level.hasNeighborSignal(pos)) {
                 if (!flag) {
@@ -80,10 +82,15 @@ public class RedstoneGenerator extends HorizontalDirectionalBlock {
         Direction facing = state.getValue(FACING);
         BlockPos targetPos = pos.relative(facing);
 
-        IEnergyStorage be = level.getCapability(Capabilities.EnergyStorage.BLOCK, targetPos, Direction.SOUTH);
+        EnergyHandler be = level.getCapability(Capabilities.Energy.BLOCK, targetPos, Direction.SOUTH);
         if (state.getValue(POWERED)) {
-            if (be != null && be.canReceive()) {
-                be.receiveEnergy(REDSTONE_GENERATOR_CAPACITY, false);
+            if (be != null && !EnergyHandlerUtil.isFull(be)) {
+                try (Transaction tr = Transaction.openRoot()) {
+                    int amount = be.insert(REDSTONE_GENERATOR_CAPACITY, tr);
+                    if (amount > 0) {
+                        tr.commit();
+                    }
+                }
             }
             level.scheduleTick(pos, this, 20);
         }

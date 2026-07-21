@@ -21,7 +21,7 @@ public class KimberliteBlocks {
     
     public static final DeferredBlock<Block> KIMBERLITE = BLOCKS.registerSimpleBlock(
         "kimberlite", 
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
@@ -70,7 +70,7 @@ public class KimberliteBlocks {
             .requiresCorrectToolForDrops()
             .strength(1.4f, 5.0f)
             .mapColor(MapColor.COLOR_BLACK)
-            .noCollission())
+            .noCollision())
     );
 
     public static final DeferredBlock<WallBlock> KIMBERLITE_WALL = BLOCKS.register(
@@ -87,7 +87,7 @@ public class KimberliteBlocks {
 
     public static final DeferredBlock<Block> POLISHED_KIMBERLITE = BLOCKS.registerSimpleBlock(
         "polished_kimberlite", 
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
@@ -119,7 +119,7 @@ public class KimberliteBlocks {
     // ores
     public static final DeferredBlock<Block> KIMBERLITE_ZINC_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_zinc_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -128,7 +128,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_COAL_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_coal_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -137,7 +137,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_COPPER_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_copper_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -146,7 +146,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_DIAMOND_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_diamond_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -155,7 +155,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_EMERALD_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_emerald_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -164,7 +164,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_GOLD_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_gold_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -173,7 +173,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_LAPIS_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_lapis_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -182,7 +182,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_REDSTONE_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_redstone_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -191,7 +191,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_IRON_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_iron_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)
@@ -200,7 +200,7 @@ public class KimberliteBlocks {
     );
     public static final DeferredBlock<Block> KIMBERLITE_COBALT_ORE = BLOCKS.registerSimpleBlock(
         "kimberlite_cobalt_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.COLOR_BLACK)
             .sound(SoundType.STONE)

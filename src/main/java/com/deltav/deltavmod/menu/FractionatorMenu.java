@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 /**
  * Menu for the fractionator block. Handles data synchronization between client and server.
@@ -35,11 +35,11 @@ public class FractionatorMenu extends AbstractContainerMenu {
         // player inv
         addStandardInventorySlots(inv, 8, 84);
 
-        addSlot(new SlotItemHandler(be.inventory, 0, 22, 36)); // INPUT_SLOT
-        addSlot(new SlotItemHandler(be.inventory, 1, 139, 36)); // MIDDLE_OUTPUT_SLOT
-        addSlot(new SlotItemHandler(be.inventory, 2, 139, 18)); // TOP_OUTPUT_SLOT
-        addSlot(new SlotItemHandler(be.inventory, 3, 139, 54)); // BOTTOM_OUTPUT_SLOT
-        addSlot(new SlotItemHandler(be.inventory, 4, 79, 54)); // RESIDUE_SLOT
+        addSlot(new ResourceHandlerSlot(be.inventory, be.inventory::set, 0, 22, 36)); // INPUT_SLOT
+        addSlot(new ResourceHandlerSlot(be.inventory, be.inventory::set, 1, 139, 36)); // MIDDLE_OUTPUT_SLOT
+        addSlot(new ResourceHandlerSlot(be.inventory, be.inventory::set, 2, 139, 18)); // TOP_OUTPUT_SLOT
+        addSlot(new ResourceHandlerSlot(be.inventory, be.inventory::set, 3, 139, 54)); // BOTTOM_OUTPUT_SLOT
+        addSlot(new ResourceHandlerSlot(be.inventory, be.inventory::set, 4, 79, 54)); // RESIDUE_SLOT
 
         addDataSlots(data); // Stores progress values
     }

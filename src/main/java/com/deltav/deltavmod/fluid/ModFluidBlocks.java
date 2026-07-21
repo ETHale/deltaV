@@ -21,7 +21,7 @@ public class ModFluidBlocks {
 
     private static final BlockBehaviour.Properties FLUID_BLOCK_PROPERTIES =
             BlockBehaviour.Properties.of()
-                .noCollission()
+                .noCollision()
                 .strength(100.0F)
                 .noLootTable()
                 .liquid()

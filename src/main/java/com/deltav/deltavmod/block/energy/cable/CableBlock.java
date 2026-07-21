@@ -66,7 +66,7 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             return null;
         } else {
             return (lvl, pos, st, be) -> {
@@ -124,7 +124,7 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
             }
             return false;
         }
-        return te.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, pos, facing) != null;
+        return te.getLevel().getCapability(Capabilities.Energy.BLOCK, pos, facing) != null;
     }
 
 
@@ -146,7 +146,7 @@ public abstract class CableBlock extends Block implements SimpleWaterloggedBlock
 
     private void updateBE(@Nonnull Level level, @Nonnull BlockPos pos) {
         if (level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 cable.markDirty();
             } else {
                 level.sendBlockUpdated(pos, level.getBlockState(pos), level.getBlockState(pos), 3);

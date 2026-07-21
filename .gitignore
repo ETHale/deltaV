@@ -31,3 +31,10 @@ repo
 # cache 
 src/generated/resources/.cache/*
 src/generated/resources/*
+
+assets/
+data/
+META-INF/
+reports/
+mcplogo.png
+url.png
