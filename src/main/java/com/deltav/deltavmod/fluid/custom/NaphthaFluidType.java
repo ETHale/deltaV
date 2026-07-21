@@ -57,6 +57,6 @@ public class NaphthaFluidType extends FluidType {
                 fogData.renderDistanceStart = 0f;
                 fogData.renderDistanceEnd = 1f;
             }
-        }, ModFluidTypes.KEROSENE_FLUID_TYPE.get());
+        }, ModFluidTypes.NAPHTHA_FLUID_TYPE.get());
     }
 }

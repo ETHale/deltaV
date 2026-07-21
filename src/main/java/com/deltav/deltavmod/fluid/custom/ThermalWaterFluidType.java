@@ -61,6 +61,6 @@ public class ThermalWaterFluidType extends FluidType {
                 fogData.renderDistanceStart = 0f;
                 fogData.renderDistanceEnd = 1f;
             }
-        }, ModFluidTypes.KEROSENE_FLUID_TYPE.get());
+        }, ModFluidTypes.THERMAL_WATER_FLUID_TYPE.get());
     }
 }
