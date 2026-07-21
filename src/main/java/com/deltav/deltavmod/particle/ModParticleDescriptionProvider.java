@@ -19,8 +19,8 @@ public class ModParticleDescriptionProvider extends ParticleDescriptionProvider 
             6,
             false
         );
-        // sprite(ModParticlesTypes.LATEX_DRIP.get(), 
-        //     Identifier.fromNamespaceAndPath("minecraft", "drip_fall")
-        // );
+        spriteSet(ModParticlesTypes.LATEX_DRIP.get(), 
+            Identifier.fromNamespaceAndPath("minecraft", "drip_fall")
+        );
     }
 }

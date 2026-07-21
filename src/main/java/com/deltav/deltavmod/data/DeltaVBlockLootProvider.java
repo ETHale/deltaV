@@ -11,7 +11,6 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.fml.common.Mod;
 
 public class DeltaVBlockLootProvider extends BlockLootSubProvider{
     public DeltaVBlockLootProvider(HolderLookup.Provider lookupProvider) {

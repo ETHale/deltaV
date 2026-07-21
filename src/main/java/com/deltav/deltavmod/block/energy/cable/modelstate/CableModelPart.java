@@ -15,7 +15,6 @@ import com.mojang.math.Quadrant;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.block.dispatch.ModelState;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
@@ -33,6 +32,7 @@ import net.minecraft.client.resources.model.sprite.TextureSlots;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.Direction;
+import net.minecraft.data.AtlasIds;
 import net.minecraft.world.phys.Vec3;
 
 /*
@@ -136,7 +136,7 @@ public record CableModelPart(QuadCollection quads, boolean useAmbientOcclusion, 
             this.connectorWidth = connectorWidth;
             
             try {
-                TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(Sheets.BLOCKS_MAPPER.sheet());
+                TextureAtlas atlas = net.minecraft.client.Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);
                 DeltaV.LOGGER.debug("Loading cable texture: " + texture);
                 spriteCable = atlas.getSprite(texture);
                 spriteSide = atlas.getSprite(texture.withSuffix("_side"));

@@ -25,10 +25,6 @@ import net.neoforged.neoforge.fluids.FluidType;
  */
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
 public class KeroseneFluidType extends FluidType {
-    // public static final Identifier STILL_TEXTURE =   Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil");
-    // public static final Identifier FLOWING_TEXTURE = Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow");
-    // public static final Identifier OVERLAY_TEXTURE = Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay");
-    public static final int TINT_COLOR = 0xFF00E2FF;
     public static final Vector4f FOG_COLOR = new Vector4f(0f / 255f, 226f / 255f, 255f / 255f, 1f);
 
     public KeroseneFluidType() {

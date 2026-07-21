@@ -3,7 +3,6 @@ package com.deltav.deltavmod.worldgen.features;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.deltav.deltavmod.DeltaV;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;

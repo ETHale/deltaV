@@ -1,15 +1,12 @@
 package com.deltav.deltavmod.particle;
 
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
-import net.neoforged.api.distmarker.Dist;
 
-@OnlyIn(Dist.CLIENT)
 public class SteamParticleProvider implements ParticleProvider<SimpleParticleType> {
     private final SpriteSet sprite;
 

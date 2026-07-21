@@ -3,10 +3,7 @@ package com.deltav.deltavmod.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.api.distmarker.Dist;
 
-@OnlyIn(Dist.CLIENT)
 public class SteamParticle extends SingleQuadParticle {
     private final SpriteSet spriteSet;
 

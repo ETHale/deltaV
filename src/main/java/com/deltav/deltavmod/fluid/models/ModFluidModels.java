@@ -17,42 +17,46 @@ public class ModFluidModels {
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
-        (FluidTintSource)null
+        createConstantColourFluidTintSource(0xFF00E2FF)
     );
 
     public static final FluidModel.Unbaked NAPTHA_MODEL = new FluidModel.Unbaked(
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
-        (FluidTintSource)null
+        createConstantColourFluidTintSource(0xFFFFE8C0)
     );
 
     public static final FluidModel.Unbaked PETROL_MODEL = new FluidModel.Unbaked(
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
-        (FluidTintSource)null
+        createConstantColourFluidTintSource(0xFFFFB52B)
     );
 
     public static final FluidModel.Unbaked OIL_MODEL = new FluidModel.Unbaked(
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
-        (FluidTintSource)null
+        createConstantColourFluidTintSource(0xFF010A1C)
     );
 
     public static final FluidModel.Unbaked LATEX_MODEL = new FluidModel.Unbaked(
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/latex")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/latex_flow")), 
         new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/latex_overlay")),
-        (FluidTintSource)null
+        createConstantColourFluidTintSource(0xFFFCFFE8)
     );
 
     public static final FluidModel.Unbaked THERMAL_WATER_MODEL = new FluidModel.Unbaked(
         new Material(Identifier.withDefaultNamespace("block/water_still")),
         new Material(Identifier.withDefaultNamespace("block/water_flow")),
         new Material(Identifier.withDefaultNamespace("block/water_overlay")), 
-        new FluidTintSource() {
+        createConstantColourFluidTintSource(0xFF4FB9EA)
+    );
+
+    private static FluidTintSource createConstantColourFluidTintSource(int colour) {
+        return new FluidTintSource() {
             @Override
             public int color(BlockState state) {
                 return -1;
@@ -60,18 +64,18 @@ public class ModFluidModels {
 
             @Override
             public int color(FluidState state) {
-                return 0xFF4FB9EA;
+                return colour;
             }
 
             @Override
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return 0xFF4FB9EA;
+                return colour;
             }
 
             @Override
             public int colorInWorld(FluidState fluidState, BlockState blockState, BlockAndTintGetter level, BlockPos pos) {
-                return 0xFF4FB9EA;
+                return colour;
             }
-        }
-    );
+        };
+    }
 }
