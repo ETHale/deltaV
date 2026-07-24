@@ -32,9 +32,11 @@ repo
 src/generated/resources/.cache/*
 src/generated/resources/*
 
-assets/
 data/
 META-INF/
 reports/
 mcplogo.png
 url.png
+assets/c/
+assets/minecraft/
+assets/neoforge/
