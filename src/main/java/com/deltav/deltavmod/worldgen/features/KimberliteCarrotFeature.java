@@ -41,7 +41,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
         BlockPos.MutableBlockPos center = new BlockPos.MutableBlockPos();
         float dx = 0f, dz = 0f; // Directional drift for natural wandering
 
-        for (int step = 0; step < maxSteps && !reachedSurface.booleanValue() && health.getValue() > 0; y++, step++) {
+        for (int step = 0; step < maxSteps && !reachedSurface.booleanValue() && health.get().intValue() > 0; y++, step++) {
             dx += (random.nextFloat() - 0.5f) * 0.8f;
             dz += (random.nextFloat() - 0.5f) * 0.8f;
             
@@ -52,7 +52,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
 
             center.set(centerX, y, centerZ);
 
-            health.setValue(health.getValue() - random.nextFloat() * 5F);
+            health.setValue(health.get().intValue() - random.nextFloat() * 5F);
             BlockPos.betweenClosedStream(center.offset(-r, 0, -r), center.offset(r, 0, r))
                 .forEach(pos -> {
                     if (reachedSurface.booleanValue()) return;
@@ -71,7 +71,7 @@ public class KimberliteCarrotFeature extends Feature<NoneFeatureConfiguration>{
                             reachedSurface.setTrue();
                         }
                         float edgeBias = (float)(Math.sqrt(dist2) / currentRadius);
-                        placeBlock(context, level, pos, state, reachedSurface.booleanValue(), health.getValue(), edgeBias, random);
+                        placeBlock(context, level, pos, state, reachedSurface.booleanValue(), health.get().intValue(), edgeBias, random);
                         this.markAboveForPostProcessing((WorldGenLevel) level, pos);
                     }
                 }

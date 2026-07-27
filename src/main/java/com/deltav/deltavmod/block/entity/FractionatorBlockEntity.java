@@ -23,13 +23,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
  * Fractionator block entity. Holds the inventory and fluid tank for the fractionation process.
@@ -44,21 +46,21 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     private static final String RESIDUE_PROGRESS_NBT = "fractionator.residue_progress";
     private static final String MAX_RESIDUE_PROGRESS_NBT = "fractionator.max_residue_progress";
 
-    private static final int MAX_TANK_CAPACITY = 10_000; // 10 buckets
+    public static final int MAX_TANK_CAPACITY = 10_000; // 10 buckets
 
-    private static final int OIL_DRAIN     = 10; // mB/tick
-    private static final int PETROL_GAIN   = 5;  // mB/tick
-    private static final int NAPHTHA_GAIN  = 1;  // mB/tick
-    private static final int KEROSENE_GAIN = 3;  // mB/tick
+    public static final int OIL_DRAIN     = 10; // mB/tick
+    public static final int PETROL_GAIN   = 5;  // mB/tick
+    public static final int NAPHTHA_GAIN  = 1;  // mB/tick
+    public static final int KEROSENE_GAIN = 3;  // mB/tick
 
-    private static final int INPUT_SLOT = 0;
-    private static final int MIDDLE_OUTPUT_SLOT = 1;
-    private static final int TOP_OUTPUT_SLOT = 2;
-    private static final int BOTTOM_OUTPUT_SLOT = 3;
-    private static final int RESIDUE_SLOT = 4;
+    public static final int INPUT_SLOT = 0;
+    public static final int MIDDLE_OUTPUT_SLOT = 1;
+    public static final int TOP_OUTPUT_SLOT = 2;
+    public static final int BOTTOM_OUTPUT_SLOT = 3;
+    public static final int RESIDUE_SLOT = 4;
 
-    private static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.OIL_SOURCE.get(), OIL_DRAIN);
-    private static final Map<Integer, FluidStack> OUTPUTS = Map.of(
+    public static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.OIL_SOURCE.get(), OIL_DRAIN);
+    public static final Map<Integer, FluidStack> OUTPUTS = Map.of(
         TOP_OUTPUT_SLOT, new FluidStack(ModFluids.NAPHTHA_SOURCE.get(), NAPHTHA_GAIN),
         MIDDLE_OUTPUT_SLOT, new FluidStack(ModFluids.PETROL_SOURCE.get(), PETROL_GAIN),
         BOTTOM_OUTPUT_SLOT, new FluidStack(ModFluids.KEROSENE_SOURCE.get(), KEROSENE_GAIN)
@@ -76,16 +78,16 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     public static final int INTERNAL_DATA_COUNT = 4;
 
     // Holds all items within the fractionator
-    public final ItemStackHandler inventory = new ItemStackHandler(5) {
+    public final ItemStacksResourceHandler inventory = new ItemStacksResourceHandler(5) {
         @Override
-        protected int getStackLimit(int slot, ItemStack stack) {
+        protected int getCapacity(int slot, ItemResource stack) {
             return 1; // In every slot only 1 item can be stored
         }
 
         @Override
-        protected void onContentsChanged(int slot) {
+        protected void onContentsChanged(int slot, ItemStack prev) {
             setChanged();
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 // Sync the inventory with the client
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
@@ -100,9 +102,9 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
 
     // Container to synchronise data between client and server
     private ContainerData data;
-    private final FluidTank tank = new FluidTank(MAX_TANK_CAPACITY) {
+    private final FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, MAX_TANK_CAPACITY) {
         @Override
-        protected void onContentsChanged() {
+        protected void onContentsChanged(int index, FluidStack stack) {
             setChanged();
         }
     };
@@ -119,8 +121,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> tank.getFluidAmount();
-                    case 1 -> tank.getCapacity();
+                    case 0 -> tank.getAmountAsInt(0);
+                    case 1 -> tank.getCapacityAsInt(0, null);
                     case 2 -> arrowProgress;
                     case 3 -> arrowMaxProgress;
                     default -> 0;
@@ -130,8 +132,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> tank.setFluid(new FluidStack(ModFluids.OIL_SOURCE.get(), value));
-                    case 1 -> tank.setCapacity(value);
+                    case 0 -> tank.set(0, FluidResource.of(new FluidStack(ModFluids.OIL_SOURCE.get(), value)), value);
+                    case 1 -> {}
                     case 2 -> arrowProgress = value;
                     case 3 -> arrowMaxProgress = value;
                 }
@@ -165,8 +167,8 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
         super.preRemoveSideEffects(pos, state);
 
         // Drop items from internal ItemHandler
-        for (int i = 0; i < inventory.getSlots(); i++) {
-            ItemStack stack = inventory.getStackInSlot(i);
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack stack = inventory.getResource(i).toStack();
             if (!stack.isEmpty()) {
                 Containers.dropItemStack(this.level, pos.getX(), pos.getY(), pos.getZ(), stack);
             }
@@ -205,7 +207,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
         residueMaxProgress = in.getIntOr(MAX_RESIDUE_PROGRESS_NBT, residueMaxProgress);
     }
 
-    public IFluidHandler getFluidHandler(@Nullable Direction side) {
+    public FluidStacksResourceHandler getFluidHandler(@Nullable Direction side) {
         return tank;
     }
 
@@ -216,7 +218,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      * @note invoked from the overriden block getTicket function in {@link FractionatorBlock}
      */
     public void tick() {
-        if (level == null || level.isClientSide) return;
+        if (level == null || level.isClientSide()) return;
         arrowProgress++;
         residueProgress++;
 
@@ -243,20 +245,11 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      * Attempts to drain fluid from the input tank into the internal tank.
      */
     private void drainToTankFromInput() {
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
+        ItemStack input = inventory.getResource(INPUT_SLOT).toStack();
         if (input.getItem() == ModItems.OIL_BUCKET.get()) {
-            IFluidHandlerItem itemHandler = FluidHandler.ITEM.getCapability(input, null);
+            ResourceHandler<FluidResource> itemHandler = input.getCapability(Capabilities.Fluid.ITEM, null);
             if (itemHandler != null) {
-                // Drain the entire bucket (1000 mB)
-                FluidStack drained = itemHandler.drain(1000, FluidAction.EXECUTE);
-                if (drained != null && !drained.isEmpty()) {
-                    int filled = tank.fill(drained, FluidAction.EXECUTE);
-                    if (filled > 0) {
-                        ItemStack result = itemHandler.getContainer();
-                        inventory.setStackInSlot(INPUT_SLOT, result);
-                        setChanged();
-                    }
-                }
+                ResourceHandlerUtil.move(itemHandler, tank, (f) -> f.is(ModFluids.OIL_SOURCE), 1000, null);
             }
         }
     }
@@ -269,12 +262,12 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      */
     private boolean hasRecipe() {
         // Check if internal tank can be drained
-        boolean tankHasSufficientOil = (tank.getFluidAmount() >= OIL_DRAIN_STACK.getAmount())
-            && (tank.getFluid().getFluid() == OIL_DRAIN_STACK.getFluid());
+        boolean tankHasSufficientOil = (tank.getAmountAsInt(0) >= OIL_DRAIN_STACK.getAmount())
+            && (tank.getResource(0).getFluid() == OIL_DRAIN_STACK.getFluid());
         if (!tankHasSufficientOil) return false;
 
         // Check that residue slot is not full and contains Gloopy Residue
-        ItemStack residue = inventory.getStackInSlot(RESIDUE_SLOT);
+        ItemStack residue = inventory.getResource(RESIDUE_SLOT).toStack();
         if (!residue.isEmpty()) {
             if (residue.getItem() != ModItems.GLOOPY_RESIDUE.get()) return false;
             if (residue.getCount() >= residue.getMaxStackSize()) return false;
@@ -282,18 +275,22 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
 
         // Check every output slot for valid barrels
         for (int SLOT : OUTPUTS.keySet()) {
-            ItemStack output = inventory.getStackInSlot(SLOT);
+            ItemStack output = inventory.getResource(SLOT).toStack();
 
             // If the output is not a barrel, we can't process into output
             if (output.getItem() != ModItems.BARREL.get()) return false;
 
             // Double-check barrel has fluid handler
-            IFluidHandlerItem barrelHandler = output.getCapability(FluidHandler.ITEM);
+            ResourceHandler<FluidResource> barrelHandler = output.getCapability(Capabilities.Fluid.ITEM, null);
             if (barrelHandler == null) return false;
 
             // Check if barrel can accept more (simulate)
-            int canAccept = barrelHandler.fill(OUTPUTS.get(SLOT), FluidAction.SIMULATE);
-            if (canAccept <= 0) return false;
+            try (Transaction tr = Transaction.openRoot()) {
+                // Convert FluidStack to FluidResource and request insertion of that amount
+                FluidStack outStack = OUTPUTS.get(SLOT);
+                int canAccept = barrelHandler.insert(FluidResource.of(outStack), outStack.getAmount(), tr);
+                if (canAccept <= 0) return false;
+            }
         }
         return true;
     }
@@ -305,27 +302,30 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      *       input tank has enough oil, all barrels are valid and can accept more
      */
     private void processOutputs() {
-        // Drain from internal tank
-        tank.drain(OIL_DRAIN_STACK, FluidAction.EXECUTE);
-
-        // Iterate gain into each output barrel
-        for (int SLOT : OUTPUTS.keySet()) {
-            ItemStack output = inventory.getStackInSlot(SLOT);
-            // Top up the existing barrel in-place
-            IFluidHandlerItem existingHandler = output.getCapability(FluidHandler.ITEM);
-            existingHandler.fill(OUTPUTS.get(SLOT), FluidAction.EXECUTE);
-            setChanged(); // TODO: Is this required in processOil?
+        try (Transaction tr = Transaction.openRoot()) {
+            // Drain from internal tank
+            tank.extract(FluidResource.of(OIL_DRAIN_STACK), OIL_DRAIN, tr);
+    
+            // Iterate gain into each output barrel
+            for (int SLOT : OUTPUTS.keySet()) {
+                ItemStack output = inventory.getResource(SLOT).toStack();
+                // Top up the existing barrel in-place
+                ResourceHandler<FluidResource> existingHandler = output.getCapability(Capabilities.Fluid.ITEM, null);
+                existingHandler.insert(FluidResource.of(OUTPUTS.get(SLOT)), SLOT, tr);
+                setChanged(); // TODO: Is this required in processOil?
+            }
+            tr.commit();
         }
     }
 
     private void createResidue() {
-        ItemStack residue = inventory.getStackInSlot(RESIDUE_SLOT);
+        ItemStack residue = inventory.getResource(RESIDUE_SLOT).toStack();
         if (residue.isEmpty()) {
             residue = new ItemStack(ModItems.GLOOPY_RESIDUE.get());
         } else {
             residue.grow(1);
         }
-        inventory.setStackInSlot(RESIDUE_SLOT, residue);
+        inventory.set(RESIDUE_SLOT, ItemResource.of(residue), residue.count());
     }
 
     /**

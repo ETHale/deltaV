@@ -32,7 +32,7 @@ public class SilicaBlocks {
 
     public static final DeferredBlock<Block> SILICA_SANDSTONE = BLOCKS.registerSimpleBlock(
         "silica_sandstone",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .mapColor(MapColor.QUARTZ)
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()

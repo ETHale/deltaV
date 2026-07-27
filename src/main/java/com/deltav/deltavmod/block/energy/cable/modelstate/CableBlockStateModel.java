@@ -10,37 +10,43 @@ import com.deltav.deltavmod.block.energy.cable.modelstate.CableModelPart.CableMo
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvableModel;
+import net.minecraft.client.resources.model.geometry.BakedQuad.MaterialFlags;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import net.neoforged.neoforge.model.data.ModelData;
 
 public final class CableBlockStateModel implements DynamicBlockStateModel {
-    private final CableModelPart model;
-    private final ResourceLocation texture;
+    private final Identifier texture;
     private CableModelPartTemplate template = null;
 
-    public CableBlockStateModel(CableModelPart model, ResourceLocation texture) {
-        this.model = Objects.requireNonNull(model, "model");
-        this.texture = Objects.requireNonNull(texture, "texture");
+    public CableBlockStateModel(CableModelPartTemplate template, Identifier texture) {
+        this.template = template;
+        this.texture = texture;
     }
 
-    // accessor methods match the record component names
-    public CableModelPart model() {
-        return model;
-    }
-
-    public ResourceLocation texture() {
+    public Identifier texture() {
         return texture;
+    }
+
+    @Override
+    @MaterialFlags
+    public int materialFlags() {
+        return 0;
+    }
+
+    @Override
+    public Material.Baked particleMaterial() {
+        return template.spriteCable;
     }
 
     @Override
@@ -48,30 +54,17 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
         if (this == o) return true;
         if (!(o instanceof CableBlockStateModel)) return false;
         CableBlockStateModel that = (CableBlockStateModel) o;
-        return Objects.equals(model, that.model) && Objects.equals(texture, that.texture);
+        return Objects.equals(texture, that.texture) && Objects.equals(texture, that.texture);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(model, texture);
+        return Objects.hash(texture);
     }
 
     @Override
     public String toString() {
-        return "CableBlockStateModel[model=" + model + ", texture=" + texture + "]";
-    }
-
-    @Override
-    public TextureAtlasSprite particleIcon() {
-        if (template == null)
-            template = new CableModelPartTemplate(texture);
-
-        return template.spriteCable;
-    }
-
-    @Override
-    public Object createGeometryKey(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random) {
-        return this;
+        return "CableBlockStateModel[texture=" + texture + "]";
     }
 
     // Method responsible for collecting the parts to be rendered. Parameters in this method are:
@@ -81,13 +74,11 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
     // - A random instance.
     // - This list of model parts to be rendered. Add your model parts here.
     @Override
-    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts) {
+    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
         // If you want the block rendered to be dependent on the block entity (e.g., your block entity implements `BlockEntity#getModelData`)
-        // You can call `BlockAndTintGetter#getModelData` with the block position
+        // You can call `BlockAndLightGetter#getModelData` with the block position
         // You can read the property using `get` with the `ModelProperty` key
         // Remember that your block entity should call `BlockEntity#requestModelDataUpdate` to sync the model data to the client
-        if (template == null) 
-            template = new CableModelPartTemplate(texture);
 
         ModelData data = level.getModelData(pos);
         if (data == null) {
@@ -163,26 +154,23 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
     }
 
     // The unbaked model that is read from the block state json
-    public record Unbaked(CableModelPart.Unbaked model, ResourceLocation texture) implements CustomUnbakedBlockStateModel {
+    public record Unbaked(Identifier texture) implements CustomUnbakedBlockStateModel {
 
         // The codec to register
         public static final MapCodec<CableBlockStateModel.Unbaked> CODEC =
             RecordCodecBuilder.mapCodec(instance -> instance.group(
-                CableModelPart.Unbaked.CODEC.forGetter(Unbaked::model),
-                ResourceLocation.CODEC.fieldOf("texture").forGetter(Unbaked::texture)
+                Identifier.CODEC.fieldOf("texture").forGetter(Unbaked::texture)
             ).apply(instance, Unbaked::new));
-        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "cable_model_loader");
+        public static final Identifier ID = Identifier.fromNamespaceAndPath(DeltaV.MODID, "cable_model_loader");
 
         @Override
         public void resolveDependencies(ResolvableModel.Resolver resolver) {
-            // Mark any models used by the state model
-            this.model.resolveDependencies(resolver);
         }
 
         @Override
         public BlockStateModel bake(ModelBaker baker) {
             // Bake the model parts and pass into the block state model
-            return new CableBlockStateModel(this.model.bake(baker), texture);
+            return new CableBlockStateModel(new CableModelPartTemplate(baker, texture), texture);
         }
 
         @Override

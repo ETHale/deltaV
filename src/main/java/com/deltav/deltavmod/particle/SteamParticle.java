@@ -1,19 +1,15 @@
 package com.deltav.deltavmod.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.particle.TextureSheetParticle;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.api.distmarker.Dist;
 
-@OnlyIn(Dist.CLIENT)
-public class SteamParticle extends TextureSheetParticle {
+public class SteamParticle extends SingleQuadParticle {
     private final SpriteSet spriteSet;
 
     protected SteamParticle(ClientLevel world, double x, double y, double z,
                             double vx, double vy, double vz, SpriteSet spriteSet) {
-        super(world, x, y, z, vx, vy, vz);
+        super(world, x, y, z, vx, vy, vz, spriteSet.first());
 
         this.lifetime = 40 + this.random.nextInt(20);
         this.gravity = -0.01F; 
@@ -40,8 +36,12 @@ public class SteamParticle extends TextureSheetParticle {
         }
     }
 
-    @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
-    }
+    public SingleQuadParticle.Layer getLayer() {
+      return Layer.TRANSLUCENT;
+   }
+
+    // @Override
+    // public ParticleRenderType getRenderType() {
+    //     return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    // }
 }

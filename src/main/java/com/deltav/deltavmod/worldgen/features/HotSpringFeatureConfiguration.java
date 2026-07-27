@@ -11,7 +11,9 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.util.valueproviders.ConstantFloat;
@@ -35,13 +37,13 @@ public record HotSpringFeatureConfiguration(
         BlockStateProvider.CODEC.fieldOf("barrier").orElse(BlockStateProvider.simple(ModBlocks.SILICA_SANDSTONE.get().defaultBlockState())).forGetter(HotSpringFeatureConfiguration::barrier),
         BlockStateProvider.CODEC.fieldOf("surface").orElse(BlockStateProvider.simple(ModBlocks.SILICA_SANDSTONE.get().defaultBlockState())).forGetter(HotSpringFeatureConfiguration::surface),
         BlockState.CODEC.fieldOf("geyser").orElse(Blocks.AIR.defaultBlockState()).forGetter(HotSpringFeatureConfiguration::geyser),
-        IntProvider.CODEC.fieldOf("depth").orElse(ConstantInt.of(6)).forGetter(HotSpringFeatureConfiguration::depth),
-        IntProvider.CODEC.fieldOf("contentsDepth").orElse(ConstantInt.of(0)).forGetter(HotSpringFeatureConfiguration::contentsDepth),
-        IntProvider.CODEC.fieldOf("radius").orElse(ConstantInt.of(8)).forGetter(HotSpringFeatureConfiguration::radius),
-        IntProvider.CODEC.fieldOf("edgeWidth").orElse(ConstantInt.of(2)).forGetter(HotSpringFeatureConfiguration::edgeWidth),
-        FloatProvider.CODEC.fieldOf("noiseScale").orElse(ConstantFloat.of(0.4f)).forGetter(HotSpringFeatureConfiguration::noiseScale),
-        FloatProvider.CODEC.fieldOf("rateOfChange").orElse(ConstantFloat.of(1.3f)).forGetter(HotSpringFeatureConfiguration::rateOfChange),
-        IntProvider.CODEC.fieldOf("originNoise").orElse(ConstantInt.of(3)).forGetter(HotSpringFeatureConfiguration::originNoise)
+        IntProviders.CODEC.fieldOf("depth").orElse(ConstantInt.of(6)).forGetter(HotSpringFeatureConfiguration::depth),
+        IntProviders.CODEC.fieldOf("contentsDepth").orElse(ConstantInt.of(0)).forGetter(HotSpringFeatureConfiguration::contentsDepth),
+        IntProviders.CODEC.fieldOf("radius").orElse(ConstantInt.of(8)).forGetter(HotSpringFeatureConfiguration::radius),
+        IntProviders.CODEC.fieldOf("edgeWidth").orElse(ConstantInt.of(2)).forGetter(HotSpringFeatureConfiguration::edgeWidth),
+        FloatProviders.CODEC.fieldOf("noiseScale").orElse(ConstantFloat.of(0.4f)).forGetter(HotSpringFeatureConfiguration::noiseScale),
+        FloatProviders.CODEC.fieldOf("rateOfChange").orElse(ConstantFloat.of(1.3f)).forGetter(HotSpringFeatureConfiguration::rateOfChange),
+        IntProviders.CODEC.fieldOf("originNoise").orElse(ConstantInt.of(3)).forGetter(HotSpringFeatureConfiguration::originNoise)
     ).apply(inst, HotSpringFeatureConfiguration::new));
 
     public static final HotSpringFeatureConfiguration INSTANCE = new HotSpringFeatureConfiguration(

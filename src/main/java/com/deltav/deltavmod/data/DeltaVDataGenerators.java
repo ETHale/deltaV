@@ -8,7 +8,6 @@ import com.deltav.deltavmod.block.ModBlocks;
 import com.deltav.deltavmod.block.energy.cable.modelstate.CableBlockStateModel;
 import com.deltav.deltavmod.block.entity.FractionatorBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
-import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.entity.ModEntityTypes;
 import com.deltav.deltavmod.entity.ModModelLayerLocations;
 import com.deltav.deltavmod.menu.ModMenus;
@@ -18,19 +17,15 @@ import com.deltav.deltavmod.particle.ModParticlesTypes;
 import com.deltav.deltavmod.particle.SteamParticleProvider;
 import com.deltav.deltavmod.screen.custom.CrusherScreen;
 import com.deltav.deltavmod.sound.ModSoundDefinitionsProvider;
-import com.deltav.deltavmod.fluid.ModFluids;
 import com.deltav.deltavmod.item.ModItems;
 
-import net.minecraft.client.model.BoatModel;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.color.block.BlockTintSources;
+import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -45,7 +40,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
-import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 
 // event handler for data gen classes 
 // MAKE SURE EVERYTHING IS STATIC
@@ -80,24 +75,24 @@ public class DeltaVDataGenerators {
     @SubscribeEvent 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
-            Capabilities.EnergyStorage.BLOCK,
+            Capabilities.Energy.BLOCK,
             ModBlockEntities.BASIC_BATTERY_BE.get(), 
             (be, side) -> be.getEnergyStorage(side)
         );
         event.registerBlockEntity(
-            Capabilities.EnergyStorage.BLOCK,
+            Capabilities.Energy.BLOCK,
             ModBlockEntities.COPPER_CABLE_BE.get(), 
             (be, side) -> be.getEnergyHandler()
         );
         event.registerBlockEntity(
-            Capabilities.EnergyStorage.BLOCK,
+            Capabilities.Energy.BLOCK,
             ModBlockEntities.INSULATED_COPPER_CABLE_BE.get(), 
             (be, side) -> be.getEnergyHandler()
         );
 
         // Register that the Fractionator block entity has a fluid handler capability.
         event.registerBlockEntity(
-            Capabilities.FluidHandler.BLOCK,
+            Capabilities.Fluid.BLOCK,
             ModBlockEntities.FRACTIONATOR_BE.get(),
             (be, side) -> {
                 if (be instanceof FractionatorBlockEntity fbe) {
@@ -112,10 +107,9 @@ public class DeltaVDataGenerators {
          * provided by ModDataComponents.GENERIC_FLUID.
          */
         event.registerItem(
-            Capabilities.FluidHandler.ITEM,
-            (stack, ctx) -> new FluidHandlerItemStack(
-                ModDataComponents.GENERIC_FLUID,
-                stack,
+            Capabilities.Fluid.ITEM,
+            (stack, ctx) -> new FluidStacksResourceHandler(
+                1,
                 4000
             ), ModItems.BARREL.get()
         );
@@ -130,21 +124,10 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
+            //Sheets.addWoodType(RubberWoodBlocks.RUBBERWOOD_TYPE);
             DeltaVCauldronRegistry.bootStrap();
         });
 
-        // item models
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.OIL_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.THERMAL_WATER_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.LATEX_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.LATEX_SOURCE.get(), ChunkSectionLayer.TRANSLUCENT);
-
-        // isn't deprecated because it will be removed but because they want jsons instead
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RUBBERWOOD_SAPLING.get(), ChunkSectionLayer.CUTOUT);
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.RUBBERWOOD_SAPLING.getId(), () -> ModBlocks.POTTED_RUBBERWOOD_SAPLING.get());
     }
 
@@ -160,9 +143,9 @@ public class DeltaVDataGenerators {
     }
 
     @SubscribeEvent
-    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.BlockTintSources event) {
         event.register(
-            (state, world, pos, tintIndex) -> tintIndex == 0 ? -12031986 : 0xFFFFFF,
+            List.of(BlockTintSources.constant(-12031986)),
             ModBlocks.RUBBERWOOD_LEAVES.get()
         );
     }
@@ -170,13 +153,13 @@ public class DeltaVDataGenerators {
     @SubscribeEvent
     public static void registerBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
         event.modify(
-            BlockEntityType.SIGN, 
+            BlockEntityTypes.SIGN, 
             ModBlocks.RUBBERWOOD_SIGN.get(),
             ModBlocks.RUBBERWOOD_WALL_SIGN.get()
         );
 
         event.modify(
-            BlockEntityType.HANGING_SIGN,
+            BlockEntityTypes.HANGING_SIGN,
             ModBlocks.RUBBERWOOD_HANGING_SIGN.get(),
             ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get()
         );
@@ -184,7 +167,7 @@ public class DeltaVDataGenerators {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(BlockEntityType.SIGN, SignRenderer::new);
+        //event.registerBlockEntityRenderer(BlockEntityTypes.SIGN, abstr);
         event.registerEntityRenderer(ModEntityTypes.RUBBERWOOD_BOAT.get(), (context) -> new BoatRenderer(
                 context, 
                 ModModelLayerLocations.RUBBERWOOD_BOAT

@@ -31,3 +31,12 @@ repo
 # cache 
 src/generated/resources/.cache/*
 src/generated/resources/*
+
+data/
+META-INF/
+reports/
+mcplogo.png
+url.png
+assets/c/
+assets/minecraft/
+assets/neoforge/

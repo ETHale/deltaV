@@ -3,7 +3,6 @@ package com.deltav.deltavmod.worldgen.features;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.deltav.deltavmod.DeltaV;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
@@ -159,14 +158,14 @@ public class HotSpringFeature extends Feature<HotSpringFeatureConfiguration> {
     
     private void placeEdgeBlocks(WorldGenLevel level, Set<BlockPos> edgeArea, HotSpringFeatureConfiguration conf, RandomSource rand) {
         for (BlockPos pos : edgeArea) {
-            level.setBlock(pos, conf.barrier().getState(rand, pos), 2);
+            level.setBlock(pos, conf.barrier().getState(level, rand, pos), 2);
             this.markAboveForPostProcessing(level, pos);
         }
     }
     
     private void placeSurfaceBlocks(WorldGenLevel level, Set<BlockPos> surfaceArea, HotSpringFeatureConfiguration conf, RandomSource rand) {
         for (BlockPos pos : surfaceArea) {
-            level.setBlock(pos, conf.surface().getState(rand, pos), 2);
+            level.setBlock(pos, conf.surface().getState(level, rand, pos), 2);
             this.markAboveForPostProcessing(level, pos);
         }
     }

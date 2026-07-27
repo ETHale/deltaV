@@ -3,16 +3,12 @@ package com.deltav.deltavmod.block.energy.batteries;
 import javax.annotation.Nullable;
 
 import com.deltav.deltavmod.block.entity.BasicBatteryBlockEntity;
-import com.deltav.deltavmod.block.entity.CrusherBlockEntity;
 import com.deltav.deltavmod.block.entity.ModBlockEntities;
 import com.deltav.deltavmod.menu.BasicBatteryMenu;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class BasicBattery extends Block implements EntityBlock{
 

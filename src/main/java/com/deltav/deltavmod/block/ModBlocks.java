@@ -15,12 +15,10 @@ import com.deltav.deltavmod.block.family.KimberliteBlocks;
 import com.deltav.deltavmod.block.family.RubberWoodBlocks;
 import com.deltav.deltavmod.block.family.SilicaBlocks;
 import com.deltav.deltavmod.block.geyser.SteamGeyser;
-import com.deltav.deltavmod.data.DeltaVCauldronRegistry;
 import com.deltav.deltavmod.fluid.ModFluidBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -28,7 +26,6 @@ import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -67,7 +64,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> ZINC_BLOCK = BLOCKS.registerSimpleBlock(
         "zinc_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BELL)
@@ -78,7 +75,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> ZINC_ORE = BLOCKS.registerSimpleBlock(
         "zinc_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -88,7 +85,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> DEEPSLATE_ZINC_ORE = BLOCKS.registerSimpleBlock(
         "deepslate_zinc_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -98,7 +95,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> RAW_ZINC_BLOCK = BLOCKS.registerSimpleBlock(
         "raw_zinc_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -108,7 +105,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> COBALT_BLOCK = BLOCKS.registerSimpleBlock(
         "cobalt_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BELL)
@@ -119,7 +116,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> COBALT_ORE = BLOCKS.registerSimpleBlock(
         "cobalt_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -129,7 +126,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> DEEPSLATE_COBALT_ORE = BLOCKS.registerSimpleBlock(
         "deepslate_cobalt_ore",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.STONE)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -139,7 +136,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> RAW_COBALT_BLOCK = BLOCKS.registerSimpleBlock(
         "raw_cobalt_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.METAL)
             .instrument(NoteBlockInstrument.BASEDRUM)
@@ -157,8 +154,8 @@ public class ModBlocks {
                 .lightLevel(state -> 3)
                 .sound(SoundType.STONE)
                 .isValidSpawn((a, b, c, d) -> d.fireImmune())
-                .hasPostProcess((a, b ,c) -> true)
-                .emissiveRendering((a, b ,c) -> true)
+                .postProcess((a,b,c) -> c.above())
+                .emissiveRendering(a -> true)
             )
     );
 
@@ -194,12 +191,12 @@ public class ModBlocks {
                 .strength(0.0F, 0.0F)
                 .sound(SoundType.WOOD)
                 .noOcclusion()
-                .noCollission())
+                .noCollision())
     );
 
     public static final DeferredBlock<Block> PRISMIUM_BLOCK = BLOCKS.registerSimpleBlock(
         "prismium_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.DIAMOND)
             .instrument(NoteBlockInstrument.CHIME)
@@ -210,7 +207,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> COAGULATED_LATEX_BLOCK = BLOCKS.registerSimpleBlock(
         "coagulated_latex_block",
-        BlockBehaviour.Properties.of()
+        () -> BlockBehaviour.Properties.of()
             .setId(ResourceKey.create(Registries.BLOCK, null))
             .mapColor(MapColor.SNOW)
             .friction(0.8F)

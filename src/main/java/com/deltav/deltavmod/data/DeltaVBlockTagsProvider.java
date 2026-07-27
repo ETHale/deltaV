@@ -21,160 +21,159 @@ public class DeltaVBlockTagsProvider extends BlockTagsProvider {
     // add tags to blocks in this function 
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.STEEL_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ALLOY_FURNACE.getKey());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.STEEL_BLOCK.getKey());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.STEEL_BLOCK.getKey());
         // ores
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(ModBlocks.ZINC_ORE.get())
-            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
-            .add(ModBlocks.ZINC_BLOCK.get())
-            .add(ModBlocks.RAW_ZINC_BLOCK.get())
-            .add(ModBlocks.COBALT_ORE.get())
-            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
-            .add(ModBlocks.COBALT_BLOCK.get())
-            .add(ModBlocks.RAW_COBALT_BLOCK.get())
-            .add(ModBlocks.PRISMIUM_BLOCK.get())
-            .add(ModBlocks.CRUSHER.get())
-            .add(ModBlocks.STEAM_GEYSER.get())
+            .add(ModBlocks.ZINC_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.getKey())
+            .add(ModBlocks.ZINC_BLOCK.getKey())
+            .add(ModBlocks.RAW_ZINC_BLOCK.getKey())
+            .add(ModBlocks.COBALT_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.getKey())
+            .add(ModBlocks.COBALT_BLOCK.getKey())
+            .add(ModBlocks.RAW_COBALT_BLOCK.getKey())
+            .add(ModBlocks.PRISMIUM_BLOCK.getKey())
+            .add(ModBlocks.CRUSHER.getKey())
+            .add(ModBlocks.STEAM_GEYSER.getKey())
             ;
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-            .add(ModBlocks.ZINC_ORE.get())
-            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
-            .add(ModBlocks.ZINC_BLOCK.get())
-            .add(ModBlocks.RAW_ZINC_BLOCK.get())
+            .add(ModBlocks.ZINC_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.getKey())
+            .add(ModBlocks.ZINC_BLOCK.getKey())
+            .add(ModBlocks.RAW_ZINC_BLOCK.getKey())
             ;
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-            .add(ModBlocks.COBALT_ORE.get())
-            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
-            .add(ModBlocks.COBALT_BLOCK.get())
-            .add(ModBlocks.RAW_COBALT_BLOCK.get())
-            .add(ModBlocks.CRUSHER.get())
-            .add(ModBlocks.STEAM_GEYSER.get())
+            .add(ModBlocks.COBALT_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.getKey())
+            .add(ModBlocks.COBALT_BLOCK.getKey())
+            .add(ModBlocks.RAW_COBALT_BLOCK.getKey())
+            .add(ModBlocks.CRUSHER.getKey())
+            .add(ModBlocks.STEAM_GEYSER.getKey())
             ;
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
-            .add(ModBlocks.PRISMIUM_BLOCK.get())
+            .add(ModBlocks.PRISMIUM_BLOCK.getKey())
             ;
         this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
-            .add(ModBlocks.ZINC_ORE.get())
-            .add(ModBlocks.DEEPSLATE_ZINC_ORE.get())
-            .add(ModBlocks.COBALT_ORE.get())
-            .add(ModBlocks.DEEPSLATE_COBALT_ORE.get())
+            .add(ModBlocks.ZINC_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_ZINC_ORE.getKey())
+            .add(ModBlocks.COBALT_ORE.getKey())
+            .add(ModBlocks.DEEPSLATE_COBALT_ORE.getKey())
             ;
 
         // kimberlite
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(ModBlocks.KIMBERLITE.get())
-            .add(ModBlocks.KIMBERLITE_BUTTON.get())
-            .add(ModBlocks.KIMBERLITE_PRESSURE_PLATE.get()) 
-            .add(ModBlocks.KIMBERLITE_SLAB.get())
-            .add(ModBlocks.KIMBERLITE_STAIRS.get()) 
-            .add(ModBlocks.KIMBERLITE_WALL.get())
-            .add(ModBlocks.POLISHED_KIMBERLITE.get())
-            .add(ModBlocks.POLISHED_KIMBERLITE_STAIRS.get())
-            .add(ModBlocks.POLISHED_KIMBERLITE_SLAB.get())
-            .add(ModBlocks.KIMBERLITE_COAL_ORE.get())
-            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
-            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
-            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
-            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
-            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
-            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
-            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
+            .add(ModBlocks.KIMBERLITE.getKey())
+            .add(ModBlocks.KIMBERLITE_BUTTON.getKey())
+            .add(ModBlocks.KIMBERLITE_PRESSURE_PLATE.getKey()) 
+            .add(ModBlocks.KIMBERLITE_SLAB.getKey())
+            .add(ModBlocks.KIMBERLITE_STAIRS.getKey()) 
+            .add(ModBlocks.KIMBERLITE_WALL.getKey())
+            .add(ModBlocks.POLISHED_KIMBERLITE.getKey())
+            .add(ModBlocks.POLISHED_KIMBERLITE_STAIRS.getKey())
+            .add(ModBlocks.POLISHED_KIMBERLITE_SLAB.getKey())
+            .add(ModBlocks.KIMBERLITE_COAL_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.getKey())
             ;
         this.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
-            .add(ModBlocks.KIMBERLITE.get())
-            .add(ModBlocks.KIMBERLITE_COAL_ORE.get())
-            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
-            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
-            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
-            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
-            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
-            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
-            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
+            .add(ModBlocks.KIMBERLITE.getKey())
+            .add(ModBlocks.KIMBERLITE_COAL_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.getKey())
         ;
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-            .add(ModBlocks.KIMBERLITE_COPPER_ORE.get())
-            .add(ModBlocks.KIMBERLITE_IRON_ORE.get())
-            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.get())
-            .add(ModBlocks.KIMBERLITE_ZINC_ORE.get())
+            .add(ModBlocks.KIMBERLITE_COPPER_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_IRON_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_LAPIS_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_ZINC_ORE.getKey())
             ;
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.get())
-            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_GOLD_ORE.get())
-            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.get())
-            .add(ModBlocks.KIMBERLITE_COBALT_ORE.get())
+            .add(ModBlocks.KIMBERLITE_DIAMOND_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_EMERALD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_GOLD_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_REDSTONE_ORE.getKey())
+            .add(ModBlocks.KIMBERLITE_COBALT_ORE.getKey())
             ;
         
-        this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REDSTONE_GENERATOR.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.REDSTONE_GENERATOR.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.BASIC_BATTERY.get());
+        this.tag(BlockTags.BASE_STONE_OVERWORLD).add(ModBlocks.MOLTEN_BEDROCK.getKey());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REDSTONE_GENERATOR.getKey());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.REDSTONE_GENERATOR.getKey());
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.BASIC_BATTERY.getKey());
 
-        this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.SILICA_SAND.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.SILICA_SAND.getKey());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.SILICA_SANDSTONE.get())
-                .add(ModBlocks.SILICA_SANDSTONE_SLAB.get())
-                .add(ModBlocks.SILICA_SANDSTONE_STAIRS.get())
-                .add(ModBlocks.SILICA_SANDSTONE_WALL.get())
+                .add(ModBlocks.SILICA_SANDSTONE.getKey())
+                .add(ModBlocks.SILICA_SANDSTONE_SLAB.getKey())
+                .add(ModBlocks.SILICA_SANDSTONE_STAIRS.getKey())
+                .add(ModBlocks.SILICA_SANDSTONE_WALL.getKey())
                 
-                .add(ModBlocks.CHISELED_SILICA_SANDSTONE.get())
-                .add(ModBlocks.CUT_SILICA_SANDSTONE.get())
-                .add(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.get())
+                .add(ModBlocks.CHISELED_SILICA_SANDSTONE.getKey())
+                .add(ModBlocks.CUT_SILICA_SANDSTONE.getKey())
+                .add(ModBlocks.CUT_SILICA_SANDSTONE_SLAB.getKey())
                 
-                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE.get())
-                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.get())
-                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.get());
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE.getKey())
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_SLAB.getKey())
+                .add(ModBlocks.SMOOTH_SILICA_SANDSTONE_STAIRS.getKey());
         this.tag(BlockTags.WALLS)
-            .add(ModBlocks.KIMBERLITE_WALL.get())
-            .add(ModBlocks.SILICA_SANDSTONE_WALL.get());
+            .add(ModBlocks.KIMBERLITE_WALL.getKey())
+            .add(ModBlocks.SILICA_SANDSTONE_WALL.getKey());
 
         // rubber wood
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(ModBlocks.RUBBERWOOD_LOG.get())
-            .add(ModBlocks.RUBBERWOOD_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get())
-            .add(ModBlocks.RUBBERWOOD_PLANKS.get());
+            .add(ModBlocks.RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.RUBBERWOOD_WOOD.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.getKey())
+            .add(ModBlocks.RUBBERWOOD_PLANKS.getKey());
         this.tag(BlockTags.LOGS)
-            .add(ModBlocks.RUBBERWOOD_LOG.get())
-            .add(ModBlocks.RUBBERWOOD_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
-        this.tag(BlockTags.LOGS_THAT_BURN)
-            .add(ModBlocks.RUBBERWOOD_LOG.get())
-            .add(ModBlocks.RUBBERWOOD_WOOD.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get())
-            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
-        this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.get());
+            .add(ModBlocks.RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.RUBBERWOOD_WOOD.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.getKey());
+        this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
+            .add(ModBlocks.RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.RUBBERWOOD_WOOD.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_LOG.getKey())
+            .add(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.getKey());
+        this.tag(BlockTags.PLANKS).add(ModBlocks.RUBBERWOOD_PLANKS.getKey());
         this.tag(BlockTags.MINEABLE_WITH_HOE)
-            .add(ModBlocks.RUBBERWOOD_LEAVES.get())
-            .add(ModBlocks.RUBBERWOOD_SAPLING.get());
-        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBERWOOD_LEAVES.get());
-        this.tag(BlockTags.SAPLINGS).add(ModBlocks.RUBBERWOOD_SAPLING.get());
-        this.tag(BlockTags.WOODEN_SLABS).add(ModBlocks.RUBBERWOOD_SLAB.get());
-        this.tag(BlockTags.SLABS).add(ModBlocks.RUBBERWOOD_SLAB.get());
-        this.tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.get());
-        this.tag(BlockTags.STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.get());
-        this.tag(BlockTags.WOODEN_FENCES).add(ModBlocks.RUBBERWOOD_FENCE.get());
-        this.tag(BlockTags.FENCE_GATES).add(ModBlocks.RUBBERWOOD_FENCE_GATE.get());
-        this.tag(BlockTags.WOODEN_DOORS).add(ModBlocks.RUBBERWOOD_DOOR.get());
-        this.tag(BlockTags.DOORS).add(ModBlocks.RUBBERWOOD_DOOR.get());
-        this.tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
-        this.tag(BlockTags.TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.get());
-        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
-        this.tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.get());
-        this.tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
-        this.tag(BlockTags.BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.get());
+            .add(ModBlocks.RUBBERWOOD_LEAVES.getKey())
+            .add(ModBlocks.RUBBERWOOD_SAPLING.getKey());
+        this.tag(BlockTags.LEAVES).add(ModBlocks.RUBBERWOOD_LEAVES.getKey());
+        this.tag(BlockTags.WOODEN_SLABS).add(ModBlocks.RUBBERWOOD_SLAB.getKey());
+        this.tag(BlockTags.SLABS).add(ModBlocks.RUBBERWOOD_SLAB.getKey());
+        this.tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.getKey());
+        this.tag(BlockTags.STAIRS).add(ModBlocks.RUBBERWOOD_STAIRS.getKey());
+        this.tag(BlockTags.WOODEN_FENCES).add(ModBlocks.RUBBERWOOD_FENCE.getKey());
+        this.tag(BlockTags.FENCE_GATES).add(ModBlocks.RUBBERWOOD_FENCE_GATE.getKey());
+        this.tag(BlockTags.WOODEN_DOORS).add(ModBlocks.RUBBERWOOD_DOOR.getKey());
+        this.tag(BlockTags.DOORS).add(ModBlocks.RUBBERWOOD_DOOR.getKey());
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.getKey());
+        this.tag(BlockTags.TRAPDOORS).add(ModBlocks.RUBBERWOOD_TRAPDOOR.getKey());
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.getKey());
+        this.tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.RUBBERWOOD_PRESSURE_PLATE.getKey());
+        this.tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.getKey());
+        this.tag(BlockTags.BUTTONS).add(ModBlocks.RUBBERWOOD_BUTTON.getKey());
 
         // cauldrons
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(ModBlocks.LATEX_CAULDRON.get());
+            .add(ModBlocks.LATEX_CAULDRON.getKey());
     }
 
 }

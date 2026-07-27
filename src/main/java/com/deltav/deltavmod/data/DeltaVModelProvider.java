@@ -27,12 +27,13 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.renderer.block.model.Variant;
+import net.minecraft.client.renderer.block.dispatch.Variant ;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 
@@ -47,7 +48,7 @@ public class DeltaVModelProvider extends ModelProvider{
     protected Stream<? extends Holder<Block>> getKnownBlocks() {
         Stream<? extends Holder<Block>> list = BuiltInRegistries.BLOCK
             .listElements()
-            .filter(holder -> holder.getKey().location().getNamespace().equals(modId))
+            .filter(holder -> holder.getKey().identifier().getNamespace().equals(modId))
             .filter(holder -> 
                 !(holder.value() instanceof RedstoneGenerator) &&
                 !(holder.value() instanceof TreeTapperBlock));
@@ -74,18 +75,18 @@ public class DeltaVModelProvider extends ModelProvider{
         blockModels.createHorizontallyRotatedBlock(
             ModBlocks.FRACTIONATOR.get(),
             TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(mapping ->
-                mapping.put(TextureSlot.SIDE, this.modLocation("block/fractionator_side"))
-                .put(TextureSlot.FRONT, this.modLocation("block/fractionator_front"))
-                .put(TextureSlot.TOP, this.modLocation("block/fractionator_top"))
+                mapping.put(TextureSlot.SIDE, new Material(this.modLocation("block/fractionator_side"), false))
+                .put(TextureSlot.FRONT, new Material(this.modLocation("block/fractionator_front"), false))
+                .put(TextureSlot.TOP, new Material(this.modLocation("block/fractionator_top"), false))
             )
         );
 
         // alloy furnace
         blockModels.createFurnace(ModBlocks.ALLOY_FURNACE.get(), TexturedModel.ORIENTABLE.updateTexture(mapping ->
-            mapping.put(TextureSlot.SIDE, this.modLocation("block/alloy_furnace_side"))
-            .put(TextureSlot.FRONT, this.modLocation("block/alloy_furnace_front"))
-            .put(TextureSlot.TOP, this.modLocation("block/alloy_furnace_top"))
-            .put(TextureSlot.BOTTOM, this.modLocation("block/alloy_furnace_bottom"))
+            mapping.put(TextureSlot.SIDE, new Material(this.modLocation("block/alloy_furnace_side"), false))
+            .put(TextureSlot.FRONT, new Material(this.modLocation("block/alloy_furnace_front"), false))
+            .put(TextureSlot.TOP, new Material(this.modLocation("block/alloy_furnace_top"), false))
+            .put(TextureSlot.BOTTOM, new Material(this.modLocation("block/alloy_furnace_bottom"), false))
         ));
 
         // Kimberlite models
@@ -140,16 +141,16 @@ public class DeltaVModelProvider extends ModelProvider{
                     })
             )
             .put(ModBlocks.BASIC_BATTERY.get(), TexturedModel.ORIENTABLE.get(ModBlocks.BASIC_BATTERY.get()).updateTextures(mapping ->
-                mapping.put(TextureSlot.SIDE, this.modLocation("block/basic_battery_side"))
-                .put(TextureSlot.FRONT, this.modLocation("block/basic_battery_side"))
-                .put(TextureSlot.TOP, this.modLocation("block/basic_battery_top"))
-                .put(TextureSlot.BOTTOM, this.modLocation("block/basic_battery_bottom"))
+                mapping.put(TextureSlot.SIDE, new Material(this.modLocation("block/basic_battery_side"), false))
+                .put(TextureSlot.FRONT, new Material(this.modLocation("block/basic_battery_side"), false))
+                .put(TextureSlot.TOP, new Material(this.modLocation("block/basic_battery_top"), false))
+                .put(TextureSlot.BOTTOM, new Material(this.modLocation("block/basic_battery_bottom"), false))
             ))
             .put(ModBlocks.STEAM_GEYSER.get(), TexturedModel.ORIENTABLE.get(ModBlocks.STEAM_GEYSER.get()).updateTextures(mapping ->
-                mapping.put(TextureSlot.SIDE, this.modLocation("block/silica_sandstone"))
-                .put(TextureSlot.FRONT, this.modLocation("block/silica_sandstone"))
-                .put(TextureSlot.TOP, this.modLocation("block/steam_geyser_top"))
-                .put(TextureSlot.BOTTOM, this.modLocation("block/silica_sandstone_bottom"))
+                mapping.put(TextureSlot.SIDE, new Material(this.modLocation("block/silica_sandstone"), false))
+                .put(TextureSlot.FRONT, new Material(this.modLocation("block/silica_sandstone"), false))
+                .put(TextureSlot.TOP, new Material(this.modLocation("block/steam_geyser_top"), false))
+                .put(TextureSlot.BOTTOM, new Material(this.modLocation("block/silica_sandstone_bottom"), false))
             ))
             .build();
         TEXTURED_MODELS.forEach((block, textureModel) -> {
@@ -180,7 +181,6 @@ public class DeltaVModelProvider extends ModelProvider{
 
         blockModels.woodProvider(ModBlocks.RUBBERWOOD_LOG.get()).logWithHorizontal(ModBlocks.RUBBERWOOD_LOG.get()).wood(ModBlocks.RUBBERWOOD_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get()).wood(ModBlocks.STRIPPED_RUBBERWOOD_WOOD.get());
-        blockModels.createHangingSign(ModBlocks.STRIPPED_RUBBERWOOD_LOG.get(), ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get());
         blockModels.createPlantWithDefaultItem(ModBlocks.RUBBERWOOD_SAPLING.get(), ModBlocks.POTTED_RUBBERWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTintedLeaves(ModBlocks.RUBBERWOOD_LEAVES.get(), TexturedModel.LEAVES, -12031986);
         blockModels.createTrivialCube(ModBlocks.RUBBERWOOD_PLANKS.get());
@@ -194,6 +194,7 @@ public class DeltaVModelProvider extends ModelProvider{
             .door(ModBlocks.RUBBERWOOD_DOOR.get())
             .sign(ModBlocks.RUBBERWOOD_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_SIGN.get())
             .trapdoor(ModBlocks.RUBBERWOOD_TRAPDOOR.get())
+            .hangingSign(ModBlocks.RUBBERWOOD_HANGING_SIGN.get(), ModBlocks.RUBBERWOOD_WALL_HANGING_SIGN.get())
             .getFamily();
         blockModels.familyWithExistingFullBlock(ModBlocks.RUBBERWOOD_PLANKS.get())
             .generateFor(rubberwoodFamily);
@@ -234,7 +235,7 @@ public class DeltaVModelProvider extends ModelProvider{
         CableModelState copperCableState = new CableModelState();
         CableModelPart.Unbaked copperCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, copperCableState);
         CableBlockStateModelBuilder copperCableBuilder = new CableBlockStateModelBuilder().part(copperCablePart);
-        copperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
+        copperCableBuilder.setTexture(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/cable/copper_cable"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.COPPER_CABLE.get(), 
@@ -245,7 +246,7 @@ public class DeltaVModelProvider extends ModelProvider{
         CableModelState insulatedCableState = new CableModelState();
         CableModelPart.Unbaked insulatedCablePart = new CableModelPart.Unbaked(CableBlockStateModel.Unbaked.ID, insulatedCableState);
         CableBlockStateModelBuilder insulatedCopperCableBuilder = new CableBlockStateModelBuilder().part(insulatedCablePart);
-        insulatedCopperCableBuilder.setTexture(ResourceLocation.fromNamespaceAndPath(DeltaV.MODID, "block/cable/insulated_copper_cable"));
+        insulatedCopperCableBuilder.setTexture(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/cable/insulated_copper_cable"));
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.INSULATED_COPPER_CABLE.get(), 

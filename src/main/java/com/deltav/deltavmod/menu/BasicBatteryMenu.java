@@ -27,11 +27,11 @@ public class BasicBatteryMenu extends AbstractContainerMenu {
         addStandardInventorySlots(inv, 8, 84);
 
         addDataSlot(new DataSlot() {
-            @Override public int get(){ return be.getEnergyStorage(null).getEnergyStored(); }
+            @Override public int get(){ return be.getEnergyStorage(null).getAmountAsInt(); }
             @Override public void set(int v){ energyStored = v; }
         });
         addDataSlot(new DataSlot() {
-            @Override public int get(){ return be.getEnergyStorage(null).getMaxEnergyStored(); }
+            @Override public int get(){ return be.getEnergyStorage(null).getCapacityAsInt(); }
             @Override public void set(int v){ capacity = v; }
         });
     }

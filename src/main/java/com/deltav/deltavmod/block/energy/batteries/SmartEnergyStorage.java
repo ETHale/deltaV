@@ -1,50 +1,25 @@
 package com.deltav.deltavmod.block.energy.batteries;
 
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
-import net.neoforged.neoforge.energy.EnergyStorage;
-import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 
 // custom class to make some stuff easier
-public class SmartEnergyStorage extends EnergyStorage {
-    private final Runnable changeListener;
+public class SmartEnergyStorage extends SimpleEnergyHandler {
     private final Direction[] outputSides;
 
-    public SmartEnergyStorage(int capacity, int maxTransfer, int maxExtract, Runnable changeListener, Direction[] outputSides) {
+    public SmartEnergyStorage(int capacity, int maxTransfer, int maxExtract, Direction[] outputSides) {
         super(capacity, maxTransfer, maxExtract);
-        this.changeListener = changeListener;
         this.outputSides = outputSides;
     }
 
-    @Override
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        int received = super.receiveEnergy(maxReceive, simulate);
-        if (received > 0 && !simulate) {
-            changeListener.run();
-        }
-        return received;
-    }
-
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate) {
-        int extracted = super.extractEnergy(maxExtract, simulate);
-        if (extracted > 0 && !simulate) {
-            changeListener.run();
-        }
-        return extracted;
-    }
-
-    public void setEnergy(int energy) {
-        this.energy = Mth.clamp(energy, 0, getMaxEnergyStored());
-        changeListener.run();
-    }
-
     /*
-     * Returns an IEnergyStorage with certain access depending on the side
+     * Returns an EnergyHandler with certain access depending on the side
      * Set side to null for full access.
      */
-    public IEnergyStorage getEnergyStorage(Direction side) {
+    public EnergyHandler getEnergyStorage(Direction side) {
         if (side == null) return this; // full access for side-less queries
 
         boolean extractAllowed = isOutputSide(side);
@@ -60,7 +35,7 @@ public class SmartEnergyStorage extends EnergyStorage {
         return false;
     }
     
-    private final class SideFilteredView implements IEnergyStorage {
+    private final class SideFilteredView implements EnergyHandler {
         private final boolean allowExtract;
         private final boolean allowReceive;
 
@@ -70,33 +45,23 @@ public class SmartEnergyStorage extends EnergyStorage {
         }
 
         @Override
-        public int receiveEnergy(int maxReceive, boolean simulate) {
-            return allowReceive ? SmartEnergyStorage.this.receiveEnergy(maxReceive, simulate) : 0;
+        public int insert(int maxReceive, TransactionContext tr) {
+            return allowReceive ? SmartEnergyStorage.this.insert(maxReceive, tr) : 0;
         }
 
         @Override
-        public int extractEnergy(int maxExtract, boolean simulate) {
-            return allowExtract ? SmartEnergyStorage.this.extractEnergy(maxExtract, simulate) : 0;
+        public int extract(int maxExtract, TransactionContext tr) {
+            return allowExtract ? SmartEnergyStorage.this.extract(maxExtract, tr) : 0;
         }
 
         @Override
-        public int getEnergyStored() {
-            return SmartEnergyStorage.this.getEnergyStored();
+        public long getAmountAsLong() {
+            return SmartEnergyStorage.this.getAmountAsLong();
         }
 
         @Override
-        public int getMaxEnergyStored() {
-            return SmartEnergyStorage.this.getMaxEnergyStored();
-        }
-
-        @Override
-        public boolean canReceive() {
-            return allowReceive;
-        }
-
-        @Override
-        public boolean canExtract() {
-            return allowExtract;
+        public long getCapacityAsLong() {
+            return SmartEnergyStorage.this.getCapacityAsLong();
         }
     }
 }
