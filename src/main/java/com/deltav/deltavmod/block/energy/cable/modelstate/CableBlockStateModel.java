@@ -46,7 +46,7 @@ public final class CableBlockStateModel implements DynamicBlockStateModel {
 
     @Override
     public Material.Baked particleMaterial() {
-        return null;
+        return template.spriteCable;
     }
 
     @Override
