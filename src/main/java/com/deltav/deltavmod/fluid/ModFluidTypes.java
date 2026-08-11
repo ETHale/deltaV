@@ -4,7 +4,7 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.fluid.custom.KeroseneFluidType;
 import com.deltav.deltavmod.fluid.custom.LatexFluidType;
 import com.deltav.deltavmod.fluid.custom.NaphthaFluidType;
-import com.deltav.deltavmod.fluid.custom.OilFluidType;
+import com.deltav.deltavmod.fluid.custom.CrudeOilFluidType;
 import com.deltav.deltavmod.fluid.custom.PetrolFluidType;
 import com.deltav.deltavmod.fluid.custom.ThermalWaterFluidType;
 
@@ -23,8 +23,8 @@ public class ModFluidTypes {
     public static final DeferredRegister<FluidType> FLUID_TYPES =
         DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, DeltaV.MODID);
 
-    public static final DeferredHolder<FluidType, FluidType> OIL_FLUID_TYPE = FLUID_TYPES.register(
-        "oil", OilFluidType::new);
+    public static final DeferredHolder<FluidType, FluidType> CRUDE_OIL_FLUID_TYPE = FLUID_TYPES.register(
+        "oil", CrudeOilFluidType::new);
 
     public static final DeferredHolder<FluidType, FluidType> PETROL_FLUID_TYPE = FLUID_TYPES.register(
         "petrol", PetrolFluidType::new);

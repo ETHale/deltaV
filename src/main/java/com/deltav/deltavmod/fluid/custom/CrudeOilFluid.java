@@ -39,25 +39,25 @@ import net.neoforged.neoforge.fluids.FluidType;
  * 
  * @author Adam Crawley
  */
-public abstract class OilFluid extends FlowingFluid {
+public abstract class CrudeOilFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
-        return ModFluids.OIL_FLOW.get();
+        return ModFluids.CRUDE_OIL_FLOW.get();
     }
 
     @Override
     public Fluid getSource() {
-        return ModFluids.OIL_SOURCE.get();
+        return ModFluids.CRUDE_OIL_SOURCE.get();
     }
 
     @Override
     public Item getBucket() {
-        return ModItems.OIL_BUCKET.get();
+        return ModItems.CRUDE_OIL_BUCKET.get();
     }
 
 	@Override
 	public FluidType getFluidType() {
-		return ModFluidTypes.OIL_FLUID_TYPE.get();
+		return ModFluidTypes.CRUDE_OIL_FLUID_TYPE.get();
 	}
 
     /**
@@ -129,12 +129,12 @@ public abstract class OilFluid extends FlowingFluid {
 
     @Override
     public BlockState createLegacyBlock(FluidState state) {
-        return ModBlocks.OIL_FLUID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state));
+        return ModBlocks.CRUDE_OIL_FLUID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state));
     }
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluids.OIL_SOURCE.get() || fluid == ModFluids.OIL_FLOW.get();
+        return fluid == ModFluids.CRUDE_OIL_SOURCE.get() || fluid == ModFluids.CRUDE_OIL_FLOW.get();
     }
 
     @Override
@@ -171,7 +171,7 @@ public abstract class OilFluid extends FlowingFluid {
         return Optional.of(SoundEvents.BUCKET_FILL);
     }
 
-    public static class Flowing extends OilFluid {
+    public static class Flowing extends CrudeOilFluid {
         @Override
         protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
@@ -189,7 +189,7 @@ public abstract class OilFluid extends FlowingFluid {
         }
     }
 
-    public static class Source extends OilFluid {
+    public static class Source extends CrudeOilFluid {
         @Override
         public int getAmount(FluidState state) {
             return 8;

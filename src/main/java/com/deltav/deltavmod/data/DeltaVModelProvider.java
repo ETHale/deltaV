@@ -206,7 +206,7 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.RAW_COBALT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COBALT_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZINC_BATTERY.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.CRUDE_OIL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.NAPHTHA_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KEROSENE_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PETROL_BUCKET.get(), ModelTemplates.FLAT_ITEM);
@@ -220,7 +220,7 @@ public class DeltaVModelProvider extends ModelProvider{
         itemModels.generateFlatItem(ModItems.COAGULATED_LATEX.get(), ModelTemplates.FLAT_ITEM);
 
         // FLUIDS
-        blockModels.createNonTemplateModelBlock(ModBlocks.OIL_FLUID.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.CRUDE_OIL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.NAPHTHA_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.PETROL_FLUID.get());
         blockModels.createNonTemplateModelBlock(ModBlocks.KEROSENE_FLUID.get());

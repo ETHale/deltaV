@@ -29,10 +29,10 @@ public class ModFluidBlocks {
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.EMPTY);
 
-    public static final DeferredBlock<Block> OIL_FLUID = BLOCKS.register(
-        "oil",
+    public static final DeferredBlock<Block> CRUDE_OIL_FLUID = BLOCKS.register(
+        "crude_oil",
         registryName -> new LiquidBlock(
-            ModFluids.OIL_SOURCE.get(),
+            ModFluids.CRUDE_OIL_SOURCE.get(),
             FLUID_BLOCK_PROPERTIES
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .mapColor(MapColor.COLOR_BLACK)

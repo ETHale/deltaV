@@ -146,10 +146,10 @@ public class ModItems {
     public static final DeferredItem<Item> GLOOPY_RESIDUE = ITEMS.registerSimpleItem("gloopy_residue");
     public static final DeferredItem<Item> RUBBER = ITEMS.registerSimpleItem("rubber");
 
-    public static final DeferredItem<BucketItem> OIL_BUCKET = ITEMS.register(
-        "oil_bucket",
+    public static final DeferredItem<BucketItem> CRUDE_OIL_BUCKET = ITEMS.register(
+        "crude_oil_bucket",
         registryName -> new BucketItem(
-            ModFluids.OIL_SOURCE.value(),
+            ModFluids.CRUDE_OIL_SOURCE.value(),
             new Item.Properties()
                 .setId(ResourceKey.create(Registries.ITEM, registryName))
                 .craftRemainder(Items.BUCKET)

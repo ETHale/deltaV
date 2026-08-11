@@ -15,7 +15,7 @@ public class ModFluidBaker {
         event.register(ModFluidModels.KEROSENE_MODEL, ModFluids.KEROSENE_SOURCE.get(), ModFluids.KEROSENE_FLOW.get());
         event.register(ModFluidModels.NAPTHA_MODEL, ModFluids.NAPHTHA_SOURCE.get(), ModFluids.NAPHTHA_FLOW.get());
         event.register(ModFluidModels.PETROL_MODEL, ModFluids.PETROL_SOURCE.get(), ModFluids.PETROL_FLOW.get());
-        event.register(ModFluidModels.OIL_MODEL, ModFluids.OIL_SOURCE.get(), ModFluids.OIL_FLOW.get());
+        event.register(ModFluidModels.OIL_MODEL, ModFluids.CRUDE_OIL_SOURCE.get(), ModFluids.CRUDE_OIL_FLOW.get());
         event.register(ModFluidModels.LATEX_MODEL, ModFluids.LATEX_SOURCE.get(), ModFluids.LATEX_FLOW.get());
         event.register(ModFluidModels.THERMAL_WATER_MODEL, ModFluids.THERMAL_WATER_SOURCE.get(), ModFluids.THERMAL_WATER_FLOW.get());
     }

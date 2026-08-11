@@ -14,30 +14,30 @@ import net.neoforged.neoforge.client.fluid.FluidTintSource;
 
 public class ModFluidModels {
     public static final FluidModel.Unbaked KEROSENE_MODEL = new FluidModel.Unbaked(
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_flow")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_overlay")),
         createConstantColourFluidTintSource(0xFF00E2FF)
     );
 
     public static final FluidModel.Unbaked NAPTHA_MODEL = new FluidModel.Unbaked(
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_flow")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_overlay")),
         createConstantColourFluidTintSource(0xFFFFE8C0)
     );
 
     public static final FluidModel.Unbaked PETROL_MODEL = new FluidModel.Unbaked(
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_flow")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_overlay")),
         createConstantColourFluidTintSource(0xFFFFB52B)
     );
 
     public static final FluidModel.Unbaked OIL_MODEL = new FluidModel.Unbaked(
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_flow")), 
-        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/oil_overlay")),
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_flow")), 
+        new Material(Identifier.fromNamespaceAndPath(DeltaV.MODID, "block/crude_oil_overlay")),
         createConstantColourFluidTintSource(0xFF010A1C)
     );
 

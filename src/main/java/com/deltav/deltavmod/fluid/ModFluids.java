@@ -4,7 +4,7 @@ import com.deltav.deltavmod.DeltaV;
 import com.deltav.deltavmod.fluid.custom.KeroseneFluid;
 import com.deltav.deltavmod.fluid.custom.LatexFluid;
 import com.deltav.deltavmod.fluid.custom.NaphthaFluid;
-import com.deltav.deltavmod.fluid.custom.OilFluid;
+import com.deltav.deltavmod.fluid.custom.CrudeOilFluid;
 import com.deltav.deltavmod.fluid.custom.PetrolFluid;
 import com.deltav.deltavmod.fluid.custom.ThermalWaterFluid;
 
@@ -24,11 +24,11 @@ public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
         DeferredRegister.create(BuiltInRegistries.FLUID, DeltaV.MODID);
 
-    public static final DeferredHolder<Fluid, FlowingFluid> OIL_SOURCE = FLUIDS.register(
-        "oil", OilFluid.Source::new);
+    public static final DeferredHolder<Fluid, FlowingFluid> CRUDE_OIL_SOURCE = FLUIDS.register(
+        "crude_oil", CrudeOilFluid.Source::new);
 
-    public static final DeferredHolder<Fluid, FlowingFluid> OIL_FLOW = FLUIDS.register(
-        "oil_flow", OilFluid.Flowing::new);
+    public static final DeferredHolder<Fluid, FlowingFluid> CRUDE_OIL_FLOW = FLUIDS.register(
+        "crude_oil_flow", CrudeOilFluid.Flowing::new);
 
     public static final DeferredHolder<Fluid, FlowingFluid> PETROL_SOURCE = FLUIDS.register(
         "petrol", PetrolFluid.Source::new);

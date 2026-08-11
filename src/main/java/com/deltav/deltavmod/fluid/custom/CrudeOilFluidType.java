@@ -24,11 +24,11 @@ import net.neoforged.neoforge.fluids.FluidType;
  * @author Adam Crawley
  */
 @EventBusSubscriber(modid = DeltaV.MODID, value = Dist.CLIENT)
-public class OilFluidType extends FluidType {
+public class CrudeOilFluidType extends FluidType {
     //private static final int TINT_COLOR = 0xFF010A1C;
     private static final Vector4f FOG_COLOR = new Vector4f(1f / 255f, 10f / 255f, 28f / 255f, 1f);
 
-    public OilFluidType() {
+    public CrudeOilFluidType() {
         super(Properties.create()
             .lightLevel(2)
             .density(15)
@@ -57,6 +57,6 @@ public class OilFluidType extends FluidType {
                 fogData.renderDistanceStart = 0f;
                 fogData.renderDistanceEnd = 1f;
             }
-        }, ModFluidTypes.OIL_FLUID_TYPE.get());
+        }, ModFluidTypes.CRUDE_OIL_FLUID_TYPE.get());
     }
 }

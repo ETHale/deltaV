@@ -228,7 +228,7 @@ public class ModBlocks {
     //#region Referenced blocks
 
     // Fluid blocks
-    public static final DeferredBlock<Block> OIL_FLUID = ModFluidBlocks.OIL_FLUID;
+    public static final DeferredBlock<Block> CRUDE_OIL_FLUID = ModFluidBlocks.CRUDE_OIL_FLUID;
     public static final DeferredBlock<Block> NAPHTHA_FLUID = ModFluidBlocks.NAPHTHA_FLUID;
     public static final DeferredBlock<Block> PETROL_FLUID = ModFluidBlocks.PETROL_FLUID;
     public static final DeferredBlock<Block> KEROSENE_FLUID = ModFluidBlocks.KEROSENE_FLUID;

@@ -59,7 +59,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
     public static final int BOTTOM_OUTPUT_SLOT = 3;
     public static final int RESIDUE_SLOT = 4;
 
-    public static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.OIL_SOURCE.get(), OIL_DRAIN);
+    public static final FluidStack OIL_DRAIN_STACK = new FluidStack(ModFluids.CRUDE_OIL_SOURCE.get(), OIL_DRAIN);
     public static final Map<Integer, FluidStack> OUTPUTS = Map.of(
         TOP_OUTPUT_SLOT, new FluidStack(ModFluids.NAPHTHA_SOURCE.get(), NAPHTHA_GAIN),
         MIDDLE_OUTPUT_SLOT, new FluidStack(ModFluids.PETROL_SOURCE.get(), PETROL_GAIN),
@@ -132,7 +132,7 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> tank.set(0, FluidResource.of(new FluidStack(ModFluids.OIL_SOURCE.get(), value)), value);
+                    case 0 -> tank.set(0, FluidResource.of(new FluidStack(ModFluids.CRUDE_OIL_SOURCE.get(), value)), value);
                     case 1 -> {}
                     case 2 -> arrowProgress = value;
                     case 3 -> arrowMaxProgress = value;
@@ -246,10 +246,10 @@ public class FractionatorBlockEntity extends BlockEntity implements MenuProvider
      */
     private void drainToTankFromInput() {
         ItemStack input = inventory.getResource(INPUT_SLOT).toStack();
-        if (input.getItem() == ModItems.OIL_BUCKET.get()) {
+        if (input.getItem() == ModItems.CRUDE_OIL_BUCKET.get()) {
             ResourceHandler<FluidResource> itemHandler = input.getCapability(Capabilities.Fluid.ITEM, null);
             if (itemHandler != null) {
-                ResourceHandlerUtil.move(itemHandler, tank, (f) -> f.is(ModFluids.OIL_SOURCE), 1000, null);
+                ResourceHandlerUtil.move(itemHandler, tank, (f) -> f.is(ModFluids.CRUDE_OIL_SOURCE), 1000, null);
             }
         }
     }
